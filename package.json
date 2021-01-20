@@ -1,19 +1,19 @@
 {
-  "name": "@micro-os-plus/<project-name>",
+  "name": "@micro-os-plus/build-helper",
   "version": "0.1.0",
-  "description": "A source xPack with <your-description-here>",
+  "description": "A source xPack with files to help builds",
   "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/micro-os-plus/<project-name>-xpack.git"
+    "url": "git+https://github.com/micro-os-plus/build-helper-xpack.git"
   },
   "bugs": {
-    "url": "https://github.com/micro-os-plus/<project-name>-xpack/issues/"
+    "url": "https://github.com/micro-os-plus/build-helper-xpack/issues/"
   },
-  "homepage": "https://github.com/micro-os-plus/<project-name>-xpack/",
+  "homepage": "https://github.com/micro-os-plus/build-helper-xpack/",
   "keywords": [
     "xpack"
   ],

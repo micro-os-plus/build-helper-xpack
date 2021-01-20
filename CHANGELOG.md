@@ -2,8 +2,10 @@
 
 Releases in reverse chronological order.
 
-Please check [GitHub](https://github.com/micro-os-plus/<project-name>-xpack/issues/) and close existing issues and pull requests.
+Please check
+[GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
+and close existing issues and pull requests.
 
-## v1.2.3 (2020-11-26)
+## v0.1.0 (2021-01-20)
 
-- [#123]: ...
+- [#1]: ...
