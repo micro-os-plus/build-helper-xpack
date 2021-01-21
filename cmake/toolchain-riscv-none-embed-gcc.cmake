@@ -14,72 +14,73 @@ set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR riscv)
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 
-set(CMAKE_C_COMPILER   "riscv-none-embed-gcc")
-set(CMAKE_CXX_COMPILER "riscv-none-embed-g++")
+set(triple "riscv-none-embed-")
+set(CMAKE_C_COMPILER   "${triple}gcc")
+set(CMAKE_CXX_COMPILER "${triple}g++")
 
 # Must be explicit, not set by CMake.
 set(CMAKE_SIZE "riscv-none-embed-size")
 
 # -----------------------------------------------------------------------------
 
-# Flags used by the ASM compiler during all build types.
-set(CMAKE_ASM_FLAGS " -x assembler-with-cpp")
+set(CMAKE_ASM_FLAGS " -x assembler-with-cpp" 
+  CACHE STRING "Flags used by the ASM compiler during all build types.")
 
-# Flags used by the ASM compiler during DEBUG builds.
-set(CMAKE_ASM_FLAGS_DEBUG "-O0 -g3")
+set(CMAKE_ASM_FLAGS_DEBUG "-O0 -g3" 
+  CACHE STRING "Flags used by the ASM compiler during DEBUG builds.")
 
-# Flags used by the ASM compiler during MINSIZEREL builds.
-set(CMAKE_ASM_FLAGS_MINSIZEREL "-Os -DNDEBUG")
+set(CMAKE_ASM_FLAGS_MINSIZEREL "-Os -DNDEBUG" 
+  CACHE STRING "Flags used by the ASM compiler during MINSIZEREL builds.")
 
-# Flags used by the ASM compiler during RELEASE builds.
-set(CMAKE_ASM_FLAGS_RELEASE "-O3 -DNDEBUG")
+set(CMAKE_ASM_FLAGS_RELEASE "-O3 -DNDEBUG" 
+  CACHE STRING "Flags used by the ASM compiler during RELEASE builds.")
 
-# Flags used by the ASM compiler during RELWITHDEBINFO builds.
-set(CMAKE_ASM_FLAGS_RELWITHDEBINFO "-O2 -g3 -DNDEBUG")
+set(CMAKE_ASM_FLAGS_RELWITHDEBINFO "-O2 -g3 -DNDEBUG" 
+  CACHE STRING "Flags used by the ASM compiler during RELWITHDEBINFO builds.")
 
-# Flags used by the C compiler during all build types.
-set(CMAKE_C_FLAGS)
+set(CMAKE_C_FLAGS 
+  CACHE STRING "Flags used by the C compiler during all build types.")
 
-# Flags used by the C compiler during DEBUG builds.
-set(CMAKE_C_FLAGS_DEBUG "-O0 -g3")
+set(CMAKE_C_FLAGS_DEBUG "-O0 -g3" 
+  CACHE STRING "Flags used by the C compiler during DEBUG builds.")
 
-# Flags used by the C compiler during MINSIZEREL builds.
-set(CMAKE_C_FLAGS_MINSIZEREL "-Os -DNDEBUG")
+set(CMAKE_C_FLAGS_MINSIZEREL "-Os -DNDEBUG" 
+  CACHE STRING "Flags used by the C compiler during MINSIZEREL builds.")
 
-# Flags used by the C compiler during RELEASE builds.
-set(CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG")
+set(CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG" 
+  CACHE STRING "Flags used by the C compiler during RELEASE builds.")
 
-# Flags used by the C compiler during RELWITHDEBINFO builds.
-set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O2 -g3 -DNDEBUG")
+set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O2 -g3 -DNDEBUG" 
+  CACHE STRING "Flags used by the C compiler during RELWITHDEBINFO builds.")
 
-# Flags used by the CXX compiler during all build types.
-set(CMAKE_CXX_FLAGS)
+set(CMAKE_CXX_FLAGS 
+  CACHE STRING "Flags used by the CXX compiler during all build types.")
 
-# Flags used by the CXX compiler during DEBUG builds.
-set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3")
+set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3" 
+  CACHE STRING "Flags used by the CXX compiler during DEBUG builds.")
 
-# Flags used by the CXX compiler during MINSIZEREL builds.
-set(CMAKE_CXX_FLAGS_MINSIZEREL "-Os -DNDEBUG")
+set(CMAKE_CXX_FLAGS_MINSIZEREL "-Os -DNDEBUG" 
+  CACHE STRING "Flags used by the CXX compiler during MINSIZEREL builds.")
 
-# Flags used by the CXX compiler during RELEASE builds.
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG" 
+  CACHE STRING "Flags used by the CXX compiler during RELEASE builds.")
 
-# Flags used by the CXX compiler during RELWITHDEBINFO builds.
-set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g3 -DNDEBUG")
+set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g3 -DNDEBUG" 
+  CACHE STRING "Flags used by the CXX compiler during RELWITHDEBINFO builds.")
 
-# Flags used by the linker during all build types.
-set(CMAKE_EXE_LINKER_FLAGS)
+set(CMAKE_EXE_LINKER_FLAGS 
+  CACHE STRING "Flags used by the linker during all build types.")
 
-# Flags used by the linker during DEBUG builds.
-set(CMAKE_EXE_LINKER_FLAGS_DEBUG "-O0 -g3")
+set(CMAKE_EXE_LINKER_FLAGS_DEBUG "-O0 -g3" 
+  CACHE STRING "Flags used by the linker during DEBUG builds.")
 
-# Flags used by the linker during MINSIZEREL builds.
-set(CMAKE_EXE_LINKER_FLAGS_MINSIZEREL "-Os")
+set(CMAKE_EXE_LINKER_FLAGS_MINSIZEREL "-Os" 
+  CACHE STRING "Flags used by the linker during MINSIZEREL builds.")
 
-# Flags used by the linker during RELEASE builds.
-set(CMAKE_EXE_LINKER_FLAGS_RELEASE "-O3")
+set(CMAKE_EXE_LINKER_FLAGS_RELEASE "-O3" 
+  CACHE STRING "Flags used by the linker during RELEASE builds.")
 
-# Flags used by the linker during RELWITHDEBINFO builds.
-set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO "-O2 -g3")
+set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO "-O2 -g3" 
+  CACHE STRING "Flags used by the linker during RELWITHDEBINFO builds.")
 
 # -----------------------------------------------------------------------------
