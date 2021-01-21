@@ -20,3 +20,66 @@ set(CMAKE_CXX_COMPILER "arm-none-eabi-g++")
 # Must be explicit, not set by CMake.
 set(CMAKE_SIZE "arm-none-eabi-size")
 
+# -----------------------------------------------------------------------------
+
+# Flags used by the ASM compiler during all build types.
+set(CMAKE_ASM_FLAGS " -x assembler-with-cpp")
+
+# Flags used by the ASM compiler during DEBUG builds.
+set(CMAKE_ASM_FLAGS_DEBUG "-O0 -g3")
+
+# Flags used by the ASM compiler during MINSIZEREL builds.
+set(CMAKE_ASM_FLAGS_MINSIZEREL "-Os -DNDEBUG")
+
+# Flags used by the ASM compiler during RELEASE builds.
+set(CMAKE_ASM_FLAGS_RELEASE "-O3 -DNDEBUG")
+
+# Flags used by the ASM compiler during RELWITHDEBINFO builds.
+set(CMAKE_ASM_FLAGS_RELWITHDEBINFO "-O2 -g3 -DNDEBUG")
+
+# Flags used by the C compiler during all build types.
+set(CMAKE_C_FLAGS)
+
+# Flags used by the C compiler during DEBUG builds.
+set(CMAKE_C_FLAGS_DEBUG "-O0 -g3")
+
+# Flags used by the C compiler during MINSIZEREL builds.
+set(CMAKE_C_FLAGS_MINSIZEREL "-Os -DNDEBUG")
+
+# Flags used by the C compiler during RELEASE builds.
+set(CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG")
+
+# Flags used by the C compiler during RELWITHDEBINFO builds.
+set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O2 -g3 -DNDEBUG")
+
+# Flags used by the CXX compiler during all build types.
+set(CMAKE_CXX_FLAGS)
+
+# Flags used by the CXX compiler during DEBUG builds.
+set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3")
+
+# Flags used by the CXX compiler during MINSIZEREL builds.
+set(CMAKE_CXX_FLAGS_MINSIZEREL "-Os -DNDEBUG")
+
+# Flags used by the CXX compiler during RELEASE builds.
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+
+# Flags used by the CXX compiler during RELWITHDEBINFO builds.
+set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g3 -DNDEBUG")
+
+# Flags used by the linker during all build types.
+set(CMAKE_EXE_LINKER_FLAGS)
+
+# Flags used by the linker during DEBUG builds.
+set(CMAKE_EXE_LINKER_FLAGS_DEBUG "-O0 -g3")
+
+# Flags used by the linker during MINSIZEREL builds.
+set(CMAKE_EXE_LINKER_FLAGS_MINSIZEREL "-Os")
+
+# Flags used by the linker during RELEASE builds.
+set(CMAKE_EXE_LINKER_FLAGS_RELEASE "-O3")
+
+# Flags used by the linker during RELWITHDEBINFO builds.
+set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO "-O2 -g3")
+
+# -----------------------------------------------------------------------------
