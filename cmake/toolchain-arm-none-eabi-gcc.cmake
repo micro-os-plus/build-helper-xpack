@@ -12,6 +12,7 @@
 # Cross compiling.
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR arm)
+
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 
 set(triple "arm-none-eabi-")
@@ -22,6 +23,8 @@ set(CMAKE_CXX_COMPILER "${triple}g++")
 set(CMAKE_SIZE "${triple}size")
 
 # -----------------------------------------------------------------------------
+
+# TODO: understand why CMAKE_<lang>_OUTPUT_EXTENSION is not effective
 
 set(CMAKE_ASM_FLAGS " -x assembler-with-cpp" 
   CACHE STRING "Flags used by the ASM compiler during all build types.")
@@ -38,6 +41,9 @@ set(CMAKE_ASM_FLAGS_RELEASE "-O3 -DNDEBUG"
 set(CMAKE_ASM_FLAGS_RELWITHDEBINFO "-O2 -g3 -DNDEBUG" 
   CACHE STRING "Flags used by the ASM compiler during RELWITHDEBINFO builds.")
 
+# Not effective.
+set(CMAKE_ASM_OUTPUT_EXTENSION ".o")
+
 set(CMAKE_C_FLAGS 
   CACHE STRING "Flags used by the C compiler during all build types.")
 
@@ -53,6 +59,9 @@ set(CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG"
 set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O2 -g3 -DNDEBUG" 
   CACHE STRING "Flags used by the C compiler during RELWITHDEBINFO builds.")
 
+# Not effective.
+set(CMAKE_C_OUTPUT_EXTENSION ".o")
+
 set(CMAKE_CXX_FLAGS 
   CACHE STRING "Flags used by the CXX compiler during all build types.")
 
@@ -67,6 +76,10 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG"
 
 set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g3 -DNDEBUG" 
   CACHE STRING "Flags used by the CXX compiler during RELWITHDEBINFO builds.")
+
+# Not effective.
+set(CMAKE_CXX_OUTPUT_EXTENSION ".o")
+# set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
 
 set(CMAKE_EXE_LINKER_FLAGS 
   CACHE STRING "Flags used by the linker during all build types.")
