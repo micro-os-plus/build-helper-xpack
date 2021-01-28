@@ -8,14 +8,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/micro-os-plus/build-helper-xpack.git"
+    "url": "git+https://github.com/micro-os-plus/build-helper-xpack.git/"
   },
   "bugs": {
     "url": "https://github.com/micro-os-plus/build-helper-xpack/issues/"
   },
   "homepage": "https://github.com/micro-os-plus/build-helper-xpack/",
   "keywords": [
-    "xpack"
+    "xpack",
+    "c++",
+    "micro-os-plus"
   ],
   "author": {
     "name": "Liviu Ionescu",
