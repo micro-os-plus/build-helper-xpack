@@ -6,6 +6,6 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
-## v0.1.0 (2021-01-20)
+## v1.1.0 (2021-02-04)
 
-- [#1]: ...
+- first restructured release
