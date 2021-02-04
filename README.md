@@ -1,8 +1,11 @@
 [![license](https://img.shields.io/github/license/micro-os-plus/build-helper-xpack)](https://github.com/micro-os-plus/build-helper-xpack/blob/xpack/LICENSE)
 
-# A source xPack with files to help builds
+# A source xPack with files to help µOS++ builds
 
 This project provides files to be included during builds.
+
+The project is hosted on GitHub as
+[micro-os-plus/build-helper-xpack](https://github.com/micro-os-plus/build-helper-xpack).
 
 ## Maintainer info
 
@@ -12,14 +15,35 @@ into their own projects.
 For maintainer infos, please see the
 [README-MAINTAINER](README-MAINTAINER.md) file.
 
-## Easy install
+## Install
+
+As a source xPacks, the easiest way to add it to a project is via **xpm**,
+but it can also be used as any Git project, for example as a submodule.
+
+### Prerequisites
+
+A recent [xpm](https://xpack.github.io/xpm/),
+which is a portable [Node.js](https://nodejs.org/) command line application.
+
+For details please follow the instructions in the
+[install](https://xpack.github.io/install/) page.
+
+### xpm
 
 Note: the package will be available from npmjs.com at a later date.
 
+For now, it can be installed from GitHub:
+
+```console
+$ cd <project>
+$ xpm init # Unless a package.json is already present
+
+$ xpm install github:micro-os-plus/build-helper-xpack
+```
+
 When ready, this package will be available as
 [`@micro-os-plus/build-helper`](https://www.npmjs.com/package/@micro-os-plus/build-helper)
-from the `npmjs.com` registry; with [xpm](https://xpack.github.io/xpm/)
-available, installing the latest version of the package is quite easy:
+from the `npmjs.com` registry:
 
 ```console
 $ cd <project>
@@ -28,16 +52,23 @@ $ xpm init # Unless a package.json is already present
 $ xpm install @micro-os-plus/build-helper@latest
 ```
 
-This package is also available from
-[GitHub](https://github.com/micro-os-plus/build-helper-xpack):
+### Git submodule
+
+If, for any reason, **xpm** is not available, the next recommended
+solution is to link it as a Git submodule below an `xpacks` folder.
 
 ```console
-$ git clone https://github.com/micro-os-plus/build-helper-xpack.git build-helper-xpack.git
+$ cd <project>
+$ git init # Unless already a Git project
+$ mkdir -p xpacks
+
+$ git submodule add https://github.com/micro-os-plus/build-helper-xpack.git \
+  xpacks/micro-os-plus-build-helper
 ```
 
 ## Branches
 
-Apart from the unused `master` branch, there are three active branches:
+Apart from the unused `master` branch, there are two active branches:
 
 - `xpack`, with the latest stable version
 - `xpack-develop`, with the current development version
@@ -58,16 +89,21 @@ builds.
 
 In a second step it is planned to add support for **meson**.
 
-## Build & integration info
+### Build & integration info
 
 TBD
 
-## Example
+### Known problems
+
+- none
+
+### Examples
 
 TBD
 
 ## License
 
 The original content is released under the
-[MIT License](https://opensource.org/licenses/MIT), with all rights reserved to
-[Liviu Ionescu](https://github.com/ilg-ul).
+[MIT License](https://opensource.org/licenses/MIT/),
+with all rights reserved to
+[Liviu Ionescu](https://github.com/ilg-ul/).
