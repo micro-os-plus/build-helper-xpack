@@ -50,3 +50,44 @@ function(append_cmake_prefix_path path)
 endfunction()
 
 # -----------------------------------------------------------------------------
+
+# Extract the three semver numbers from the input string.
+# The second argument is a string with the variable name in the parent scope.
+# Assume the string contains a full semver (https://semver.org).
+
+function (parse_semver version_in variable_name)
+
+  # Ignore the possible pre-release part.
+  string(REGEX REPLACE "^\([0-9]+\.[0-9]+\.[0-9]+\).*$" "\\1" semver "${version_in}")
+
+  # Pass the three numbers semver to the caller.
+  set("${variable_name}" "${semver}" PARENT_SCOPE)
+
+  string(REGEX REPLACE "^\([0-9]+\)\.\([0-9]+\)\.\([0-9]+\)$" "\\1" semver_major "${semver}")
+  string(REGEX REPLACE "^\([0-9]+\)\.\([0-9]+\)\.\([0-9]+\)$" "\\2" semver_minor "${semver}")
+  string(REGEX REPLACE "^\([0-9]+\)\.\([0-9]+\)\.\([0-9]+\)$" "\\3" semver_patch "${semver}")
+
+  # Pass the separate semver components to the caller.
+  set("${variable_name}_MAJOR" "${semver_major}" PARENT_SCOPE)
+  set("${variable_name}_MINOR" "${semver_minor}" PARENT_SCOPE)
+  set("${variable_name}_PATCH" "${semver_patch}" PARENT_SCOPE)
+
+endfunction()
+
+macro (parse_package_json_semver package_json_path)
+
+  # Read the whole file into memory.
+  file(READ "${package_json_path}" package_json_content)
+
+  string(JSON package_json_name GET "${package_json_content}" "name")
+  message(STATUS "package.name: ${package_json_name}")
+
+  # Parse JSON and get the version property.
+  string(JSON package_json_version_in GET "${package_json_content}" "version")
+
+  parse_semver("${package_json_version_in}" "PACKAGE_JSON_VERSION")
+  message(STATUS "package.version: ${PACKAGE_JSON_VERSION}")
+
+endmacro()
+
+# -----------------------------------------------------------------------------
