@@ -1,11 +1,14 @@
 # https://help.github.com/en/actions
 
 # https://github.com/actions
+# https://github.com/actions/checkout
+# https://github.com/actions/setup-node
 
 name: CI on Push
 
 on:
   push:
+  pull_request:
 
 jobs:
   xpm-test:
@@ -15,11 +18,11 @@ jobs:
     strategy:
       matrix:
         node-version: [14]
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-20.04, macos-latest, windows-latest]
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
       with:
         fetch-depth: 3
 
@@ -35,9 +38,15 @@ jobs:
         env
 
     - name: Install xpm
+      if: runner.os != 'Windows'
       run: sudo npm install -g xpm@latest
+
+    - name: Install xpm
+      if: runner.os == 'Windows'
+      run: npm install -g xpm@latest
 
     - name: Run test
       run: |
         xpm install
         xpm run test
+
