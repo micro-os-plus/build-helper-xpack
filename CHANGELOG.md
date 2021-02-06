@@ -6,6 +6,12 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
-## v1.1.0 (2021-02-04)
+## 2021-02-06
 
+- prepare v1.2.0
+- add parse_semver
+
+## 2021-02-04
+
+- publish v1.1.0 on GitHub
 - first restructured release
