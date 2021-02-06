@@ -84,9 +84,9 @@ macro (parse_package_json_semver package_json_path)
 
   # Parse JSON and get the version property.
   string(JSON package_json_version_in GET "${package_json_content}" "version")
+  message(STATUS "package.version: ${package_json_version_in}")
 
   parse_semver("${package_json_version_in}" "PACKAGE_JSON_VERSION")
-  message(STATUS "package.version: ${PACKAGE_JSON_VERSION}")
 
 endmacro()
 
