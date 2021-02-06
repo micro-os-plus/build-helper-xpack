@@ -4,6 +4,8 @@
 # https://github.com/actions/checkout
 # https://github.com/actions/setup-node
 
+# TODO: add windows-latest after fixing CMake.
+
 name: CI on Push
 
 on:
@@ -18,7 +20,7 @@ jobs:
     strategy:
       matrix:
         node-version: [14]
-        os: [ubuntu-20.04, macos-latest, windows-latest]
+        os: [ubuntu-20.04, macos-latest]
 
     steps:
     - name: Checkout
@@ -37,11 +39,11 @@ jobs:
         npm --version
         env
 
-    - name: Install xpm
+    - name: Install xpm on Unix
       if: runner.os != 'Windows'
       run: sudo npm install -g xpm@latest
 
-    - name: Install xpm
+    - name: Install xpm on Windows
       if: runner.os == 'Windows'
       run: npm install -g xpm@latest
 
