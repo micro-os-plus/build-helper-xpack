@@ -10,6 +10,7 @@ and close existing issues and pull requests.
 
 - prepare v1.2.0
 - add parse_semver
+- add tests/meta/CMakeLists.txt
 
 ## 2021-02-04
 

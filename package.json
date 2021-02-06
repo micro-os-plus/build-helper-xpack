@@ -4,7 +4,8 @@
   "description": "A source xPack to assist the µOS++ builds",
   "main": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test-cmake": "cmake -S tests/meta -B build/tests-cmake -GNinja",
+    "test": "xpm run test-cmake"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,9 @@
   "license": "MIT",
   "config": {},
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "@xpack-dev-tools/cmake": "3.19.2-1.1",
+    "@xpack-dev-tools/ninja-build": "1.10.2-1.1"
+  },
   "xpack": {}
 }

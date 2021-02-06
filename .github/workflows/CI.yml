@@ -1,0 +1,43 @@
+# https://help.github.com/en/actions
+
+# https://github.com/actions
+
+name: CI on Push
+
+on:
+  push:
+
+jobs:
+  xpm-test:
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node-version: [14]
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+      with:
+        fetch-depth: 3
+
+    - name: Setup Node.js ${{ matrix.node-version }} on ${{ matrix.os }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Show node & npm versions, environment
+      run: |
+        node --version
+        npm --version
+        env
+
+    - name: Install xpm
+      run: sudo npm install -g xpm@latest
+
+    - name: Run test
+      run: |
+        xpm install
+        xpm run test
