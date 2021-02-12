@@ -32,7 +32,7 @@ function(append_cmake_prefix_path path)
   endif()
 
   if(EXISTS "${path}/xpacks")
-    file(GLOB children "${path}/xpacks")
+    file(GLOB children LIST_DIRECTORIES true "${path}/xpacks/*")
 
     foreach(child ${children})
       if(IS_DIRECTORY "${child}")
