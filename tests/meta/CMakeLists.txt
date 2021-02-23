@@ -20,11 +20,11 @@ get_filename_component(xpack_root_folder ${xpack_tests_root_folder} DIRECTORY)
 
 include("${xpack_root_folder}/cmake/xpack-helper.cmake")
 
-# append_cmake_prefix_path("${xpack_tests_root_folder}")
-append_cmake_prefix_path("${xpack_root_folder}")
+# xpack_append_cmake_prefix_path("${xpack_tests_root_folder}")
+xpack_append_cmake_prefix_path("${xpack_root_folder}")
 
 # Leave the result in PACKAGE_JSON_VERSION[*]
-parse_package_json_semver("${xpack_root_folder}/package.json")
+xpack_parse_package_json_semver("${xpack_root_folder}/package.json")
 
 # -----------------------------------------------------------------------------
 

@@ -11,6 +11,7 @@
 
 # This file includes various helper functions that may be used in 
 # in CMake scripts.
+# All functions are prefixed with `xpack_`, used as a namespace.
 
 # -----------------------------------------------------------------------------
 
@@ -21,7 +22,7 @@ message(STATUS "Including xpack-helper...")
 # Add the `meta` and `cmake` folders to CMAKE_PREFIX_PATH.
 # If an `xpacks` folder exists, iterate its children.
 
-function(append_cmake_prefix_path path)
+function(xpack_append_cmake_prefix_path path)
 
   set(prefix_path ${CMAKE_PREFIX_PATH})
 
@@ -55,7 +56,7 @@ endfunction()
 # The second argument is a string with the variable name in the parent scope.
 # Assume the string contains a full semver (https://semver.org).
 
-function (parse_semver version_in variable_name)
+function (xpack_parse_semver version_in variable_name)
 
   # Ignore the possible pre-release part.
   string(REGEX REPLACE "^\([0-9]+\.[0-9]+\.[0-9]+\).*$" "\\1" semver "${version_in}")
@@ -74,7 +75,7 @@ function (parse_semver version_in variable_name)
 
 endfunction()
 
-macro (parse_package_json_semver package_json_path)
+macro (xpack_parse_package_json_semver package_json_path)
 
   # Read the whole file into memory.
   file(READ "${package_json_path}" package_json_content)
@@ -86,7 +87,7 @@ macro (parse_package_json_semver package_json_path)
   string(JSON package_json_version_in GET "${package_json_content}" "version")
   message(STATUS "package.version: ${package_json_version_in}")
 
-  parse_semver("${package_json_version_in}" "PACKAGE_JSON_VERSION")
+  xpack_parse_semver("${package_json_version_in}" "PACKAGE_JSON_VERSION")
 
 endmacro()
 
