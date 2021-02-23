@@ -84,6 +84,9 @@ set(CMAKE_CXX_OUTPUT_EXTENSION ".o")
 set(CMAKE_EXE_LINKER_FLAGS 
   CACHE STRING "Flags used by the linker during all build types.")
 
+# Disabled, since apparently CMake already uses the C/CXX flags,
+# and defining them here will double them.
+if(0)
 set(CMAKE_EXE_LINKER_FLAGS_DEBUG "-O0 -g3" 
   CACHE STRING "Flags used by the linker during DEBUG builds.")
 
@@ -95,5 +98,6 @@ set(CMAKE_EXE_LINKER_FLAGS_RELEASE "-O3"
 
 set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO "-O2 -g3" 
   CACHE STRING "Flags used by the linker during RELWITHDEBINFO builds.")
+endif()
 
 # -----------------------------------------------------------------------------
