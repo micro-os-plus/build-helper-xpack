@@ -16,23 +16,25 @@ message(STATUS "CMake version: ${CMAKE_VERSION}")
 # -----------------------------------------------------------------------------
 
 get_filename_component(xpack_tests_root_folder ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
-get_filename_component(xpack_root_folder ${xpack_tests_root_folder} DIRECTORY)
+get_filename_component(xpack_project_folder ${xpack_tests_root_folder} DIRECTORY)
 
-include("${xpack_root_folder}/cmake/xpack-helper.cmake")
+include("${xpack_project_folder}/cmake/xpack-helper.cmake")
 
 # xpack_append_cmake_prefix_path("${xpack_tests_root_folder}")
-xpack_append_cmake_prefix_path("${xpack_root_folder}")
+xpack_append_cmake_prefix_path("${xpack_project_folder}")
 
 # Leave the result in PACKAGE_JSON_VERSION[*]
-xpack_parse_package_json_semver("${xpack_root_folder}/package.json")
+xpack_parse_package_json_semver("${xpack_project_folder}/package.json")
 
 # -----------------------------------------------------------------------------
 
 project(
-  xpack-test
+  test
   DESCRIPTION "build-helper-xpack tests"
   VERSION "${PACKAGE_JSON_VERSION}"
 )
+
+# Nothing to do, only check if CMake is happy with including the helper.
 
 # -----------------------------------------------------------------------------
 
