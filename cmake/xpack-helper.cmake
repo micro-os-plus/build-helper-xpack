@@ -26,25 +26,15 @@ function(xpack_append_cmake_prefix_path path)
 
   set(prefix_path ${CMAKE_PREFIX_PATH})
 
-  if(IS_DIRECTORY "${path}/meta")
-    list(APPEND prefix_path "${path}/meta")
-  elseif(IS_DIRECTORY "${path}/cmake")
-    list(APPEND prefix_path "${path}/cmake")
-  endif()
-
-  if(EXISTS "${path}/xpacks")
-    file(GLOB children LIST_DIRECTORIES true "${path}/xpacks/*")
-
-    foreach(child ${children})
-      if(IS_DIRECTORY "${child}")
-        if(IS_DIRECTORY "${child}/meta")
-          list(APPEND prefix_path "${child}/meta")
-        elseif(IS_DIRECTORY "${child}/cmake")
-          list(APPEND prefix_path "${child}/cmake")
-        endif()
+  file(GLOB children LIST_DIRECTORIES true "${path}/*")
+  foreach(child ${children})
+  if(IS_DIRECTORY "${child}")
+      file(GLOB files "${child}/meta/*-config.cmake")
+      if(files)
+        list(APPEND prefix_path "${child}/meta")
       endif()
-    endforeach()
-  endif()
+    endif()
+  endforeach()
 
   set(CMAKE_PREFIX_PATH "${prefix_path}" PARENT_SCOPE)
 
