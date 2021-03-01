@@ -6,10 +6,15 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2021-03-01
+
+- cmake: xpack_append_cmake_prefix_path folder/meta/*-config.cmake
+- v2.0.0
+
 ## 2021-02-23
 
 - add `xpack_` prefix
-- prepare v2.0.0
+- prepare v2.0.0-pre
 
 ## 2021-02-06
 
