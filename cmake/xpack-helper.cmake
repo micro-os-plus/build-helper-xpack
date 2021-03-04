@@ -268,3 +268,19 @@ endmacro()
 
 # -----------------------------------------------------------------------------
 
+macro(xpack_glob_recurse_cxx variable_name sources_folder_path)
+
+  file(GLOB_RECURSE ${variable_name} CONFIGURE_DEPENDS "${sources_folder_path}/*.[cS]*")
+
+endmacro()
+
+function(xpack_display_relative_paths files_list relative_to_path)
+
+  foreach(file_path IN LISTS files_list)
+    file(RELATIVE_PATH file_relative_path "${relative_to_path}" "${file_path}")
+    message(STATUS "+ ${file_relative_path}")
+  endforeach()
+
+endfunction()
+
+# -----------------------------------------------------------------------------
