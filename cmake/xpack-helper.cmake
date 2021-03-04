@@ -168,3 +168,103 @@ endmacro()
 
 # -----------------------------------------------------------------------------
 
+macro(xpack_process_package_version)
+
+  # message(STATUS "PACKAGE_FIND_NAME ${PACKAGE_FIND_NAME}")
+  # message(STATUS "PACKAGE_FIND_VERSION_MAJOR ${PACKAGE_FIND_VERSION_MAJOR}")
+  # message(STATUS "PACKAGE_FIND_VERSION_MINOR ${PACKAGE_FIND_VERSION_MINOR}")
+  # message(STATUS "PACKAGE_FIND_VERSION_PATCH ${PACKAGE_FIND_VERSION_PATCH}")
+  # message(STATUS "PACKAGE_FIND_VERSION_TWEAK ${PACKAGE_FIND_VERSION_TWEAK}")
+  # message(STATUS "PACKAGE_FIND_VERSION_COUNT ${PACKAGE_FIND_VERSION_COUNT}")
+
+  get_filename_component(xpack_project_folder ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
+  # message(STATUS "${xpack_project_folder}")
+
+  file(READ "${xpack_project_folder}/package.json" package_json_content)
+
+  string(JSON json_name GET "${package_json_content}" "name")
+  string(JSON json_version GET "${package_json_content}" "version")
+  # message(STATUS "package.version: ${json_version}")
+  set(PACKAGE_JSON_NAME "${json_name}" PARENT_SCOPE)
+  set(PACKAGE_JSON_VERSION "${json_version}" PARENT_SCOPE)
+
+  # Ignore the possible pre-release part.
+  string(REGEX REPLACE "^\([0-9]+\.[0-9]+\.[0-9]+\).*$" "\\1" semver "${json_version}")
+
+  string(REGEX REPLACE "^\([0-9]+\)\.\([0-9]+\)\.\([0-9]+\)$" "\\1" semver_major "${semver}")
+  string(REGEX REPLACE "^\([0-9]+\)\.\([0-9]+\)\.\([0-9]+\)$" "\\2" semver_minor "${semver}")
+  string(REGEX REPLACE "^\([0-9]+\)\.\([0-9]+\)\.\([0-9]+\)$" "\\3" semver_patch "${semver}")
+
+  set(PACKAGE_VERSION "${semver}")
+
+  # Defaults.
+  set(PACKAGE_VERSION_UNSUITABLE false)
+  set(PACKAGE_VERSION_EXACT false)
+  set(PACKAGE_VERSION_COMPATIBLE false)
+
+  if(PACKAGE_FIND_VERSION_COUNT LESS 1)
+    # No specific version required, any version should be compatible. 
+    set(PACKAGE_VERSION_COMPATIBLE true)
+    return()
+  endif()
+
+  # There is at least the major, check it.
+
+  if(NOT PACKAGE_FIND_VERSION_MAJOR EQUAL semver_major)
+    set(PACKAGE_VERSION_UNSUITABLE true)
+    return()
+  endif()
+
+  # The major is the same, it is compatible.
+  set(PACKAGE_VERSION_COMPATIBLE true)
+
+  if(PACKAGE_FIND_VERSION_COUNT LESS 2)
+    # If there are no more digits, it is exact.
+    set(PACKAGE_VERSION_EXACT true)
+    return()
+  endif()
+
+  # A minor is also present, check it.
+
+  if(PACKAGE_FIND_VERSION_MINOR GREATER semver_minor)
+    # Require a later version, not suitable.
+    set(PACKAGE_VERSION_UNSUITABLE true)
+    return()
+  endif()
+
+  # The minor is at least the requested one.
+
+  if(PACKAGE_FIND_VERSION_MINOR LESS semver_minor)
+    # Require a previous version, not exact, but compatible.
+    return()
+  endif()
+
+  # The minor is the same.
+
+  if(PACKAGE_FIND_VERSION_COUNT LESS 3)
+    # If there are no more digits, it is exact.
+    set(PACKAGE_VERSION_EXACT true)
+    return()
+  endif()
+
+  # The patch is also present, check it.
+
+  if(PACKAGE_FIND_VERSION_PATCH GREATER semver_patch)
+    # Require a later version, not suitable.
+    set(PACKAGE_VERSION_UNSUITABLE true)
+    return()
+  endif()
+
+  if(PACKAGE_FIND_VERSION_PATCH LESS semver_PATCH)
+    # Require a previous version, not exact, but compatible.
+    return()
+  endif()
+
+  # The patch is the same.
+
+  set(PACKAGE_VERSION_EXACT false)
+
+endmacro()
+
+# -----------------------------------------------------------------------------
+
