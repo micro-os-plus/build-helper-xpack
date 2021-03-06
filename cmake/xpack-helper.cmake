@@ -46,7 +46,7 @@ endfunction()
 # The second argument is a string with the variable name in the parent scope.
 # Assume the string contains a full semver (https://semver.org).
 
-function (xpack_parse_semver version_in variable_name)
+function(xpack_parse_semver version_in variable_name)
 
   # Ignore the possible pre-release part.
   string(REGEX REPLACE "^\([0-9]+\.[0-9]+\.[0-9]+\).*$" "\\1" semver "${version_in}")
@@ -65,7 +65,7 @@ function (xpack_parse_semver version_in variable_name)
 
 endfunction()
 
-macro (xpack_parse_package_json_semver package_json_path)
+macro(xpack_parse_package_json_semver package_json_path)
 
   # Read the whole file into memory.
   file(READ "${package_json_path}" package_json_content)
@@ -89,6 +89,7 @@ macro(xpack_set_all_compiler_warnings variable_name)
   set(${variable_name}
 
     -Wall
+    -Wpedantic
 
     # Common GNU C & C++.
     $<$<CXX_COMPILER_ID:GNU>:-Waggregate-return>
