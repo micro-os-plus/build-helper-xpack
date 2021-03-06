@@ -268,11 +268,17 @@ endmacro()
 
 # -----------------------------------------------------------------------------
 
-macro(xpack_glob_recurse_cxx variable_name sources_folder_path)
+function(xpack_glob_recurse_cxx variable_name sources_folder_path)
 
-  file(GLOB_RECURSE ${variable_name} CONFIGURE_DEPENDS "${sources_folder_path}/*.[cS]*")
+  set(local_sources)
+  file(GLOB_RECURSE local_sublist CONFIGURE_DEPENDS "${sources_folder_path}/*.c*")
+  list(APPEND local_sources ${local_sublist})
+  file(GLOB_RECURSE local_sublist CONFIGURE_DEPENDS "${sources_folder_path}/*.S")
+  list(APPEND local_sources ${local_sublist})
 
-endmacro()
+  set(${variable_name} ${local_sources} PARENT_SCOPE)
+
+endfunction()
 
 function(xpack_display_relative_paths files_list relative_to_path)
 
