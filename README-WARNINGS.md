@@ -172,11 +172,15 @@ Silencing GCC warnings is strightforward:
 #pragma GCC diagnostic pop
 ```
 
-There are a few GCC specific warnings, that are not accepted by clang:
+There are a few GCC specific warnings, that are not accepted by clang,
+for example:
 
 ```c
 #if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC diagnostic ignored "-Wuseless-cast"
+#pragma GCC diagnostic ignored "-Wredundant-tags"
+#pragma GCC diagnostic ignored "-Wsuggest-final-methods"
+#pragma GCC diagnostic ignored "-Wsuggest-final-types"
 #endif
 ```
 
@@ -185,12 +189,18 @@ necessary to disable the `-Wold-style-cast` warning:
 
 ```c
 #pragma GCC diagnostic push
+
 #if defined(__cplusplus)
 #pragma GCC diagnostic ignored "-Wold-style-cast"
 #endif
 
 #pragma GCC diagnostic pop
+```
 
+Other warnings:
+
+```c
+#pragma GCC diagnostic ignored "-Wpedantic"
 ```
 
 ## clang
