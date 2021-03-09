@@ -6,6 +6,13 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2021-03-09
+
+- v2.1.0
+- add xpack_set_all_compiler_warnings()
+- add xpack_process_package_version()
+- add xpack_glob_recurse_cxx()
+
 ## 2021-03-01
 
 - cmake: xpack_append_cmake_prefix_path folder/meta/*-config.cmake
