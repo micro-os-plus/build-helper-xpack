@@ -101,6 +101,19 @@ TBD
 
 TBD
 
+### Toolchains
+
+µOS++ sources should comply with **C++ 17** and **C 11**
+
+- GCC: `-std=c++-17` or `-std=c11`
+- clang: `-std=c++-17` or `-std=c11`
+
+It should be possible to compile it with:
+
+- GCC 8 or newer (https://gcc.gnu.org/projects/cxx-status.html)
+- LLVM clang 7 or newer (https://clang.llvm.org/cxx_status.html)
+
+The recommended versions are GCC 10, AppleClang 12.
 ## License
 
 The original content is released under the

@@ -178,9 +178,11 @@ for example:
 ```c
 #if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC diagnostic ignored "-Wuseless-cast"
-#pragma GCC diagnostic ignored "-Wredundant-tags"
-#pragma GCC diagnostic ignored "-Wsuggest-final-methods"
 #pragma GCC diagnostic ignored "-Wsuggest-final-types"
+#pragma GCC diagnostic ignored "-Wsuggest-final-methods"
+#if __GNUC__ >= 10
+#pragma GCC diagnostic ignored "-Wredundant-tags"
+#endif
 #endif
 ```
 
@@ -202,6 +204,10 @@ Other warnings:
 ```c
 #pragma GCC diagnostic ignored "-Wpedantic"
 ```
+
+### GCC predefined macros
+
+- https://gcc.gnu.org/onlinedocs/cpp/Common-Predefined-Macros.html
 
 ## clang
 
