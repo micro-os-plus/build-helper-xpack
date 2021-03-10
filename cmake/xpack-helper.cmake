@@ -90,80 +90,139 @@ macro(xpack_set_all_compiler_warnings variable_name)
 
     -Wall
     -Wpedantic
-
-    # Common GNU C & C++.
-    $<$<CXX_COMPILER_ID:GNU>:-Waggregate-return>
-    $<$<CXX_COMPILER_ID:GNU>:-Warith-conversion>
-    $<$<CXX_COMPILER_ID:GNU>:-Wcast-align>
-    $<$<CXX_COMPILER_ID:GNU>:-Wcast-qual>
-    $<$<CXX_COMPILER_ID:GNU>:-Wconversion>
-    $<$<CXX_COMPILER_ID:GNU>:-Wdouble-promotion>
-    $<$<CXX_COMPILER_ID:GNU>:-Wduplicated-branches>
-    $<$<CXX_COMPILER_ID:GNU>:-Wduplicated-cond>
-    $<$<CXX_COMPILER_ID:GNU>:-Wextra>
-    $<$<CXX_COMPILER_ID:GNU>:-Wfloat-conversion>
-    $<$<CXX_COMPILER_ID:GNU>:-Wfloat-equal>
-    $<$<CXX_COMPILER_ID:GNU>:-Wformat-nonliteral>
-    $<$<CXX_COMPILER_ID:GNU>:-Wformat-overflow=2>
-    $<$<CXX_COMPILER_ID:GNU>:-Wformat-security>
-    $<$<CXX_COMPILER_ID:GNU>:-Wformat-signedness>
-    $<$<CXX_COMPILER_ID:GNU>:-Wformat-truncation=2>
-    $<$<CXX_COMPILER_ID:GNU>:-Wformat-y2k>
-    $<$<CXX_COMPILER_ID:GNU>:-Wformat=2>
-    $<$<CXX_COMPILER_ID:GNU>:-Wlogical-op>
-    $<$<CXX_COMPILER_ID:GNU>:-Wmissing-declarations>
-    $<$<CXX_COMPILER_ID:GNU>:-Wmissing-include-dirs>
-    $<$<CXX_COMPILER_ID:GNU>:-Wnull-dereference>
-    $<$<CXX_COMPILER_ID:GNU>:-Wpacked>
-    $<$<CXX_COMPILER_ID:GNU>:-Wpadded>
-    $<$<CXX_COMPILER_ID:GNU>:-Wpointer-arith>
-    $<$<CXX_COMPILER_ID:GNU>:-Wredundant-decls>
-    $<$<CXX_COMPILER_ID:GNU>:-Wshadow>
-    $<$<CXX_COMPILER_ID:GNU>:-Wshift-overflow=2>
-    $<$<CXX_COMPILER_ID:GNU>:-Wsign-conversion>
-    $<$<CXX_COMPILER_ID:GNU>:-Wswitch-default>
-    $<$<CXX_COMPILER_ID:GNU>:-Wswitch-enum>
-    $<$<CXX_COMPILER_ID:GNU>:-Wundef>
-    $<$<CXX_COMPILER_ID:GNU>:-Wuninitialized>
-    $<$<CXX_COMPILER_ID:GNU>:-Wvla>
-
-    # GNU C only.
-    $<$<COMPILE_LANG_AND_ID:C,GNU>:-Wbad-function-cast>
-    $<$<COMPILE_LANG_AND_ID:C,GNU>:-Wc++-compat>
-    $<$<COMPILE_LANG_AND_ID:C,GNU>:-Wduplicate-decl-specifier>
-    $<$<COMPILE_LANG_AND_ID:C,GNU>:-Wmissing-prototypes>
-    $<$<COMPILE_LANG_AND_ID:C,GNU>:-Wnested-externs>
-    $<$<COMPILE_LANG_AND_ID:C,GNU>:-Wold-style-definition>
-    $<$<COMPILE_LANG_AND_ID:C,GNU>:-Wstrict-prototypes>
-
-    # GNU C++ only.
-
-    # inherits the "cxx11" ABI tag that 'std::string'
-    # $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wabi-tag>
-    
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wcomma-subscript>
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wctor-dtor-privacy>
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wextra-semi>
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wmismatched-tags>
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wnoexcept>
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wnon-virtual-dtor>
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wold-style-cast>
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Woverloaded-virtual>
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wplacement-new=2>
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wredundant-tags>
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wregister>
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wsign-promo>
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wstrict-null-sentinel>
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wsuggest-final-methods>
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wsuggest-final-types>
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wsuggest-override>
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wuseless-cast>
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wvolatile>
-    $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wzero-as-null-pointer-constant>
-
-    # For clang things are much easier.
-    $<$<CXX_COMPILER_ID:Clang,AppleClang>:-Weverything>
   )
+
+  # https://cmake.org/cmake/help/v3.18/variable/CMAKE_LANG_COMPILER_ID.html
+  if("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
+
+    # message(STATUS "GCC ${CMAKE_C_COMPILER_VERSION}")
+
+    if("${CMAKE_C_COMPILER_VERSION}" VERSION_LESS "8.0.0")
+      message(FATAL_ERROR "GNU GCC older than 8.x not supported.")
+    endif()
+
+    if("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "8.0.0")
+
+      message(STATUS "Adding GCC 8 warnings...")
+
+      list(APPEND ${variable_name}
+
+        # ---------------------------------------------------------------------
+        # Common GNU C & C++.
+
+        -Waggregate-return
+        -Wcast-align
+        -Wcast-qual
+        -Wconversion
+        -Wdouble-promotion
+        -Wduplicated-branches
+        -Wduplicated-cond
+        -Wextra
+        -Wfloat-conversion
+        -Wfloat-equal
+        -Wformat-nonliteral
+        -Wformat-overflow=2
+        -Wformat-security
+        -Wformat-signedness
+        -Wformat-truncation=2
+        -Wformat-y2k
+        -Wformat=2
+        -Wlogical-op
+        -Wmissing-declarations
+        -Wmissing-include-dirs
+        -Wnull-dereference
+        -Wpacked
+        -Wpadded
+        -Wpointer-arith
+        -Wredundant-decls
+        -Wshadow
+        -Wshift-overflow=2
+        -Wsign-conversion
+        -Wswitch-default
+        -Wswitch-enum
+        -Wundef
+        -Wuninitialized
+        -Wvla
+    
+        # ---------------------------------------------------------------------
+        # GNU C only.
+
+        $<$<COMPILE_LANGUAGE:C>:-Wbad-function-cast>
+        $<$<COMPILE_LANGUAGE:C>:-Wc++-compat>
+        $<$<COMPILE_LANGUAGE:C>:-Wduplicate-decl-specifier>
+        $<$<COMPILE_LANGUAGE:C>:-Wmissing-prototypes>
+        $<$<COMPILE_LANGUAGE:C>:-Wnested-externs>
+        $<$<COMPILE_LANGUAGE:C>:-Wold-style-definition>
+        $<$<COMPILE_LANGUAGE:C>:-Wstrict-prototypes>
+
+        # ---------------------------------------------------------------------
+        # GNU C++ only.
+
+        # inherits the "cxx11" ABI tag that 'std::string'
+        # $<$<COMPILE_LANGUAGE:CXX>:-Wabi-tag>
+        
+        $<$<COMPILE_LANGUAGE:CXX>:-Wctor-dtor-privacy>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wextra-semi>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wnoexcept>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wnon-virtual-dtor>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wold-style-cast>
+        $<$<COMPILE_LANGUAGE:CXX>:-Woverloaded-virtual>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wplacement-new=2>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wregister>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wsign-promo>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wstrict-null-sentinel>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wsuggest-final-methods>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wsuggest-final-types>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wsuggest-override>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wuseless-cast>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wzero-as-null-pointer-constant>
+      )
+
+    endif()
+    
+    if("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "9.0.0")
+
+      message(STATUS "Adding GCC 9 warnings...")
+
+      list(APPEND ${variable_name}
+
+      )
+
+    endif()
+
+    if("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "10.0.0")
+
+      message(STATUS "Adding GCC 10 warnings...")
+
+      list(APPEND ${variable_name}
+
+        # ---------------------------------------------------------------------
+        # Common GNU C & C++.
+
+        -Warith-conversion
+    
+        # ---------------------------------------------------------------------
+        # GNU C++ only.
+
+        $<$<COMPILE_LANGUAGE:CXX>:-Wcomma-subscript>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wmismatched-tags>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wredundant-tags>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wvolatile>
+      )
+
+    endif()
+
+  elseif("${CMAKE_C_COMPILER_ID}" MATCHES ".*Clang")
+
+    message(STATUS "Adding clang warnings...")
+
+    list(APPEND ${variable_name}
+
+      # For clang things are much easier.
+      -Weverything
+    )
+
+  endif()
 
 endmacro()
 

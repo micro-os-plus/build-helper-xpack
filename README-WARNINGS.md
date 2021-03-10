@@ -97,7 +97,7 @@ This enables some extra warning flags that are not enabled by ‘-Wall’.
 ### Other
 
 - `-Waggregate-return`
-- `-Warith-conversion`
+- `-Warith-conversion` <-- since 10.x
 - `-Wbad-function-cast` (C and Objective-C only)
 - `-Wc++-compat` (C and Objective-C only)
 - `-Wcast-align`
@@ -141,16 +141,16 @@ This enables some extra warning flags that are not enabled by ‘-Wall’.
 And for C++
 
 - `-Wabi-tag` (C++ and Objective-C++ only) <- too noisy
-- `-Wcomma-subscript` (C++ and Objective-C++ only)
+- `-Wcomma-subscript` (C++ and Objective-C++ only) <-- since 10.x
 - `-Wctor-dtor-privacy` (C++ and Objective-C++ only)
 - `-Wextra-semi` (C++, Objective-C++ only)
-- `-Wmismatched-tags` (C++ and Objective-C++ only)
+- `-Wmismatched-tags` (C++ and Objective-C++ only) <-- since 10.x
 - `-Wnoexcept` (C++ and Objective-C++ only)
 - `-Wnon-virtual-dtor` (C++ and Objective-C++ only)
 - `-Wold-style-cast` (C++ and Objective-C++ only)
 - `-Woverloaded-virtual` (C++ and Objective-C++ only)
 - `-Wplacement-new=2` (C++, Objective-C++ only)
-- `-Wredundant-tags` (C++ and Objective-C++ only)
+- `-Wredundant-tags` (C++ and Objective-C++ only) <-- since 10.x
 - `-Wregister` (C++ and Objective-C++ only)
 - `-Wsign-promo` (C++ and Objective-C++ only)
 - `-Wstrict-null-sentinel` (C++ and Objective-C++ only)
@@ -158,7 +158,7 @@ And for C++
 - `-Wsuggest-final-types`
 - `-Wsuggest-override`
 - `-Wuseless-cast` (C++ and Objective-C++ only)
-- `-Wvolatile` (C++ and Objective-C++ only)
+- `-Wvolatile` (C++ and Objective-C++ only) <-- since 10.x
 - `-Wzero-as-null-pointer-constant` (C++ and Objective-C++ only)
 
 ### Silencing GCC warnings
