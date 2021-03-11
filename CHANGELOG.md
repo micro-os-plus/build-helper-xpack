@@ -6,6 +6,13 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2021-03-11
+
+- v2.1.2
+- lower min to GCC 7
+- remove -Wpedantic
+- disable -Wmismatched-tags for GCC 10.1
+
 ## 2021-03-10
 
 - v2.1.1
