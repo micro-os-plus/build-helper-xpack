@@ -97,13 +97,15 @@ macro(xpack_set_all_compiler_warnings variable_name)
 
     # message(STATUS "GCC ${CMAKE_C_COMPILER_VERSION}")
 
-    if("${CMAKE_C_COMPILER_VERSION}" VERSION_LESS "8.0.0")
-      message(FATAL_ERROR "GNU GCC older than 8.x not supported.")
+    if("${CMAKE_C_COMPILER_VERSION}" VERSION_LESS "7.0.0")
+      message(FATAL_ERROR "GNU GCC older than 7.x not supported.")
     endif()
 
-    if("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "8.0.0")
+    message(STATUS "Adding GCC warnings...")
 
-      message(STATUS "Adding GCC 8 warnings...")
+    if("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "7.0.0")
+
+      # message(STATUS "Adding GCC 7 warnings...")
 
       list(APPEND ${variable_name}
 
