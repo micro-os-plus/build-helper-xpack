@@ -162,7 +162,6 @@ macro(xpack_set_all_compiler_warnings variable_name)
         # $<$<COMPILE_LANGUAGE:CXX>:-Wabi-tag>
         
         $<$<COMPILE_LANGUAGE:CXX>:-Wctor-dtor-privacy>
-        $<$<COMPILE_LANGUAGE:CXX>:-Wextra-semi>
         $<$<COMPILE_LANGUAGE:CXX>:-Wnoexcept>
         $<$<COMPILE_LANGUAGE:CXX>:-Wnon-virtual-dtor>
         $<$<COMPILE_LANGUAGE:CXX>:-Wold-style-cast>
@@ -180,6 +179,17 @@ macro(xpack_set_all_compiler_warnings variable_name)
 
     endif()
     
+    if("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "8.0.0")
+
+      # message(STATUS "Adding GCC 8 warnings...")
+
+      list(APPEND ${variable_name}
+
+        $<$<COMPILE_LANGUAGE:CXX>:-Wextra-semi>
+
+      )
+
+    endif()
     if("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "9.0.0")
 
       message(STATUS "Adding GCC 9 warnings...")
