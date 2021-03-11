@@ -89,7 +89,10 @@ macro(xpack_set_all_compiler_warnings variable_name)
   set(${variable_name}
 
     -Wall
-    -Wpedantic
+
+    # Nope. It complains about #include_next, and #pragma does not disable it,
+    # at least on GCC 7.
+    # -Wpedantic
   )
 
   # https://cmake.org/cmake/help/v3.18/variable/CMAKE_LANG_COMPILER_ID.html
