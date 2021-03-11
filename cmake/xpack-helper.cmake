@@ -183,7 +183,7 @@ macro(xpack_set_all_compiler_warnings variable_name)
       )
 
     endif()
-    
+
     if("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "8.0.0")
 
       # message(STATUS "Adding GCC 8 warnings...")
@@ -195,19 +195,21 @@ macro(xpack_set_all_compiler_warnings variable_name)
       )
 
     endif()
+    
     if("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "9.0.0")
 
-      message(STATUS "Adding GCC 9 warnings...")
+      # message(STATUS "Adding GCC 9 warnings...")
 
       list(APPEND ${variable_name}
 
+        # None so far.
       )
 
     endif()
 
     if("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "10.0.0")
 
-      message(STATUS "Adding GCC 10 warnings...")
+      # message(STATUS "Adding GCC 10 warnings...")
 
       list(APPEND ${variable_name}
 
@@ -233,6 +235,7 @@ macro(xpack_set_all_compiler_warnings variable_name)
         )
 
       endif()
+
     endif()
 
   elseif("${CMAKE_C_COMPILER_ID}" MATCHES ".*Clang")
