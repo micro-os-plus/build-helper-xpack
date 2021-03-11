@@ -220,11 +220,19 @@ macro(xpack_set_all_compiler_warnings variable_name)
         # GNU C++ only.
 
         $<$<COMPILE_LANGUAGE:CXX>:-Wcomma-subscript>
-        $<$<COMPILE_LANGUAGE:CXX>:-Wmismatched-tags>
         $<$<COMPILE_LANGUAGE:CXX>:-Wredundant-tags>
         $<$<COMPILE_LANGUAGE:CXX>:-Wvolatile>
       )
 
+      # RISC-V 10.1 fails with `note: replace the class-key with 'struct'`.
+      if(NOT "${CMAKE_C_COMPILER_VERSION}" VERSION_EQUAL "10.1.0")
+
+        list(APPEND ${variable_name}
+
+          $<$<COMPILE_LANGUAGE:CXX>:-Wmismatched-tags>
+        )
+
+      endif()
     endif()
 
   elseif("${CMAKE_C_COMPILER_ID}" MATCHES ".*Clang")
