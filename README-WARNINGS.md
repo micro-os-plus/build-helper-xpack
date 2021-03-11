@@ -125,7 +125,6 @@ This enables some extra warning flags that are not enabled by ‘-Wall’.
 - `-Wold-style-definition`
 - `-Wpacked`
 - `-Wpadded`
-- `-Wpedantic`
 - `-Wpointer-arith`
 - `-Wredundant-decls`
 - `-Wshadow`
@@ -144,7 +143,7 @@ And for C++
 - `-Wcomma-subscript` (C++ and Objective-C++ only) <-- since 10.x
 - `-Wctor-dtor-privacy` (C++ and Objective-C++ only)
 - `-Wextra-semi` (C++, Objective-C++ only)
-- `-Wmismatched-tags` (C++ and Objective-C++ only) <-- since 10.x
+- `-Wmismatched-tags` (C++ and Objective-C++ only) <-- since 10.x, fails on 10.1
 - `-Wnoexcept` (C++ and Objective-C++ only)
 - `-Wnon-virtual-dtor` (C++ and Objective-C++ only)
 - `-Wold-style-cast` (C++ and Objective-C++ only)
@@ -160,6 +159,15 @@ And for C++
 - `-Wuseless-cast` (C++ and Objective-C++ only)
 - `-Wvolatile` (C++ and Objective-C++ only) <-- since 10.x
 - `-Wzero-as-null-pointer-constant` (C++ and Objective-C++ only)
+
+### `-Wpedantic`
+
+Do not enable it, since it'll complain about `#include_next`.
+
+### `-Wmismatched-tags`
+
+On RISC-V 10.1 it fails with _note: replace the class-key with 'struct'_ in
+system headers.
 
 ### Silencing GCC warnings
 
@@ -216,7 +224,6 @@ For clang things are easier, to enable all possible checks use:
 - `-Wall`
 - `-Weverything` (includes -pedantic)
 - `-Werror`
-- `-pedantic-errors` (might be redundant)
 
 ### Silencing clang warnings
 
