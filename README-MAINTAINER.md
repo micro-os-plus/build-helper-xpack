@@ -30,7 +30,7 @@ A recent [xpm](https://xpack.github.io/xpm/), which is a portable
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
 - `npm version patch`, `npm version minor`, `npm version major`
-- push the `xpack-develop` branch to GitHub
+- push the `xpack-develop` branch to GitHub with `git push origin --tags`
 - `npm publish --tag next` (use `--access public` when publishing for
   the first time)
 
