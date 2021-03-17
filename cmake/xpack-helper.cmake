@@ -95,7 +95,7 @@ macro(xpack_set_all_compiler_warnings variable_name)
     # -Wpedantic
   )
 
-  # https://cmake.org/cmake/help/v3.18/variable/CMAKE_LANG_COMPILER_ID.html
+  # https://cmake.org/cmake/help/v3.19/variable/CMAKE_LANG_COMPILER_ID.html
   if("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
 
     # message(STATUS "GCC ${CMAKE_C_COMPILER_VERSION}")

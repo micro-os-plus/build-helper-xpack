@@ -22,6 +22,6 @@ cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=xpacks/micro-os-plus-build-helper/cma
 
 ## Other resources
 
-- https://cmake.org/cmake/help/v3.18/manual/cmake-variables.7.html
-- https://cmake.org/cmake/help/v3.18/manual/cmake-generator-expressions.7.html
-- https://cmake.org/cmake/help/v3.18/variable/CMAKE_LANG_COMPILER_ID.html
+- https://cmake.org/cmake/help/v3.19/manual/cmake-variables.7.html
+- https://cmake.org/cmake/help/v3.19/manual/cmake-generator-expressions.7.html
+- https://cmake.org/cmake/help/v3.19/variable/CMAKE_LANG_COMPILER_ID.html
