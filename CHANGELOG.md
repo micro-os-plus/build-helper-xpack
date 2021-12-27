@@ -6,6 +6,11 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2021-12-27
+
+- v2.1.3
+- add toolchain-gcc.cmake
+
 ## 2021-03-11
 
 - v2.1.2

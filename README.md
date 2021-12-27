@@ -34,22 +34,22 @@ Note: the package will be available from npmjs.com at a later date.
 
 For now, it can be installed from GitHub:
 
-```console
-$ cd <project>
-$ xpm init # Unless a package.json is already present
+```sh
+cd my-project
+xpm init # Unless a package.json is already present
 
-$ xpm install github:micro-os-plus/build-helper-xpack
+xpm install github:micro-os-plus/build-helper-xpack
 ```
 
 When ready, this package will be available as
 [`@micro-os-plus/build-helper`](https://www.npmjs.com/package/@micro-os-plus/build-helper)
 from the `npmjs.com` registry:
 
-```console
-$ cd <project>
-$ xpm init # Unless a package.json is already present
+```sh
+cd my-project
+xpm init # Unless a package.json is already present
 
-$ xpm install @micro-os-plus/build-helper@latest
+xpm install @micro-os-plus/build-helper@latest
 ```
 
 ### Git submodule
@@ -57,12 +57,12 @@ $ xpm install @micro-os-plus/build-helper@latest
 If, for any reason, **xpm** is not available, the next recommended
 solution is to link it as a Git submodule below an `xpacks` folder.
 
-```console
-$ cd <project>
-$ git init # Unless already a Git project
-$ mkdir -p xpacks
+```sh
+cd my-project
+git init # Unless already a Git project
+mkdir -p xpacks
 
-$ git submodule add https://github.com/micro-os-plus/build-helper-xpack.git \
+git submodule add https://github.com/micro-os-plus/build-helper-xpack.git \
   xpacks/micro-os-plus-build-helper
 ```
 
@@ -114,6 +114,7 @@ It should be possible to compile it with:
 - LLVM clang 7 or newer (https://clang.llvm.org/cxx_status.html)
 
 The recommended versions are GCC 10, AppleClang 12.
+
 ## License
 
 The original content is released under the
