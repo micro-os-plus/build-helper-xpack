@@ -9,11 +9,18 @@
 #
 # -----------------------------------------------------------------------------
 
-# This file includes various helper functions that may be used in 
+# This file includes various helper functions that may be used in
 # in CMake scripts.
 # All functions are prefixed with `xpack_`, used as a namespace.
 
 # -----------------------------------------------------------------------------
+
+# Use targets as include markers (variables are not scope independent).
+if(TARGET micro-os-plus-build-helper-included)
+  return()
+else()
+  add_custom_target(micro-os-plus-build-helper-included)
+endif()
 
 message(STATUS "Including xpack-helper...")
 
@@ -148,7 +155,7 @@ macro(xpack_set_all_compiler_warnings variable_name)
         -Wundef
         -Wuninitialized
         -Wvla
-    
+
         # ---------------------------------------------------------------------
         # GNU C only.
 
@@ -165,7 +172,7 @@ macro(xpack_set_all_compiler_warnings variable_name)
 
         # inherits the "cxx11" ABI tag that 'std::string'
         # $<$<COMPILE_LANGUAGE:CXX>:-Wabi-tag>
-        
+
         $<$<COMPILE_LANGUAGE:CXX>:-Wctor-dtor-privacy>
         $<$<COMPILE_LANGUAGE:CXX>:-Wnoexcept>
         $<$<COMPILE_LANGUAGE:CXX>:-Wnon-virtual-dtor>
@@ -195,7 +202,7 @@ macro(xpack_set_all_compiler_warnings variable_name)
       )
 
     endif()
-    
+
     if("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "9.0.0")
 
       # message(STATUS "Adding GCC 9 warnings...")
@@ -217,7 +224,7 @@ macro(xpack_set_all_compiler_warnings variable_name)
         # Common GNU C & C++.
 
         -Warith-conversion
-    
+
         # ---------------------------------------------------------------------
         # GNU C++ only.
 
@@ -289,7 +296,7 @@ macro(xpack_process_package_version)
   set(PACKAGE_VERSION_COMPATIBLE false)
 
   if(PACKAGE_FIND_VERSION_COUNT LESS 1)
-    # No specific version required, any version should be compatible. 
+    # No specific version required, any version should be compatible.
     set(PACKAGE_VERSION_COMPATIBLE true)
     return()
   endif()
@@ -353,6 +360,18 @@ macro(xpack_process_package_version)
 endmacro()
 
 # -----------------------------------------------------------------------------
+
+function(xpack_glob_cxx variable_name sources_folder_path)
+
+  set(local_sources)
+  file(GLOB local_sublist CONFIGURE_DEPENDS "${sources_folder_path}/*.c*")
+  list(APPEND local_sources ${local_sublist})
+  file(GLOB local_sublist CONFIGURE_DEPENDS "${sources_folder_path}/*.S")
+  list(APPEND local_sources ${local_sublist})
+
+  set(${variable_name} ${local_sources} PARENT_SCOPE)
+
+endfunction()
 
 function(xpack_glob_recurse_cxx variable_name sources_folder_path)
 
