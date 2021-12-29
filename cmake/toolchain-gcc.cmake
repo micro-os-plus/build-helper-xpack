@@ -11,12 +11,11 @@
 
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 
-set(triple "")
-set(CMAKE_C_COMPILER   "${triple}gcc")
-set(CMAKE_CXX_COMPILER "${triple}g++")
+set(CMAKE_C_COMPILER   "gcc")
+set(CMAKE_CXX_COMPILER "g++")
 
 # Must be explicit, not set by CMake.
-set(CMAKE_SIZE "${triple}size")
+set(CMAKE_SIZE "size")
 
 # -----------------------------------------------------------------------------
 
