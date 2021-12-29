@@ -1,6 +1,6 @@
 {
   "name": "@micro-os-plus/build-helper",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "A source xPack to assist the µOS++ builds",
   "main": "",
   "scripts": {
