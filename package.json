@@ -4,6 +4,7 @@
   "description": "A source xPack to assist the µOS++ builds",
   "main": "",
   "scripts": {
+    "pack": "npm pack",
     "test-cmake": "cmake -S tests/meta -B build/tests-cmake -GNinja",
     "test": "xpm run test-cmake"
   },
