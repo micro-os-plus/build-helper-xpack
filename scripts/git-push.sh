@@ -38,6 +38,7 @@ tmp_script_file="$(mktemp)"
 cat <<'__EOF__' >"${tmp_script_file}"
 cd "$1/.."
 git push
+git push origin --tags
 __EOF__
 
 # -----------------------------------------------------------------------------
