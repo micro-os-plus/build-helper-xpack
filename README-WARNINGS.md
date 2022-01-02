@@ -215,7 +215,7 @@ Other warnings:
 
 ### GCC predefined macros
 
-- https://gcc.gnu.org/onlinedocs/cpp/Common-Predefined-Macros.html
+- <https://gcc.gnu.org/onlinedocs/cpp/Common-Predefined-Macros.html>
 
 ## clang
 
