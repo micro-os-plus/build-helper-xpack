@@ -6,21 +6,29 @@
 
 # TODO: add windows-latest after fixing CMake.
 
+# https://github.com/micro-os-plus/build-helper-xpack/actions/workflows/CI.yml
 name: CI on Push
 
 on:
   push:
+    # TODO: ignore tags only
+    paths-ignore:
+      - '.vscode/**'
+      - 'LICENSE'
+      - '**.md'
+      - '.clang-format'
   pull_request:
 
 jobs:
-  xpm-test:
+  ci-test:
+    name: 'CI tests'
 
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
         node-version: [14]
-        os: [ubuntu-20.04, macos-latest]
+        os: [ubuntu-20.04, macos-10.15]
 
     steps:
     - name: Checkout
