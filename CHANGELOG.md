@@ -8,6 +8,8 @@ and close existing issues and pull requests.
 
 ## 2022-01-02
 
+- v2.1.7
+- add meson windows toolcahins (.cmd)
 - v2.1.6
 - v2.1.5
 - add meson toolchains
