@@ -8,6 +8,7 @@ and close existing issues and pull requests.
 
 ## 2022-01-02
 
+- v2.1.6
 - v2.1.5
 - add meson toolchains
 
