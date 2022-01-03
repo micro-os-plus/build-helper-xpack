@@ -49,6 +49,8 @@ A recent [xpm](https://xpack.github.io/xpm/), which is a portable
 - `npm version patch`, `npm version minor`, `npm version major`
 - push the `xpack-develop` branch to GitHub
 - push tag to GitHub, with `git push origin --tags`
+- wait for the CI job to complete
+  (<https://github.com/micro-os-plus/build-helper-xpack/actions/workflows/CI.yml>)
 - `npm publish --tag next` (use `--access public` when publishing for
   the first time)
 
