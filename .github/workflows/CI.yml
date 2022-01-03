@@ -17,6 +17,8 @@ on:
       - 'LICENSE'
       - '**.md'
       - '.clang-format'
+      - '.gitignore'
+      - '.npmignore'
   pull_request:
 
 jobs:
