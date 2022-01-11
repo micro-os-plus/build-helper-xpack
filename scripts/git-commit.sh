@@ -34,21 +34,70 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 # =============================================================================
 
-tmp_script_file="$(mktemp)"
-cat <<'__EOF__' >"${tmp_script_file}"
+tmp_file_show_remote="$(mktemp)"
+cat <<'__EOF__' >"${tmp_file_show_remote}"
 cd "$1/.."
-git add package.json
-git commit -m "$2"
+echo $1
+git remote -v
+
+__EOF__
+
+tmp_file_show_branch="$(mktemp)"
+cat <<'__EOF__' >"${tmp_file_show_branch}"
+cd "$1/.."
+echo $1
+git branch
+
+__EOF__
+
+tmp_file_merge_develop="$(mktemp)"
+cat <<'__EOF__' >"${tmp_file_merge_develop}"
+cd "$1/.."
+
+echo
+echo $1
+git switch xpack
+git merge xpack-develop
+git push
+git switch xpack-develop
+
+__EOF__
+
+tmp_file_commit="$(mktemp)"
+cat <<'__EOF__' >"${tmp_file_commit}"
+cd "$1/.."
+
+echo
+echo $1
+git add README.md
+git commit -m "README updates"
+
+__EOF__
+
+tmp_file_commit_all="$(mktemp)"
+cat <<'__EOF__' >"${tmp_file_commit_all}"
+cd "$1/.."
+
+echo
+echo $1
+git add -A
+git commit -m "Update min CMake 3.19"
+
 __EOF__
 
 # -----------------------------------------------------------------------------
+
+set -x
+
+# UPDATE ME!
+commands_file="${tmp_file_commit_all}"
 
 repos_folder="$(dirname $(dirname "${script_folder_path}"))"
 
 cd "${repos_folder}"
 
 find . -type d -name '.git' -print0 | sort -zn | \
-  xargs -0 -I '{}' bash "${tmp_script_file}" '{}' "$1"
+  xargs -0 -I '{}' bash "${commands_file}" '{}'
 
 echo
 
