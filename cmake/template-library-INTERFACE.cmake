@@ -37,6 +37,10 @@ get_filename_component(xpack_current_folder ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
 if(NOT TARGET micro-os-plus-xxx-yyy-zzz-interface)
 
   # https://cmake.org/cmake/help/v3.19/command/add_library.html?highlight=interface#interface-libraries
+  # Only the INTERFACE modes of the target_include_directories(),
+  # target_compile_definitions(), target_compile_options(), target_sources(),
+  # and target_link_libraries() commands may be used with INTERFACE libraries.
+
   add_library(micro-os-plus-xxx-yyy-zzz-interface INTERFACE EXCLUDE_FROM_ALL)
 
   # ---------------------------------------------------------------------------
