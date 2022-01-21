@@ -63,14 +63,25 @@ git switch xpack-develop
 
 __EOF__
 
-tmp_file_commit="$(mktemp)"
-cat <<'__EOF__' >"${tmp_file_commit}"
+tmp_file_readme="$(mktemp)"
+cat <<'__EOF__' >"${tmp_file_readme}"
 cd "$1/.."
 
 echo
 echo $1
 git add README.md
 git commit -m "README updates"
+
+__EOF__
+
+tmp_file_readme_maintainer="$(mktemp)"
+cat <<'__EOF__' >"${tmp_file_readme_maintainer}"
+cd "$1/.."
+
+echo
+echo $1
+git add README-MAINTAINER.md
+git commit -m "README-MAINTAINER updates"
 
 __EOF__
 
@@ -85,12 +96,23 @@ git commit -m "Update min CMake 3.19"
 
 __EOF__
 
+tmp_file_package_json="$(mktemp)"
+cat <<'__EOF__' >"${tmp_file_package_json}"
+cd "$1/.."
+
+echo
+echo $1
+git add package.json
+git commit -m "package.json remove git url"
+
+__EOF__
+
 # -----------------------------------------------------------------------------
 
 set -x
 
 # UPDATE ME!
-commands_file="${tmp_file_commit_all}"
+commands_file="${tmp_file_package_json}"
 
 repos_folder="$(dirname $(dirname "${script_folder_path}"))"
 
