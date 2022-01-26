@@ -1,0 +1,319 @@
+#
+# This file is part of the µOS++ distribution.
+#   (https://github.com/micro-os-plus)
+# Copyright (c) 2021 Liviu Ionescu
+#
+# This Source Code Form is subject to the terms of the MIT License.
+# If a copy of the license was not distributed with this file, it can
+# be obtained from https://opensource.org/licenses/MIT/.
+#
+# -----------------------------------------------------------------------------
+
+# This file includes various helper functions that may be used in
+# in CMake scripts.
+# All functions are prefixed with `xpack_`, used as a namespace.
+
+# -----------------------------------------------------------------------------
+
+message(VERBOSE "Including micro-os-plus-build-helper module...")
+
+# -----------------------------------------------------------------------------
+
+# Called from tests/CMakeLists.txt.
+function(xpack_display_greetings)
+
+  message(VERBOSE "CMake version: ${CMAKE_VERSION}")
+  message(VERBOSE "Compiler: ${CMAKE_C_COMPILER_ID} ${CMAKE_C_COMPILER_VERSION}")
+
+  xpack_get_package_name_and_version("${CMAKE_CURRENT_SOURCE_DIR}/../package.json")
+  message(VERBOSE "package.name: ${PACKAGE_JSON_NAME}")
+  message(VERBOSE "package.version: ${PACKAGE_JSON_VERSION}")
+
+  message(VERBOSE "Platform name: ${PLATFORM_NAME}")
+  # CMAKE_BUILD_TYPE: Debug, Release, RelWithDebInfo, MinSizeRel
+  message(VERBOSE "Build type: ${CMAKE_BUILD_TYPE}")
+  message(VERBOSE "Project path: ${CMAKE_SOURCE_DIR}")
+  message(VERBOSE "Build path: ${CMAKE_BINARY_DIR}")
+  message(VERBOSE "Module path: ${CMAKE_MODULE_PATH}")
+
+endfunction()
+
+# -----------------------------------------------------------------------------
+
+macro(xpack_glob_add_subdirectories path base_bin_path)
+
+  file(GLOB children LIST_DIRECTORIES true "${path}/*")
+  foreach(child ${children})
+    if(EXISTS "${child}/CMakeLists.txt")
+      file(RELATIVE_PATH relative_path ${CMAKE_SOURCE_DIR} ${child})
+      message(VERBOSE "Adding '${relative_path}'...")
+      get_filename_component(folder_name ${child} NAME)
+      add_subdirectory("${child}" "${base_bin_path}/${folder_name}")
+      list(APPEND XPACK_ADDED_DEPENDENCIES "${child}")
+    endif()
+  endforeach()
+
+endmacro()
+
+# -----------------------------------------------------------------------------
+
+# Extract the three semver numbers from the input string.
+# The second argument is a string with the variable name in the parent scope.
+# Assume the string contains a full semver (https://semver.org).
+
+function(xpack_parse_semver version_in variable_name)
+
+  # Ignore the possible pre-release part.
+  string(REGEX REPLACE "^\([0-9]+\.[0-9]+\.[0-9]+\).*$" "\\1" semver "${version_in}")
+
+  # Pass the three numbers semver to the caller.
+  set("${variable_name}" "${semver}" PARENT_SCOPE)
+
+  string(REGEX REPLACE "^\([0-9]+\)\.\([0-9]+\)\.\([0-9]+\)$" "\\1" semver_major "${semver}")
+  string(REGEX REPLACE "^\([0-9]+\)\.\([0-9]+\)\.\([0-9]+\)$" "\\2" semver_minor "${semver}")
+  string(REGEX REPLACE "^\([0-9]+\)\.\([0-9]+\)\.\([0-9]+\)$" "\\3" semver_patch "${semver}")
+
+  # Pass the separate semver components to the caller.
+  set("${variable_name}_MAJOR" "${semver_major}" PARENT_SCOPE)
+  set("${variable_name}_MINOR" "${semver_minor}" PARENT_SCOPE)
+  set("${variable_name}_PATCH" "${semver_patch}" PARENT_SCOPE)
+
+endfunction()
+
+macro(_xpack_parse_package_json_semver package_json_path)
+
+  # Read the whole file into memory.
+  file(READ "${package_json_path}" package_json_content)
+
+  string(JSON package_json_name GET "${package_json_content}" "name")
+  message(VERBOSE "package.name: ${package_json_name}")
+
+  # Parse JSON and get the version property.
+  string(JSON package_json_version_in GET "${package_json_content}" "version")
+  message(VERBOSE "package.version: ${package_json_version_in}")
+
+  xpack_parse_semver("${package_json_version_in}" "PACKAGE_JSON_VERSION")
+
+endmacro()
+
+function(xpack_get_package_name_and_version package_json_path)
+
+  # Read the whole file into memory.
+  file(READ "${package_json_path}" package_json_content)
+
+  string(JSON package_json_name GET "${package_json_content}" "name")
+  set(PACKAGE_JSON_NAME "${package_json_name}" PARENT_SCOPE)
+
+  # Parse JSON and get the version property.
+  string(JSON package_json_version_in GET "${package_json_content}" "version")
+  set(PACKAGE_JSON_VERSION "${package_json_version_in}" PARENT_SCOPE)
+
+endfunction()
+
+# -----------------------------------------------------------------------------
+
+# Define a list of compiler options to enable as many warnings as possible.
+macro(xpack_set_all_compiler_warnings variable_name)
+
+  set(${variable_name}
+
+    -Wall
+
+    # Nope. It complains about #include_next, and #pragma does not disable it,
+    # at least on GCC 7.
+    # -Wpedantic
+  )
+
+  # https://cmake.org/cmake/help/v3.19/variable/CMAKE_LANG_COMPILER_ID.html
+  if("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
+
+    # message(VERBOSE "GCC ${CMAKE_C_COMPILER_VERSION}")
+
+    if("${CMAKE_C_COMPILER_VERSION}" VERSION_LESS "7.0.0")
+      message(FATAL_ERROR "GNU GCC older than 7.x not supported.")
+    endif()
+
+    message(VERBOSE "Adding GCC warnings...")
+
+    if("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "7.0.0")
+
+      # message(VERBOSE "Adding GCC 7 warnings...")
+
+      list(APPEND ${variable_name}
+
+        # ---------------------------------------------------------------------
+        # Common GNU C & C++.
+
+        -Waggregate-return
+        -Wcast-align
+        -Wcast-qual
+        -Wconversion
+        -Wdouble-promotion
+        -Wduplicated-branches
+        -Wduplicated-cond
+        -Wextra
+        -Wfloat-conversion
+        -Wfloat-equal
+        -Wformat-nonliteral
+        -Wformat-overflow=2
+        -Wformat-security
+        -Wformat-signedness
+        -Wformat-truncation=2
+        -Wformat-y2k
+        -Wformat=2
+        -Wlogical-op
+        -Wmissing-declarations
+        -Wmissing-include-dirs
+        -Wnull-dereference
+        -Wpacked
+        -Wpadded
+        -Wpointer-arith
+        -Wredundant-decls
+        -Wshadow
+        -Wshift-overflow=2
+        -Wsign-conversion
+        -Wswitch-default
+        -Wswitch-enum
+        -Wundef
+        -Wuninitialized
+        -Wvla
+
+        # ---------------------------------------------------------------------
+        # GNU C only.
+
+        $<$<COMPILE_LANGUAGE:C>:-Wbad-function-cast>
+        $<$<COMPILE_LANGUAGE:C>:-Wc++-compat>
+        $<$<COMPILE_LANGUAGE:C>:-Wduplicate-decl-specifier>
+        $<$<COMPILE_LANGUAGE:C>:-Wmissing-prototypes>
+        $<$<COMPILE_LANGUAGE:C>:-Wnested-externs>
+        $<$<COMPILE_LANGUAGE:C>:-Wold-style-definition>
+        $<$<COMPILE_LANGUAGE:C>:-Wstrict-prototypes>
+
+        # ---------------------------------------------------------------------
+        # GNU C++ only.
+
+        # inherits the "cxx11" ABI tag that 'std::string'
+        # $<$<COMPILE_LANGUAGE:CXX>:-Wabi-tag>
+
+        $<$<COMPILE_LANGUAGE:CXX>:-Wctor-dtor-privacy>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wnoexcept>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wnon-virtual-dtor>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wold-style-cast>
+        $<$<COMPILE_LANGUAGE:CXX>:-Woverloaded-virtual>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wplacement-new=2>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wregister>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wsign-promo>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wstrict-null-sentinel>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wsuggest-final-methods>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wsuggest-final-types>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wsuggest-override>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wuseless-cast>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wzero-as-null-pointer-constant>
+      )
+
+    endif()
+
+    if("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "8.0.0")
+
+      # message(VERBOSE "Adding GCC 8 warnings...")
+
+      list(APPEND ${variable_name}
+
+        $<$<COMPILE_LANGUAGE:CXX>:-Wextra-semi>
+
+      )
+
+    endif()
+
+    if("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "9.0.0")
+
+      # message(VERBOSE "Adding GCC 9 warnings...")
+
+      list(APPEND ${variable_name}
+
+        # None so far.
+      )
+
+    endif()
+
+    if("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "10.0.0")
+
+      # message(VERBOSE "Adding GCC 10 warnings...")
+
+      list(APPEND ${variable_name}
+
+        # ---------------------------------------------------------------------
+        # Common GNU C & C++.
+
+        -Warith-conversion
+
+        # ---------------------------------------------------------------------
+        # GNU C++ only.
+
+        $<$<COMPILE_LANGUAGE:CXX>:-Wcomma-subscript>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wredundant-tags>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wvolatile>
+      )
+
+      # RISC-V 10.1 fails with `note: replace the class-key with 'struct'`.
+      if(NOT "${CMAKE_C_COMPILER_VERSION}" VERSION_EQUAL "10.1.0")
+
+        list(APPEND ${variable_name}
+
+          $<$<COMPILE_LANGUAGE:CXX>:-Wmismatched-tags>
+        )
+
+      endif()
+
+    endif()
+
+  elseif("${CMAKE_C_COMPILER_ID}" MATCHES ".*Clang")
+
+    message(VERBOSE "Adding clang warnings...")
+
+    list(APPEND ${variable_name}
+
+      # For clang things are much easier.
+      -Weverything
+    )
+
+  endif()
+
+endmacro()
+
+# -----------------------------------------------------------------------------
+
+function(xpack_glob_cxx variable_name sources_folder_path)
+
+  set(local_sources)
+  file(GLOB local_sublist CONFIGURE_DEPENDS "${sources_folder_path}/*.c*")
+  list(APPEND local_sources ${local_sublist})
+  file(GLOB local_sublist CONFIGURE_DEPENDS "${sources_folder_path}/*.S")
+  list(APPEND local_sources ${local_sublist})
+
+  set(${variable_name} ${local_sources} PARENT_SCOPE)
+
+endfunction()
+
+function(xpack_glob_recurse_cxx variable_name sources_folder_path)
+
+  set(local_sources)
+  file(GLOB_RECURSE local_sublist CONFIGURE_DEPENDS "${sources_folder_path}/*.c*")
+  list(APPEND local_sources ${local_sublist})
+  file(GLOB_RECURSE local_sublist CONFIGURE_DEPENDS "${sources_folder_path}/*.S")
+  list(APPEND local_sources ${local_sublist})
+
+  set(${variable_name} ${local_sources} PARENT_SCOPE)
+
+endfunction()
+
+function(xpack_display_relative_paths files_list relative_to_path)
+
+  foreach(file_path IN LISTS files_list)
+    file(RELATIVE_PATH file_relative_path "${relative_to_path}" "${file_path}")
+    message(VERBOSE "+ ${file_relative_path}")
+  endforeach()
+
+endfunction()
+
+# -----------------------------------------------------------------------------
