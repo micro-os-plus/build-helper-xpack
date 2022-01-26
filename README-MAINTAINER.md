@@ -10,7 +10,8 @@ The project is hosted on GitHub:
 
 - <https://github.com/micro-os-plus/build-helper-xpack.git>
 
-To clone it:
+To clone the stable branch (`xpack`), run the following commands in a
+terminal (on Windows use the _Git Bash_ console):
 
 ```sh
 rm -rf ~/Work/build-helper-xpack.git && \
