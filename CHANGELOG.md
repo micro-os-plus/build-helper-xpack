@@ -6,6 +6,11 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2022-01-26
+
+- v2.2.0
+- rename micro-os-plus-build-helper.cmake module
+
 ## 2022-01-02
 
 - v2.1.7
