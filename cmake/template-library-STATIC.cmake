@@ -36,7 +36,7 @@ get_filename_component(xpack_current_folder ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
 
 if(NOT TARGET micro-os-plus-xxx-yyy-zzz-static)
 
-  # https://cmake.org/cmake/help/v3.19/command/add_library.html?highlight=interface#normal-libraries
+  # https://cmake.org/cmake/help/v3.20/command/add_library.html?highlight=interface#normal-libraries
 
   add_library(micro-os-plus-xxx-yyy-zzz-static STATIC)
 

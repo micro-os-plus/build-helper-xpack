@@ -92,7 +92,7 @@ cd "$1/.."
 echo
 echo $1
 git add -A
-git commit -m "Update min CMake 3.19"
+git commit -m "Update min CMake 3.20"
 
 __EOF__
 
@@ -112,7 +112,7 @@ __EOF__
 set -x
 
 # UPDATE ME!
-commands_file="${tmp_file_package_json}"
+commands_file="${tmp_file_commit_all}"
 
 repos_folder="$(dirname $(dirname "${script_folder_path}"))"
 

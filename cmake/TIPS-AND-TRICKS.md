@@ -114,7 +114,7 @@ Common IDs:
 
 Full list:
 
-- <https://cmake.org/cmake/help/v3.19/variable/CMAKE_LANG_COMPILER_ID.html>
+- <https://cmake.org/cmake/help/v3.20/variable/CMAKE_LANG_COMPILER_ID.html>
 
 ## GCC With 32-bit Target On 64-bit Host
 
