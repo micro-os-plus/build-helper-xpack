@@ -40,10 +40,12 @@ endfunction()
 
 # -----------------------------------------------------------------------------
 
-macro(xpack_glob_add_subdirectories path base_bin_path)
+macro(xpack_glob_add_subdirectories from_path base_bin_path)
 
-  file(GLOB children LIST_DIRECTORIES true "${path}/*")
+  # message(VERBOSE "${from_path}")
+  file(GLOB children LIST_DIRECTORIES true "${from_path}/*")
   foreach(child ${children})
+    # message(VERBOSE "${child}")
     if(EXISTS "${child}/CMakeLists.txt")
       file(RELATIVE_PATH relative_path ${CMAKE_SOURCE_DIR} ${child})
       message(VERBOSE "Adding '${relative_path}'...")
