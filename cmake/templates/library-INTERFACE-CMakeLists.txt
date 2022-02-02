@@ -1,40 +1,39 @@
 #
 # This file is part of the µOS++ distribution.
 #   (https://github.com/micro-os-plus)
-# Copyright (c) 2022 Liviu Ionescu
+# Copyright (c) 2021 Liviu Ionescu
 #
-# This Source Code Form is subject to the terms of the MIT License.
+# Permission to use, copy, modify, and/or distribute this software
+# for any purpose is hereby granted, under the terms of the MIT license.
+#
 # If a copy of the license was not distributed with this file, it can
 # be obtained from https://opensource.org/licenses/MIT/.
 #
 # -----------------------------------------------------------------------------
 
-# Use targets as include markers (variables are not scope independent).
-if(TARGET micro-os-plus-xxx-yyy-zzz-included)
-  return()
-else()
-  add_custom_target(micro-os-plus-xxx-yyy-zzz-included)
+# This file is intended to be consumed by applications with:
+#
+# `add_subdirectory("xpacks/micro-os-plus-xxx-yyy")`
+#
+# The result is an interface library that can be added to the linker with:
+#
+# `target_link_libraries(your-target PUBLIC micro-os-plus::xxx-yyy)`
+
+# -----------------------------------------------------------------------------
+## Preamble ##
+
+# https://cmake.org/cmake/help/v3.20/
+cmake_minimum_required(VERSION 3.20)
+
+project(
+  micro-os-plus-xxx-yyy
+  DESCRIPTION "µOS++ xxx-yyy"
+)
+
+if(COMMAND xpack_get_package_name_and_version)
+  xpack_get_package_name_and_version("${CMAKE_CURRENT_SOURCE_DIR}/package.json")
+  message(VERBOSE "Processing xPack ${PACKAGE_JSON_NAME}@${PACKAGE_JSON_VERSION}...")
 endif()
-
-if(NOT TARGET micro-os-plus-build-helper-included)
-  message(FATAL_ERROR "Include the mandatory build-helper (xpacks/micro-os-plus-build-helper/cmake/xpack-helper.cmake)")
-endif()
-
-message(STATUS "Processing xPack ${PACKAGE_JSON_NAME}@${PACKAGE_JSON_VERSION}...")
-
-# -----------------------------------------------------------------------------
-# Dependencies.
-
-find_package(micro-os-plus-aaa-bbb-ccc REQUIRED)
-
-# -----------------------------------------------------------------------------
-# The current folder.
-
-get_filename_component(xpack_current_folder ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
-
-# -----------------------------------------------------------------------------
-
-if(NOT TARGET micro-os-plus-xxx-yyy-zzz-interface)
 
 # -----------------------------------------------------------------------------
 ## The project library definitions ##
@@ -44,67 +43,59 @@ if(NOT TARGET micro-os-plus-xxx-yyy-zzz-interface)
 # INTERFACE: usage definitions, passed up to targets linking to it
 # PUBLIC: both
 
-  # Only the INTERFACE modes of the target_include_directories(),
-  # target_compile_definitions(), target_compile_options(), target_sources(),
-  # and target_link_libraries() commands may be used with INTERFACE libraries.
-
-  add_library(micro-os-plus-xxx-yyy-zzz-interface INTERFACE EXCLUDE_FROM_ALL)
+add_library(micro-os-plus-xxx-yyy-interface INTERFACE EXCLUDE_FROM_ALL)
 
 # -----------------------------------------------------------------------------
 # Target settings.
 
-  xpack_glob_recurse_cxx(source_files "${xpack_current_folder}/src")
-  xpack_display_relative_paths("${source_files}" "${xpack_current_folder}")
+target_include_directories(
+  micro-os-plus-xxx-yyy-interface
 
-  target_sources(
-    micro-os-plus-xxx-yyy-zzz-interface
+  INTERFACE
+    "include"
+)
 
-    INTERFACE
-      ${source_files}
+message(VERBOSE "+ -I include")
+
+target_sources(
+  micro-os-plus-xxx-yyy-interface
+
+  INTERFACE
+    "src/xxx-yyy.cpp"
   )
 
-  target_include_directories(
-    micro-os-plus-xxx-yyy-zzz-interface
+message(VERBOSE "+ src/xxx-yyy.cpp")
 
-    INTERFACE
-      ${xpack_current_folder}/include
-  )
+target_compile_definitions(
+  micro-os-plus-xxx-yyy-interface
 
-  target_compile_definitions(
-    micro-os-plus-xxx-yyy-zzz-interface
+  INTERFACE
+    MICRO_OS_PLUS_USE_XXX_YYY
+    # ... add preprocessor macro definitions.
+)
 
-    INTERFACE
-      # Preprocessor macro definitions
-  )
+message(VERBOSE "+ -D MICRO_OS_PLUS_USE_XXX_YYY")
 
-  target_compile_options(
-    micro-os-plus-xxx-yyy-zzz-interface
+target_compile_options(
+  micro-os-plus-xxx-yyy-interface
 
-    INTERFACE
-      # Perhaps ignore some warnings.
-  )
+  INTERFACE
+    # ... perhaps ignore some warnings.
+)
 
-  target_link_options(
-    micro-os-plus-xxx-yyy-zzz-interface
+target_link_libraries(
+  micro-os-plus-xxx-yyy-interface
 
-    INTERFACE
-      # Linker options
-  )
-
-  target_link_libraries(
-    micro-os-plus-xxx-yyy-zzz-interface
-
-    INTERFACE
-      # Dependencies
-      micro-os-plus::aaa-bbb-ccc
-  )
+  INTERFACE
+    # Dependencies
+    # ... list all dependencies.
+)
 
 # -----------------------------------------------------------------------------
-  # Aliases.
+# Aliases.
 
-  add_library(micro-os-plus::xxx-yyy-zzz ALIAS micro-os-plus-xxx-yyy-zzz-interface)
-  message(STATUS "=> micro-os-plus::xxx-yyy-zzz (micro-os-plus-xxx-yyy-zzz-interface)")
-
-endif()
+# https://cmake.org/cmake/help/v3.20/command/add_library.html#alias-libraries
+add_library(micro-os-plus::xxx-yyy ALIAS micro-os-plus-xxx-yyy-interface)
+message(VERBOSE "> micro-os-plus::xxx-yyy -> micro-os-plus-xxx-yyy-interface")
 
 # -----------------------------------------------------------------------------
