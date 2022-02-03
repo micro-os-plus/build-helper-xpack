@@ -92,7 +92,7 @@ cd "$1/.."
 echo
 echo $1
 git add -A
-git commit -m "Update min CMake 3.20"
+git commit -m "Update short copyright notice"
 
 __EOF__
 
@@ -123,7 +123,7 @@ __EOF__
 set -x
 
 # UPDATE ME!
-commands_file="${cmakelists_file_package_json}"
+commands_file="${tmp_file_commit_all}"
 
 repos_folder="$(dirname $(dirname "${script_folder_path}"))"
 
