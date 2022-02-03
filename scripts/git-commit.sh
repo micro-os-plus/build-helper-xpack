@@ -92,7 +92,7 @@ cd "$1/.."
 echo
 echo $1
 git add -A
-git commit -m "Update short copyright notice"
+git commit -m "Update short copyright notice for C/C++"
 
 __EOF__
 
