@@ -36,6 +36,7 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 tmp_script_file="$(mktemp)"
 cat <<'__EOF__' >"${tmp_script_file}"
+echo "$1..."
 cd "$1/.."
 git push
 git push origin --tags
