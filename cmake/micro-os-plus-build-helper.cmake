@@ -321,3 +321,55 @@ function(xpack_display_relative_paths files_list relative_to_path)
 endfunction()
 
 # -----------------------------------------------------------------------------
+
+function(xpack_display_target_lists target)
+
+  set(relative_to_path "${CMAKE_CURRENT_SOURCE_DIR}")
+  get_target_property(name ${target} NAME)
+  message(VERBOSE "> ${name}")
+
+  get_target_property(include_paths ${target} INTERFACE_INCLUDE_DIRECTORIES)
+
+  if (include_paths)
+    foreach(file_path IN LISTS include_paths)
+      file(RELATIVE_PATH file_relative_path "${relative_to_path}" "${file_path}")
+      message(VERBOSE "+ -I ${file_relative_path}")
+    endforeach()
+  endif()
+
+  get_target_property(sources_paths ${target} INTERFACE_SOURCES)
+
+  if (sources_paths)
+    foreach(file_path IN LISTS sources_paths)
+      file(RELATIVE_PATH file_relative_path "${relative_to_path}" "${file_path}")
+      message(VERBOSE "+ ${file_relative_path}")
+    endforeach()
+  endif()
+
+  get_target_property(compile_definitions ${target} INTERFACE_COMPILE_DEFINITIONS)
+
+  if (compile_definitions)
+    foreach(def IN LISTS compile_definitions)
+      message(VERBOSE "+ -D ${def}")
+    endforeach()
+  endif()
+
+  get_target_property(compile_options ${target} INTERFACE_COMPILE_OPTIONS)
+
+  if (compile_options)
+    foreach(opt IN LISTS compile_options)
+      message(VERBOSE "+ ${opt}")
+    endforeach()
+  endif()
+
+  get_target_property(link_libraries ${target} INTERFACE_LINK_LIBRARIES)
+
+  if (link_libraries)
+    foreach(lib IN LISTS link_libraries)
+      message(VERBOSE "+ ${lib}")
+    endforeach()
+  endif()
+
+endfunction()
+
+# -----------------------------------------------------------------------------

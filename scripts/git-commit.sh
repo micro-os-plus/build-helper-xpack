@@ -85,17 +85,6 @@ git commit -m "README-MAINTAINER updates"
 
 __EOF__
 
-tmp_file_commit_all="$(mktemp)"
-cat <<'__EOF__' >"${tmp_file_commit_all}"
-cd "$1/.."
-
-echo
-echo $1
-git add -A
-git commit -m "Update short copyright notice for C/C++"
-
-__EOF__
-
 cmakelists_file_package_json="$(mktemp)"
 cat <<'__EOF__' >"${cmakelists_file_package_json}"
 cd "$1/.."
@@ -115,6 +104,19 @@ echo
 echo $1
 git add package.json
 git commit -m "package.json remove git url"
+
+__EOF__
+
+# -----------------------------------------------------------------------------
+
+tmp_file_commit_all="$(mktemp)"
+cat <<'__EOF__' >"${tmp_file_commit_all}"
+cd "$1/.."
+
+echo
+echo $1
+git add -A
+git commit -m "cmake: add xpack_display_target_lists"
 
 __EOF__
 

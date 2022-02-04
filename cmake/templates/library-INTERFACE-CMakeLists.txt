@@ -55,16 +55,12 @@ target_include_directories(
     "include"
 )
 
-message(VERBOSE "+ -I include")
-
 target_sources(
   micro-os-plus-xxx-yyy-interface
 
   INTERFACE
     "src/xxx-yyy.cpp"
   )
-
-message(VERBOSE "+ src/xxx-yyy.cpp")
 
 target_compile_definitions(
   micro-os-plus-xxx-yyy-interface
@@ -73,8 +69,6 @@ target_compile_definitions(
     MICRO_OS_PLUS_USE_XXX_YYY
     # ... add preprocessor macro definitions.
 )
-
-message(VERBOSE "+ -D MICRO_OS_PLUS_USE_XXX_YYY")
 
 target_compile_options(
   micro-os-plus-xxx-yyy-interface
@@ -90,6 +84,10 @@ target_link_libraries(
     # Dependencies
     # ... list all dependencies.
 )
+
+if (COMMAND xpack_display_target_lists)
+  xpack_display_target_lists(micro-os-plus-xxx-yyy-interface)
+endif()
 
 # -----------------------------------------------------------------------------
 # Aliases.
