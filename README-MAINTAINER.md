@@ -43,7 +43,7 @@ A recent [xpm](https://xpack.github.io/xpm/), which is a portable
 - commit all changes
 - update versions in `README.md` and `README-MAINTAINER.md`
 - update `CHANGELOG.md`
-- commit with a message like _prepare v2.2.0_
+- commit with a message like _prepare v2.3.0_
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
@@ -77,7 +77,7 @@ When the package is considered stable:
 When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @micro-os-plus/build-helper`
-- `npm dist-tag add @micro-os-plus/build-helper@2.2.0 latest`
+- `npm dist-tag add @micro-os-plus/build-helper@2.3.0 latest`
 - `npm dist-tag ls @@micro-os-plus/build-helper`
 
 ## Announce to the community

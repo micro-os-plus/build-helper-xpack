@@ -6,6 +6,14 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2022-02-01
+
+- dc5e3e4 scripts/clone: update for device-*
+- 17c0fcd meson: add scripts and templates
+- 2cc967a move cmake templates to sub-folder
+- 9b7666a move toolchains to sub-folder
+- cf29ef8 cmake/build-helper cosmetics
+
 ## 2022-01-26
 
 - v2.2.0
