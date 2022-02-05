@@ -16,11 +16,11 @@ message('Adding all warnings...')
 global_warnings = [ ]
 
 # This will trigger an warning.
-# global_warnings += '-Wall'
+global_warnings += [ '-Wall' ]
 # The recommended way is with warning_level, but it also defines other options,
 # like `-Wall -Winvalid-pch -Wnon-virtual-dtor -Wextra`
 # [built-in options]
-# warning_level = '2'
+# warning_level = '1'
 
 c_global_warnings = [ ]
 cpp_global_warnings = [ ]
@@ -37,7 +37,7 @@ if c_compiler.get_id() == 'gcc'
     '-Wdouble-promotion',
     '-Wduplicated-branches',
     '-Wduplicated-cond',
-    # '-Wextra', # via warning_level, but together with other
+    '-Wextra',
     '-Wfloat-conversion',
     '-Wfloat-equal',
     '-Wformat-nonliteral',
@@ -48,6 +48,7 @@ if c_compiler.get_id() == 'gcc'
     '-Wformat-y2k',
     '-Wformat=2',
     '-Wlogical-op',
+    '-Winvalid-pch',
     '-Wmissing-declarations',
     '-Wmissing-include-dirs',
     '-Wnull-dereference',
@@ -65,9 +66,6 @@ if c_compiler.get_id() == 'gcc'
     '-Wvla',
   ]
 
-  c_global_warnings += global_warnings
-  cpp_global_warnings += global_warnings
-
   c_global_warnings += [
     '-Wbad-function-cast',
     '-Wc++-compat',
@@ -81,7 +79,7 @@ if c_compiler.get_id() == 'gcc'
   cpp_global_warnings += [
     '-Wctor-dtor-privacy',
     '-Wnoexcept',
-    # '-Wnon-virtual-dtor',
+    '-Wnon-virtual-dtor',
     '-Wold-style-cast',
     '-Woverloaded-virtual',
     '-Wplacement-new=2',
@@ -122,12 +120,12 @@ elif c_compiler.get_id().contains('clang')
 endif
 
 add_global_arguments(
-  c_global_warnings,
+  global_warnings + c_global_warnings,
   language: 'c',
 )
 
 add_global_arguments(
-  cpp_global_warnings,
+  global_warnings + cpp_global_warnings,
   language: 'cpp',
 )
 
