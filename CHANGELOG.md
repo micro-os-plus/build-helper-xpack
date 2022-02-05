@@ -6,7 +6,12 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
-## 2022-02-01
+## 2022-02-05
+
+- v2.3.1
+- 0e35cf2 meson/enable-all-warnings: revert to without warning_level
+
+## 2022-02-04
 
 - v2.3.0
 - dc5e3e4 scripts/clone: update for device-*
