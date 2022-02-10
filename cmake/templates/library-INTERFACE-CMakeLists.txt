@@ -48,41 +48,26 @@ add_library(micro-os-plus-xxx-yyy-interface INTERFACE EXCLUDE_FROM_ALL)
 # -----------------------------------------------------------------------------
 # Target settings.
 
-target_include_directories(
-  micro-os-plus-xxx-yyy-interface
-
-  INTERFACE
-    "include"
+target_include_directories(micro-os-plus-xxx-yyy-interface INTERFACE
+  "include"
 )
 
-target_sources(
-  micro-os-plus-xxx-yyy-interface
-
-  INTERFACE
-    "src/xxx-yyy.cpp"
-  )
-
-target_compile_definitions(
-  micro-os-plus-xxx-yyy-interface
-
-  INTERFACE
-    MICRO_OS_PLUS_USE_XXX_YYY
-    # ... add preprocessor macro definitions.
+target_sources(micro-os-plus-xxx-yyy-interface INTERFACE
+  "src/xxx-yyy.cpp"
 )
 
-target_compile_options(
-  micro-os-plus-xxx-yyy-interface
-
-  INTERFACE
-    # ... perhaps ignore some warnings.
+target_compile_definitions(micro-os-plus-xxx-yyy-interface INTERFACE
+  "MICRO_OS_PLUS_USE_XXX_YYY"
+  # None.
 )
 
-target_link_libraries(
-  micro-os-plus-xxx-yyy-interface
+target_compile_options(micro-os-plus-xxx-yyy-interface INTERFACE
+  # None.
+)
 
-  INTERFACE
-    # Dependencies
-    # ... list all dependencies.
+target_link_libraries(micro-os-plus-xxx-yyy-interface INTERFACE
+  # Dependencies
+  # None.
 )
 
 if (COMMAND xpack_display_target_lists)
