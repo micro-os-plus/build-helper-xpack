@@ -374,3 +374,39 @@ function(xpack_display_target_lists target)
 endfunction()
 
 # -----------------------------------------------------------------------------
+
+# https://cmake.org/cmake/help/v3.20/manual/cmake-properties.7.html#properties-of-global-scope
+# https://cmake.org/cmake/help/v3.20/command/get_property.html
+
+function(xpack_display_global_lists)
+
+  set(relative_to_path "${CMAKE_CURRENT_SOURCE_DIR}")
+
+  get_directory_property(include_paths INCLUDE_DIRECTORIES)
+
+  if (include_paths)
+    foreach(file_path IN LISTS include_paths)
+      file(RELATIVE_PATH file_relative_path "${relative_to_path}" "${file_path}")
+      message(VERBOSE ".G+ -I ${file_relative_path}")
+    endforeach()
+  endif()
+
+  get_directory_property(compile_definitions COMPILE_DEFINITIONS )
+
+  if (compile_definitions)
+  foreach(def IN LISTS compile_definitions)
+    message(VERBOSE ".G+ -D ${def}")
+  endforeach()
+  endif()
+
+  get_directory_property(compile_options COMPILE_OPTIONS)
+
+  if (compile_options)
+    foreach(opt IN LISTS compile_options)
+      message(VERBOSE ".G+ ${opt}")
+    endforeach()
+  endif()
+
+endfunction()
+
+# -----------------------------------------------------------------------------
