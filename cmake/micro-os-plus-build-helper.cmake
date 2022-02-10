@@ -279,6 +279,7 @@ macro(xpack_set_all_compiler_warnings variable_name)
 
       # For clang things are much easier.
       -Weverything
+      $<$<C_COMPILER_ID:ARMClang>:-Wno-poison-system-directories>
     )
 
   endif()

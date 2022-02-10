@@ -117,6 +117,10 @@ elif c_compiler.get_id().contains('clang')
   c_global_warnings += [ '-Weverything' ]
   cpp_global_warnings += [ '-Weverything' ]
 
+  # Warning observed only on Apple clang.
+  c_global_warnings += [ '-Wno-poison-system-directories' ]
+  cpp_global_warnings += [ '-Wno-poison-system-directories' ]
+
 endif
 
 add_global_arguments(
