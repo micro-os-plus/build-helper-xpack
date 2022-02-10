@@ -6,6 +6,12 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2022-02-10
+
+- v2.4.0
+- 18da2f9 cmake global add xpack_display_global_lists()
+- 526824e cmake & meson add -Wno-poison-system-directories
+
 ## 2022-02-05
 
 - v2.3.1
