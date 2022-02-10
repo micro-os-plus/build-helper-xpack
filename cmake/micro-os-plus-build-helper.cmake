@@ -128,6 +128,7 @@ macro(xpack_set_all_compiler_warnings variable_name)
     # -Wpedantic
   )
 
+  # https://cmake.org/cmake/help/v3.20/manual/cmake-generator-expressions.7.html
   # https://cmake.org/cmake/help/v3.20/variable/CMAKE_LANG_COMPILER_ID.html
   if("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
 
@@ -322,6 +323,9 @@ function(xpack_display_relative_paths files_list relative_to_path)
 endfunction()
 
 # -----------------------------------------------------------------------------
+
+# https://cmake.org/cmake/help/v3.20/manual/cmake-properties.7.html#properties-on-targets
+# https://cmake.org/cmake/help/v3.20/command/get_target_property.html
 
 function(xpack_display_target_lists target)
 
