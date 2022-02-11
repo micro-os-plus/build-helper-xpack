@@ -6,6 +6,11 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2022-02-11
+
+- v2.4.1
+- 97bcb5b meson/templates update
+
 ## 2022-02-10
 
 - v2.4.0
