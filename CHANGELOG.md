@@ -8,6 +8,7 @@ and close existing issues and pull requests.
 
 ## 2022-02-11
 
+- 1e46852 meson/gcc.ini: remove gcc-ar/ranlib
 - v2.4.1
 - 97bcb5b meson/templates update
 
