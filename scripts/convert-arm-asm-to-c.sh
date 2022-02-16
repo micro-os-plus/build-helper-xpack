@@ -192,7 +192,6 @@ Default_Handler(void)
 #endif
   while (1)
     {
-      ;
     }
 }
 
