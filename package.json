@@ -9,9 +9,7 @@
     "version-patch": "npm version patch",
     "version-minor": "npm version minor",
     "postversion": "git push origin --all && git push origin --tags",
-    "git-log": "git log --pretty='%cd * %h %s' --date=short",
-    "test-cmake": "cmake -S tests/meta -B build/tests-cmake -GNinja",
-    "test": "xpm run test-cmake"
+    "git-log": "git log --pretty='%cd * %h %s' --date=short"
   },
   "repository": {
     "type": "git",
@@ -37,5 +35,13 @@
     "@xpack-dev-tools/cmake": "3.20.6-2.1",
     "@xpack-dev-tools/ninja-build": "1.10.2-5.1"
   },
-  "xpack": {}
+  "xpack": {
+    "minimumXpmRequired": "0.11.0",
+    "actions": {
+      "test-cmake": "cmake -S tests -B build/tests-cmake -G Ninja --log-level=VERBOSE",
+      "test": [
+        "xpm run test-cmake"
+      ]
+    }
+  }
 }
