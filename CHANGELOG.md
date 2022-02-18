@@ -6,8 +6,16 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2022-02-18
+
+- v2.5.0
+- 8ce33a4 package.json update actions
+- 88d5544 tests/CMakeLists
+- fd8361e cmake/helper: display SYSTEM_NAME & PROCESSSOR
+
 ## 2022-02-11
 
+- v2.4.2
 - 1e46852 meson/gcc.ini: remove gcc-ar/ranlib
 - v2.4.1
 - 97bcb5b meson/templates update
