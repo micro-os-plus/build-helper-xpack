@@ -38,6 +38,10 @@ function(xpack_display_greetings)
   message(VERBOSE "Build path: ${CMAKE_BINARY_DIR}")
   message(VERBOSE "Module path: ${CMAKE_MODULE_PATH}")
 
+  message(VERBOSE "CMAKE_C_COMPILER_ID: ${CMAKE_C_COMPILER_ID}")
+  message(VERBOSE "CMAKE_SYSTEM_NAME: ${CMAKE_SYSTEM_NAME}")
+  message(VERBOSE "CMAKE_SYSTEM_PROCESSOR: ${CMAKE_SYSTEM_PROCESSOR}")
+
 endfunction()
 
 # -----------------------------------------------------------------------------
