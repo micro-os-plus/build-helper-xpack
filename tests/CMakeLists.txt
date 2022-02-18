@@ -17,16 +17,15 @@ message(STATUS "CMake version: ${CMAKE_VERSION}")
 
 # -----------------------------------------------------------------------------
 
-get_filename_component(xpack_tests_root_folder ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
-get_filename_component(xpack_project_folder ${xpack_tests_root_folder} DIRECTORY)
+get_filename_component(xpack_project_folder ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
 
-include("${xpack_project_folder}/cmake/xpack-helper.cmake")
+include("${xpack_project_folder}/cmake/micro-os-plus-build-helper.cmake")
 
 # xpack_append_cmake_prefix_path("${xpack_tests_root_folder}")
-xpack_append_cmake_prefix_path("${xpack_project_folder}")
+# xpack_append_cmake_prefix_path("${xpack_project_folder}")
 
-# Leave the result in PACKAGE_JSON_VERSION[*]
-xpack_parse_package_json_semver("${xpack_project_folder}/package.json")
+# Leave the result in PACKAGE_JSON_VERSION & _NAME
+xpack_get_package_name_and_version("${xpack_project_folder}/package.json")
 
 # -----------------------------------------------------------------------------
 
@@ -37,6 +36,7 @@ project(
 )
 
 # Nothing to do, only check if CMake is happy with including the helper.
+xpack_display_greetings()
 
 # -----------------------------------------------------------------------------
 
