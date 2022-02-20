@@ -6,6 +6,15 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2022-02-21
+
+- v2.5.1
+- 6f7ddd7 gcc.cmake: CMAKE_AR CMAKE_RANLIB
+
+## 2022-02-20
+
+- 313c888 add templates
+
 ## 2022-02-18
 
 - v2.5.0
