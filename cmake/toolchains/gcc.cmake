@@ -13,11 +13,17 @@
 
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 
-set(CMAKE_C_COMPILER   "gcc")
+set(CMAKE_C_COMPILER "gcc")
 set(CMAKE_CXX_COMPILER "g++")
 
 # Must be explicit, not set by CMake.
 set(CMAKE_SIZE "size")
+
+if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Linux")
+  # Required for -flto.
+  set(CMAKE_AR "gcc-ar")
+  set(CMAKE_RANLIB "gcc-ranlib")
+endif()
 
 # -----------------------------------------------------------------------------
 
