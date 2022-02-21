@@ -86,6 +86,8 @@ function(add_test_executable name)
 
   # https://cmake.org/cmake/help/v3.20/manual/cmake-generator-expressions.7.html
   target_link_options(${name} PRIVATE
+    $<$<C_COMPILER_ID:GNU>:-static-libgcc>
+    $<$<C_COMPILER_ID:GNU>:-static-libstdc++>
     $<$<PLATFORM_ID:Darwin>:-Wl,-dead_strip>
     $<$<PLATFORM_ID:Linux,Windows>:-Wl,--gc-sections>
     $<$<PLATFORM_ID:Linux,Windows>:-Wl,-Map,platform-bin/${name}-map.txt>

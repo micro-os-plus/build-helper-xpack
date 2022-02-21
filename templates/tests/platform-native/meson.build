@@ -38,7 +38,16 @@ message('> platform_native_dependency')
 
 # =============================================================================
 
-linker_options = []
+linker_options = [
+  # '-v',
+]
+
+if c_compiler.get_id() == 'gcc'
+  linker_options += [
+    '-static-libgcc',
+    '-static-libstdc++',
+  ]
+endif
 
 # https://mesonbuild.com/Reference-tables.html#operating-system-names
 if build_machine.system() == 'darwin'
