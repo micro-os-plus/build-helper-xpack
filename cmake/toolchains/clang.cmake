@@ -35,6 +35,7 @@ set(CMAKE_SIZE "llvm-size") # Must be explicit, not set by CMake.
 # TODO: remove workaround once VS Code is fixed.
 # VS Code does not properly identify the shims used by npm/xpm,
 # thus make the extension explicit.
+# https://cmake.org/cmake/help/v3.20/variable/CMAKE_HOST_SYSTEM_NAME.html
 if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Windows")
   set(CMAKE_C_COMPILER "${CMAKE_C_COMPILER}.cmd")
   set(CMAKE_CXX_COMPILER "${CMAKE_CXX_COMPILER}.cmd")
