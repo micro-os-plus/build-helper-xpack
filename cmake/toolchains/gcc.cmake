@@ -19,7 +19,10 @@ set(CMAKE_CXX_COMPILER "g++")
 # Must be explicit, not set by CMake.
 set(CMAKE_SIZE "size")
 
-if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Linux")
+# https://cmake.org/cmake/help/v3.20/variable/CMAKE_HOST_SYSTEM_NAME.html
+if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Darwin")
+  # macOS has no separate AR or RANLIB.
+else()
   # Required for -flto.
   set(CMAKE_AR "gcc-ar")
   set(CMAKE_RANLIB "gcc-ranlib")
