@@ -1,7 +1,7 @@
 {
   "name": "@micro-os-plus/build-helper",
   "version": "2.6.0",
-  "description": "A source xPack to assist the µOS++ builds",
+  "description": "A source library xPack to assist the µOS++ builds",
   "main": "",
   "scripts": {
     "npm-install": "npm install",
