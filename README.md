@@ -1,6 +1,6 @@
 [![license](https://img.shields.io/github/license/micro-os-plus/build-helper-xpack)](https://github.com/micro-os-plus/build-helper-xpack/blob/xpack/LICENSE)
 
-# A source xPack with files to help µOS++ builds
+# A source library xPack with files to help µOS++ builds
 
 This project provides files to be included during builds.
 
@@ -17,8 +17,8 @@ For maintainer infos, please see the
 
 ## Install
 
-As a source xPacks, the easiest way to add it to a project is via **xpm**,
-but it can also be used as any Git project, for example as a submodule.
+As a source library xPacks, the easiest way to add it to a project is via
+**xpm**, but it can also be used as any Git project, for example as a submodule.
 
 ### Prerequisites
 
