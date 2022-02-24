@@ -6,10 +6,14 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2022-02-24
+
+- v2.6.1
+- 1f6b1f0 update template
 
 ## 2022-02-21
 
-- 2.6.0
+- v2.6.0
 - 12a4d9c meson: separate platform toolchain files
 - bc34d9d gcc.cmake: gcc-ar for windows too
 - fcb90ce platform-native: -static-libgcc -static-libstdc++ for GCC
