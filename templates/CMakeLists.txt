@@ -1,7 +1,7 @@
 #
 # This file is part of the µOS++ distribution.
 #   (https://github.com/micro-os-plus)
-# Copyright (c) 2021 Liviu Ionescu
+# Copyright (c) 2022 Liviu Ionescu
 #
 # Permission to use, copy, modify, and/or distribute this software
 # for any purpose is hereby granted, under the terms of the MIT license.
@@ -55,7 +55,23 @@ target_compile_definitions(micro-os-plus-xxx-yyy-interface INTERFACE
 )
 
 target_compile_options(micro-os-plus-xxx-yyy-interface INTERFACE
-  # None.
+
+  # -Wno-padded
+  # -Wno-psabi
+
+  # $<$<C_COMPILER_ID:GNU>:-Wno-conversion>
+
+  # $<$<C_COMPILER_ID:Clang,AppleClang>:-Wno-c++98-c++11-c++14-c++17-compat-pedantic>
+  # $<$<C_COMPILER_ID:Clang,AppleClang>:-Wno-c++98-c++11-compat>
+  # $<$<C_COMPILER_ID:Clang,AppleClang>:-Wno-c++98-compat>
+  # $<$<C_COMPILER_ID:Clang,AppleClang>:-Wno-c++98-compat-pedantic>
+  # $<$<C_COMPILER_ID:Clang,AppleClang>:-Wno-c99-extensions>
+  # $<$<C_COMPILER_ID:Clang,AppleClang>:-Wno-pedantic>
+
+  # $<$<COMPILE_LANGUAGE:CXX>:-Wno-ctor-dtor-privacy>
+
+  # $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<C_COMPILER_ID:GNU>>:-Wno-useless-cast>
+
 )
 
 target_link_libraries(micro-os-plus-xxx-yyy-interface INTERFACE
