@@ -1,0 +1,91 @@
+# https://help.github.com/en/actions
+# https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
+# https://github.com/actions
+
+# https://github.com/micro-os-plus/diag-trace-xpack/actions/workflows/CI.yml
+name: CI on Push
+
+on:
+  push:
+    paths-ignore:
+      - '.vscode/**'
+      - 'LICENSE'
+      - '**.md'
+      - '.clang-format'
+      - '.gitignore'
+      - '.npmignore'
+      - '.github/workflows/test-all.yml'
+      - 'tests-xpack/scripts/**'
+    # tags-ignore: # Does not work, nothing triggers.
+    #   - '**'
+
+jobs:
+  ci-test:
+    name: 'CI xxx-yyy tests'
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node-version: [14]
+        # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners
+        os: [ubuntu-18.04, macos-10.15, windows-2019]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 3
+
+    - name: Setup Node.js ${{ matrix.node-version }} on ${{ matrix.os }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Show environment
+      run: |
+        uname -a
+        node --version
+        npm --version
+        env
+
+    - name: Install xpm on Unix
+      if: runner.os != 'Windows'
+      run: sudo npm install -g xpm@test
+
+    - name: Install xpm on Windows
+      if: runner.os == 'Windows'
+      run: npm install -g xpm@test
+
+    - name: Satisfy project dependencies
+      run: xpm install
+
+    - name: Run test-native-cmake-gcc11
+      run: |
+        xpm install --config native-cmake-gcc11-debug --quiet
+        xpm install --config native-cmake-gcc11-release --quiet
+        xpm run test-native-cmake-gcc11
+
+    - name: Run test-native-cmake-clang12
+      run: |
+        xpm install --config native-cmake-clang12-debug --quiet
+        xpm install --config native-cmake-clang12-release --quiet
+        xpm run test-native-cmake-clang12
+
+    - name: Run test-native-meson-gcc11
+      run: |
+        xpm install --config native-meson-gcc11-debug --quiet
+        xpm install --config native-meson-gcc11-release --quiet
+        xpm run test-native-meson-gcc11
+
+    - name: Run test-qemu-mps2-an386-cmake
+      run: |
+        xpm install --config qemu-mps2-an386-cmake-debug --quiet
+        xpm install --config qemu-mps2-an386-cmake-release --quiet
+        xpm run test-qemu-mps2-an386-cmake
+
+    - name: Run test-qemu-mps2-an386-meson
+      run: |
+        xpm install --config qemu-mps2-an386-meson-debug --quiet
+        xpm install --config qemu-mps2-an386-meson-release --quiet
+        xpm run test-qemu-mps2-an386-meson

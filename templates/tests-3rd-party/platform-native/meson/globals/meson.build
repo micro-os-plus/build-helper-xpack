@@ -24,9 +24,14 @@ xpack_platform_common_c_args = []
 xpack_platform_common_cpp_args = []
 xpack_platform_compile_definitions = []
 
-xpack_platform_compile_definitions += [
-  '-D_POSIX_C_SOURCE=200809L',
-]
+if c_compiler.get_id().contains('clang') and build_machine.system() == 'darwin'
+  # On macOS enabling the macro fails with:
+  # error: unknown type name 'u_int'
+else
+  xpack_platform_compile_definitions += [
+    '-D_POSIX_C_SOURCE=200809L',
+  ]
+endif
 
 if get_option('buildtype') == 'release' or get_option('buildtype') == 'minsize' or get_option('buildtype') == 'debugoptimized'
   # https://mesonbuild.com/Reference-tables.html#operating-system-names

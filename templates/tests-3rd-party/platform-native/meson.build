@@ -114,8 +114,8 @@ xpack_sources += [
   '../src/sample-test.cpp',
 ]
 
-xpack_c_args += xpack_3rd_party_xxx_yyy_dependency_c_args
-xpack_cpp_args += xpack_3rd_party_xxx_yyy_dependency_cpp_args
+# xpack_c_args += xpack_3rd_party_xxx_yyy_dependency_c_args
+# xpack_cpp_args += xpack_3rd_party_xxx_yyy_dependency_cpp_args
 
 xpack_dependencies += [
   # Tested library.
@@ -162,7 +162,10 @@ message('A> sample-test')
 test(
   'sample-test',
   sample_test,
-  args: [],
+  args: [
+    'one',
+    'two'
+  ],
   env: nomalloc
 )
 
@@ -186,8 +189,8 @@ xpack_sources += [
   '../src/unit-test.cpp',
 ]
 
-xpack_c_args += xpack_3rd_party_xxx_yyy_dependency_c_args
-xpack_cpp_args += xpack_3rd_party_xxx_yyy_dependency_cpp_args
+# xpack_c_args += xpack_3rd_party_xxx_yyy_dependency_c_args
+# xpack_cpp_args += xpack_3rd_party_xxx_yyy_dependency_cpp_args
 
 xpack_dependencies += [
   # Tested library.
@@ -195,6 +198,7 @@ xpack_dependencies += [
 
   # Portable dependencies.
   micro_os_plus_diag_trace_dependency,
+  # micro_os_plus_micro_test_plus_dependency,
 
   # Platform specific dependencies.
   platform_native_dependency,

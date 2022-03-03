@@ -1,0 +1,127 @@
+# -----------------------------------------------------------------------------
+# This file is part of the xPack distribution.
+#   (https://xpack.github.io)
+# Copyright (c) 2021 Liviu Ionescu.
+#
+# Permission to use, copy, modify, and/or distribute this software
+# for any purpose is hereby granted, under the terms of the MIT license.
+# -----------------------------------------------------------------------------
+
+# https://help.github.com/en/actions
+# https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners
+
+# https://docs.github.com/en/actions/reference/events-that-trigger-workflows#workflow_dispatch
+# https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
+# https://docs.github.com/en/rest/reference/actions#create-a-workflow-dispatch-event
+
+# -----------------------------------------------------------------------------
+
+name: 'Test xxx-yyy on all platforms'
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  linux-x64:
+    name: 'Linux x64 tests'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Machine'
+        run: uname -a
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+          submodules: true
+      - name: 'Ubuntu latest x64 native xpm test-all'
+        run: bash tests-xpack/scripts/test-all.sh
+      - name: 'Debian node:lts x64 docker xpm test-all'
+        uses: docker://node:lts
+        with:
+          entrypoint: /bin/bash
+          args: /github/workspace/tests-xpack/scripts/test-all.sh --image node:lts
+
+  linux-arm64:
+    name: 'Linux arm64 tests'
+    runs-on: [self-hosted, linux, arm64]
+    steps:
+      - name: 'Machine'
+        run: uname -a
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+          submodules: true
+      - name: 'Raspberry Pi OS arm64 native xpm test-all'
+        run: bash tests-xpack/scripts/test-all.sh
+      - name: 'Debian node:lts arm64 docker xpm test-all'
+        uses: docker://node:lts
+        with:
+          entrypoint: /bin/bash
+          args: /github/workspace/tests-xpack/scripts/test-all.sh --image node:lts
+
+  linux-arm32:
+    name: 'Linux arm32 tests'
+    runs-on: [self-hosted, linux, arm64]
+    steps:
+      - name: 'Machine'
+        run: uname -a
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+          submodules: true
+      - name: 'Debian node:lts arm32 docker xpm test-all'
+        uses: docker://arm32v7/node:lts
+        with:
+          entrypoint: /usr/bin/linux32
+          args: /bin/bash /github/workspace/tests-xpack/scripts/test-all.sh --image arm32v7/node:lts
+      # Ubuntu 20.04 & Debian buster fail to install nvm
+
+  macos-x64:
+    name: 'macOS x64 tests'
+    runs-on: macos-latest
+    steps:
+      - name: 'Machine'
+        run: uname -a
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+          submodules: true
+      - name: 'macOS x64 native xpm test-all'
+        run: bash tests-xpack/scripts/test-all.sh
+
+  macos-arm64:
+    name: 'macOS arm64 tests'
+    runs-on: [self-hosted, macos, apple]
+    defaults:
+      run:
+        shell: "/usr/bin/arch -arch arm64e /bin/bash -l {0}"
+    steps:
+      - name: 'Machine'
+        run: uname -a
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+          submodules: true
+      - name: 'macOS arm64 native xpm test-all'
+        run: bash tests-xpack/scripts/test-all.sh
+
+  windows-x64:
+    name: 'Windows x64 tests'
+    runs-on: windows-latest
+    steps:
+      - name: 'Machine'
+        run: uname -a
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+          submodules: true
+      - name: 'Windows x64 native xpm test-all'
+        run: bash tests-xpack/scripts/test-all.sh
+
+# -----------------------------------------------------------------------------

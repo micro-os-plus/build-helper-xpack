@@ -36,7 +36,6 @@ even with multiple versions of the same toolchain.
 
 For native tests, the toolchains used are:
 
-- GCC 8 (not available on Apple Silicon)
 - GCC 11
 - clang 12
 

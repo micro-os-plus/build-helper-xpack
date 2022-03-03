@@ -124,7 +124,7 @@ fi
 # runners the build folders are presistent.
 xpm run deep-clean
 
-xpm run install-all
+xpm run install-all --quiet
 xpm run test-all
 
 # -----------------------------------------------------------------------------

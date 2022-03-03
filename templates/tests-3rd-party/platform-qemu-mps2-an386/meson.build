@@ -17,6 +17,8 @@ message('Processing tests-xpack/platform-qemu-mps2-an386...')
 
 # -----------------------------------------------------------------------------
 
+xpack_platform_compile_definition = 'PLATFORM_QEMU_MPS2_AN386'
+
 # Enable them only when needed.
 xpack_create_listing = false
 xpack_create_hex = false
@@ -31,6 +33,12 @@ xpack_compile_definitions = []
 
 xpack_include_directories += [
   'include-platform',
+]
+
+# xpack_sources += []
+
+xpack_compile_definitions += [
+  '-D' + xpack_platform_compile_definition,
 ]
 
 # https://mesonbuild.com/Reference-manual_functions.html#declare_dependency
@@ -84,31 +92,8 @@ foreach name : test_names
     '../src/' + name + '.cpp',
   ]
 
-  xpack_c_args += xpack_3rd_party_xxx_yyy_dependency_c_args
-  xpack_cpp_args += xpack_3rd_party_xxx_yyy_dependency_cpp_args
-
-  xpack_dependencies += [
-    # Tested library.
-    xpack_3rd_party_xxx_yyy_dependency,
-  ]
-
-  if name == 'unit-test'
-    xpack_dependencies += [
-      # Portable dependencies.
-      micro_os_plus_micro_test_plus_dependency,
-      # micro_os_plus_diag_trace_dependency,
-    ]
-  endif
-
-  xpack_dependencies += [
-    # Platform specific dependencies.
-    platform_qemu_mps2_an386_dependency, # bring device & architecture too.
-
-    micro_os_plus_libs_c_dependency,
-    micro_os_plus_libs_cpp_dependency,
-    micro_os_plus_semihosting_dependency,
-    micro_os_plus_startup_dependency,
-  ]
+  # xpack_c_args += xpack_3rd_party_xxx_yyy_dependency_c_args
+  # xpack_cpp_args += xpack_3rd_party_xxx_yyy_dependency_cpp_args
 
   xpack_link_args += [
     '-nostartfiles',
@@ -117,16 +102,34 @@ foreach name : test_names
     # are not refered from anywhere.
     '-u_interrupt_vectors',
 
+    # nano has no exceptions.
+    # '-specs=nano.specs'
+
     '-Wl,--gc-sections',
 
     '-Wl,-Map,'+ name + '-map.txt',
     # '-v',
-  ]
 
-  xpack_link_args += [
     # Path are relative to the build folder.
     '-Txpacks/micro-os-plus-devices-qemu-cortexm/linker-scripts/mem.ld',
     '-Txpacks/micro-os-plus-architecture-cortexm/linker-scripts/sections.ld',
+  ]
+
+  xpack_dependencies += [
+    # Tested library.
+    xpack_3rd_party_xxx_yyy_dependency,
+
+    # Portable dependencies.
+    micro_os_plus_micro_test_plus_dependency,
+    # micro_os_plus_diag_trace_dependency,
+
+    # Platform specific dependencies.
+    platform_qemu_mps2_an386_dependency, # bring device & architecture too.
+
+    micro_os_plus_libs_c_dependency,
+    micro_os_plus_libs_cpp_dependency,
+    micro_os_plus_semihosting_dependency,
+    micro_os_plus_startup_dependency,
   ]
 
   xpack_link_with += [
@@ -229,7 +232,7 @@ test(
     '--nographic',
     '-d', 'unimp,guest_errors',
     '--semihosting-config', 'enable=on,target=native',
-    '--semihosting-config', 'arg=sample-test',
+    '--semihosting-config', 'arg=sample-test,arg=one,arg=two',
   ],
   env: nomalloc
 )

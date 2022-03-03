@@ -115,7 +115,7 @@ add_test_executable(sample-test)
 
 add_test(
   NAME "sample-test"
-  COMMAND sample-test
+  COMMAND sample-test one two
 )
 
 # -----------------------------------------------------------------------------

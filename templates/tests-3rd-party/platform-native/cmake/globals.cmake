@@ -41,7 +41,7 @@ else()
   )
 
   add_compile_definitions(
-    _POSIX_C_SOURCE=200809L
+    $<$<NOT:$<C_COMPILER_ID:Clang,AppleClang>>:_POSIX_C_SOURCE=200809L>
   )
 
   # When `-flto` is used, the compile options must be passed to the linker too.

@@ -18,8 +18,8 @@
 cmake_minimum_required(VERSION 3.20)
 
 project(
-  micro-os-plus-xxx-yyy-plus
-  DESCRIPTION "xxx-yyy"
+  xpack-3rd-party-xxx-yyy
+  DESCRIPTION "XXX YYY"
 )
 
 # Must be called from the project root folder.
@@ -36,7 +36,7 @@ enable_language(ASM)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 

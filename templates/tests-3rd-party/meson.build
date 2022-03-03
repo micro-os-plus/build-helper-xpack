@@ -16,7 +16,7 @@ project('xpack-3rd-party-xxx-yyy',
   ['c', 'cpp'],
   default_options: [
     'c_std=c11',
-    'cpp_std=c++17',
+    'cpp_std=c++20',
     'b_staticpic=false', # Mandatory, startup fails otherwise.
   ],
   meson_version: '>= 0.59'

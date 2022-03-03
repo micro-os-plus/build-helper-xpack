@@ -14,6 +14,9 @@
 
 #if defined(MICRO_OS_PLUS_TRACE)
 #define MICRO_OS_PLUS_USE_TRACE_POSIX_STDOUT
+// #define MICRO_OS_PLUS_USE_TRACE_POSIX_STDERR
+
+#define MICRO_OS_PLUS_INTEGER_TRACE_PRINTF_TMP_ARRAY_SIZE 500
 #endif // MICRO_OS_PLUS_TRACE
 
 // ----------------------------------------------------------------------------
