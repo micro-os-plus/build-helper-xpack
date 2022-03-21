@@ -50,6 +50,8 @@ cd my-project
 xpm init # Unless a package.json is already present
 
 xpm install @micro-os-plus/build-helper@latest
+
+ls -l xpacks/micro-os-plus-build-helper
 ```
 
 ### Git submodule

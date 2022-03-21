@@ -39,6 +39,8 @@ cd my-project
 xpm init # Unless a package.json is already present
 
 xpm install @xpack-3rd-party/xxx-yyy@latest
+
+ls -l xpacks/xpack-3rd-party-xxx-yyy
 ```
 
 ### Git submodule
