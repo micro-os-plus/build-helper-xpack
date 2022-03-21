@@ -97,148 +97,156 @@ endif
 
 # -----------------------------------------------------------------------------
 
-xpack_common_args = []
-xpack_c_args = []
-xpack_cpp_args = []
-xpack_include_directories = []
-xpack_sources = []
-xpack_compile_definitions = []
-xpack_dependencies = []
-xpack_link_args = []
-xpack_link_with = []
+if enable_sample_test
 
-xpack_include_directories += [
-  '../include',
-]
+  xpack_common_args = []
+  xpack_c_args = []
+  xpack_cpp_args = []
+  xpack_include_directories = []
+  xpack_sources = []
+  xpack_compile_definitions = []
+  xpack_dependencies = []
+  xpack_link_args = []
+  xpack_link_with = []
 
-xpack_sources += [
-  '../src/sample-test.cpp',
-]
+  xpack_include_directories += [
+    '../include',
+  ]
 
-# xpack_c_args += xpack_3rd_party_xxx_yyy_dependency_c_args
-# xpack_cpp_args += xpack_3rd_party_xxx_yyy_dependency_cpp_args
+  xpack_sources += [
+    '../src/sample-test.cpp',
+  ]
 
-xpack_dependencies += [
-  # Tested library.
-  xpack_3rd_party_xxx_yyy_dependency,
+  # xpack_c_args += xpack_3rd_party_xxx_yyy_dependency_c_args
+  # xpack_cpp_args += xpack_3rd_party_xxx_yyy_dependency_cpp_args
 
-  # Portable dependencies.
-  micro_os_plus_diag_trace_dependency,
+  xpack_dependencies += [
+    # Tested library.
+    xpack_3rd_party_xxx_yyy_dependency,
 
-  # Platform specific dependencies.
-  platform_native_dependency,
-]
+    # Portable dependencies.
+    micro_os_plus_diag_trace_dependency,
 
-xpack_link_args += xpack_common_link_args
+    # Platform specific dependencies.
+    platform_native_dependency,
+  ]
 
-xpack_link_with += [
-  # Tested library.
-  # xpack_3rd_party_xxx_yyy_static,
-]
+  xpack_link_args += xpack_common_link_args
 
-# https://mesonbuild.com/Reference-manual.html#executable
-sample_test = executable(
-  'sample-test',
-  include_directories: include_directories(xpack_include_directories),
-  sources: files(xpack_sources),
-  c_args: xpack_common_args + xpack_c_args + xpack_compile_definitions,
-  cpp_args: xpack_common_args + xpack_cpp_args + xpack_compile_definitions,
-  dependencies: xpack_dependencies,
-  link_args: xpack_link_args,
-  link_with: xpack_link_with,
-)
+  xpack_link_with += [
+    # Tested library.
+    # xpack_3rd_party_xxx_yyy_static,
+  ]
 
-foreach xn : xpack_include_directories
-  message('A+ -I ' + xn)
-endforeach
-# Note: depenedencies compile_args not shown.
-foreach xn : xpack_sources + xpack_common_args + xpack_c_args + xpack_cpp_args + xpack_compile_definitions + xpack_link_args
-  message('A+ ' + xn)
-endforeach
-message('A> sample-test')
+  # https://mesonbuild.com/Reference-manual.html#executable
+  sample_test = executable(
+    'sample-test',
+    include_directories: include_directories(xpack_include_directories),
+    sources: files(xpack_sources),
+    c_args: xpack_common_args + xpack_c_args + xpack_compile_definitions,
+    cpp_args: xpack_common_args + xpack_cpp_args + xpack_compile_definitions,
+    dependencies: xpack_dependencies,
+    link_args: xpack_link_args,
+    link_with: xpack_link_with,
+  )
+
+  foreach xn : xpack_include_directories
+    message('A+ -I ' + xn)
+  endforeach
+  # Note: depenedencies compile_args not shown.
+  foreach xn : xpack_sources + xpack_common_args + xpack_c_args + xpack_cpp_args + xpack_compile_definitions + xpack_link_args
+    message('A+ ' + xn)
+  endforeach
+  message('A> sample-test')
+
+  # ---------------------------------------------------------------------------
+
+  # https://mesonbuild.com/Reference-manual_functions.html#test
+  test(
+    'sample-test',
+    sample_test,
+    args: [
+      'one',
+      'two'
+    ],
+    env: nomalloc
+  )
+
+endif
 
 # -----------------------------------------------------------------------------
 
-# https://mesonbuild.com/Reference-manual_functions.html#test
-test(
-  'sample-test',
-  sample_test,
-  args: [
-    'one',
-    'two'
-  ],
-  env: nomalloc
-)
+if enable_unit_test
 
-# -----------------------------------------------------------------------------
+  xpack_common_args = []
+  xpack_c_args = []
+  xpack_cpp_args = []
+  xpack_include_directories = []
+  xpack_sources = []
+  xpack_compile_definitions = []
+  xpack_dependencies = []
+  xpack_link_args = []
+  xpack_link_with = []
 
-xpack_common_args = []
-xpack_c_args = []
-xpack_cpp_args = []
-xpack_include_directories = []
-xpack_sources = []
-xpack_compile_definitions = []
-xpack_dependencies = []
-xpack_link_args = []
-xpack_link_with = []
+  xpack_include_directories += [
+    '../include',
+  ]
 
-xpack_include_directories += [
-  '../include',
-]
+  xpack_sources += [
+    '../src/unit-test.cpp',
+  ]
 
-xpack_sources += [
-  '../src/unit-test.cpp',
-]
+  # xpack_c_args += xpack_3rd_party_xxx_yyy_dependency_c_args
+  # xpack_cpp_args += xpack_3rd_party_xxx_yyy_dependency_cpp_args
 
-# xpack_c_args += xpack_3rd_party_xxx_yyy_dependency_c_args
-# xpack_cpp_args += xpack_3rd_party_xxx_yyy_dependency_cpp_args
+  xpack_dependencies += [
+    # Tested library.
+    xpack_3rd_party_xxx_yyy_dependency,
 
-xpack_dependencies += [
-  # Tested library.
-  xpack_3rd_party_xxx_yyy_dependency,
+    # Portable dependencies.
+    micro_os_plus_diag_trace_dependency,
+    # micro_os_plus_micro_test_plus_dependency,
 
-  # Portable dependencies.
-  micro_os_plus_diag_trace_dependency,
-  # micro_os_plus_micro_test_plus_dependency,
+    # Platform specific dependencies.
+    platform_native_dependency,
+  ]
 
-  # Platform specific dependencies.
-  platform_native_dependency,
-]
+  xpack_link_args += xpack_common_link_args
 
-xpack_link_args += xpack_common_link_args
+  xpack_link_with += [
+    # Tested library.
+    xpack_3rd_party_xxx_yyy_static,
+  ]
 
-xpack_link_with += [
-  # Tested library.
-  xpack_3rd_party_xxx_yyy_static,
-]
+  # https://mesonbuild.com/Reference-manual.html#executable
+  sample_test = executable(
+    'unit-test',
+    include_directories: include_directories(xpack_include_directories),
+    sources: files(xpack_sources),
+    c_args: xpack_common_args + xpack_c_args + xpack_compile_definitions,
+    cpp_args: xpack_common_args + xpack_cpp_args + xpack_compile_definitions,
+    dependencies: xpack_dependencies,
+    link_args: xpack_link_args,
+    link_with: xpack_link_with,
+  )
 
-# https://mesonbuild.com/Reference-manual.html#executable
-sample_test = executable(
-  'unit-test',
-  include_directories: include_directories(xpack_include_directories),
-  sources: files(xpack_sources),
-  c_args: xpack_common_args + xpack_c_args + xpack_compile_definitions,
-  cpp_args: xpack_common_args + xpack_cpp_args + xpack_compile_definitions,
-  dependencies: xpack_dependencies,
-  link_args: xpack_link_args,
-  link_with: xpack_link_with,
-)
+  foreach xn : xpack_include_directories
+    message('A+ -I ' + xn)
+  endforeach
+  # Note: depenedencies compile_args not shown.
+  foreach xn : xpack_sources + xpack_common_args + xpack_c_args + xpack_cpp_args + xpack_compile_definitions + xpack_link_args
+    message('A+ ' + xn)
+  endforeach
+  message('A> sample-test')
 
-foreach xn : xpack_include_directories
-  message('A+ -I ' + xn)
-endforeach
-# Note: depenedencies compile_args not shown.
-foreach xn : xpack_sources + xpack_common_args + xpack_c_args + xpack_cpp_args + xpack_compile_definitions + xpack_link_args
-  message('A+ ' + xn)
-endforeach
-message('A> sample-test')
+  # https://mesonbuild.com/Reference-manual_functions.html#test
+  test(
+    'unit-test',
+    unit_test,
+    args: [],
+    env: nomalloc
+  )
 
-# https://mesonbuild.com/Reference-manual_functions.html#test
-test(
-  'unit-test',
-  unit_test,
-  args: [],
-  env: nomalloc
-)
+endif
 
 # -----------------------------------------------------------------------------

@@ -112,24 +112,28 @@ endfunction()
 
 # -----------------------------------------------------------------------------
 
-add_test_executable(sample-test)
+if (ENABLE_SAMPLE_TEST)
+  add_test_executable(sample-test)
 
-add_test(
-  NAME "sample-test"
-  COMMAND sample-test one two
-)
+  add_test(
+    NAME "sample-test"
+    COMMAND sample-test one two
+  )
+endif()
 
 # -----------------------------------------------------------------------------
 
-add_test_executable(unit-test)
+if (ENABLE_UNIT_TEST)
+  add_test_executable(unit-test)
 
-target_link_libraries(unit-test PRIVATE
-  micro-os-plus::micro-test-plus
-)
+  target_link_libraries(unit-test PRIVATE
+    micro-os-plus::micro-test-plus
+  )
 
-add_test(
-  NAME "unit-test"
-  COMMAND unit-test
-)
+  add_test(
+    NAME "unit-test"
+    COMMAND unit-test
+  )
+endif()
 
 # -----------------------------------------------------------------------------

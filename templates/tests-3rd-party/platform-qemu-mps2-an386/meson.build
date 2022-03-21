@@ -222,36 +222,44 @@ qemu = find_program('qemu-system-arm')
 # https://mesonbuild.com/Unit-tests.html#malloc_perturb_
 nomalloc = environment({'MALLOC_PERTURB_': '0'})
 
-# https://mesonbuild.com/Reference-manual_functions.html#test
-test(
-  'sample-test',
-  qemu,
-  args: [
-    '--machine', 'mps2-an386',
-    '--cpu', 'cortex-m4',
-    '--kernel', sample_test,
-    '--nographic',
-    '-d', 'unimp,guest_errors',
-    '--semihosting-config', 'enable=on,target=native',
-    '--semihosting-config', 'arg=sample-test,arg=one,arg=two',
-  ],
-  env: nomalloc
-)
+if enable_sample_test
 
-# https://mesonbuild.com/Reference-manual_functions.html#test
-test(
-  'unit-test',
-  qemu,
-  args: [
-    '--machine', 'mps2-an386',
-    '--cpu', 'cortex-m4',
-    '--kernel', unit_test,
-    '--nographic',
-    '-d', 'unimp,guest_errors',
-    '--semihosting-config', 'enable=on,target=native',
-    '--semihosting-config', 'arg=unit-test',
-  ],
-  env: nomalloc
-)
+  # https://mesonbuild.com/Reference-manual_functions.html#test
+  test(
+    'sample-test',
+    qemu,
+    args: [
+      '--machine', 'mps2-an386',
+      '--cpu', 'cortex-m4',
+      '--kernel', sample_test,
+      '--nographic',
+      '-d', 'unimp,guest_errors',
+      '--semihosting-config', 'enable=on,target=native',
+      '--semihosting-config', 'arg=sample-test,arg=one,arg=two',
+    ],
+    env: nomalloc
+  )
+
+endif
+
+if enable_unit_test
+
+  # https://mesonbuild.com/Reference-manual_functions.html#test
+  test(
+    'unit-test',
+    qemu,
+    args: [
+      '--machine', 'mps2-an386',
+      '--cpu', 'cortex-m4',
+      '--kernel', unit_test,
+      '--nographic',
+      '-d', 'unimp,guest_errors',
+      '--semihosting-config', 'enable=on,target=native',
+      '--semihosting-config', 'arg=unit-test',
+    ],
+    env: nomalloc
+  )
+
+endif
 
 # -----------------------------------------------------------------------------

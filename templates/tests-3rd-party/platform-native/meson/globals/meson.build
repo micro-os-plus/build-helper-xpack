@@ -34,6 +34,12 @@ else
   ]
 endif
 
+if c_compiler.get_id().contains('clang') and build_machine.system() == 'windows'
+  xpack_platform_common_args += [
+    '-Wno-used-but-marked-unused',
+  ]
+endif
+
 if get_option('buildtype') == 'release' or get_option('buildtype') == 'minsize' or get_option('buildtype') == 'debugoptimized'
   # https://mesonbuild.com/Reference-tables.html#operating-system-names
   # message(build_machine.cpu())
@@ -47,6 +53,16 @@ if get_option('buildtype') == 'release' or get_option('buildtype') == 'minsize' 
       '-flto',
     ]
   endif
+endif
+
+xpack_platform_common_args += [
+  '-Werror',
+]
+
+if build_machine.system() == 'darwin'
+  xpack_platform_common_args += [
+    '-Wno-missing-include-dirs',
+  ]
 endif
 
 add_global_arguments(

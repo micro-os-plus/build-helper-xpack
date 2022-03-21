@@ -138,10 +138,14 @@ function(add_test_executable name)
 
   # TODO use add_custom_target()
   # https://cmake.org/cmake/help/v3.20/command/add_custom_command.html
+  add_custom_command(TARGET ${name} POST_BUILD
+    COMMAND ${CMAKE_SIZE} --format=berkeley "$<TARGET_FILE:${name}>"
+  )
+
   if (xpack_create_hex)
     add_custom_command(TARGET ${name} POST_BUILD
-      COMMAND ${CMAKE_SIZE} --format=berkeley "$<TARGET_FILE:${name}>"
-  )
+      COMMAND ${CMAKE_OBJCOPY} -O ihex "$<TARGET_FILE:${name}>" "$<TARGET_FILE:${name}>.hex"
+    )
   endif()
 
   if(xpack_create_listing)
@@ -157,41 +161,49 @@ endfunction()
 
 # -----------------------------------------------------------------------------
 
-add_test_executable(sample-test)
+if (ENABLE_SAMPLE_TEST)
 
-add_test(
-  NAME "sample-test"
+  add_test_executable(sample-test)
 
-  COMMAND qemu-system-arm${extension}
-    --machine mps2-an386
-    --cpu cortex-m4
-    --kernel sample-test.elf
-    --nographic
-    -d unimp,guest_errors
-    --semihosting-config enable=on,target=native
-    --semihosting-config arg=sample-test,arg=one,arg=two
-)
+  add_test(
+    NAME "sample-test"
+
+    COMMAND qemu-system-arm${extension}
+      --machine mps2-an386
+      --cpu cortex-m4
+      --kernel sample-test.elf
+      --nographic
+      -d unimp,guest_errors
+      --semihosting-config enable=on,target=native
+      --semihosting-config arg=sample-test,arg=one,arg=two
+  )
+
+endif()
 
 # -----------------------------------------------------------------------------
 
-add_test_executable(unit-test)
+if (ENABLE_UNIT_TEST)
 
-target_link_libraries(unit-test  PRIVATE
-  micro-os-plus::micro-test-plus
-)
+  add_test_executable(unit-test)
 
-add_test(
-  NAME "unit-test"
+  target_link_libraries(unit-test  PRIVATE
+    micro-os-plus::micro-test-plus
+  )
 
-  COMMAND qemu-system-arm${extension}
-    --machine mps2-an386
-    --cpu cortex-m4
-    --kernel unit-test.elf
-    --nographic
-    -d unimp,guest_errors
-    --semihosting-config enable=on,target=native
-    --semihosting-config arg=unit-test
-)
+  add_test(
+    NAME "unit-test"
+
+    COMMAND qemu-system-arm${extension}
+      --machine mps2-an386
+      --cpu cortex-m4
+      --kernel unit-test.elf
+      --nographic
+      -d unimp,guest_errors
+      --semihosting-config enable=on,target=native
+      --semihosting-config arg=unit-test
+  )
+
+endif()
 
 # -----------------------------------------------------------------------------
 
