@@ -58,7 +58,7 @@ jobs:
       run: npm install -g xpm@test
 
     - name: Satisfy project dependencies
-      run: xpm install
+      run: xpm install --quiet
 
     - name: Run test-native-cmake-gcc11
       run: |
