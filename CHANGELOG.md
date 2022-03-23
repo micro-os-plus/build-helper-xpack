@@ -6,6 +6,20 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2022-03-23
+
+- v2.6.2
+- templates more cmake/meson consistency
+- 865289d clone-and-link update with new xpacks
+
+## 2022-03-21
+
+- 81c9e8d templates/tests-3rd-party updates
+
+## 2022-03-03
+
+- 592b4b3 .clang-format default c++20
+
 ## 2022-02-24
 
 - v2.6.1

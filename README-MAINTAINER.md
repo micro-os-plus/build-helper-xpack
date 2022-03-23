@@ -43,7 +43,7 @@ A recent [xpm](https://xpack.github.io/xpm/), which is a portable
 - commit all changes
 - update versions in `README.md` and `README-MAINTAINER.md`
 - update `CHANGELOG.md`
-- commit with a message like _prepare v2.6.1_
+- commit with a message like _prepare v2.6.2_
 - `npm pack` and check the content of the archive, which should list
   only `package.json`, `README.md`, `LICENSE`, `CHANGELOG.md`,
   the sources and CMake/meson files;
@@ -68,7 +68,6 @@ Test the package.
 
 When the package is considered stable:
 
-- with Sourcetree
 - merge `xpack-develop` into `xpack`
 - push to GitHub
 - select `xpack-develop`
@@ -78,7 +77,7 @@ When the package is considered stable:
 When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @micro-os-plus/build-helper`
-- `npm dist-tag add @micro-os-plus/build-helper@2.6.1 latest`
+- `npm dist-tag add @micro-os-plus/build-helper@2.6.2 latest`
 - `npm dist-tag ls @@micro-os-plus/build-helper`
 
 ## Announce to the community
