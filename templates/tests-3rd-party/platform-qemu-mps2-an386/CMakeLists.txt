@@ -128,7 +128,6 @@ function(add_test_executable name)
 
     # Platform specific dependencies.
     micro-os-plus::platform # bring device & architecture too.
-    micro-os-plus::micro-test-plus
 
     micro-os-plus::libs-c
     micro-os-plus::libs-cpp
@@ -201,6 +200,7 @@ if (ENABLE_UNIT_TEST)
       -d unimp,guest_errors
       --semihosting-config enable=on,target=native
       --semihosting-config arg=unit-test
+      # --semihosting-config arg=--verbose
   )
 
 endif()

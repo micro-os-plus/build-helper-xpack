@@ -54,7 +54,10 @@ nomalloc = environment({'MALLOC_PERTURB_': '0'})
 
 # -----------------------------------------------------------------------------
 
+# To be used with all applications.
 xpack_common_link_args = []
+
+# -----------------------------------------------------------------------------
 
 xpack_common_link_args += [
   # '-v',
@@ -108,6 +111,8 @@ if enable_sample_test
   xpack_dependencies = []
   xpack_link_args = []
   xpack_link_with = []
+
+  # ---------------------------------------------------------------------------
 
   xpack_include_directories += [
     '../include',
@@ -188,6 +193,8 @@ if enable_unit_test
   xpack_link_args = []
   xpack_link_with = []
 
+  # ---------------------------------------------------------------------------
+
   xpack_include_directories += [
     '../include',
   ]
@@ -205,7 +212,7 @@ if enable_unit_test
 
     # Portable dependencies.
     micro_os_plus_diag_trace_dependency,
-    # micro_os_plus_micro_test_plus_dependency,
+    micro_os_plus_micro_test_plus_dependency,
 
     # Platform specific dependencies.
     platform_native_dependency,
@@ -237,7 +244,7 @@ if enable_unit_test
   foreach xn : xpack_sources + xpack_common_args + xpack_c_args + xpack_cpp_args + xpack_compile_definitions + xpack_link_args
     message('A+ ' + xn)
   endforeach
-  message('A> sample-test')
+  message('A> unit-test')
 
   # https://mesonbuild.com/Reference-manual_functions.html#test
   test(

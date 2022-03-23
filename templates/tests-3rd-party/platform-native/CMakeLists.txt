@@ -113,17 +113,20 @@ endfunction()
 # -----------------------------------------------------------------------------
 
 if (ENABLE_SAMPLE_TEST)
+
   add_test_executable(sample-test)
 
   add_test(
     NAME "sample-test"
     COMMAND sample-test one two
   )
+
 endif()
 
 # -----------------------------------------------------------------------------
 
 if (ENABLE_UNIT_TEST)
+
   add_test_executable(unit-test)
 
   target_link_libraries(unit-test PRIVATE
@@ -132,8 +135,9 @@ if (ENABLE_UNIT_TEST)
 
   add_test(
     NAME "unit-test"
-    COMMAND unit-test
+    COMMAND unit-test # --verbose
   )
+
 endif()
 
 # -----------------------------------------------------------------------------

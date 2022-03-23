@@ -70,6 +70,9 @@ message('Platform name: ' + xpack_platform_name)
 # -----------------------------------------------------------------------------
 ## Global definitions ##
 
+enable_sample_test = true
+enable_unit_test = true
+
 # https://mesonbuild.com/Reference-manual.html#subdir
 subdir('meson/globals')
 subdir('top/xpacks/micro-os-plus-build-helper/meson/enable-all-warnings')

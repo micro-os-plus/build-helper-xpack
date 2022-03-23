@@ -32,6 +32,8 @@
 
 message('Processing xPack @xpack-3rd-party/xxx_yyy...')
 
+# -----------------------------------------------------------------------------
+
 xpack_common_args = []
 xpack_c_args = []
 xpack_cpp_args = []
@@ -39,30 +41,32 @@ xpack_include_directories = []
 xpack_sources = []
 xpack_compile_definitions = []
 
+# -----------------------------------------------------------------------------
+
 xpack_common_args += [
-  '-Wno-padded',
+  # '-Wno-padded',
 
   # parameter passing for argument of type '...' changed in GCC 7.1
-  '-Wno-psabi'
+  # '-Wno-psabi'
 ]
 
 if c_compiler.get_id() == 'gcc'
   xpack_common_args += [
-    '-Wno-aggregate-return',
+    # '-Wno-aggregate-return',
   ]
 elif c_compiler.get_id().contains('clang')
   xpack_common_args += [
-    '-Wno-c++98-c++11-c++14-c++17-compat-pedantic',
-    '-Wno-c++98-c++11-compat',
-    '-Wno-c++98-compat',
-    '-Wno-c++98-compat-pedantic',
-    '-Wno-c99-extensions',
-    '-Wno-pedantic',
+    # '-Wno-c++98-c++11-c++14-c++17-compat-pedantic',
+    # '-Wno-c++98-c++11-compat',
+    # '-Wno-c++98-compat',
+    # '-Wno-c++98-compat-pedantic',
+    # '-Wno-c99-extensions',
+    # '-Wno-pedantic',
 
-    '-Wno-exit-time-destructors',
-    '-Wno-ctad-maybe-unsupported',
-    '-Wno-global-constructors',
-    '-Wno-extra-semi-stmt',
+    # '-Wno-exit-time-destructors',
+    # '-Wno-ctad-maybe-unsupported',
+    # '-Wno-global-constructors',
+    # '-Wno-extra-semi-stmt',
   ]
 endif
 
@@ -81,7 +85,8 @@ xpack_include_directories += [
 # https://mesonbuild.com/Reference-manual_functions.html#declare_dependency
 xpack_3rd_party_xxx_yyy_dependency = declare_dependency(
   include_directories: include_directories(xpack_include_directories),
-  compile_args: xpack_common_args
+  compile_args: xpack_common_args,
+  sources: files(xpack_sources),
 )
 
 # Dependencies cannot store language specific definitions, the only

@@ -68,6 +68,9 @@ message(VERBOSE "CMAKE_SYSTEM_PROCESSOR: ${CMAKE_SYSTEM_PROCESSOR}")
 
 # CMAKE_BUILD_TYPE: Debug, Release, RelWithDebInfo, MinSizeRel
 
+set(ENABLE_SAMPLE_TEST true)
+set(ENABLE_UNIT_TEST true)
+
 # -----------------------------------------------------------------------------
 
 # Bare-metal executables have the .elf extension.

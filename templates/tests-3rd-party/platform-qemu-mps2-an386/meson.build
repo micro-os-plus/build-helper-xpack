@@ -32,11 +32,14 @@ xpack_include_directories = []
 xpack_sources = []
 xpack_compile_definitions = []
 
+# -----------------------------------------------------------------------------
+
 xpack_include_directories += [
   'include-platform',
 ]
 
-# xpack_sources += []
+xpack_sources += [
+]
 
 xpack_compile_definitions += [
   '-D' + xpack_platform_compile_definition,
@@ -85,6 +88,8 @@ foreach name : test_names
   xpack_link_args = []
   xpack_link_with = []
 
+  # ---------------------------------------------------------------------------
+
   xpack_include_directories += [
     '../include',
   ]
@@ -121,9 +126,16 @@ foreach name : test_names
     xpack_3rd_party_xxx_yyy_dependency,
 
     # Portable dependencies.
-    micro_os_plus_micro_test_plus_dependency,
-    # micro_os_plus_diag_trace_dependency,
+    micro_os_plus_diag_trace_dependency,
+  ]
 
+  if name == 'unit-test'
+    xpack_dependencies += [
+      micro_os_plus_micro_test_plus_dependency,
+    ]
+  endif
+
+  xpack_dependencies += [
     # Platform specific dependencies.
     platform_qemu_mps2_an386_dependency, # bring device & architecture too.
 
@@ -222,6 +234,8 @@ qemu = find_program('qemu-system-arm')
 # https://mesonbuild.com/Unit-tests.html#malloc_perturb_
 nomalloc = environment({'MALLOC_PERTURB_': '0'})
 
+# -----------------------------------------------------------------------------
+
 if enable_sample_test
 
   # https://mesonbuild.com/Reference-manual_functions.html#test
@@ -241,6 +255,8 @@ if enable_sample_test
   )
 
 endif
+
+# -----------------------------------------------------------------------------
 
 if enable_unit_test
 

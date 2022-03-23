@@ -23,10 +23,14 @@ message('Including platform-qemu-mps2-an386 globals...')
 # Required in devices-qemu-cortexm.
 xpack_device_compile_definition='DEVICE_QEMU_CORTEX_M4'
 
+# -----------------------------------------------------------------------------
+
 xpack_platform_common_args = []
 xpack_platform_common_c_args = []
 xpack_platform_common_cpp_args = []
 xpack_platform_compile_definitions = []
+
+# -----------------------------------------------------------------------------
 
 # Compiler definitions must passed as options.
 xpack_platform_compile_definitions += [
@@ -91,7 +95,7 @@ add_global_link_arguments(
 # The base folder is root, via the `top` link.
 xpack_dependencies = [
   'xpacks/micro-os-plus-diag-trace', # -
-  # 'xpacks/micro-os-plus-micro-test-plus', # -
+  'xpacks/micro-os-plus-micro-test-plus', # -
 
   # -
   xpack_build_folder_relative_path + '/xpacks/micro-os-plus-version',
