@@ -37,7 +37,7 @@
     "@xpack-dev-tools/cmake": "3.20.6-2.1",
     "@xpack-dev-tools/meson-build": "0.59.4-1.1",
     "@xpack-dev-tools/ninja-build": "1.10.2-5.1",
-    "@micro-os-plus/build-helper": "2.6.1",
+    "@micro-os-plus/build-helper": "2.6.2",
     "@micro-os-plus/micro-test-plus": "2.1.1",
     "@micro-os-plus/diag-trace": "3.0.0"
   },
