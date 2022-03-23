@@ -105,10 +105,10 @@ TBD
 
 ### Toolchains
 
-µOS++ sources should comply with **C++ 17** and **C 11**
+µOS++ sources should comply with **C++ 20** and **C 11**
 
-- GCC: `-std=c++-17` or `-std=c11`
-- clang: `-std=c++-17` or `-std=c11`
+- GCC: `-std=c++-20` or `-std=c11`
+- clang: `-std=c++-20` or `-std=c11`
 
 It should be possible to compile it with:
 
