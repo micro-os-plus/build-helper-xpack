@@ -8,6 +8,7 @@ and close existing issues and pull requests.
 
 ## 2022-03-27
 
+- v2.6.3
 - v2.6.2 published
 
 ## 2022-03-23
