@@ -66,11 +66,11 @@ jobs:
         xpm install --config native-cmake-gcc11-release --quiet
         xpm run test-native-cmake-gcc11
 
-    - name: Run test-native-cmake-clang12
+    - name: Run test-native-cmake-clang13
       run: |
-        xpm install --config native-cmake-clang12-debug --quiet
-        xpm install --config native-cmake-clang12-release --quiet
-        xpm run test-native-cmake-clang12
+        xpm install --config native-cmake-clang13-debug --quiet
+        xpm install --config native-cmake-clang13-release --quiet
+        xpm run test-native-cmake-clang13
 
     - name: Run test-native-meson-gcc11
       run: |
