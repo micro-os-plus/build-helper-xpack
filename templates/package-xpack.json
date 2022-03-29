@@ -87,11 +87,7 @@
       ],
       "test-cortexm": [
         "xpm run test-qemu-mps2-an386-cmake",
-        "xpm run test-qemu-mps2-an386-meson",
-        "{% if os.platform == 'linux' %}xpm run test-stm32f4discovery-cmake{% endif %}",
-        "{% if os.platform == 'darwin' and os.arch == 'x64' %}xpm run test-stm32f4discovery-cmake{% endif %}",
-        "{% if os.platform == 'linux' %}xpm run test-stm32f4discovery-meson{% endif %}",
-        "{% if os.platform == 'darwin' and os.arch == 'x64' %}xpm run test-stm32f4discovery-meson{% endif %}"
+        "xpm run test-qemu-mps2-an386-meson"
       ],
       "test-native-cmake": [
         "xpm run prepare --config native-cmake-debug",
