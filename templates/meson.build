@@ -82,6 +82,10 @@ xpack_include_directories += [
   'include',
 ]
 
+xpack_sources += [
+  'src/yyy.cpp',
+]
+
 # https://mesonbuild.com/Reference-manual_functions.html#declare_dependency
 xpack_3rd_party_xxx_yyy_dependency = declare_dependency(
   include_directories: include_directories(xpack_include_directories),
