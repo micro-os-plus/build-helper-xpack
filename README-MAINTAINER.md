@@ -78,7 +78,7 @@ When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @micro-os-plus/build-helper`
 - `npm dist-tag add @micro-os-plus/build-helper@2.6.3 latest`
-- `npm dist-tag ls @@micro-os-plus/build-helper`
+- `npm dist-tag ls @micro-os-plus/build-helper`
 
 ## Announce to the community
 
