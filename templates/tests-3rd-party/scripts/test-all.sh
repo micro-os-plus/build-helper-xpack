@@ -120,7 +120,7 @@ then
   trap "xpm run deep-clean" EXIT
 fi
 
-if [ "$(uname)" == "Linux"]
+if [ "$(uname)" == "Linux" ]
 then
   trap "lsb_release -a" EXIT
 fi
