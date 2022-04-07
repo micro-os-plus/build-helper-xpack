@@ -58,8 +58,6 @@ jobs:
         with:
           fetch-depth: 3
           submodules: true
-      - name: 'Raspberry Pi OS arm64 native xpm test-all'
-        run: bash tests-xpack/scripts/test-all.sh
       - name: 'Debian node:lts arm64 docker xpm test-all'
         uses: docker://node:lts
         with:
