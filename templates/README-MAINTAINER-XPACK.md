@@ -226,7 +226,7 @@ When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @xpack-3rd-party/xxx-yyy`
 - `npm dist-tag add @xpack-3rd-party/xxx-yyy@0.1.0-1 latest`
-- `npm dist-tag ls @@xpack-3rd-party/xxx-yyy`
+- `npm dist-tag ls @xpack-3rd-party/xxx-yyy`
 
 ## Share on Twitter
 
