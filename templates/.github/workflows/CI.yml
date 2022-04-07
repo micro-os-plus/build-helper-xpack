@@ -51,11 +51,11 @@ jobs:
 
     - name: Install xpm on Unix
       if: runner.os != 'Windows'
-      run: sudo npm install -g xpm@test
+      run: sudo npm install -g xpm@latest
 
     - name: Install xpm on Windows
       if: runner.os == 'Windows'
-      run: npm install -g xpm@test
+      run: npm install -g xpm@latest
 
     - name: Satisfy project dependencies
       run: xpm install --quiet

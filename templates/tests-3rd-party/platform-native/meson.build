@@ -226,7 +226,7 @@ if enable_unit_test
   ]
 
   # https://mesonbuild.com/Reference-manual.html#executable
-  sample_test = executable(
+  unit_test = executable(
     'unit-test',
     include_directories: include_directories(xpack_include_directories),
     sources: files(xpack_sources),

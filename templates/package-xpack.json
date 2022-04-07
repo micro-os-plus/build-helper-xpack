@@ -38,8 +38,8 @@
     "@xpack-dev-tools/meson-build": "0.60.3-1.1",
     "@xpack-dev-tools/ninja-build": "1.10.2-5.1",
     "@micro-os-plus/build-helper": "2.6.3",
-    "@micro-os-plus/micro-test-plus": "2.1.1",
-    "@micro-os-plus/diag-trace": "3.0.0"
+    "@micro-os-plus/micro-test-plus": "3.0.0",
+    "@micro-os-plus/diag-trace": "3.0.1"
   },
   "xpack": {
     "minimumXpmRequired": "0.11.0",
@@ -213,7 +213,7 @@
           "clean": "{{ properties.commandCMakeClean }}"
         },
         "devDependencies": {
-          "@micro-os-plus/architecture-synthetic-posix": "4.0.0"
+          "@micro-os-plus/architecture-synthetic-posix": "4.0.2"
         }
       },
       "native-cmake-release": {
@@ -234,7 +234,7 @@
           "clean": "{{ properties.commandCMakeClean }}"
         },
         "devDependencies": {
-          "@micro-os-plus/architecture-synthetic-posix": "4.0.0"
+          "@micro-os-plus/architecture-synthetic-posix": "4.0.2"
         }
       },
       "native-cmake-gcc11-debug": {
@@ -257,7 +257,7 @@
         },
         "devDependencies": {
           "@xpack-dev-tools/gcc": "11.2.0-3.3",
-          "@micro-os-plus/architecture-synthetic-posix": "4.0.0"
+          "@micro-os-plus/architecture-synthetic-posix": "4.0.2"
         }
       },
       "native-cmake-gcc11-release": {
@@ -280,7 +280,7 @@
         },
         "devDependencies": {
           "@xpack-dev-tools/gcc": "11.2.0-3.3",
-          "@micro-os-plus/architecture-synthetic-posix": "4.0.0"
+          "@micro-os-plus/architecture-synthetic-posix": "4.0.2"
         }
       },
       "native-cmake-clang12-debug": {
@@ -303,7 +303,7 @@
         },
         "devDependencies": {
           "@xpack-dev-tools/clang": "12.0.1-2.2",
-          "@micro-os-plus/architecture-synthetic-posix": "4.0.0"
+          "@micro-os-plus/architecture-synthetic-posix": "4.0.2"
         }
       },
       "native-cmake-clang12-release": {
@@ -326,7 +326,7 @@
         },
         "devDependencies": {
           "@xpack-dev-tools/clang": "12.0.1-2.2",
-          "@micro-os-plus/architecture-synthetic-posix": "4.0.0"
+          "@micro-os-plus/architecture-synthetic-posix": "4.0.2"
         }
       },
       "native-cmake-clang13-debug": {
@@ -349,7 +349,7 @@
         },
         "devDependencies": {
           "@xpack-dev-tools/clang": "13.0.1-1.1",
-          "@micro-os-plus/architecture-synthetic-posix": "4.0.0"
+          "@micro-os-plus/architecture-synthetic-posix": "4.0.2"
         }
       },
       "native-cmake-clang13-release": {
@@ -372,7 +372,7 @@
         },
         "devDependencies": {
           "@xpack-dev-tools/clang": "13.0.1-1.1",
-          "@micro-os-plus/architecture-synthetic-posix": "4.0.0"
+          "@micro-os-plus/architecture-synthetic-posix": "4.0.2"
         }
       },
       "native-meson-debug": {
@@ -393,7 +393,7 @@
           "clean": "{{ properties.commandMesonClean }}"
         },
         "devDependencies": {
-          "@micro-os-plus/architecture-synthetic-posix": "4.0.0"
+          "@micro-os-plus/architecture-synthetic-posix": "4.0.2"
         }
       },
       "native-meson-release": {
@@ -414,7 +414,7 @@
           "clean": "{{ properties.commandMesonClean }}"
         },
         "devDependencies": {
-          "@micro-os-plus/architecture-synthetic-posix": "4.0.0"
+          "@micro-os-plus/architecture-synthetic-posix": "4.0.2"
         }
       },
       "native-meson-gcc11-debug": {
@@ -437,7 +437,7 @@
         },
         "devDependencies": {
           "@xpack-dev-tools/gcc": "11.2.0-3.3",
-          "@micro-os-plus/architecture-synthetic-posix": "4.0.0"
+          "@micro-os-plus/architecture-synthetic-posix": "4.0.2"
         }
       },
       "native-meson-gcc11-release": {
@@ -460,7 +460,7 @@
         },
         "devDependencies": {
           "@xpack-dev-tools/gcc": "11.2.0-3.3",
-          "@micro-os-plus/architecture-synthetic-posix": "4.0.0"
+          "@micro-os-plus/architecture-synthetic-posix": "4.0.2"
         }
       },
       "native-meson-clang12-debug": {
@@ -483,7 +483,7 @@
         },
         "devDependencies": {
           "@xpack-dev-tools/clang": "12.0.1-2.2",
-          "@micro-os-plus/architecture-synthetic-posix": "4.0.0"
+          "@micro-os-plus/architecture-synthetic-posix": "4.0.2"
         }
       },
       "native-meson-clang12-release": {
@@ -506,7 +506,7 @@
         },
         "devDependencies": {
           "@xpack-dev-tools/clang": "12.0.1-2.2",
-          "@micro-os-plus/architecture-synthetic-posix": "4.0.0"
+          "@micro-os-plus/architecture-synthetic-posix": "4.0.2"
         }
       },
       "native-meson-clang13-debug": {
@@ -529,7 +529,7 @@
         },
         "devDependencies": {
           "@xpack-dev-tools/clang": "13.0.1-1.1",
-          "@micro-os-plus/architecture-synthetic-posix": "4.0.0"
+          "@micro-os-plus/architecture-synthetic-posix": "4.0.2"
         }
       },
       "native-meson-clang13-release": {
@@ -552,7 +552,7 @@
         },
         "devDependencies": {
           "@xpack-dev-tools/clang": "13.0.1-1.1",
-          "@micro-os-plus/architecture-synthetic-posix": "4.0.0"
+          "@micro-os-plus/architecture-synthetic-posix": "4.0.2"
         }
       },
       "qemu-mps2-an386-cmake-debug": {
