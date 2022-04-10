@@ -8,7 +8,7 @@ and close existing issues and pull requests.
 
 ## 2022-04-10
 
-- v2.7.0
+- v2.7.0 published
 - add scripts/common-tests-source.sh
 - rename dev-scripts
 - templates updates
