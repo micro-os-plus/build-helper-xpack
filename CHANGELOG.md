@@ -6,6 +6,13 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2022-04-10
+
+- v2.7.0
+- add scripts/common-tests-source.sh
+- rename dev-scripts
+- templates updates
+
 ## 2022-03-27
 
 - v2.6.3
