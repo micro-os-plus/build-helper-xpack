@@ -22,7 +22,7 @@ on:
 
 jobs:
   ci-test:
-    name: 'CI tests'
+    name: 'CI xxx-yyy tests'
 
     runs-on: ${{ matrix.os }}
 
