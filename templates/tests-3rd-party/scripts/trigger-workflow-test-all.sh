@@ -47,6 +47,7 @@ script_folder_name="$(basename "${script_folder_path}")"
 
 # =============================================================================
 
+source "${script_folder_path}/common-tests-source.sh"
 source "${script_folder_path}/helper.sh"
 
 # -----------------------------------------------------------------------------
