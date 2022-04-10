@@ -45,7 +45,7 @@ README-*
 .clang-format
 
 templates/
-scripts/
+dev-scripts/
 vscode/
 
 # End
