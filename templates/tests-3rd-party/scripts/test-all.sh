@@ -111,22 +111,13 @@ fi
 
 # -----------------------------------------------------------------------------
 
+trap exit_trap EXIT
+
 # npm --version
 run_verbose npm install --global xpm@latest
 
 # export PYTHONIOENCODING=utf-8
 export LC_CTYPE=C.UTF-8
-
-if [ -f "/.dockerenv" ]
-then
-  # For self-hosted runners.
-  trap "xpm run deep-clean" EXIT
-fi
-
-if [ "$(uname)" == "Linux" ]
-then
-  trap "lsb_release -a" EXIT
-fi
 
 # Be sure the build starts with a clean slate, since on self-hosted
 # runners the build folders are presistent.
