@@ -105,7 +105,7 @@ foreach name : test_names
     '-nostartfiles',
 
     # Ensure the linker will keep the interrupt vectors which otherwise
-    # are not refered from anywhere.
+    # are not referred from anywhere.
     '-u_interrupt_vectors',
 
     # nano has no exceptions.

@@ -8,6 +8,6 @@ and close existing issues and pull requests.
 
 ## 2022-02-25
 
-- create the `xpack` branch based on v2.13.8, commit
+* create the `xpack` branch based on v2.13.8, commit
 216713a4066b79d9803d374f261ccb30c0fb451f from 03 Feb 2022
-- fork from <https://...git>
+* fork from <https://...git>

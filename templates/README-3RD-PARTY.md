@@ -114,9 +114,9 @@ The source file to be added to user projects are:
 
 #### Preprocessor definitions
 
-There are several proprocessor definitions used to configure the build.
+There are several preprocessor definitions used to configure the build.
 
-For embedded platfroms, use:
+For embedded platforms, use:
 
 - `-D_POSIX_C_SOURCE=200809L`
 
