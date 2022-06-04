@@ -117,6 +117,18 @@ It should be possible to compile it with:
 
 The recommended versions are GCC 10, AppleClang 12.
 
+## Change log - incompatible changes
+
+According to [semver](https://semver.org) rules:
+
+> Major version X (X.y.z | X > 0) MUST be incremented if any
+backwards incompatible changes are introduced to the public API.
+
+The incompatible changes, in reverse chronological order,
+are:
+
+- TBD
+
 ## License
 
 The original content is released under the

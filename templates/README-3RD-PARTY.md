@@ -232,6 +232,18 @@ Tho original documentation is available on-line:
 
 - <https:.../>
 
+## Change log - incompatible changes
+
+According to [semver](https://semver.org) rules:
+
+> Major version X (X.y.z | X > 0) MUST be incremented if any
+backwards incompatible changes are introduced to the public API.
+
+The incompatible changes, in reverse chronological order,
+are:
+
+- TBD
+
 ## License
 
 The xPack content is released under the
