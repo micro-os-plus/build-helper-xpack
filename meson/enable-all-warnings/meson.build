@@ -69,7 +69,7 @@ if c_compiler.get_id() == 'gcc'
 
   c_global_warnings += [
     '-Wbad-function-cast',
-    '-Wc++-compat',
+    # '-Wc++-compat', # May break assembly builds.
     '-Wduplicate-decl-specifier',
     '-Wmissing-prototypes',
     '-Wnested-externs',
