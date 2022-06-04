@@ -81,7 +81,7 @@ Pull Requests should be directed to this branch.
 When new releases are published, the `xpack-develop` branch is merged
 into `xpack`.
 
-## User info
+## Developer info
 
 The current plan for µOS++ is to use the future xPack build tools,
 but for now the builds will use **CMake**, and initially this project
