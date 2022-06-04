@@ -573,7 +573,7 @@
             "xpm link --config {{ configuration.name }} @micro-os-plus/semihosting",
             "xpm link --config {{ configuration.name }} @micro-os-plus/startup",
             "xpm link --config {{ configuration.name }} @micro-os-plus/version",
-            "xpm link --config {{ configuration.name }} @xpack-3rd-party/arm-cmsis-core-m"
+            "xpm link --config {{ configuration.name }} @xpack-3rd-party/arm-cmsis-core"
           ],
           "prepare": "{{ properties.commandCMakePrepareWithToolchain }}",
           "build": [
@@ -594,7 +594,7 @@
           "@micro-os-plus/semihosting": "4.0.0",
           "@micro-os-plus/startup": "3.0.0",
           "@micro-os-plus/version": "7.1.2",
-          "@xpack-3rd-party/arm-cmsis-core-m": "5.4.0-5"
+          "@xpack-3rd-party/arm-cmsis-core": "5.4.0-6"
         }
       },
       "qemu-mps2-an386-cmake-release": {
@@ -617,7 +617,7 @@
             "xpm link --config {{ configuration.name }} @micro-os-plus/semihosting",
             "xpm link --config {{ configuration.name }} @micro-os-plus/startup",
             "xpm link --config {{ configuration.name }} @micro-os-plus/version",
-            "xpm link --config {{ configuration.name }} @xpack-3rd-party/arm-cmsis-core-m"
+            "xpm link --config {{ configuration.name }} @xpack-3rd-party/arm-cmsis-core"
           ],
           "prepare": "{{ properties.commandCMakePrepareWithToolchain }}",
           "build": [
@@ -638,7 +638,7 @@
           "@micro-os-plus/semihosting": "4.0.0",
           "@micro-os-plus/startup": "3.0.0",
           "@micro-os-plus/version": "7.1.2",
-          "@xpack-3rd-party/arm-cmsis-core-m": "5.4.0-5"
+          "@xpack-3rd-party/arm-cmsis-core": "5.4.0-6"
         }
       },
       "qemu-mps2-an386-meson-debug": {
@@ -658,7 +658,7 @@
             "xpm link --config {{ configuration.name }} @micro-os-plus/semihosting",
             "xpm link --config {{ configuration.name }} @micro-os-plus/startup",
             "xpm link --config {{ configuration.name }} @micro-os-plus/version",
-            "xpm link --config {{ configuration.name }} @xpack-3rd-party/arm-cmsis-core-m"
+            "xpm link --config {{ configuration.name }} @xpack-3rd-party/arm-cmsis-core"
           ],
           "prepare": "{{ properties.commandMesonPrepareCross }}",
           "build": [
@@ -679,7 +679,7 @@
           "@micro-os-plus/semihosting": "4.0.0",
           "@micro-os-plus/startup": "3.0.0",
           "@micro-os-plus/version": "7.1.2",
-          "@xpack-3rd-party/arm-cmsis-core-m": "5.4.0-5"
+          "@xpack-3rd-party/arm-cmsis-core": "5.4.0-6"
         }
       },
       "qemu-mps2-an386-meson-release": {
@@ -699,7 +699,7 @@
             "xpm link --config {{ configuration.name }} @micro-os-plus/semihosting",
             "xpm link --config {{ configuration.name }} @micro-os-plus/startup",
             "xpm link --config {{ configuration.name }} @micro-os-plus/version",
-            "xpm link --config {{ configuration.name }} @xpack-3rd-party/arm-cmsis-core-m"
+            "xpm link --config {{ configuration.name }} @xpack-3rd-party/arm-cmsis-core"
           ],
           "prepare": "{{ properties.commandMesonPrepareCross }}",
           "build": [
@@ -720,7 +720,7 @@
           "@micro-os-plus/semihosting": "4.0.0",
           "@micro-os-plus/startup": "3.0.0",
           "@micro-os-plus/version": "7.1.2",
-          "@xpack-3rd-party/arm-cmsis-core-m": "5.4.0-5"
+          "@xpack-3rd-party/arm-cmsis-core": "5.4.0-6"
         }
       }
     }

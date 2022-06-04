@@ -100,7 +100,7 @@ xpack_dependencies = [
   # -
   xpack_build_folder_relative_path + '/xpacks/micro-os-plus-version',
   # -
-  xpack_build_folder_relative_path + '/xpacks/xpack-3rd-party-arm-cmsis-core-m',
+  xpack_build_folder_relative_path + '/xpacks/xpack-3rd-party-arm-cmsis-core',
   # (architecture) -
   xpack_build_folder_relative_path + '/xpacks/micro-os-plus-architecture-cortexm',
 
