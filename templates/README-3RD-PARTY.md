@@ -94,7 +94,7 @@ on top of an Arm semihosting environment.
 
 #### Include folders
 
-The following folders should be used during the build:
+The following folders should be passed to the compiler during the build:
 
 - `include`
 
@@ -104,11 +104,9 @@ The header files can then be included in user projects with statements like:
 #include "xxx/yyy.h"
 ```
 
-#### Source folders
+#### Source files
 
-- `src`
-
-The source file to be added to user projects are:
+The source files to be added to user projects are:
 
 - `src/xxx-yyy.cpp`
 
@@ -242,7 +240,7 @@ backwards incompatible changes are introduced to the public API.
 The incompatible changes, in reverse chronological order,
 are:
 
-- TBD
+- v1.x: initial release
 
 ## License
 
