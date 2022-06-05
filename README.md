@@ -83,13 +83,11 @@ into `xpack`.
 
 ## Developer info
 
-The current plan for µOS++ is to use the future xPack build tools,
-but for now the builds will use **CMake**, and initially this project
-will include CMake scripts, mainly used to build the tests, but the
-same scripts should also help integrating source xPacks in application
-builds.
+The xPack Build Framework is neutral to the actual system build generator
+used.
 
-In a second step it is planned to add support for **meson**.
+Currently all µOS++ source libraries support both **CMake** and **meson**,
+and an internal xPack builder is planned.
 
 ### Build & integration info
 

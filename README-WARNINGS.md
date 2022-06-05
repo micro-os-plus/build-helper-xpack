@@ -1,10 +1,10 @@
 # Compiler Warnings
 
-The general recommandation is to try to compile with as many warnings checks
+The general recommendation is to try to compile with as many warnings checks
 enabled, and explicitly disable some warnings where needed.
 
 Enabling all warnings for GCC is a bit more complicated, so the minimum
-recomended would be to pass the build with clang `-Wall -Weverything`.
+recommended would be to pass the build with clang `-Wall -Weverything`.
 
 ## GCC
 
