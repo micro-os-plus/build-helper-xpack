@@ -9,6 +9,8 @@ and close existing issues and pull requests.
 ## 2022-06-05
 
 * v2.8.0
+* 6dcbeb0 cleanup meson/*-cmd.ini
+* 3e3f09e add riscv-none-elf-gcc toolchain
 
 ## 2022-06-04
 
@@ -72,7 +74,7 @@ and close existing issues and pull requests.
 * v2.5.0
 * 8ce33a4 package.json update actions
 * 88d5544 tests/CMakeLists
-* fd8361e cmake/helper: display SYSTEM_NAME & PROCESSSOR
+* fd8361e cmake/helper: display SYSTEM_NAME & PROCESSOR
 
 ## 2022-02-11
 
@@ -109,7 +111,7 @@ and close existing issues and pull requests.
 ## 2022-01-02
 
 * v2.1.7
-* add meson windows toolcahins (.cmd)
+* add meson windows toolchains (.cmd)
 * v2.1.6
 * v2.1.5
 * add meson toolchains
