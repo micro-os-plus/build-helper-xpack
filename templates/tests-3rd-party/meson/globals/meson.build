@@ -29,11 +29,12 @@ if c_compiler.get_id() == 'gcc' or c_compiler.get_id().contains('clang')
   # Global compiler preprocessor definitions.
   # Native builds may not use them.
   if get_option('buildtype').contains('debug')
+    # TODO: remove DEBUG
     xpack_global_compile_definitions += [ '-DDEBUG' ]
+    
     xpack_global_compile_definitions += [ '-DMICRO_OS_PLUS_DEBUG' ]
     xpack_global_compile_definitions += [ '-DMICRO_OS_PLUS_TRACE' ]
-  endif
-  if get_option('buildtype') == 'release'
+  elif get_option('buildtype') == 'release'
     xpack_global_compile_definitions += [ '-DNDEBUG' ]
   endif
   xpack_global_compile_definitions += [ '-DMICRO_OS_PLUS_INCLUDE_CONFIG_H' ]

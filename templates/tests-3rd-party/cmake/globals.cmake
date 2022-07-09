@@ -31,6 +31,7 @@ add_compile_definitions(
 
   # TODO: remove DEBUG
   $<$<CONFIG:Debug>:DEBUG>
+
   $<$<CONFIG:Debug>:MICRO_OS_PLUS_DEBUG>
   $<$<CONFIG:Debug>:MICRO_OS_PLUS_TRACE>
   MICRO_OS_PLUS_INCLUDE_CONFIG_H
