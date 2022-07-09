@@ -25,10 +25,23 @@ message(VERBOSE "Including micro-os-plus-build-helper module...")
 # Called from tests/CMakeLists.txt.
 function(xpack_display_greetings)
 
+  if(${ARGC} GREATER_EQUAL 1)
+    # If there are arguments, use the first one as path to package.json.
+    set(package_json_path "${ARGV0}")
+  else()
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/package.json")
+      set(package_json_path "${CMAKE_CURRENT_SOURCE_DIR}/package.json")
+    elseif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../package.json")
+      set(package_json_path "${CMAKE_CURRENT_SOURCE_DIR}/../package.json")
+    else()
+      message(FATAL_ERROR "Path to package.json required")
+    endif()
+  endif()
+
   message(VERBOSE "CMake version: ${CMAKE_VERSION}")
   message(VERBOSE "Compiler: ${CMAKE_C_COMPILER_ID} ${CMAKE_C_COMPILER_VERSION}")
 
-  xpack_get_package_name_and_version("${CMAKE_CURRENT_SOURCE_DIR}/../package.json")
+  xpack_get_package_name_and_version("${package_json_path}")
   message(VERBOSE "package.name: ${PACKAGE_JSON_NAME}")
   message(VERBOSE "package.version: ${PACKAGE_JSON_VERSION}")
 
