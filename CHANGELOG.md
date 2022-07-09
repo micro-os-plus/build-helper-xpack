@@ -6,6 +6,12 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2022-07-09
+
+* v2.9.0
+* 1b7c699 #2: Update convert-arm-asm-to-c.sh to use __stack
+* 1ec56bd #1: pass optional argv to xpack_display_greetings()
+
 ## 2022-06-05
 
 * v2.8.0
