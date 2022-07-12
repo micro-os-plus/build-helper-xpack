@@ -60,6 +60,7 @@ endfunction()
 
 # -----------------------------------------------------------------------------
 
+# DEPRECATED! Use xpack_add_dependencies_subdirectories().
 macro(xpack_glob_add_subdirectories from_path base_bin_path)
 
   # message(VERBOSE "${from_path}")
@@ -72,6 +73,26 @@ macro(xpack_glob_add_subdirectories from_path base_bin_path)
       get_filename_component(folder_name ${child} NAME)
       add_subdirectory("${child}" "${base_bin_path}/${folder_name}")
       list(APPEND XPACK_ADDED_DEPENDENCIES "${child}")
+    endif()
+  endforeach()
+
+endmacro()
+
+# -----------------------------------------------------------------------------
+
+macro(xpack_add_dependencies_subdirectories dependencies_folders base_bin_path)
+
+  # message(VERBOSE "${dependencies_folders}")
+  foreach(dependency_folder ${dependencies_folders})
+    # message(VERBOSE "${dependency_folder}")
+    if(EXISTS "${dependency_folder}/CMakeLists.txt")
+      file(RELATIVE_PATH relative_path ${CMAKE_SOURCE_DIR} ${dependency_folder})
+      message(VERBOSE "Adding '${relative_path}'...")
+      get_filename_component(folder_name ${dependency_folder} NAME)
+      add_subdirectory("${dependency_folder}" "${base_bin_path}/${folder_name}")
+      list(APPEND XPACK_ADDED_DEPENDENCIES "${dependency_folder}")
+    else()
+      message(FATAL_ERROR "Missing ${dependency_folder}/CMakeLists.txt")
     endif()
   endforeach()
 
