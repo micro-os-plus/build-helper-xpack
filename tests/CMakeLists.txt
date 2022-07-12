@@ -37,7 +37,7 @@ project(
 )
 
 # Nothing to do, only check if CMake is happy with including the helper.
-xpack_display_greetings("${CMAKE_CURRENT_SOURCE_DIR}/../package.json"))
+xpack_display_greetings("${CMAKE_CURRENT_SOURCE_DIR}/../package.json")
 
 # -----------------------------------------------------------------------------
 
