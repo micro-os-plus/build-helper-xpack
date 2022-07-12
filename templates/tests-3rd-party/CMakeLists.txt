@@ -58,11 +58,7 @@ endif()
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../xpacks/micro-os-plus-build-helper/cmake")
 include("micro-os-plus-build-helper")
 
-xpack_display_greetings()
-
-message(VERBOSE "CMAKE_C_COMPILER_ID: ${CMAKE_C_COMPILER_ID}")
-message(VERBOSE "CMAKE_SYSTEM_NAME: ${CMAKE_SYSTEM_NAME}")
-message(VERBOSE "CMAKE_SYSTEM_PROCESSOR: ${CMAKE_SYSTEM_PROCESSOR}")
+xpack_display_greetings("${CMAKE_CURRENT_SOURCE_DIR}/../package.json"))
 
 # -----------------------------------------------------------------------------
 
