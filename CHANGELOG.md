@@ -6,6 +6,13 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2022-07-12
+
+* v2.10.0
+* ae8be74 templates: bump deps
+* 57a07b1 CMake xpack_display_greetings() with arg
+* ba6cdbb add xpack_add_dependencies_subdirectories() macro
+
 ## 2022-07-09
 
 * v2.9.0
