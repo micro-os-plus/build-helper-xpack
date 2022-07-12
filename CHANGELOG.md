@@ -8,6 +8,7 @@ and close existing issues and pull requests.
 
 ## 2022-07-12
 
+* c232754 CMakeLists.txt: fix syntax
 * v2.10.0
 * ae8be74 templates: bump deps
 * 57a07b1 CMake xpack_display_greetings() with arg
