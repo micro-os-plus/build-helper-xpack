@@ -17,7 +17,7 @@ For maintainer info, please see the
 
 ## Install
 
-As a source library xPacks, the easiest way to add it to a project is via
+As a source library xPack, the easiest way to add it to a project is via
 **xpm**, but it can also be used as any Git project, for example as a submodule.
 
 ### Prerequisites
@@ -83,6 +83,8 @@ into `xpack`.
 
 ## Developer info
 
+### Overview
+
 The xPack Build Framework is neutral to the actual system build generator
 used.
 
@@ -108,12 +110,12 @@ TBD
 - GCC: `-std=c++-20` or `-std=c11`
 - clang: `-std=c++-20` or `-std=c11`
 
-It should be possible to compile it with:
+It should be possible to compile them with:
 
 - GCC 8 or newer (https://gcc.gnu.org/projects/cxx-status.html)
 - LLVM clang 7 or newer (https://clang.llvm.org/cxx_status.html)
 
-The recommended versions are GCC 10, AppleClang 12.
+The recommended versions are GCC 11, AppleClang 12.
 
 ## Change log - incompatible changes
 
@@ -125,7 +127,8 @@ backwards incompatible changes are introduced to the public API.
 The incompatible changes, in reverse chronological order,
 are:
 
-- TBD
+- v2.x: add `xpack_` prefix
+- v1.x: initial version
 
 ## License
 

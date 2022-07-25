@@ -41,9 +41,6 @@ A recent [xpm](https://xpack.github.io/xpm/), which is a portable
 
 - select the `xpack-develop` branch
 - commit all changes
-- update versions in `README.md` and `README-MAINTAINER.md`
-- update `CHANGELOG.md`
-- commit with a message like _prepare v2.10.1_
 - `npm pack` and check the content of the archive, which should list
   only `package.json`, `README.md`, `LICENSE`, `CHANGELOG.md`,
   the sources and CMake/meson files;
@@ -68,6 +65,7 @@ Test the package.
 
 When the package is considered stable:
 
+- with a Git client (VS Code is fine)
 - merge `xpack-develop` into `xpack`
 - push to GitHub
 - select `xpack-develop`
