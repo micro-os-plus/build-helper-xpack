@@ -1,8 +1,11 @@
+[![license](https://img.shields.io/github/license/xpack-3rd-party/xxx-yyy-xpack)](https://github.com/xpack-3rd-party/xxx-yyy-xpack/blob/xpack/LICENSE)
+[![CI on Push](https://github.com/xpack-3rd-party/xxx-yyy-xpack/actions/workflows/CI.yml/badge.svg)](https://github.com/xpack-3rd-party/xxx-yyy-xpack/actions/workflows/CI.yml)
+
 # A source library xPack with XXXX YYYY
 
 Note: this project is work in progress.
 
-This project provides the **XXXX YYYY** source libraries as an xPack dependency.
+This project provides the **XXXX YYYY** source library as an xPack dependency.
 
 The project is hosted on GitHub as
 [xpack-3rd-party/xxx-yyy-xpack](https://github.com/xpack-3rd-party/xxx-yyy-xpack).
@@ -17,7 +20,7 @@ For maintainer info, please see the
 
 ## Install
 
-As a source library xPacks, the easiest way to add it to a project is via
+As a source library xPack, the easiest way to add it to a project is via
 **xpm**, but it can also be used as any Git project, for example as a submodule.
 
 ### Prerequisites
@@ -85,12 +88,20 @@ In addition to the source files, the
 configuration files required to integrate it into
 CMake and meson projects, by building a static library.
 
+### Status
+
+The **xxx-yyy** source library is fully functional.
+
 ### Build & integration info
 
-The project is written in ....
+The project is written in C++, and it is expected to be used in C++ projects.
+The source code was compiled with GCC 11, clang 12, clang 12
+and arm-none-eabi-gcc 10, and should be warning free.
 
-For embedded platforms it can be built
-on top of an Arm semihosting environment.
+To ease the integration of this package into user projects, there
+are already made CMake and meson configuration files (see below).
+
+For other build systems, consider the following details:
 
 #### Include folders
 
@@ -133,10 +144,14 @@ This will enable POSIX support in newlib.
 
 The project includes many classes; see the documentation for details.
 
+#### Dependencies
+
+- none
+
 #### CMake
 
-To integrate the Google Test source library into a CMake application, add this
-folder to the build:
+To integrate the Google Test source library into a CMake application,
+add this folder to the build:
 
 ```cmake
 add_subdirectory("xpacks/xpack-3rd-party-xxx-yyy")`
@@ -154,8 +169,8 @@ target_link_libraries(your-target PRIVATE
 
 #### meson
 
-To integrate the Google Test source library into a meson application, add this
-folder to the build:
+To integrate the Google Test source library into a meson application,
+add this folder to the build:
 
 ```meson
 subdir('xpacks/xpack-3rd-party-xxx-yyy')
