@@ -1,0 +1,30 @@
+{
+  "minimumXpmakeRequired": "0.0.0",
+  "license": "MIT",
+  "copyright": "Copyright (c) 2022 Liviu Ionescu",
+  "description": "Root components",
+  "cdlComponents": {
+    "micro-os-plus": {
+      "description": "The top µOS++ node.",
+      "parent": "",
+      "cdlInterfaces": {
+        "architecture": {
+          "description": "The generic architecture, to guarantee a single implementation.",
+          "generatedDefinition": "MICRO_OS_PLUS_INCLUDE_ARCHITECTURE"
+        },
+        "device": {
+          "description": "The generic device, to guarantee a single implementation.",
+          "generatedDefinition": "MICRO_OS_PLUS_INCLUDE_DEVICE"
+        },
+        "platform": {
+          "description": "The generic platform/board, to guarantee a single implementation.",
+          "generatedDefinition": "MICRO_OS_PLUS_INCLUDE_PLATFORM"
+        }
+      }
+    },
+    "xpack-3rd-party": {
+      "description": "The top node for 3rd party components.",
+      "parent": ""
+    }
+  }
+}
