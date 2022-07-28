@@ -6,8 +6,28 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2022-07-28
+
+* v2.11.0
+* 8e06902 templates/READMEs updates
+* d6b9ed0 templates/package.json: minimumXpmRequired 0.13.7
+* 85525e9 templates: no -fno-move-loop-invariants -fno-use-cxa-atexit
+* e660fc4 template/.vscode: wordWrap
+* 577b2cd template/CI.yml: skip tags
+* 5ec9f3c add meta/xpack-root.json
+* 7616888 CI.yml do not trigger on tags
+
+## 2022-07-22
+
+* e937587 templates: MICRO_OS_PLUS_INCLUDE_SEMIHOSTING_SYSCALLS
+
+## 2022-07-13
+
+* b5e773b cmake.ignoreCMakeListsMissing
+
 ## 2022-07-12
 
+* v2.10.1
 * c232754 CMakeLists.txt: fix syntax
 * v2.10.0
 * ae8be74 templates: bump deps
