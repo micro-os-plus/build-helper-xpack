@@ -130,8 +130,8 @@ TODO
 
 ### Increase the version
 
-Determine the upstream version (like `0.1.0`) and update the `package.json`
-file; the format is `0.1.0-1-pre`. The fourth number is the xPack release number
+Determine the upstream version (like `0.1.0`) and eventually update the
+`package.json` file; the format is `0.1.0-1-pre`. The fourth number is the xPack release number
 of this version.
 
 ### Fix possible open issues
@@ -173,17 +173,6 @@ it runs a selection of the tests on GitHub hosted runners,
 and the results are available at
 [CI on Push](https://github.com/xpack-3rd-party/xxx-yyy-xpack/actions/workflows/CI.yml).
 
-### Test on all platforms
-
-In addition, it is possible to manually trigger a **test-all** job, that
-runs all available builds, on all supported platforms, including Linux Arm
-and macOS Apple Silicon.
-
-For this, run the `trigger-workflow-test-all` action before publishing.
-
-Wait for the **test-all** job to complete
-  (<https://github.com/xpack-3rd-party/xxx-yyy-xpack/actions/workflows/test-all.yml>)
-
 ## Publish on the npmjs.com server
 
 - select the `xpack-develop` branch
@@ -200,6 +189,23 @@ Wait for the **test-all** job to complete
 - the `postversion` npm script should also update tags via `git push origin --tags`
 - wait for the CI job to complete
   (<https://github.com/xpack-3rd-party/xxx-yyy-xpack/actions/workflows/CI.yml>)
+
+### Test on all platforms
+
+In addition, it is possible to manually trigger a **test-all** job, that
+runs all available builds, on all supported platforms, including Linux Arm
+and macOS Apple Silicon.
+
+For this:
+
+- start the `~/actions-runners/micro-os-plus/run.sh &` runner on `xbbma` and `xbbla`
+- ensure that the `xpack-develop` branch is pushed
+- run the `trigger-workflow-test-all` action
+- wait for the **test-all** job to complete
+  (<https://github.com/xpack-3rd-party/xxx-yyy-xpack/actions/workflows/test-all.yml>)
+
+### Publish
+
 - `npm publish --tag next` (use `npm publish --access public` when
   publishing for the first time)
 
