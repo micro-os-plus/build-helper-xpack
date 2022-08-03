@@ -32,6 +32,8 @@
     "xpack",
     "xpacks"
   ],
+  "cmake.ignoreCMakeListsMissing": true,
   "cmake.configureOnOpen": false,
-  "cmake.ignoreCMakeListsMissing": true
+  "makefile.configureOnOpen": false,
+  "editor.wordWrap": "on"
 }
