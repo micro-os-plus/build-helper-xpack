@@ -15,10 +15,10 @@
     "type": "git",
     "url": "https://github.com/micro-os-plus/build-helper-xpack.git/"
   },
+  "homepage": "https://github.com/micro-os-plus/build-helper-xpack/",
   "bugs": {
     "url": "https://github.com/micro-os-plus/build-helper-xpack/issues/"
   },
-  "homepage": "https://github.com/micro-os-plus/build-helper-xpack/",
   "keywords": [
     "xpack",
     "c++",
@@ -31,17 +31,23 @@
   },
   "license": "MIT",
   "config": {},
-  "devDependencies": {
-    "@xpack-dev-tools/cmake": "3.20.6-2.1",
-    "@xpack-dev-tools/ninja-build": "1.10.2-5.1"
-  },
+  "dependencies": {},
+  "bundleDependencies": [],
+  "devDependencies": {},
   "xpack": {
-    "minimumXpmRequired": "0.11.0",
+    "minimumXpmRequired": "0.14.0",
+    "dependencies": {},
+    "devDependencies": {
+      "@xpack-dev-tools/cmake": "3.20.6-2.1",
+      "@xpack-dev-tools/ninja-build": "1.10.2-5.1"
+    },
+    "properties": {},
     "actions": {
       "test-cmake": "cmake -S tests -B build/tests-cmake -G Ninja --log-level=VERBOSE",
       "test": [
         "xpm run test-cmake"
       ]
-    }
+    },
+    "buildConfigurations": {}
   }
 }
