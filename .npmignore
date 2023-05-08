@@ -48,4 +48,6 @@ templates/
 dev-scripts/
 vscode/
 
+.gitkeep
+
 # End
