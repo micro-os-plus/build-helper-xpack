@@ -15,22 +15,22 @@ To clone the stable branch (`xpack`), run the following commands in a
 terminal (on Windows use the _Git Bash_ console):
 
 ```sh
-rm -rf ~/Work/xxx-yyy-xpack.git && \
-mkdir -p ~/Work && \
+rm -rf ~/Work/micro-os-plus/xxx-yyy-xpack.git && \
+mkdir -p ~/Work/micro-os-plus && \
 git clone \
   https://github.com/xpack-3rd-party/xxx-yyy-xpack.git \
-  ~/Work/xxx-yyy-xpack.git
+  ~/Work/micro-os-plus/xxx-yyy-xpack.git
 ```
 
 For development purposes, clone the `xpack-develop` branch:
 
 ```sh
-rm -rf ~/Work/xxx-yyy-xpack.git && \
-mkdir -p ~/Work && \
+rm -rf ~/Work/micro-os-plus/xxx-yyy-xpack.git && \
+mkdir -p ~/Work/micro-os-plus && \
 git clone \
   --branch xpack-develop \
   https://github.com/xpack-3rd-party/xxx-yyy-xpack.git \
-  ~/Work/xxx-yyy-xpack.git
+  ~/Work/micro-os-plus/xxx-yyy-xpack.git
 ```
 
 ## Prerequisites
@@ -53,9 +53,7 @@ Always reformat the source files that were changed.
 With a clean slate, install dependencies:
 
 ```sh
-cd ~/Work/xxx-yyy-xpack.git
-
-xpm run install-all
+xpm run install-all -C ~/Work/micro-os-plus/xxx-yyy-xpack.git
 ```
 
 This will install the project wide dependencies and all the build
@@ -68,9 +66,7 @@ The project includes unit tests.
 To perform the tests, run the usual xpm sequence:
 
 ```sh
-cd ~/Work/micro-test-plus-xpack.git
-
-xpm run test-all
+xpm run test-all -C ~/Work/micro-os-plus/micro-test-plus-xpack.git
 ```
 
 ### Clone writeable dependencies
