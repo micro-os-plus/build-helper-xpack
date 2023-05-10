@@ -6,6 +6,26 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2023-05-08
+
+* v2.12.0
+* 5942c7f .npmignore update
+* 848d6c6 meson.build cosmetics
+
+## 2022-08-16
+
+* 7218f17 package.json min 0.14.0 & defaults
+
+## 2022-08-04
+
+* b144ffc template/cross.ini: add link to cpu-families
+
+## 2022-08-03
+
+* 28eb572 .vscode/settings.json: cmake.ignoreCMakeListsMissing
+* 1de341f .vscode/settings.json: makefile.configureOnOpen
+* 6b3bb99 .vscode/settings.json: makefile.configureOnOpen
+
 ## 2022-07-28
 
 * v2.11.0
