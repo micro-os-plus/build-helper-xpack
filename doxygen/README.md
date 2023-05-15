@@ -30,12 +30,12 @@ Other projects using this theme (for inspiration):
 
 Customisations:
 
-```
+```sh
 doxygen -w html header.html delete_me.html delete_me.css
 rm delete_me.html delete_me.css
 ```
 
-```
+```text
 HTML_HEADER            = xpacks/micro-os-plus-build-helper/doxygen/common-header.html
 
 HTML_EXTRA_FILES       = \
@@ -87,6 +87,6 @@ DoxygenAwesomeTabs.init()
 
 The previous µOS++ Reference also used:
 
-```
+```text
 LAYOUT_FILE = DoxygenLayout.xml
 ```
