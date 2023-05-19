@@ -62,6 +62,7 @@ In `common-header.html` add the scripts.
 <!-- ... -->
 
 <!-- Awesome Theme Begin -->
+
 <script type="text/javascript" src="$relpath^doxygen-awesome-darkmode-toggle.js"></script>
 <script type="text/javascript" src="$relpath^doxygen-awesome-fragment-copy-button.js"></script>
 <script type="text/javascript" src="$relpath^doxygen-awesome-paragraph-link.js"></script>
@@ -75,8 +76,23 @@ DoxygenAwesomeParagraphLink.init()
 DoxygenAwesomeInteractiveToc.init()
 DoxygenAwesomeTabs.init()
 </script>
+
 <!-- Awesome Theme End -->
 </head>
+```
+
+Duplicate and rename `common-header.html`; add the Google Analytics code:
+
+```html
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E9T84WD3CK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E9T84WD3CK');
+</script>
 ```
 
 ## TODO
