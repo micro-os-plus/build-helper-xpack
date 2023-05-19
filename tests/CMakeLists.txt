@@ -33,7 +33,7 @@ xpack_get_package_name_and_version("${xpack_project_folder}/package.json")
 project(
   test
   DESCRIPTION "build-helper-xpack tests"
-  VERSION "${PACKAGE_JSON_VERSION}"
+  # VERSION "${PACKAGE_JSON_VERSION}"
 )
 
 # Nothing to do, only check if CMake is happy with including the helper.
