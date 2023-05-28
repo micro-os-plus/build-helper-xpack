@@ -101,7 +101,7 @@ div.card_container svg {
 div.card_container svg path {
   stroke: var(--page-foreground-color);
   fill: var(--page-background-color);
-  stroke-width: 2;
+  stroke-width: 1.5;
 }
 
 div.footer {
