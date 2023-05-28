@@ -56,6 +56,14 @@ div.card a {
   text-decoration: none;
 }
 
+div.card_container a.anchorlink {
+  visibility: hidden;
+}
+
+div.card_container a.anchorlink svg {
+  display: none;
+}
+
 div.card h2 {
   color: var(--page-foreground-color);
 }
