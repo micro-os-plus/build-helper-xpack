@@ -31,8 +31,9 @@ Other projects using this theme (for inspiration):
 Customisations:
 
 ```sh
-doxygen -w html header.html delete_me.html delete_me.css
-rm delete_me.html delete_me.css
+doxygen -g
+
+doxygen -w html header.html footer.html styles.css
 ```
 
 ```text
