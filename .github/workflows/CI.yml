@@ -34,17 +34,20 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14]
-        os: [ubuntu-20.04, macos-10.15]
+        # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources
+        os: [ubuntu-22.04, macos-12]
+        node-version: [18]
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      # https://github.com/actions/checkout
+      uses: actions/checkout@v3
       with:
         fetch-depth: 3
 
     - name: Setup Node.js ${{ matrix.node-version }} on ${{ matrix.os }}
-      uses: actions/setup-node@v2
+      # https://github.com/actions/setup-node
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
 
@@ -52,7 +55,7 @@ jobs:
       run: |
         node --version
         npm --version
-        env
+        env | sort
 
     - name: Install xpm on Unix
       if: runner.os != 'Windows'
