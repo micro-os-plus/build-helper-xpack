@@ -49,7 +49,7 @@ A recent [xpm](https://xpack.github.io/xpm/), which is a portable
 - push the `xpack-develop` branch to GitHub
 - push tag to GitHub, with `git push origin --tags`
 - wait for the CI job to complete
-  (<https://github.com/micro-os-plus/build-helper-xpack/actions/workflows/CI.yml>)
+  (<https://github.com/micro-os-plus/build-helper-xpack/actions/workflows/ci.yml>)
 
 ### Publish
 

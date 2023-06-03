@@ -1,5 +1,5 @@
 [![license](https://img.shields.io/github/license/xpack-3rd-party/xxx-yyy-xpack)](https://github.com/xpack-3rd-party/xxx-yyy-xpack/blob/xpack/LICENSE)
-[![CI on Push](https://github.com/xpack-3rd-party/xxx-yyy-xpack/actions/workflows/CI.yml/badge.svg)](https://github.com/xpack-3rd-party/xxx-yyy-xpack/actions/workflows/CI.yml)
+[![CI on Push](https://github.com/xpack-3rd-party/xxx-yyy-xpack/actions/workflows/ci.yml/badge.svg)](https://github.com/xpack-3rd-party/xxx-yyy-xpack/actions/workflows/ci.yml)
 [![GitHub issues](https://img.shields.io/github/issues/xpack-3rd-party/xxx-yyy-xpack.svg)](https://github.com/xpack-3rd-party/xxx-yyy-xpack/issues/)
 [![GitHub pulls](https://img.shields.io/github/issues-pr/xpack-3rd-party/xxx-yyy-xpack.svg)](https://github.com/xpack-3rd-party/xxx-yyy-xpack/pulls)
 
@@ -167,7 +167,7 @@ The project is fully tested via GitHub
 the **CI** job is automatically triggered on **Push**;
 it runs a selection of the tests on GitHub hosted runners,
 and the results are available at
-[CI on Push](https://github.com/xpack-3rd-party/xxx-yyy-xpack/actions/workflows/CI.yml).
+[CI on Push](https://github.com/xpack-3rd-party/xxx-yyy-xpack/actions/workflows/ci.yml).
 
 ## Publish on the npmjs.com server
 
@@ -184,7 +184,7 @@ and the results are available at
 - push the `xpack-develop` branch to GitHub
 - the `postversion` npm script should also update tags via `git push origin --tags`
 - wait for the CI job to complete
-  (<https://github.com/xpack-3rd-party/xxx-yyy-xpack/actions/workflows/CI.yml>)
+  (<https://github.com/xpack-3rd-party/xxx-yyy-xpack/actions/workflows/ci.yml>)
 
 ### Test on all platforms
 

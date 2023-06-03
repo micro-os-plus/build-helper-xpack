@@ -1,5 +1,5 @@
 [![license](https://img.shields.io/github/license/xpack-3rd-party/xxx-yyy-xpack)](https://github.com/xpack-3rd-party/xxx-yyy-xpack/blob/xpack/LICENSE)
-[![CI on Push](https://github.com/xpack-3rd-party/xxx-yyy-xpack/actions/workflows/CI.yml/badge.svg)](https://github.com/xpack-3rd-party/xxx-yyy-xpack/actions/workflows/CI.yml)
+[![CI on Push](https://github.com/xpack-3rd-party/xxx-yyy-xpack/actions/workflows/ci.yml/badge.svg)](https://github.com/xpack-3rd-party/xxx-yyy-xpack/actions/workflows/ci.yml)
 
 # A source library xPack with XXXX YYYY
 

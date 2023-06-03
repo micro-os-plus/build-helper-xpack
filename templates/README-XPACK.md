@@ -2,7 +2,7 @@
 [![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/micro-os-plus/xxx-yyy-xpack)](https://github.com/micro-os-plus/xxx-yyy-xpack/tags/)
 [![npm (scoped)](https://img.shields.io/npm/v/@micro-os-plus/xxx-yyy.svg?color=blue)](https://www.npmjs.com/package/@micro-os-plus/xxx-yyy/)
 [![license](https://img.shields.io/github/license/micro-os-plus/xxx-yyy-xpack)](https://github.com/micro-os-plus/xxx-yyy-xpack/blob/xpack/LICENSE)
-[![CI on Push](https://github.com/micro-os-plus/xxx-yyy-xpack/actions/workflows/CI.yml/badge.svg)](https://github.com/micro-os-plus/xxx-yyy-xpack/actions/workflows/CI.yml)
+[![CI on Push](https://github.com/micro-os-plus/xxx-yyy-xpack/actions/workflows/ci.yml/badge.svg)](https://github.com/micro-os-plus/xxx-yyy-xpack/actions/workflows/ci.yml)
 
 # A source library xPack with XXXX YYYY
 
