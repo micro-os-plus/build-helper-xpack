@@ -51,7 +51,7 @@ xpm init # Unless a package.json is already present
 
 xpm install @micro-os-plus/xxx-yyy@latest
 
-ls -l xpacks/micro-os-plus-xxx-yyy
+ls -l xpacks/@micro-os-plus/xxx-yyy
 ```
 
 ### Git submodule
@@ -65,7 +65,7 @@ git init # Unless already a Git project
 mkdir -p xpacks
 
 git submodule add https://github.com/micro-os-plus/xxx-yyy-xpack.git \
-  xpacks/micro-os-plus-xxx-yyy
+  xpacks/@micro-os-plus/xxx-yyy
 ```
 
 ## Branches
@@ -196,7 +196,7 @@ To integrate the xxx-yyy source library into a CMake application,
 add this folder to the build:
 
 ```cmake
-add_subdirectory("xpacks/micro-os-plus-xxx-yyy")`
+add_subdirectory("xpacks/@micro-os-plus/xxx-yyy")`
 ```
 
 The result is an interface library that can be added as an application
@@ -215,7 +215,7 @@ To integrate the xxx-yyy source library into a meson application,
 add this folder to the build:
 
 ```meson
-subdir('xpacks/micro-os-plus-xxx-yyy')
+subdir('xpacks/@micro-os-plus/xxx-yyy')
 ```
 
 The result is a dependency object that can be added

@@ -57,7 +57,7 @@ xpm init # Unless a package.json is already present
 
 xpm install @micro-os-plus/build-helper@latest
 
-ls -l xpacks/micro-os-plus-build-helper
+ls -l xpacks/@micro-os-plus/build-helper
 ```
 
 ### Git submodule
@@ -71,7 +71,7 @@ git init # Unless already a Git project
 mkdir -p xpacks
 
 git submodule add https://github.com/micro-os-plus/build-helper-xpack.git \
-  xpacks/micro-os-plus-build-helper
+  xpacks/@micro-os-plus/build-helper
 ```
 
 ## Branches

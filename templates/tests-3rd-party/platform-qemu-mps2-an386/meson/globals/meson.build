@@ -94,30 +94,30 @@ add_global_link_arguments(
 
 # The base folder is root, via the `top` link.
 xpack_dependencies = [
-  'xpacks/micro-os-plus-diag-trace', # -
-  'xpacks/micro-os-plus-micro-test-plus', # -
+  'xpacks/@micro-os-plus/diag-trace', # -
+  'xpacks/@micro-os-plus/micro-test-plus', # -
 
   # -
-  xpack_build_folder_relative_path + '/xpacks/micro-os-plus-version',
+  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/version',
   # -
-  xpack_build_folder_relative_path + '/xpacks/xpack-3rd-party-arm-cmsis-core',
+  xpack_build_folder_relative_path + '/xpacks/@xpack-3rd-party/arm-cmsis-core',
   # (architecture) -
-  xpack_build_folder_relative_path + '/xpacks/micro-os-plus-architecture-cortexm',
+  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/architecture-cortexm',
 
   # +(version, diag_trace, architecture) >startup
-  xpack_build_folder_relative_path + '/xpacks/micro-os-plus-startup',
+  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/startup',
   # +(diag_trace, startup, architecture) >libs_c
-  xpack_build_folder_relative_path + '/xpacks/micro-os-plus-libs-c',
+  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/libs-c',
   # +(diag_trace) >libs_cpp
-  xpack_build_folder_relative_path + '/xpacks/micro-os-plus-libs-cpp',
+  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/libs-cpp',
 
   # +(diag_trace, architecture) >semihosting
-  xpack_build_folder_relative_path + '/xpacks/micro-os-plus-semihosting',
+  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/semihosting',
   # +(semihosting) >devices_cortexm
-  xpack_build_folder_relative_path + '/xpacks/micro-os-plus-devices-cortexm',
+  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/devices-cortexm',
 
   # +(arm_cmsis_core_m, devices_cortexm, startup) >devices_qemu_cortexm
-  xpack_build_folder_relative_path + '/xpacks/micro-os-plus-devices-qemu-cortexm',
+  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/devices-qemu-cortexm',
 ]
 
 # -----------------------------------------------------------------------------

@@ -37,18 +37,18 @@ doxygen -w html header.html footer.html styles.css
 ```
 
 ```text
-HTML_HEADER            = xpacks/micro-os-plus-build-helper/doxygen/common-header.html
+HTML_HEADER            = xpacks/@micro-os-plus/build-helper/doxygen/common-header.html
 
 HTML_EXTRA_FILES       = \
-xpacks/xpack-3rd-party-doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js \
-xpacks/xpack-3rd-party-doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
-xpacks/xpack-3rd-party-doxygen-awesome-css/doxygen-awesome-paragraph-link.js \
-xpacks/xpack-3rd-party-doxygen-awesome-css/doxygen-awesome-interactive-toc.js \
-xpacks/xpack-3rd-party-doxygen-awesome-css/doxygen-awesome-tabs.js
+xpacks/@xpack-3rd-party/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js \
+xpacks/@xpack-3rd-party/doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
+xpacks/@xpack-3rd-party/doxygen-awesome-css/doxygen-awesome-paragraph-link.js \
+xpacks/@xpack-3rd-party/doxygen-awesome-css/doxygen-awesome-interactive-toc.js \
+xpacks/@xpack-3rd-party/doxygen-awesome-css/doxygen-awesome-tabs.js
 
 HTML_EXTRA_STYLESHEET  = \
-xpacks/xpack-3rd-party-doxygen-awesome-css/doxygen-awesome.css \
-xpacks/micro-os-plus-build-helper/doxygen/common-custom.css
+xpacks/@xpack-3rd-party/doxygen-awesome-css/doxygen-awesome.css \
+xpacks/@micro-os-plus/build-helper/doxygen/common-custom.css
 
 HTML_COLORSTYLE        = LIGHT
 HTML_COLORSTYLE_HUE    = 209

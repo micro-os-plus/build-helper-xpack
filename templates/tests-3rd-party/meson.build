@@ -75,7 +75,7 @@ enable_unit_test = true
 
 # https://mesonbuild.com/Reference-manual.html#subdir
 subdir('meson/globals')
-subdir('top/xpacks/micro-os-plus-build-helper/meson/enable-all-warnings')
+subdir('top/xpacks/@micro-os-plus/build-helper/meson/enable-all-warnings')
 subdir('platform-'+ xpack_platform_name + '/meson/globals')
 
 # -----------------------------------------------------------------------------

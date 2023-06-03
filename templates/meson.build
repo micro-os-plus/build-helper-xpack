@@ -14,7 +14,7 @@
 
 # This file is intended to be consumed by applications with:
 #
-# `subdir('xpacks/xpack-3rd-party-xxx-yyy')`
+# `subdir('xpacks/@xpack-3rd-party/xxx-yyy')`
 #
 # The result is a library that can be referred as:
 #

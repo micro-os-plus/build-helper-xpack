@@ -99,11 +99,11 @@ add_global_link_arguments(
 
 # The base folder is root, via the `top` link.
 xpack_dependencies = [
-  'xpacks/micro-os-plus-diag-trace', # -
-  'xpacks/micro-os-plus-micro-test-plus', # -
+  'xpacks/@micro-os-plus/diag-trace', # -
+  'xpacks/@micro-os-plus/micro-test-plus', # -
 
   # (architecture) -
-  xpack_build_folder_relative_path + '/xpacks/micro-os-plus-architecture-synthetic-posix',
+  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/architecture-synthetic-posix',
 ]
 
 # -----------------------------------------------------------------------------
