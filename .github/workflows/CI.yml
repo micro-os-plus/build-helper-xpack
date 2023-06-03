@@ -6,7 +6,7 @@
 
 # TODO: add windows-latest after fixing CMake.
 
-# https://github.com/micro-os-plus/build-helper-xpack/actions/workflows/CI.yml
+# https://github.com/micro-os-plus/build-helper-xpack/actions/workflows/ci.yml
 name: CI on Push
 
 on:
