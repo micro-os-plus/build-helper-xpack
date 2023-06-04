@@ -61,34 +61,34 @@ jobs:
       run: npm install -g xpm@latest
 
     - name: Satisfy project dependencies
-      run: xpm install --quiet
+      run: xpm install
 
     - name: Run test-native-cmake-gcc11
       run: |
-        xpm install --config native-cmake-gcc11-debug --quiet
-        xpm install --config native-cmake-gcc11-release --quiet
+        xpm install --config native-cmake-gcc11-debug
+        xpm install --config native-cmake-gcc11-release
         xpm run test-native-cmake-gcc11
 
     - name: Run test-native-cmake-clang13
       run: |
-        xpm install --config native-cmake-clang13-debug --quiet
-        xpm install --config native-cmake-clang13-release --quiet
+        xpm install --config native-cmake-clang13-debug
+        xpm install --config native-cmake-clang13-release
         xpm run test-native-cmake-clang13
 
     - name: Run test-native-meson-gcc11
       run: |
-        xpm install --config native-meson-gcc11-debug --quiet
-        xpm install --config native-meson-gcc11-release --quiet
+        xpm install --config native-meson-gcc11-debug
+        xpm install --config native-meson-gcc11-release
         xpm run test-native-meson-gcc11
 
     - name: Run test-qemu-mps2-an386-cmake
       run: |
-        xpm install --config qemu-mps2-an386-cmake-debug --quiet
-        xpm install --config qemu-mps2-an386-cmake-release --quiet
+        xpm install --config qemu-mps2-an386-cmake-debug
+        xpm install --config qemu-mps2-an386-cmake-release
         xpm run test-qemu-mps2-an386-cmake
 
     - name: Run test-qemu-mps2-an386-meson
       run: |
-        xpm install --config qemu-mps2-an386-meson-debug --quiet
-        xpm install --config qemu-mps2-an386-meson-release --quiet
+        xpm install --config qemu-mps2-an386-meson-debug
+        xpm install --config qemu-mps2-an386-meson-release
         xpm run test-qemu-mps2-an386-meson

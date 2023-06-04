@@ -66,7 +66,7 @@
     },
     "actions": {
       "install-all": [
-        "xpm install --all-configs --quiet"
+        "xpm install --all-configs"
       ],
       "link-deps": [
         "xpm link @micro-os-plus/build-helper",
