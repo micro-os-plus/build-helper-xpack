@@ -244,7 +244,9 @@ compiling like:
 Other warnings:
 
 ```c
+#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
 #pragma clang diagnostic ignored "-Wglobal-constructors"
 #pragma clang diagnostic ignored "-Wunused-macros"
 #pragma clang diagnostic ignored "-Wempty-translation-unit"
+#pragma clang diagnostic ignored "-Wdeprecated-volatile"
 ```
