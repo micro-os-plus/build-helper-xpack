@@ -266,7 +266,7 @@ are:
 The xPack content is released under the
 [MIT License](https://opensource.org/licenses/MIT/),
 with all rights reserved to
-[Liviu Ionescu](https://github.com/ilg-ul/).
+[Liviu Ionescu](https://github.com/ilg-ul).
 
 The upstream content is provided under the terms of the ... .
 

@@ -3,7 +3,7 @@
 Releases in reverse chronological order.
 
 Please check
-[GitHub](https://github.com/xpack-3rd-party/xxx-yyy-xpack/issues/)
+[GitHub](https://github.com/micro-os-plus/xxx-yyy-xpack/issues)
 and close existing issues and pull requests.
 
 ## 2022-02-25
