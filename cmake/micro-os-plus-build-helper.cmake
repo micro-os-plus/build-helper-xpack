@@ -471,3 +471,28 @@ function(xpack_display_global_lists)
 endfunction()
 
 # -----------------------------------------------------------------------------
+
+function (xpack_add_cross_custom_commands target_name)
+
+  # TODO use add_custom_target()
+  # https://cmake.org/cmake/help/v3.20/command/add_custom_command.html
+  add_custom_command(TARGET ${target_name} POST_BUILD
+    COMMAND ${CMAKE_SIZE} --format=berkeley "$<TARGET_FILE:${target_name}>"
+  )
+
+  if (xpack_create_hex)
+    add_custom_command(TARGET ${target_name} POST_BUILD
+      COMMAND ${CMAKE_OBJCOPY} -O ihex "$<TARGET_FILE:${target_name}>" "$<TARGET_FILE:${target_name}>.hex"
+    )
+  endif()
+
+  if(xpack_create_listing)
+    add_custom_command(TARGET ${target_name} POST_BUILD
+      COMMAND ${CMAKE_OBJDUMP} --source --all-headers --demangle --line-numbers --wide "$<TARGET_FILE:${target_name}>" > ${target_name}-list.txt
+      VERBATIM
+    )
+  endif()
+
+endfunction ()
+
+# -----------------------------------------------------------------------------
