@@ -21,8 +21,32 @@ set(triple "riscv-none-elf-")
 set(CMAKE_C_COMPILER   "${triple}gcc")
 set(CMAKE_CXX_COMPILER "${triple}g++")
 
+# Some are autodiscovered, some are not, better make them explicit.
+set(CMAKE_ADDR2LINE "${triple}addr2line")
+set(CMAKE_AR "${triple}ar")
+
+set(CMAKE_ASM_COMPILER "${triple}gcc")
+set(CMAKE_ASM_COMPILER_AR "${triple}gcc-ar")
+set(CMAKE_ASM_COMPILER_RANLIB "${triple}gcc-ranlib")
+
+set(CMAKE_C_COMPILER_AR "${triple}gcc-ar")
+set(CMAKE_C_COMPILER_RANLIB "${triple}gcc-ranlib")
+
+set(CMAKE_CXX_COMPILER_AR "${triple}gcc-ar")
+set(CMAKE_CXX_COMPILER_RANLIB "${triple}gcc-ranlib")
+
+set(CMAKE_LINKER "${triple}ld")
+
+set(CMAKE_NM "${triple}nm")
+set(CMAKE_OBJCOPY "${triple}objcopy")
+set(CMAKE_OBJDUMP "${triple}objdump")
+set(CMAKE_RANLIB "${triple}ranlib")
+set(CMAKE_READELF "${triple}readelf")
+
 # Must be explicit, not set by CMake.
-set(CMAKE_SIZE "riscv-none-elf-size")
+set(CMAKE_SIZE "${triple}size")
+
+set(CMAKE_STRIP "${triple}strip")
 
 # -----------------------------------------------------------------------------
 
