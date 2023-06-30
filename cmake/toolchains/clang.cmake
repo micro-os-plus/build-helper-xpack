@@ -46,8 +46,8 @@ endif()
 
 # TODO: understand why CMAKE_<lang>_OUTPUT_EXTENSION is not effective
 
-set(CMAKE_ASM_FLAGS " -x assembler-with-cpp"
-  CACHE STRING "Flags used by the ASM compiler during all build types.")
+# set(CMAKE_ASM_FLAGS " -x assembler-with-cpp"
+#   CACHE STRING "Flags used by the ASM compiler during all build types.")
 
 set(CMAKE_ASM_FLAGS_DEBUG "-O0 -g3"
   CACHE STRING "Flags used by the ASM compiler during DEBUG builds.")

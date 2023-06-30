@@ -26,8 +26,8 @@ set(CMAKE_SIZE "riscv-none-elf-size")
 
 # -----------------------------------------------------------------------------
 
-set(CMAKE_ASM_FLAGS " -x assembler-with-cpp"
-  CACHE STRING "Flags used by the ASM compiler during all build types.")
+# set(CMAKE_ASM_FLAGS " -x assembler-with-cpp"
+#   CACHE STRING "Flags used by the ASM compiler during all build types.")
 
 set(CMAKE_ASM_FLAGS_DEBUG "-O0 -g3"
   CACHE STRING "Flags used by the ASM compiler during DEBUG builds.")
