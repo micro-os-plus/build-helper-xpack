@@ -45,7 +45,7 @@ README-*
 .clang-format
 
 templates/
-dev-scripts/
+# dev-scripts/
 vscode/
 
 .gitkeep
