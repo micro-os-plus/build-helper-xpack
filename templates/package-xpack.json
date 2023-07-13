@@ -1,7 +1,7 @@
 {
   "...": "...",
   "xpack": {
-    "minimumXpmRequired": "0.16.0",
+    "minimumXpmRequired": "0.16.2",
     "dependencies": {},
     "$dependenciesUrls": [
       "https://github.com/micro-os-plus",
