@@ -6,6 +6,86 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2023-07-13
+
+* v2.13.0
+* 72b1249 package.json: minXpm 0.16.2
+* bbbac45 templates: minXpm 0.16.2
+
+## 2023-07-04
+
+* 687597d package.json: 2.13.0-pre.5
+* 2147e7e .npmignore remove dev-scripts
+
+## 2023-06-30
+
+* d5c0995 package.json: 2.13.0-pre.4
+* 263c274 cross toolchains: explicit commands
+* 396838f toolchains: comment out CMAKE_ASM_FLAGS
+
+## 2023-06-23
+
+* d043b15 package.json: 2.13.0-pre.3
+* 4d1e8a8 package.json: url cosmetics
+* fe550d2 READMEs updates
+* f7e1582 templates update
+* e3a151c cmake: add xpack_add_cross_custom_commands
+
+## 2023-06-04
+
+* 8fc469b templates/ci.yml: bump deps
+* 3000831 package-xpack.json: build-helper-xpack#xpack-develop
+* 8e54f38 cmake: update for @scope/name
+* 5b83e2c remove --quiet
+
+## 2023-06-03
+
+* e23425f lower case ci.yml
+* fd995ad lower case ci.yml
+* 26046fc package.json min 0.16.0
+* 9e947a0 CI.yml: matrix.xpm-version
+* 297121b update xpack multi-level folders
+
+## 2023-05-30
+
+* ba308cd CI.yml: update macos-12
+
+## 2023-05-29
+
+* 6cc7e56 doxygen: update for 1.9.7, add original-config
+
+## 2023-05-28
+
+* 301d9f9 cards.css: stroke-width 1.5
+* 3fb0177 cards.css: svg 64px, stroke-width 2
+* 71c13c5 cards.css: hide anchor link
+* 96f9bea add doxygen/cards.css
+
+## 2023-05-19
+
+* 5dde9a6 bump package.json version pre.1
+* 6782491 tests/CMakeLists.txt: comment out VERSION
+* 6c6caab add common-header-micro-os-plus.html
+
+## 2023-05-16
+
+* bf34ec5 common-config.doxyfile: comment out IMAGE_PATH
+
+## 2023-05-15
+
+* 45258bd README update
+* bfb3125 package.json: 2.13.0-pre
+* 6eb76bc add doxygen TIPS & TRICKS
+* dd815a1 README update
+* 85fe4ee common-config.doxyfile: CREATE_SUBDIRS = NO
+
+## 2023-05-10
+
+* 19c47be add doxygen/README.md
+* 14b74fe 2.12.0
+* 3e11ba9 prepare v2.12.0
+* ad8fcd9 #3: dd common Doxygen files
+
 ## 2023-05-08
 
 * v2.12.0
