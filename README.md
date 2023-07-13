@@ -1,4 +1,8 @@
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/micro-os-plus/build-helper-xpack)](https://github.com/micro-os-plus/build-helper-xpack/blob/xpack/package.json)
+[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/micro-os-plus/build-helper-xpack)](https://github.com/micro-os-plus/build-helper-xpack/tags/)
+[![npm (scoped)](https://img.shields.io/npm/v/@micro-os-plus/build-helper.svg?color=blue)](https://www.npmjs.com/package/@micro-os-plus/build-helper/)
 [![license](https://img.shields.io/github/license/micro-os-plus/build-helper-xpack)](https://github.com/micro-os-plus/build-helper-xpack/blob/xpack/LICENSE)
+[![CI on Push](https://github.com/micro-os-plus/build-helper-xpack/actions/workflows/ci.yml/badge.svg)](https://github.com/micro-os-plus/build-helper-xpack/actions/workflows/ci.yml)
 
 # A source code project with files to help µOS++ builds
 
