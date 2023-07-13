@@ -1,8 +1,8 @@
 [![license](https://img.shields.io/github/license/micro-os-plus/build-helper-xpack)](https://github.com/micro-os-plus/build-helper-xpack/blob/xpack/LICENSE)
 
-# A source library xPack with files to help µOS++ builds
+# A source code project with files to help µOS++ builds
 
-This project provides files to be included during builds.
+This project provides various support files to be included during builds.
 
 The project is hosted on GitHub as
 [micro-os-plus/build-helper-xpack](https://github.com/micro-os-plus/build-helper-xpack).
@@ -17,13 +17,29 @@ For maintainer info, please see the
 
 ## Install
 
-As a source library xPack, the easiest way to add it to a project is via
-**xpm**, but it can also be used as any Git project, for example as a submodule.
+This project can be integrated into another project
+in the traditional way,
+by either copying the relevant files into the target project, or by linking
+the entire project as a Git submodule.
 
-### Prerequisites
+However, things can be further automated and the most convenient way is
+to **add it as a dependency** to the project via **xpm**.
+
+### Install with xpm/npm
+
+Along with the source files, this project also includes a
+`package.json` file with the metadata that allows it to be identified as an
+**xpm/npm** package so that it can be directly installed from GitHub or
+from the [npmjs.com](https://www.npmjs.com) registry as
+[`@micro-os-plus/build-helper`](https://www.npmjs.com/package/@micro-os-plus/build-helper).
+
+#### Prerequisites
 
 A recent [xpm](https://xpack.github.io/xpm/),
-which is a portable [Node.js](https://nodejs.org/) command line application.
+which is a portable [Node.js](https://nodejs.org/) command line application
+that complements [npm](https://docs.npmjs.com)
+with several extra features specific to
+**C/C++ projects**.
 
 It is recommended to update to the latest version with:
 
@@ -34,22 +50,12 @@ npm install --global xpm@latest
 For details please follow the instructions in the
 [xPack install](https://xpack.github.io/install/) page.
 
-### xpm
+Note: Be sure **xpm** is not installed with administrative rights.
 
-Note: the package will be available from npmjs.com at a later date.
+#### xpm
 
-For now, it can be installed from GitHub:
-
-```sh
-cd my-project
-xpm init # Unless a package.json is already present
-
-xpm install github:micro-os-plus/build-helper-xpack
-```
-
-When ready, this package will be available as
-[`@micro-os-plus/build-helper`](https://www.npmjs.com/package/@micro-os-plus/build-helper)
-from the `npmjs.com` registry:
+This project can be installed as a package from the
+`npmjs.com` registry with:
 
 ```sh
 cd my-project
@@ -60,10 +66,21 @@ xpm install @micro-os-plus/build-helper@latest
 ls -l xpacks/@micro-os-plus/build-helper
 ```
 
-### Git submodule
+#### npm
 
-If, for any reason, **xpm** is not available, the next recommended
-solution is to link it as a Git submodule below an `xpacks` folder.
+The package can also be installed with [npm](https://docs.npmjs.com)
+or related, but
+the features specific to C/C++ projects will not be available;
+therefore, at least for consistency reasons, it is recommended
+to use **xpm**.
+
+### Add as Git submodule
+
+Besides manually copying the relevant files to the target
+project, which will later require extra maintenance efforts to keep the
+project up to date, a more convenient
+solution is to link the entire project as a **Git submodule**,
+for example below an `xpacks` folder:
 
 ```sh
 cd my-project
@@ -121,7 +138,7 @@ It should be possible to compile them with:
 - GCC 8 or newer (https://gcc.gnu.org/projects/cxx-status.html)
 - LLVM clang 7 or newer (https://clang.llvm.org/cxx_status.html)
 
-The recommended versions are GCC 11, AppleClang 12.
+The recommended versions are GCC 12, AppleClang 15.
 
 ## Change log - incompatible changes
 
