@@ -4,7 +4,7 @@
 [![license](https://img.shields.io/github/license/micro-os-plus/xxx-yyy-xpack)](https://github.com/micro-os-plus/xxx-yyy-xpack/blob/xpack/LICENSE)
 [![CI on Push](https://github.com/micro-os-plus/xxx-yyy-xpack/actions/workflows/ci.yml/badge.svg)](https://github.com/micro-os-plus/xxx-yyy-xpack/actions/workflows/ci.yml)
 
-# A source library xPack with XXXX YYYY
+# A source code library with XXXX YYYY
 
 This project provides the **xxx-yyy** source library as an xPack
 dependency and includes ...
