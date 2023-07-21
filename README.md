@@ -73,10 +73,9 @@ ls -l xpacks/@micro-os-plus/build-helper
 #### npm
 
 The package can also be installed with [npm](https://docs.npmjs.com)
-or related, but
-the features specific to C/C++ projects will not be available;
-therefore, at least for consistency reasons, it is recommended
-to use **xpm**.
+or related, but the content will end in the `node_modules` folder,
+along with JavaScript code;
+therefore it is recommended to install C/C++ packages via **xpm**.
 
 ### Add as a Git submodule
 
