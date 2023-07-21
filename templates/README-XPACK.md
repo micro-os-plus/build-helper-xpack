@@ -47,7 +47,7 @@ from the `npmjs.com` registry:
 
 ```sh
 cd my-project
-xpm init # Unless a package.json is already present
+xpm init # Add a package.json if not already present
 
 xpm install @micro-os-plus/xxx-yyy@latest
 
@@ -290,7 +290,8 @@ Many thanks to ...
 
 ## License
 
-The original content is released under the
-[MIT License](https://opensource.org/licenses/MIT/),
+Unless otherwise stated, the content is released under the terms of the
+[MIT License](https://opensource.org/licenses/mit/)
+,
 with all rights reserved to
 [Liviu Ionescu](https://github.com/ilg-ul).

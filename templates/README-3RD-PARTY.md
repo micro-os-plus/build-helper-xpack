@@ -45,7 +45,7 @@ from the `npmjs.com` registry:
 
 ```sh
 cd my-project
-xpm init # Unless a package.json is already present
+xpm init # Add a package.json if not already present
 
 xpm install @xpack-3rd-party/xxx-yyy@latest
 
@@ -264,7 +264,8 @@ are:
 ## License
 
 The xPack content is released under the
-[MIT License](https://opensource.org/licenses/MIT/),
+[MIT License](https://opensource.org/licenses/mit/)
+,
 with all rights reserved to
 [Liviu Ionescu](https://github.com/ilg-ul).
 

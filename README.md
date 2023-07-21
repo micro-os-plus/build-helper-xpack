@@ -54,7 +54,7 @@ npm install --global xpm@latest
 For details please follow the instructions in the
 [xPack install](https://xpack.github.io/install/) page.
 
-Warning: Be sure **xpm** is not installed with administrative rights.
+Warning: Be sure **xpm** is not installed with administrative/root rights.
 
 #### xpm
 
@@ -63,7 +63,7 @@ This project can be installed as a package from the
 
 ```sh
 cd my-project
-xpm init # Unless a package.json is already present
+xpm init # Add a package.json if not already present
 
 xpm install @micro-os-plus/build-helper@latest
 
@@ -80,9 +80,12 @@ to use **xpm**.
 
 ### Add as a Git submodule
 
-Besides manually copying the relevant files to the target
-project, which will later require extra maintenance efforts to keep the
-project up to date, a more convenient
+If, for any reason, xpm/npm are not available, it is always possible
+to manually copy the relevant files into the target
+project. However, this will need extra maintenance to keep the
+project up to date.
+
+A more convenient
 solution is to link the entire project as a **Git submodule**,
 for example below an `xpacks` folder:
 
@@ -159,7 +162,8 @@ are:
 
 ## License
 
-The original content is released under the
-[MIT License](https://opensource.org/licenses/MIT/),
+Unless otherwise stated, the content is released under the terms of the
+[MIT License](https://opensource.org/licenses/mit/)
+,
 with all rights reserved to
 [Liviu Ionescu](https://github.com/ilg-ul).
