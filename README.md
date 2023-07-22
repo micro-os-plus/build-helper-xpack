@@ -70,6 +70,8 @@ xpm install @micro-os-plus/build-helper@latest
 ls -l xpacks/@micro-os-plus/build-helper
 ```
 
+Note: On Windows use `dir` and back-slashes.
+
 #### npm
 
 The package can also be installed with [npm](https://docs.npmjs.com)
