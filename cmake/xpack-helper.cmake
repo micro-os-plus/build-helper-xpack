@@ -148,7 +148,7 @@ macro(xpack_set_all_compiler_warnings variable_name)
         -Wformat=2
         -Wlogical-op
         -Wmissing-declarations
-        -Wmissing-include-dirs
+        $<$<NOT:$<PLATFORM_ID:Darwin>>:-Wmissing-include-dirs>
         -Wnull-dereference
         -Wpacked
         -Wpadded

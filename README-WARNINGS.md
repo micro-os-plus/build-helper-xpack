@@ -118,7 +118,7 @@ This enables some extra warning flags that are not enabled by ‘-Wall’.
 - `-Wformat=2`
 - `-Wlogical-op`
 - `-Wmissing-declarations`
-- `-Wmissing-include-dirs`
+- `-Wmissing-include-dirs` (NOT on macOS)
 - `-Wmissing-prototypes` (C and Objective-C only)
 - `-Wnested-externs` (C and Objective-C only)
 - `-Wnull-dereference`

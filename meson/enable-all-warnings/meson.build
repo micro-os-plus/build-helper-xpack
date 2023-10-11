@@ -51,7 +51,7 @@ if c_compiler.get_id() == 'gcc'
     '-Wlogical-op',
     '-Winvalid-pch',
     '-Wmissing-declarations',
-    '-Wmissing-include-dirs',
+    # '-Wmissing-include-dirs',
     '-Wnull-dereference',
     '-Wpacked',
     '-Wpadded',
