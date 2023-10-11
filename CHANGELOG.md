@@ -8,7 +8,10 @@ and close existing issues and pull requests.
 
 ## 2023-10-11
 
-* v2.14.0
+* v2.14.1
+* 10592fd remove -Wmissing-include-dirs on macOS
+* 8824f34 2.14.0
+* 23076f8 prepare v2.14.0
 
 ## 2023-10-10
 
