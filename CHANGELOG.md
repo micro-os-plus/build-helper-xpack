@@ -6,9 +6,44 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2023-10-11
+
+* v2.14.0
+
+## 2023-10-10
+
+* a69abb7 README update
+* 035a0ae cmake/README update
+* b9dc28b add dev-scripts/get-libraries-paths.sh
+
+## 2023-07-22
+
+* e9900f3 README updates
+
+## 2023-07-21
+
+* f063589 README updates
+* 1bc3432 README updates
+
+## 2023-07-18
+
+* f3998fe templates/READMEs update
+
+## 2023-07-14
+
+* 2154a1c README updates
+* 5e8685c ci.yml: xpm 0.16.2
+* 278eb23 README update
+* 9df12df README update
+
 ## 2023-07-13
 
-* v2.13.0
+* 9b2cbaf rename ci.yml
+* d85f76d README update
+* 769c1f1 README update
+* 7ffa72e CI.yml: update for xpm 0.16.2
+* 977ad8d 2.13.0
+* 14a30eb CHANGELOG: update for 2.13.0
 * 72b1249 package.json: minXpm 0.16.2
 * bbbac45 templates: minXpm 0.16.2
 
