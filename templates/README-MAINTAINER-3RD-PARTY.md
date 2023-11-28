@@ -22,7 +22,7 @@ git clone \
   ~/Work/micro-os-plus/xxx-yyy-xpack.git
 ```
 
-For development purposes, clone the `xpack-develop` branch:
+For development purposes, clone the development branch (`xpack-develop`):
 
 ```sh
 rm -rf ~/Work/micro-os-plus/xxx-yyy-xpack.git && \
@@ -37,6 +37,9 @@ git clone \
 
 A recent [xpm](https://xpack.github.io/xpm/), which is a portable
 [Node.js](https://nodejs.org/) command line application.
+
+To run the native tests, a C++ development environment is required.
+On macOS install Command Line Tools, on Ubuntu `build-essential`.
 
 ## Code formatting
 
@@ -73,7 +76,7 @@ xpm run test-all -C ~/Work/micro-os-plus/micro-test-plus-xpack.git
 
 The above procedure will allow to develop the project itself, but the
 dependencies will be read-only; to be able to contribute to them,
-also clone the `xpack-develop` branches of the source xPacks dependencies
+also clone the development branch (`xpack-develop`)es of the source xPacks dependencies
 into a folder of your choice and add links from the central xPacks
 storage to them by running `xpack link` in each folder.
 

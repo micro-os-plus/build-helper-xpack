@@ -10,7 +10,7 @@
     ],
     "devDependencies": {
       "@xpack-dev-tools/cmake": "3.23.5-1.1",
-      "@xpack-dev-tools/meson-build": "0.63.3-1.1",
+      "@xpack-dev-tools/meson-build": "1.3.0-1.1",
       "@xpack-dev-tools/ninja-build": "1.11.1-2.1",
       "@micro-os-plus/build-helper": "github:micro-os-plus/build-helper-xpack#xpack-develop",
       "@micro-os-plus/micro-test-plus": "^3.1.1",
@@ -520,7 +520,7 @@
         "hidden": true,
         "$devDependenciesUrl": "https://www.npmjs.com/package/@xpack-dev-tools/clang",
         "devDependencies": {
-          "@xpack-dev-tools/clang": "15.0.7-2.1"
+          "@xpack-dev-tools/clang": "15.0.7-4.1"
         }
       },
       "arm-none-eabi-gcc-dependencies": {
