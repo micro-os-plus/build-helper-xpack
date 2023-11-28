@@ -71,6 +71,7 @@ echo
 echo $1
 git add README.md
 git commit -m "README updates"
+# git commit -m "README fix typo"
 
 __EOF__
 
@@ -85,6 +86,7 @@ git commit -m "README-MAINTAINER updates"
 
 __EOF__
 
+
 cmakelists_file_package_json="$(mktemp)"
 cat <<'__EOF__' >"${cmakelists_file_package_json}"
 cd "$1/.."
@@ -96,14 +98,75 @@ git commit -m "CMakeLists.txt cosmetics"
 
 __EOF__
 
-tmp_file_package_json="$(mktemp)"
-cat <<'__EOF__' >"${tmp_file_package_json}"
+tmp_file_gitignore="$(mktemp)"
+cat <<'__EOF__' >"${tmp_file_gitignore}"
 cd "$1/.."
 
 echo
 echo $1
-git add package.json
-git commit -m "package.json remove git url"
+git add .gitignore
+git commit -m ".gitignore update"
+
+__EOF__
+
+tmp_file_npmignore="$(mktemp)"
+cat <<'__EOF__' >"${tmp_file_npmignore}"
+cd "$1/.."
+
+echo
+echo $1
+git add .npmignore
+git commit -m ".npmignore update"
+
+__EOF__
+
+tmp_file_clangformat="$(mktemp)"
+cat <<'__EOF__' >"${tmp_file_clangformat}"
+cd "$1/.."
+
+echo
+echo $1
+git add .clang-format
+git commit -m ".clang-format update"
+
+__EOF__
+
+tmp_file_ciyml="$(mktemp)"
+cat <<'__EOF__' >"${tmp_file_ciyml}"
+cd "$1/.."
+
+echo
+echo $1
+git add .github/workflows/ci.yml
+git commit -m "ci.yml do not trigger on tags"
+
+__EOF__
+
+# -----------------------------------------------------------------------------
+
+tmp_file_commit_vscode_settings="$(mktemp)"
+cat <<'__EOF__' >"${tmp_file_commit_vscode_settings}"
+cd "$1/.."
+
+echo
+echo $1
+git add .vscode/settings.json
+# git commit -m ".vscode/settings.json: ignoreWords"
+# git commit -m ".vscode/settings.json: makefile.configureOnOpen"
+git commit -m ".vscode/settings.json: cmake.ignoreCMakeListsMissing"
+
+__EOF__
+
+# -----------------------------------------------------------------------------
+
+tmp_file_commit_xpack_json="$(mktemp)"
+cat <<'__EOF__' >"${tmp_file_commit_xpack_json}"
+cd "$1/.."
+
+echo
+echo $1
+git add xpack.json
+git commit -m "add preliminary xpack.json"
 
 __EOF__
 
@@ -116,7 +179,39 @@ cd "$1/.."
 echo
 echo $1
 git add -A
-git commit -m "cmake: add xpack_display_target_lists"
+git commit -m "consistent copyright notices"
+
+__EOF__
+
+# -----------------------------------------------------------------------------
+
+tmp_file_commit_readmes="$(mktemp)"
+cat <<'__EOF__' >"${tmp_file_commit_readmes}"
+cd "$1/.."
+
+echo
+echo $1
+# git add README.md README-MAINTAINER.md README-MAINTAINER-XPACK.md
+git add README*.md
+# git commit -m "READMEs updates"
+git commit -m "README updates"
+
+__EOF__
+
+# -----------------------------------------------------------------------------
+
+tmp_file_commit_package="$(mktemp)"
+cat <<'__EOF__' >"${tmp_file_commit_package}"
+cd "$1/.."
+
+echo
+echo $1
+git add package.json
+# git commit -m "package.json min 0.14.0 & defaults"
+# git commit -m "package.json min 0.16.0"
+# git commit -m "package.json: cosmetise urls"
+# git commit -m "package.json: cosmetise description"
+git commit -m "package.json: cosmetise scripts"
 
 __EOF__
 
@@ -125,7 +220,10 @@ __EOF__
 set -x
 
 # UPDATE ME!
-commands_file="${tmp_file_commit_all}"
+# commands_file="${tmp_file_commit_all}"
+
+# commands_file="${tmp_file_commit_package}"
+commands_file="${tmp_file_commit_readmes}"
 
 repos_folder="$(dirname $(dirname "${script_folder_path}"))"
 
