@@ -1,0 +1,59 @@
+# platforms/qemu-cortex-a15
+
+Support files for building application to run on the QEMU "virt"
+emulated board with "cortex-a15" CPU.
+
+## Include folders
+
+The following folders should be passed to the compiler during the build:
+
+- `include`
+
+The header files to be included in user projects are:
+
+```cpp
+#include <micro-os-plus/platform.h>
+```
+
+Internally, the following file with platform specific configurations
+is included in `micro-os-plus/platform.h`:
+
+```cpp
+#include <micro-os-plus/platform/config.h>
+```
+
+## Source files
+
+The source files to be added to user projects are:
+
+- none
+
+## Memory range
+
+The applications are built for the following memory range:
+
+- RAM: 0x4000_0000-0x43FF_FFFF (64 MB)
+- HEAP: 0x4400_0000-0x47FF_FFFF (64 MB)
+- stack: 0x4800_0000
+
+The heap and stack are set automatically in `_startup()` to the values
+returned by `SEMIHOSTING_SYS_HEAPINFO`.
+
+## QEMU invocation
+
+To run tests, pass the ELF file and the arguments:
+
+```sh
+qemu-system-arm --machine virt --cpu cortex-a15 --nographic -smp 1 -d unimp,guest_errors --kernel "unit-test.elf" --semihosting-config enable=on,target=native,arg=unit-test
+```
+
+For debug sessions start QEMU in GDB server mode by passing both `-s -S`:
+
+```sh
+qemu-system-arm --machine virt --cpu cortex-a15 --nographic -smp 1 -d unimp,guest_errors -s -S --semihosting-config enable=on,target=native,arg=test
+```
+
+## Links
+
+- [QEMU Arm](https://www.qemu.org/docs/master/system/target-arm.html)
+- [virt](https://www.qemu.org/docs/master/system/arm/virt.html)
