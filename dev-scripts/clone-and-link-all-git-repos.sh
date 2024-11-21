@@ -53,7 +53,7 @@ function clone-and-link()
   local repo_name="$1"
 
   echo
-  clone "${repo_name}" "xpack-develop"
+  clone "${repo_name}" ""
 
   # Link it to the central xPacks repo.
   xpm link -C ${repo_name}.git

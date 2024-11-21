@@ -22,13 +22,13 @@ git clone \
   ~/Work/micro-os-plus/xxx-yyy-xpack.git
 ```
 
-For development purposes, clone the development branch (`xpack-develop`):
+For development purposes, clone the development branch (``):
 
 ```sh
 rm -rf ~/Work/micro-os-plus/xxx-yyy-xpack.git && \
 mkdir -p ~/Work/micro-os-plus && \
 git clone \
-  --branch xpack-develop \
+  --branch  \
   https://github.com/micro-os-plus/xxx-yyy-xpack.git \
   ~/Work/micro-os-plus/xxx-yyy-xpack.git
 ```
@@ -59,7 +59,7 @@ There are no fixed releases.
 
 In the `micro-os-plus/xxx-yyy-xpack` Git repo:
 
-- switch to the `xpack-develop` branch
+- switch to the `` branch
 - if needed, merge the `xpack` branch
 
 No need to add a tag here, it'll be added when the release is created.
@@ -105,14 +105,14 @@ xpm run test-all -C ~/Work/micro-os-plus/xxx-yyy-xpack.git
 
 ### Publish on the npmjs.com server
 
-- select the `xpack-develop` branch
+- select the `` branch
 - commit all changes
 - `npm pack` and check the content of the archive, which should list
   only `package.json`, `README.md`, `LICENSE`, `CHANGELOG.md`,
   the sources and CMake/meson files;
   possibly adjust `.npmignore`
 - `npm version patch`, `npm version minor`, `npm version major`
-- push the `xpack-develop` branch to GitHub
+- push the `` branch to GitHub
 - the `postversion` npm script should also update tags via `git push origin --tags`
 - wait for the CI job to complete
   (<https://github.com/micro-os-plus/xxx-yyy-xpack/actions/workflows/ci.yml>)
@@ -126,7 +126,7 @@ and macOS Apple Silicon.
 For this:
 
 - start the `~/actions-runners/micro-os-plus/run.sh &` runner on `xbbma` and `xbbla`
-- ensure that the `xpack-develop` branch is pushed
+- ensure that the `` branch is pushed
 - run the `trigger-workflow-test-all` action
 - wait for the **test-all** job to complete
   (<https://github.com/micro-os-plus/xxx-yyy-xpack/actions/workflows/test-all.yml>)
@@ -145,9 +145,9 @@ The version is visible at:
 When the package is considered stable:
 
 - with a Git client (VS Code is fine)
-- merge `xpack-develop` into `xpack`
+- merge `` into `xpack`
 - push to GitHub
-- select `xpack-develop`
+- select ``
 
 ### Tag the npm package as `latest`
 

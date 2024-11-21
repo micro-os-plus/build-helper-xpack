@@ -18,14 +18,14 @@ The first argument is an optional destination folder path. The default is
 `${HOME}/Work/micro-os-plus-xpack-repos`.
 
 ```sh
-curl -L https://raw.githubusercontent.com/micro-os-plus/build-helper-xpack/xpack/scripts/clone-and-link-all-git-repos.sh | bash 
+curl -L https://raw.githubusercontent.com/micro-os-plus/build-helper-xpack/xpack/scripts/clone-and-link-all-git-repos.sh | bash
 ```
 
 To get the very latest version, get the script from the
-`xpack-develop` branch:
+`` branch:
 
 ```sh
-curl -L https://raw.githubusercontent.com/micro-os-plus/build-helper-xpack/xpack-develop/scripts/clone-and-link-all-git-repos.sh | bash 
+curl -L https://raw.githubusercontent.com/micro-os-plus/build-helper-xpack//scripts/clone-and-link-all-git-repos.sh | bash
 ```
 
 
@@ -57,7 +57,7 @@ It can be invoked with:
 bash convert-arm-asm-to-c.sh ${input} >${output}
 ```
 
-The input file is usually an Arm assembly file from the vendor CMSIS, 
+The input file is usually an Arm assembly file from the vendor CMSIS,
 something like:
 
 - `${HOME}/STM32Cube/Repository/STM32Cube_FW_F0_V1.11.1/Drivers/CMSIS/Device/ST/STM32F0xx/Source/Templates/arm/startup_stm32f030x6.s`

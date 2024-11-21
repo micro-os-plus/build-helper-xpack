@@ -72,14 +72,14 @@ There are three active branches:
 
 - `master`, follows the original Arm `master`
 - `xpack`, with the latest stable version (default)
-- `xpack-develop`, with the current development version
+- ``, with the current development version
 
-All development is done in the `xpack-develop` branch, and contributions via
+All development is done in the `` branch, and contributions via
 Pull Requests should be directed to this branch. (Only contributions
 related to the xPack integration are accepted, functional contributions
 should be addressed to the upstream project.)
 
-When new releases are published, the `xpack-develop` branch is merged
+When new releases are published, the `` branch is merged
 into `xpack`.
 
 ## Developer info

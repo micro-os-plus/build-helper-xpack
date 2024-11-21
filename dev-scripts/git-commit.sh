@@ -57,9 +57,9 @@ cd "$1/.."
 echo
 echo $1
 git switch xpack
-git merge xpack-develop
+git merge
 git push
-git switch xpack-develop
+git switch
 
 __EOF__
 
