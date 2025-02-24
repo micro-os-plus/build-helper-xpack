@@ -14,7 +14,7 @@
 
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
   set(extension ".cmd")
 else()
   set(extension "")
