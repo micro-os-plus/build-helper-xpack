@@ -433,6 +433,14 @@ function(xpack_display_target_lists target)
     endforeach()
   endif()
 
+  get_target_property(link_options ${target} INTERFACE_LINK_OPTIONS)
+
+  if (link_options)
+    foreach(opt IN LISTS link_options)
+      message(VERBOSE "+ ${opt}")
+    endforeach()
+  endif()
+
 endfunction()
 
 # -----------------------------------------------------------------------------
