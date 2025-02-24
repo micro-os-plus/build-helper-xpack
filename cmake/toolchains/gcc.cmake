@@ -14,29 +14,25 @@
 
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 
-set(CMAKE_C_COMPILER "gcc")
-set(CMAKE_CXX_COMPILER "g++")
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+  set(extension ".cmd")
+else()
+  set(extension "")
+endif()
+
+set(CMAKE_C_COMPILER "gcc${extension}")
+set(CMAKE_CXX_COMPILER "g++${extension}")
 
 # Must be explicit, not set by CMake.
-set(CMAKE_SIZE "size")
+set(CMAKE_SIZE "size${extension}")
 
 # https://cmake.org/cmake/help/v3.20/variable/CMAKE_HOST_SYSTEM_NAME.html
 if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Darwin")
   # macOS has no separate AR or RANLIB.
 else()
   # Required for -flto.
-  set(CMAKE_AR "gcc-ar")
-  set(CMAKE_RANLIB "gcc-ranlib")
-endif()
-
-# -----------------------------------------------------------------------------
-
-# TODO: remove workaround once VS Code is fixed.
-# VS Code does not properly identify the shims used by npm/xpm,
-# thus make the extension explicit.
-if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Windows")
-  set(CMAKE_C_COMPILER "${CMAKE_C_COMPILER}.cmd")
-  set(CMAKE_CXX_COMPILER "${CMAKE_CXX_COMPILER}.cmd")
+  set(CMAKE_AR "gcc-ar${extension}")
+  set(CMAKE_RANLIB "gcc-ranlib${extension}")
 endif()
 
 # -----------------------------------------------------------------------------

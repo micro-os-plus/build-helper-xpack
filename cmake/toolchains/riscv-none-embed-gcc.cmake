@@ -12,41 +12,50 @@
 #
 # -----------------------------------------------------------------------------
 
+# DEPRECATED! Use riscv-none-elf-gcc.
+
 # Cross compiling.
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR riscv)
+
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+  set(extension ".cmd")
+else()
+  set(extension "")
+endif()
+
 set(triple "riscv-none-embed-")
-set(CMAKE_C_COMPILER   "${triple}gcc")
-set(CMAKE_CXX_COMPILER "${triple}g++")
+set(CMAKE_C_COMPILER   "${triple}gcc${extension}")
+set(CMAKE_CXX_COMPILER "${triple}g++${extension}")
 
 # Some are autodiscovered, some are not, better make them explicit.
-set(CMAKE_ADDR2LINE "${triple}addr2line")
-set(CMAKE_AR "${triple}ar")
+set(CMAKE_ADDR2LINE "${triple}addr2line${extension}")
+set(CMAKE_AR "${triple}ar${extension}")
 
-set(CMAKE_ASM_COMPILER "${triple}gcc")
-set(CMAKE_ASM_COMPILER_AR "${triple}gcc-ar")
-set(CMAKE_ASM_COMPILER_RANLIB "${triple}gcc-ranlib")
+set(CMAKE_ASM_COMPILER "${triple}gcc${extension}")
+set(CMAKE_ASM_COMPILER_AR "${triple}gcc-ar${extension}")
+set(CMAKE_ASM_COMPILER_RANLIB "${triple}gcc-ranlib${extension}")
 
-set(CMAKE_C_COMPILER_AR "${triple}gcc-ar")
-set(CMAKE_C_COMPILER_RANLIB "${triple}gcc-ranlib")
+set(CMAKE_C_COMPILER_AR "${triple}gcc-ar${extension}")
+set(CMAKE_C_COMPILER_RANLIB "${triple}gcc-ranlib${extension}")
 
-set(CMAKE_CXX_COMPILER_AR "${triple}gcc-ar")
-set(CMAKE_CXX_COMPILER_RANLIB "${triple}gcc-ranlib")
+set(CMAKE_CXX_COMPILER_AR "${triple}gcc-ar${extension}")
+set(CMAKE_CXX_COMPILER_RANLIB "${triple}gcc-ranlib${extension}")
 
-set(CMAKE_LINKER "${triple}ld")
+set(CMAKE_LINKER "${triple}ld${extension}")
 
-set(CMAKE_NM "${triple}nm")
-set(CMAKE_OBJCOPY "${triple}objcopy")
-set(CMAKE_OBJDUMP "${triple}objdump")
-set(CMAKE_RANLIB "${triple}ranlib")
-set(CMAKE_READELF "${triple}readelf")
+set(CMAKE_NM "${triple}nm${extension}")
+set(CMAKE_OBJCOPY "${triple}objcopy${extension}")
+set(CMAKE_OBJDUMP "${triple}objdump${extension}")
+set(CMAKE_RANLIB "${triple}ranlib${extension}")
+set(CMAKE_READELF "${triple}readelf${extension}")
 
 # Must be explicit, not set by CMake.
-set(CMAKE_SIZE "${triple}size")
+set(CMAKE_SIZE "${triple}size${extension}")
 
-set(CMAKE_STRIP "${triple}strip")
+set(CMAKE_STRIP "${triple}strip${extension}")
 
 # -----------------------------------------------------------------------------
 

@@ -14,33 +14,28 @@
 
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 
-set(CMAKE_C_COMPILER   "clang")
-set(CMAKE_CXX_COMPILER "clang++")
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+  set(extension ".cmd")
+else()
+  set(extension "")
+endif()
+
+set(CMAKE_C_COMPILER   "clang${extension}")
+set(CMAKE_CXX_COMPILER "clang++${extension}")
 
 # Some are autodiscovered, some are not, better make them explicit.
-set(CMAKE_ADDR2LINE "llvm-addr2line")
-set(CMAKE_AR "llvm-ar")
-set(CMAKE_ASM_COMPILER "clang")
-set(CMAKE_ASM_COMPILER_AR "llvm-ar")
-set(CMAKE_ASM_COMPILER_RANLIB "llvm-ranlib")
-set(CMAKE_DLLTOOL "llvm-dlltool")
-set(CMAKE_NM "llvm-nm")
-set(CMAKE_OBJCOPY "llvm-objcopy")
-set(CMAKE_OBJDUMP "llvm-objdump")
-set(CMAKE_RANLIB "llvm-ranlib")
-set(CMAKE_READELF "llvm-readelf")
-set(CMAKE_SIZE "llvm-size") # Must be explicit, not set by CMake.
-
-# -----------------------------------------------------------------------------
-
-# TODO: remove workaround once VS Code is fixed.
-# VS Code does not properly identify the shims used by npm/xpm,
-# thus make the extension explicit.
-# https://cmake.org/cmake/help/v3.20/variable/CMAKE_HOST_SYSTEM_NAME.html
-if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Windows")
-  set(CMAKE_C_COMPILER "${CMAKE_C_COMPILER}.cmd")
-  set(CMAKE_CXX_COMPILER "${CMAKE_CXX_COMPILER}.cmd")
-endif()
+set(CMAKE_ADDR2LINE "llvm-addr2line${extension}")
+set(CMAKE_AR "llvm-ar${extension}")
+set(CMAKE_ASM_COMPILER "clang${extension}")
+set(CMAKE_ASM_COMPILER_AR "llvm-ar${extension}")
+set(CMAKE_ASM_COMPILER_RANLIB "llvm-ranlib${extension}")
+set(CMAKE_DLLTOOL "llvm-dlltool${extension}")
+set(CMAKE_NM "llvm-nm${extension}")
+set(CMAKE_OBJCOPY "llvm-objcopy${extension}")
+set(CMAKE_OBJDUMP "llvm-objdump${extension}")
+set(CMAKE_RANLIB "llvm-ranlib${extension}")
+set(CMAKE_READELF "llvm-readelf${extension}")
+set(CMAKE_SIZE "llvm-size${extension}") # Must be explicit, not set by CMake.
 
 # -----------------------------------------------------------------------------
 
