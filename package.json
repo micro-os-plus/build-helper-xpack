@@ -1,21 +1,26 @@
 {
   "name": "@micro-os-plus/build-helper",
   "version": "2.14.1",
-  "description": "A source library xPack to assist the µOS++ builds",
+  "description": "A source package to assist the µOS++ builds",
   "main": "",
   "scripts": {
+    "generate-top-commons": "bash node_modules/@xpack/npm-packages-helper/maintenance-scripts/generate-top-commons.sh --micro-os-plus",
     "npm-install": "npm install",
-    "pack": "npm pack",
+    "npm-link-helpers": "npm link @xpack/npm-packages-helper @xpack/docusaurus-template-liquid",
+    "npm-outdated": "npm outdated",
+    "npm-pack": "npm pack",
+    "npm-link": "npm link",
     "npm-version-patch": "npm version patch",
     "npm-version-minor": "npm version minor",
-    "postversion": "git push origin --all && git push origin --tags",
-    "git-log": "git log --pretty='%cd * %h %s' --date=short"
+    "git-log": "git log --pretty='%cd * %h %s' --date=short",
+    "deep-clean": "del-cli node_modules package-lock.json *.tgz",
+    "postversion": "git push origin --all && git push origin --tags"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/micro-os-plus/build-helper-xpack.git"
+    "url": "git+https://github.com/micro-os-plus/build-helper-xpack.git"
   },
-  "homepage": "https://github.com/micro-os-plus/build-helper-xpack",
+  "homepage": "https://micro-os-plus.github.io/build-helper-xpack/",
   "bugs": {
     "url": "https://github.com/micro-os-plus/build-helper-xpack/issues"
   },
@@ -33,9 +38,18 @@
   "config": {},
   "dependencies": {},
   "bundleDependencies": [],
-  "devDependencies": {},
+  "$devDependenciesUrls": [
+    "https://www.npmjs.com/package/del-cli",
+    "https://www.npmjs.com/package/json",
+    "https://www.npmjs.com/package/liquidjs"
+  ],
+  "devDependencies": {
+    "del-cli": "^6.0.0",
+    "json": "^11.0.0",
+    "liquidjs": "^10.19.1"
+  },
   "xpack": {
-    "minimumXpmRequired": "0.16.2",
+    "minimumXpmRequired": "0.20.5",
     "dependencies": {},
     "devDependencies": {
       "@xpack-dev-tools/cmake": "3.20.6-2.1",
@@ -43,11 +57,22 @@
     },
     "properties": {},
     "actions": {
+      "install-ci": [
+        "xpm install"
+      ],
       "test-cmake": "cmake -S tests -B build/tests-cmake -G Ninja --log-level=VERBOSE",
-      "test": [
+      "test-ci": [
         "xpm run test-cmake"
       ]
     },
     "buildConfigurations": {}
+  },
+  "topConfig": {
+    "descriptiveName": "µOS++ build helper",
+    "permalinkName": "build-helper",
+    "hasTestAll": "false"
+  },
+  "engines": {
+    "node": " >=18.0.0"
   }
 }
