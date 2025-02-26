@@ -27,7 +27,8 @@
   "keywords": [
     "xpack",
     "c++",
-    "micro-os-plus"
+    "micro-os-plus",
+    "helper"
   ],
   "author": {
     "name": "Liviu Ionescu",
@@ -52,8 +53,7 @@
     "minimumXpmRequired": "0.20.5",
     "dependencies": {},
     "devDependencies": {
-      "@xpack-dev-tools/cmake": "3.20.6-2.1",
-      "@xpack-dev-tools/ninja-build": "1.10.2-5.1"
+      "@xpack-dev-tools/cmake": "3.20.6-2.1"
     },
     "properties": {},
     "actions": {
