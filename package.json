@@ -53,7 +53,8 @@
     "minimumXpmRequired": "0.20.5",
     "dependencies": {},
     "devDependencies": {
-      "@xpack-dev-tools/cmake": "3.20.6-2.1"
+      "@xpack-dev-tools/cmake": "3.30.7-1.1",
+      "@xpack-dev-tools/ninja-build": "1.12.1-1.1"
     },
     "properties": {},
     "actions": {
