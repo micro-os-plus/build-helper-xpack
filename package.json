@@ -61,7 +61,7 @@
       "install-ci": [
         "xpm install"
       ],
-      "test-cmake": "cmake -S tests -B build/tests-cmake -G Ninja --log-level=VERBOSE",
+      "test-cmake": "cmake -S tests -B build/tests-cmake -G Ninja{% if os.platform == 'win32' %} -D CMAKE_MAKE_PROGRAM=ninja.cmd{% endif %} --log-level=VERBOSE",
       "test-ci": [
         "xpm run test-cmake"
       ]
