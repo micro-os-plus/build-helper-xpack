@@ -89,7 +89,7 @@ jobs:
     - name: Satisfy project dependencies on ${{ matrix.os }}
       run: |
         npm ci
-        xpm run install-ci -C tests
+        xpm run install-ci
 
     - name: Run tests on ${{ matrix.os }}
       run: xpm run test-ci
