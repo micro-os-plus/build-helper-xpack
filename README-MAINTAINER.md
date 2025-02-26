@@ -103,7 +103,7 @@ related to the new version:
 - push the `` branch to GitHub
 - the `postversion` npm script should also update tags via `git push origin --tags`
 - wait for the CI job to complete
-  (<https://github.com/micro-os-plus/build-helper-xpack/actions/workflows/ci.yml>)
+  (<https://github.com/micro-os-plus/build-helper-xpack/actions/workflows/test-ci.yml>)
 
 ## Publish to npmjs.com
 
