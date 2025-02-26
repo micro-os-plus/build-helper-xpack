@@ -6,9 +6,47 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2025-02-26
+
+* v2.15.1
+* 0841517 package.json: bump deps
+* 7573cca package*.json updates
+* a9e98ba workflows/test-ci.yml update
+* 1a5467e worflows/test-ci.yml update
+* 5f731de re-generate commons
+
+## 2025-02-24
+
+* cb4c81b cmake/toolchains: use CMAKE_HOST_SYSTEM_NAME
+* 27b25c7 cmake/toolchains: add explicit extensions
+* 37ffb99 toolchain.cmake: add explicit extension
+* 8ea91c5 get-library-paths.sh: rework
+* 0820545 cmake: show INTERFACE_LINK_OPTIONS
+
+## 2024-11-21
+
+* 384e465 rename xpack-development
+* 4eabde6 add templates
+* f9ccbba shorten copyright notice
+* 0270447 add dev-scripts
+* c8c0cd0 update copyright notice
+
+## 2023-11-28
+
+* 98c7c3d add dev-scripts/sed-endif.sh (untested)
+* 5f583dc git-commit.sh update
+* 0312568 README updates
+* c7d7cad package.json: cosmetise scripts
+* 642ffd5 templates updates
+
+## 2023-10-12
+
+* 07e8e12 ci.yml: non-sudo npm install
+
 ## 2023-10-11
 
-* v2.14.1
+* 91a9d71 2.14.1
+* e39d51d prepare v2.14.1
 * 10592fd remove -Wmissing-include-dirs on macOS
 * 8824f34 2.14.0
 * 23076f8 prepare v2.14.0
