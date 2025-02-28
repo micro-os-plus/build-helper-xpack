@@ -27,7 +27,7 @@ For development purposes, clone the development branch (``):
 rm -rf ~/Work/micro-os-plus/build-helper-xpack.git && \
 mkdir -p ~/Work/micro-os-plus && \
 git clone \
-  --branch  \
+  --branch xpack-development \
   https://github.com/micro-os-plus/build-helper-xpack.git \
   ~/Work/micro-os-plus/build-helper-xpack.git
 ```
