@@ -1,0 +1,20 @@
+# -----------------------------------------------------------------------------
+#
+# This file is part of the µOS++ project (https://micro-os-plus.github.io/).
+# Copyright (c) 2022 Liviu Ionescu. All rights reserved.
+#
+# Permission to use, copy, modify, and/or distribute this software
+# for any purpose is hereby granted, under the terms of the MIT license.
+#
+# If a copy of the license was not distributed with this file, it can
+# be obtained from https://opensource.org/licenses/MIT/.
+#
+# -----------------------------------------------------------------------------
+
+option('platform-name',
+type : 'string',
+value : '',
+description : '[native, qemu-cortex-a15, qemu-cortex-a72, qemu-cortex-m0, qemu-cortex-m3, qemu-cortex-m4f, qemu-cortex-m7f, qemu-riscv-rv32imac, qemu-riscv-rv64imafdc]'
+)
+
+# -----------------------------------------------------------------------------
