@@ -8,7 +8,7 @@
 # for any purpose is hereby granted, under the terms of the MIT license.
 #
 # If a copy of the license was not distributed with this file, it can
-# be obtained from https://opensource.org/licenses/MIT/.
+# be obtained from https://opensource.org/licenses/mit.
 #
 # -----------------------------------------------------------------------------
 ## Common definitions for all platforms ##
@@ -31,7 +31,7 @@ if c_compiler.get_id() == 'gcc' or c_compiler.get_id().contains('clang')
   if get_option('buildtype').contains('debug')
     # TODO: remove DEBUG
     xpack_global_compile_definitions += [ '-DDEBUG' ]
-    
+
     xpack_global_compile_definitions += [ '-DMICRO_OS_PLUS_DEBUG' ]
     xpack_global_compile_definitions += [ '-DMICRO_OS_PLUS_TRACE' ]
   elif get_option('buildtype') == 'release'
