@@ -101,9 +101,9 @@ fi
 
 if [ "${do_init}" == "true" ]
 then
-  # TODO
-  echo "--init not implemented yet"
-  exit 1
+  cd "${templates_folder_path}/common"
+  bash "${script_folder_path}/process-template-item.sh" --force "./_micro-os-plus/tests/package-liquid.json" "${project_folder_path}"
+  exit 0
 else
 
   if false
