@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
 # DO NOT EDIT!
-# Automatically generated from build-helper/templates/*.
+# Automatically generated from build-helper/templates.
 #
 # This file is part of the µOS++ project (https://micro-os-plus.github.io/).
 # Copyright (c) 2022 Liviu Ionescu. All rights reserved.
@@ -17,24 +17,25 @@
 
 # -----------------------------------------------------------------------------
 
-# Required in devices-qemu-cortexm.
-xpack_device_compile_definition='MICRO_OS_PLUS_DEVICE_QEMU_CORTEX_M4'
+# Required in devices-qemu-riscv.
+xpack_device_compile_definition='MICRO_OS_PLUS_DEVICE_QEMU_RISCV_RV64IMAFDC'
 
-xpack_platform_compile_definition = 'MICRO_OS_PLUS_PLATFORM_QEMU_CORTEX_M4F'
+xpack_platform_compile_definition = 'MICRO_OS_PLUS_PLATFORM_QEMU_RISCV_RV64IMAFDC'
 
 # -----------------------------------------------------------------------------
 
-# The base folder is tests. The order is significative.
+# The base folder is `tests`. The order is significant.
 xpack_dependencies_folders = [
 
   'xpacks/@micro-os-plus/diag-trace', # -
+{%- if packageScopedName != '@micro-os-plus/micro-test-plus' %}
+  'xpacks/@micro-os-plus/micro-test-plus', # -
+{%- endif %}
   # -
   # 'xpacks/@micro-os-plus/version',
 
-  # -
-  xpack_build_folder_relative_path + '/xpacks/@xpack-3rd-party/arm-cmsis-core',
   # (architecture) -
-  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/architecture-cortexm',
+  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/architecture-riscv',
 
   # +(diag_trace, architecture) >semihosting
   xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/semihosting',
@@ -42,10 +43,10 @@ xpack_dependencies_folders = [
   # -
   xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/startup',
 
-  # +(arm_cmsis_core_m, devices_cortexm, startup) >devices_qemu_cortexm
-  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/devices-qemu-cortexm',
+  # -
+  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/devices-qemu-riscv',
 
-  'platforms/qemu-cortex-m4f/meson/platform-options',
+  'platforms/qemu-riscv-rv64imafdc/meson/platform-options',
 ]
 
 # -----------------------------------------------------------------------------

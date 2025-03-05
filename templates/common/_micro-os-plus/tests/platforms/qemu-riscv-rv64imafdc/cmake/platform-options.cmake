@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
 # DO NOT EDIT!
-# Automatically generated from build-helper/templates/*.
+# Automatically generated from build-helper/templates.
 #
 # This file is part of the µOS++ project (https://micro-os-plus.github.io/).
 # Copyright (c) 2022 Liviu Ionescu. All rights reserved.
@@ -42,6 +42,7 @@ target_sources(platform-qemu-riscv-rv64imafdc-interface INTERFACE
 )
 
 target_compile_definitions(platform-qemu-riscv-rv64imafdc-interface INTERFACE
+
   "${xpack_platform_compile_definition}"
 
   # Full POSIX conformance:
@@ -117,6 +118,7 @@ target_link_options(platform-qemu-riscv-rv64imafdc-interface INTERFACE
 
 if("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "12.0.0")
   target_link_options(platform-qemu-riscv-rv64imafdc-interface INTERFACE
+
     # .elf has a LOAD segment with RWX permissions (GCC 12)
     -Wl,--no-warn-rwx-segment
   )

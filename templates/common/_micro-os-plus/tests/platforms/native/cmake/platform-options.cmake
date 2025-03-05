@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
 # DO NOT EDIT!
-# Automatically generated from build-helper/templates/*.
+# Automatically generated from build-helper/templates.
 #
 # This file is part of the µOS++ project (https://micro-os-plus.github.io/).
 # Copyright (c) 2022-2023 Liviu Ionescu. All rights reserved.
@@ -69,6 +69,7 @@ target_sources(platform-native-interface INTERFACE
 )
 
 target_compile_definitions(platform-native-interface INTERFACE
+
   "${xpack_platform_compile_definition}"
 
   # Full POSIX conformance:
@@ -143,6 +144,7 @@ target_compile_options(platform-native-interface INTERFACE
 # On macOS, GCC 11 gets confused.
 # dyld[72401]: Symbol not found: (__ZNKSt3_V214error_category10_M_messageB5cxx11Ei)
 target_link_options(platform-native-interface INTERFACE
+
   # When `-flto` is used, the compile options must be passed to the linker too.
   ${_local_common_options}
 

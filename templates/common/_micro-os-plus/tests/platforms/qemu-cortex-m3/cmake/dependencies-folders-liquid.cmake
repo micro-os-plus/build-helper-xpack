@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
 # DO NOT EDIT!
-# Automatically generated from build-helper/templates/*.
+# Automatically generated from build-helper/templates.
 #
 # This file is part of the µOS++ project (https://micro-os-plus.github.io/).
 # Copyright (c) 2022 Liviu Ionescu. All rights reserved.
@@ -17,33 +17,26 @@
 
 # -----------------------------------------------------------------------------
 
-# Required in devices-qemu-riscv.
-xpack_device_compile_definition='MICRO_OS_PLUS_DEVICE_QEMU_RISCV_RV64IMAFDC'
+# Required in devices-qemu-cortexm.
+set(xpack_device_compile_definition "MICRO_OS_PLUS_DEVICE_QEMU_CORTEX_M3")
 
-xpack_platform_compile_definition = 'MICRO_OS_PLUS_PLATFORM_QEMU_RISCV_RV64IMAFDC'
+set(xpack_platform_compile_definition "MICRO_OS_PLUS_PLATFORM_QEMU_CORTEX_M3")
 
 # -----------------------------------------------------------------------------
+set(xpack_dependencies_folders
 
-# The base folder is tests. The order is significative.
-xpack_dependencies_folders = [
+  # The BINARY_DIR is the `build/<config>` folder.
+  "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/arm-cmsis-core"
+  "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-cortexm"
+  "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/devices-qemu-cortexm"
+  "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/semihosting"
+  "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/startup"
 
-  'xpacks/@micro-os-plus/diag-trace', # -
-  # -
-  # 'xpacks/@micro-os-plus/version',
-
-  # (architecture) -
-  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/architecture-riscv',
-
-  # +(diag_trace, architecture) >semihosting
-  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/semihosting',
-
-  # -
-  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/startup',
-
-  # -
-  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/devices-qemu-riscv',
-
-  'platforms/qemu-riscv-rv64imafdc/meson/platform-options',
-]
+  # The SOURCE_DIR is the `tests` folder.
+  "${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/diag-trace"
+{%- if packageScopedName != '@micro-os-plus/micro-test-plus' %}
+  "${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/micro-test-plus"
+{%- endif %}
+)
 
 # -----------------------------------------------------------------------------
