@@ -35,5 +35,6 @@
   "cmake.ignoreCMakeListsMissing": true,
   "cmake.configureOnOpen": false,
   "makefile.configureOnOpen": false,
-  "editor.wordWrap": "on"
+  "editor.wordWrap": "on",
+  "mesonbuild.selectRootDir": false
 }
