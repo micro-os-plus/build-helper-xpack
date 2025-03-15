@@ -33,7 +33,7 @@
       "@micro-os-plus/build-helper": "github:micro-os-plus/build-helper-xpack#v2.16.0",
       "@micro-os-plus/diag-trace": "^4.2.1",
 {%- if githubProjectName != 'micro-test-plus-xpack' %}
-      "@micro-os-plus/micro-test-plus": "^3.2.0",
+      "@micro-os-plus/micro-test-plus": "^3.2.2",
 {%- endif %}
       "@xpack-dev-tools/cmake": "3.30.7-1.1",
       "@xpack-dev-tools/meson-build": "1.6.1-1.1",
