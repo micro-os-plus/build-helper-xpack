@@ -64,6 +64,11 @@ parse_options "$@"
 
 # -----------------------------------------------------------------------------
 
+# Used to enforce an exit code of 255, required by xargs.
+trap 'trap_handler "${script_name}" $LINENO $?; return 255' ERR
+
+# -----------------------------------------------------------------------------
+
 if [ "${is_micro_os_plus}" != "true" ]
 then
   echo "Unsupported configuration..."
@@ -72,18 +77,21 @@ fi
 
 current_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
 project_folder_path="$(dirname "${current_folder_path}")"
+tests_folder_path="${project_folder_path}/tests"
 templates_folder_path="$(dirname "${script_folder_path}")/templates"
 
 export current_folder_path
 export project_folder_path
 export templates_folder_path
+export tests_folder_path
 
 # -----------------------------------------------------------------------------
 
-# Used to enforce an exit code of 255, required by xargs.
-trap 'trap_handler "${script_name}" $LINENO $?; return 255' ERR
-
-# -----------------------------------------------------------------------------
+if [ "${is_micro_os_plus}" != "true" ]
+then
+  echo "Unsupported configuration..."
+  exit 1
+fi
 
 # Process package.json files and leave results in environment variables.
 compute_context
@@ -101,8 +109,8 @@ fi
 
 if [ "${do_init}" == "true" ]
 then
-  cd "${templates_folder_path}/common"
-  bash "${script_folder_path}/process-template-item.sh" --force "./_micro-os-plus/tests/package-liquid.json" "${project_folder_path}"
+  cd "${templates_folder_path}/common/_micro-os-plus/tests"
+  substitute "package-merge-liquid.json" "package.json" "${project_folder_path}/tests"
   exit 0
 else
 
