@@ -134,3 +134,12 @@ When the release is considered stable, promote it as `latest`:
 - `npm dist-tag ls @micro-os-plus/build-helper`
 - `npm dist-tag add @micro-os-plus/build-helper@2.16.0 latest`
 - `npm dist-tag ls @micro-os-plus/build-helper`
+
+---
+
+## How to add it to a new repo
+
+```
+mkdir -p tests
+xpm init -C tests
+```
