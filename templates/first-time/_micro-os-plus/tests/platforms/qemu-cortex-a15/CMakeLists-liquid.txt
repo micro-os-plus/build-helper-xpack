@@ -15,7 +15,7 @@
 
 # -----------------------------------------------------------------------------
 
-message(VERBOSE "Processing 'tests/platforms/qemu-cortex-m3'...")
+message(VERBOSE "Processing 'tests/platforms/qemu-cortex-a15'...")
 
 # -----------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ function(add_test_executable name)
   )
 
   # Include folders.
-  # `tests/platforms/qemu-cortex-m3/include` was added globally.
+  # `tests/platforms/qemu-cortex-a15/include` was added globally.
   target_include_directories(${name} PRIVATE
     "../../include"
   )
@@ -68,7 +68,7 @@ function(add_test_executable name)
   target_link_libraries(${name} PRIVATE
 
     # Tested library.
-    micro-os-plus::micro-test-plus
+    micro-os-plus::{{packageName}}
 
     # Portable dependencies.
     micro-os-plus::diag-trace
@@ -110,10 +110,11 @@ if(ENABLE_SAMPLE_TEST)
     NAME "sample-test"
 
     COMMAND qemu-system-arm${extension}
-    --machine mps2-an385
-    --cpu cortex-m3
+    --machine virt
+    --cpu cortex-a15
     --kernel sample-test.elf
     --nographic
+    -smp 1
     -d unimp,guest_errors
     --semihosting-config enable=on,target=native,arg=sample-test,arg=one,arg=two
   )
@@ -131,14 +132,13 @@ if(ENABLE_UNIT_TEST)
     NAME "unit-test"
 
     COMMAND qemu-system-arm${extension}
-    --machine mps2-an385
-    --cpu cortex-m3
+    --machine virt
+    --cpu cortex-a15
     --kernel unit-test.elf
     --nographic
+    -smp 1
     -d unimp,guest_errors
     --semihosting-config enable=on,target=native,arg=unit-test
-
-    # --semihosting-config arg=--verbose
   )
 endif()
 

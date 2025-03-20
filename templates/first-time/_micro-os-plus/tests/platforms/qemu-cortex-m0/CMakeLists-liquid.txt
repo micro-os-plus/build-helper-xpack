@@ -15,7 +15,7 @@
 
 # -----------------------------------------------------------------------------
 
-message(VERBOSE "Processing 'tests/platforms/qemu-riscv-rv64imafdc'...")
+message(VERBOSE "Processing 'tests/platforms/qemu-cortex-m0'...")
 
 # -----------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ function(add_test_executable name)
   )
 
   # Include folders.
-  # `tests/platforms/qemu-riscv-rv64imafdc/include` was added globally.
+  # `tests/platforms/qemu-cortex-m0/include` was added globally.
   target_include_directories(${name} PRIVATE
     "../../include"
   )
@@ -68,7 +68,7 @@ function(add_test_executable name)
   target_link_libraries(${name} PRIVATE
 
     # Tested library.
-    micro-os-plus::micro-test-plus
+    micro-os-plus::{{packageName}}
 
     # Portable dependencies.
     micro-os-plus::diag-trace
@@ -109,12 +109,10 @@ if(ENABLE_SAMPLE_TEST)
   add_test(
     NAME "sample-test"
 
-    COMMAND qemu-system-riscv64${extension}
-    --machine virt
-    --cpu rv64
+    COMMAND qemu-system-arm${extension}
+    --machine mps2-an385
+    --cpu cortex-m3
     --kernel sample-test.elf
-    -smp 1
-    -bios none
     --nographic
     -d unimp,guest_errors
     --semihosting-config enable=on,target=native,arg=sample-test,arg=one,arg=two
@@ -132,15 +130,15 @@ if(ENABLE_UNIT_TEST)
   add_test(
     NAME "unit-test"
 
-    COMMAND qemu-system-riscv64${extension}
-    --machine virt
-    --cpu rv64
+    COMMAND qemu-system-arm${extension}
+    --machine mps2-an385
+    --cpu cortex-m3
     --kernel unit-test.elf
     --nographic
-    -smp 1
-    -bios none
     -d unimp,guest_errors
     --semihosting-config enable=on,target=native,arg=unit-test
+
+    # --semihosting-config arg=--verbose
   )
 endif()
 

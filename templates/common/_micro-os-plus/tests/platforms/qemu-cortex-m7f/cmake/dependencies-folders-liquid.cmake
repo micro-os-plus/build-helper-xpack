@@ -35,10 +35,8 @@ set(xpack_dependencies_folders
   "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/startup"
 
   # The SOURCE_DIR is the `tests` folder.
-  "${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/diag-trace"
-{%- if packageScopedName != '@micro-os-plus/micro-test-plus' %}
-  "${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/micro-test-plus"
-{%- endif %}
+  {% if packageScopedName == '@micro-os-plus/diag-trace' %}# {% endif %}"${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/diag-trace"
+  {% if packageScopedName == '@micro-os-plus/micro-test-plus' %}# {% endif %}"${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/micro-test-plus"
 )
 
 # -----------------------------------------------------------------------------

@@ -15,7 +15,7 @@
 
 # -----------------------------------------------------------------------------
 
-message(VERBOSE "Processing 'tests/platforms/qemu-cortex-m0'...")
+message(VERBOSE "Processing 'tests/platforms/qemu-cortex-m4f'...")
 
 # -----------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ function(add_test_executable name)
   )
 
   # Include folders.
-  # `tests/platforms/qemu-cortex-m0/include` was added globally.
+  # `tests/platforms/qemu-cortex-m4f/include` was added globally.
   target_include_directories(${name} PRIVATE
     "../../include"
   )
@@ -60,6 +60,7 @@ function(add_test_executable name)
   )
 
   target_link_options(${name} PRIVATE
+
     -Wl,-Map,platform-bin/${name}-map.txt
 
     # -v
@@ -68,7 +69,7 @@ function(add_test_executable name)
   target_link_libraries(${name} PRIVATE
 
     # Tested library.
-    micro-os-plus::micro-test-plus
+    micro-os-plus::{{packageName}}
 
     # Portable dependencies.
     micro-os-plus::diag-trace
@@ -110,8 +111,8 @@ if(ENABLE_SAMPLE_TEST)
     NAME "sample-test"
 
     COMMAND qemu-system-arm${extension}
-    --machine mps2-an385
-    --cpu cortex-m3
+    --machine mps2-an386
+    --cpu cortex-m4
     --kernel sample-test.elf
     --nographic
     -d unimp,guest_errors
@@ -131,8 +132,8 @@ if(ENABLE_UNIT_TEST)
     NAME "unit-test"
 
     COMMAND qemu-system-arm${extension}
-    --machine mps2-an385
-    --cpu cortex-m3
+    --machine mps2-an386
+    --cpu cortex-m4
     --kernel unit-test.elf
     --nographic
     -d unimp,guest_errors

@@ -28,9 +28,8 @@ xpack_platform_compile_definition = 'MICRO_OS_PLUS_PLATFORM_QEMU_RISCV_RV64IMAFD
 xpack_dependencies_folders = [
 
   'xpacks/@micro-os-plus/diag-trace', # -
-{%- if packageScopedName != '@micro-os-plus/micro-test-plus' %}
-  'xpacks/@micro-os-plus/micro-test-plus', # -
-{%- endif %}
+  {% if packageScopedName == '@micro-os-plus/micro-test-plus' %}# {% endif %}'xpacks/@micro-os-plus/micro-test-plus', # -
+
   # -
   # 'xpacks/@micro-os-plus/version',
 

@@ -21,7 +21,7 @@ cmake_minimum_required(VERSION 3.20)
 
 project(
   {{packageScope}}-{{packageName}}-tests
-  DESCRIPTION "{{packageName}} tests"
+  DESCRIPTION "{{packageConfig.descriptiveName}} tests"
 )
 
 # Must be called from the top CMakeLists.txt.

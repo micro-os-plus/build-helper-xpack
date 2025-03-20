@@ -4,7 +4,7 @@
   "description": "Tests",
   "main": "",
   "scripts": {
-    "generate-tests-commons": "bash xpacks/@micro-os-plus/build-helper/maintenance-scripts/generate-commons.sh --micro-os-plus",
+    "generate-tests-commons": "bash xpacks/@micro-os-plus/build-helper/maintenance-scripts/generate-tests-commons.sh --micro-os-plus",
     "npm-install": "npm install",
     "npm-link-helpers": "npm link @xpack/npm-packages-helper",
     "xpm-link-helpers": "xpm link @micro-os-plus/build-helper",
@@ -20,7 +20,13 @@
   "dependencies": {},
   "bundleDependencies": [],
   "devDependencies": {
-    "del-cli": "^6.0.0"
+    "del-cli": "^6.0.0",
+    "json": "^11.0.0",
+    "liquidjs": "^10.20.1"
+  },
+  "testsConfig": {},
+  "engines": {
+    "node": ">=18.0"
   },
   "xpack": {
     "minimumXpmRequired": "0.20.7",
@@ -31,8 +37,10 @@
     ],
     "devDependencies": {
       "@micro-os-plus/build-helper": "github:micro-os-plus/build-helper-xpack#v2.16.0",
+{%- if githubProjectName != "diag-trace-xpack" %}
       "@micro-os-plus/diag-trace": "^4.2.1",
-{%- if githubProjectName != 'micro-test-plus-xpack' %}
+{%- endif %}
+{%- if githubProjectName != "micro-test-plus-xpack" %}
       "@micro-os-plus/micro-test-plus": "^3.2.2",
 {%- endif %}
       "@xpack-dev-tools/cmake": "3.30.7-1.1",
@@ -145,8 +153,8 @@
         "xpm install --all-configs"
       ],
       "link-deps": [
-        "xpm link @micro-os-plus/build-helper",
-        "xpm link @micro-os-plus/diag-trace"{% if githubProjectName != 'micro-test-plus-xpack' %},
+        "xpm link @micro-os-plus/build-helper"{% if githubProjectName != 'diag-trace-xpack' %},
+        "xpm link @micro-os-plus/diag-trace"{% endif %}{% if githubProjectName != 'micro-test-plus-xpack' %},
         "xpm link @micro-os-plus/micro-test-plus"{% endif %}
       ],
       "link-deps-all": [

@@ -15,7 +15,7 @@
 
 # -----------------------------------------------------------------------------
 
-message('Processing tests/platforms/qemu-cortex-a72...')
+message('Processing tests/platforms/qemu-cortex-m4f...')
 
 # -----------------------------------------------------------------------------
 
@@ -57,28 +57,36 @@ foreach name : test_names
     '../../src/' + name + '.cpp',
   ]
 
-  _local_compile_c_args += platform_qemu_cortex_a72_dependency_compile_c_args
-  _local_compile_cpp_args += platform_qemu_cortex_a72_dependency_compile_cpp_args
-
-  _local_compile_c_args += micro_os_plus_micro_test_plus_dependency_compile_c_args
-  _local_compile_cpp_args += micro_os_plus_micro_test_plus_dependency_compile_cpp_args
-
   _local_link_args += [
     '-Wl,-Map,'+ name + '-map.txt',
     # '-v',
   ]
 
-  _local_dependencies += [
-    # Tested library.
-    micro_os_plus_micro_test_plus_dependency,
+  # Tested library.
+  _local_compile_c_args += micro_os_plus_{{packageName | replace: "-", "_"}}_dependency_compile_c_args
+  _local_compile_cpp_args += micro_os_plus_{{packageName | replace: "-", "_"}}_dependency_compile_cpp_args
 
-    # Portable dependencies.
-    micro_os_plus_diag_trace_dependency,
-  ]
+  _local_dependencies += [ micro_os_plus_{{packageName | replace: "-", "_"}}_dependency ]
+
+  # Portable dependencies.
+  _local_compile_c_args += micro_os_plus_diag_trace_dependency_compile_c_args
+  _local_compile_cpp_args += micro_os_plus_diag_trace_dependency_compile_cpp_args
+
+  _local_dependencies += [ micro_os_plus_diag_trace_dependency ]
+
+  if name == 'unit-test'
+    _local_compile_c_args += micro_os_plus_micro_test_plus_dependency_compile_c_args
+    _local_compile_cpp_args += micro_os_plus_micro_test_plus_dependency_compile_cpp_args
+
+    _local_dependencies += [ micro_os_plus_micro_test_plus_dependency ]
+  endif
+
+  # Platform specific dependencies.
+  _local_compile_c_args += platform_qemu_cortex_m4f_dependency_compile_c_args
+  _local_compile_cpp_args += platform_qemu_cortex_m4f_dependency_compile_cpp_args
 
   _local_dependencies += [
-    # Platform specific dependencies.
-    platform_qemu_cortex_a72_dependency, # bring device & architecture too
+    platform_qemu_cortex_m4f_dependency, # bring device & architecture too
 
     micro_os_plus_semihosting_dependency,
     micro_os_plus_startup_dependency,
@@ -165,7 +173,7 @@ endforeach
 
 # -----------------------------------------------------------------------------
 
-qemu = find_program('qemu-system-aarch64')
+qemu = find_program('qemu-system-arm')
 
 # https://mesonbuild.com/Unit-tests.html#malloc_perturb_
 xpack_environment = environment()
@@ -180,11 +188,10 @@ if enable_sample_test
     'sample-test',
     qemu,
     args: [
-      '--machine', 'virt',
-      '--cpu', 'cortex-a72',
+      '--machine', 'mps2-an386',
+      '--cpu', 'cortex-m4',
       '--kernel', sample_test,
       '--nographic',
-      '-smp', '1',
       '-d', 'unimp,guest_errors',
       '--semihosting-config', 'enable=on,target=native,arg=sample-test,arg=one,arg=two',
     ],
@@ -202,11 +209,10 @@ if enable_unit_test
     'unit-test',
     qemu,
     args: [
-      '--machine', 'virt',
-      '--cpu', 'cortex-a72',
+      '--machine', 'mps2-an386',
+      '--cpu', 'cortex-m4',
       '--kernel', unit_test,
       '--nographic',
-      '-smp', '1',
       '-d', 'unimp,guest_errors',
       '--semihosting-config', 'enable=on,target=native,arg=unit-test',
     ],

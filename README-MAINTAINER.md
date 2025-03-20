@@ -139,7 +139,19 @@ When the release is considered stable, promote it as `latest`:
 
 ## How to add it to a new repo
 
-```
+```sh
 mkdir -p tests
 xpm init -C tests
+```
+
+```sh
+npm install del-cli json liquidjs --save-dev -C tests
+xpm link @micro-os-plus/build-helper -C tests
+(cd tests; npm link @xpack/npm-packages-helper)
+```
+
+```json
+  "scripts": {
+    "generate-tests-commons-init": "bash xpacks/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh --micro-os-plus --init"
+  },
 ```

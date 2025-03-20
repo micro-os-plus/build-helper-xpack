@@ -15,7 +15,7 @@
 
 # -----------------------------------------------------------------------------
 
-message(VERBOSE "Processing 'tests/platforms/qemu-cortex-a72'...")
+message(VERBOSE "Processing 'tests/platforms/qemu-riscv-rv32imac'...")
 
 # -----------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ function(add_test_executable name)
   )
 
   # Include folders.
-  # `tests/platforms/qemu-aarch64/include` was added globally.
+  # `tests/platforms/qemu-riscv-rv32imac/include` was added globally.
   target_include_directories(${name} PRIVATE
     "../../include"
   )
@@ -68,7 +68,7 @@ function(add_test_executable name)
   target_link_libraries(${name} PRIVATE
 
     # Tested library.
-    micro-os-plus::micro-test-plus
+    micro-os-plus::{{packageName}}
 
     # Portable dependencies.
     micro-os-plus::diag-trace
@@ -109,11 +109,12 @@ if(ENABLE_SAMPLE_TEST)
   add_test(
     NAME "sample-test"
 
-    COMMAND qemu-system-aarch64${extension}
+    COMMAND qemu-system-riscv32${extension}
     --machine virt
-    --cpu cortex-a72
+    --cpu rv32
     --kernel sample-test.elf
     -smp 1
+    -bios none
     --nographic
     -d unimp,guest_errors
     --semihosting-config enable=on,target=native,arg=sample-test,arg=one,arg=two
@@ -121,8 +122,6 @@ if(ENABLE_SAMPLE_TEST)
 endif()
 
 # -----------------------------------------------------------------------------
-
-# unit-test
 if(ENABLE_UNIT_TEST)
   add_test_executable(unit-test)
 
@@ -133,12 +132,13 @@ if(ENABLE_UNIT_TEST)
   add_test(
     NAME "unit-test"
 
-    COMMAND qemu-system-aarch64${extension}
+    COMMAND qemu-system-riscv32${extension}
     --machine virt
-    --cpu cortex-a72
+    --cpu rv32
     --kernel unit-test.elf
     --nographic
     -smp 1
+    -bios none
     -d unimp,guest_errors
     --semihosting-config enable=on,target=native,arg=unit-test
   )
