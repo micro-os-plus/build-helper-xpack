@@ -107,6 +107,12 @@ if c_compiler.get_id().contains('clang') and build_machine.system() == 'windows'
   ]
 endif
 
+if c_compiler.get_id().contains('clang')
+  _local_compile_args += [
+    '-Wno-documentation',
+  ]
+endif
+
 if get_option('buildtype') == 'release' or get_option('buildtype') == 'minsize' or get_option('buildtype') == 'debugoptimized'
   # https://mesonbuild.com/Reference-tables.html#operating-system-names
   # message(build_machine.cpu())

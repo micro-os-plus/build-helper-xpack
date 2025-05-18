@@ -83,6 +83,7 @@ set(_local_common_options
   # Apple clang 13 does not support -Wunused-but-set-variable
   # $<$<PLATFORM_ID:Darwin>:-Wno-unknown-warning-option>
   $<$<C_COMPILER_ID:Clang,AppleClang>:-Wno-unknown-warning-option>
+  $<$<C_COMPILER_ID:Clang,AppleClang>:-Wno-documentation>
   $<$<PLATFORM_ID:Darwin>:-Wno-missing-include-dirs>
 )
 
