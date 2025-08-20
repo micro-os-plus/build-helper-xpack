@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 # -----------------------------------------------------------------------------
 #
-# This file is part of the µOS++ distribution.
-#   (https://github.com/micro-os-plus/)
-# Copyright (c) 2022 Liviu Ionescu
+# This file is part of the µOS++ project (https://micro-os-plus.github.io/).
+# Copyright (c) 2022-2025 Liviu Ionescu. All rights reserved.
 #
 # Permission to use, copy, modify, and/or distribute this software
 # for any purpose is hereby granted, under the terms of the MIT license.
