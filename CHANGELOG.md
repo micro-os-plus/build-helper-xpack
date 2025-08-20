@@ -6,13 +6,64 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2025-08-20
+
+* v2.17.0
+* c462d9c templates add -Wno-psabi for gcc
+* 55fb3d7 templates update copyright notices
+* 3d83c03 update copyright licenses
+* 1d7ba82 doxygen updates for 1.14.0
+
+## 2025-05-18
+
+* cef1230 Add -Wno-documentation to clang
+
+## 2025-05-14
+
+* 60d9d10 doxygen update configs to 1.13.2
+
+## 2025-03-21
+
+* 8e1e375 template: update for diag-trace
+
+## 2025-03-20
+
+* 2296a5b generate-tests-commons.sh: update --init
+
+## 2025-03-19
+
+* 6c50e69 cosmetise copyright notices
+
+## 2025-03-15
+
+* 5c97fb0 template/package: bump micro-test
+
+## 2025-03-05
+
+* c45296e generate-commons --init
+* 9b9d8cf doxygen/custom.css --primary-color
+* 62cbf9c .vscode/setting.json update
+* ade530f cosmetics in DO NOT EDIT; add deps to micro-test-plus
+
+## 2025-02-28
+
+* fc7b0cb templates: copyright notices cosmetics
+* 25da268 add templates & generate-commons.sh
+* ffa7aa3 README update
+* 00d1fc2 re-generate workflows
+* e5e7051 move templates/old
+
 ## 2025-02-26
 
-* v2.15.1
+* 3561435 package.json: ninja.cmd
+* debb720 README update
+* 280f3a4 2.16.0
+* 90a6ae6 README update
+* 7097b3f prepare v2.15.1
 * 0841517 package.json: bump deps
 * 7573cca package*.json updates
 * a9e98ba workflows/test-ci.yml update
-* 1a5467e worflows/test-ci.yml update
+* 1a5467e workflows/test-ci.yml update
 * 5f731de re-generate commons
 
 ## 2025-02-24

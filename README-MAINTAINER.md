@@ -21,7 +21,7 @@ git clone \
   ~/Work/micro-os-plus/build-helper-xpack.git
 ```
 
-For development purposes, clone the development branch (``):
+For development purposes, clone the development branch (`xpack-development`):
 
 ```sh
 rm -rf ~/Work/micro-os-plus/build-helper-xpack.git && \
@@ -53,7 +53,7 @@ There are no fixed releases.
 
 In the `micro-os-plus/build-helper` Git repo:
 
-- switch to the `` branch
+- switch to the `xpack-development` branch
 - if needed, merge the `xpack` branch
 
 No need to add a tag here, it'll be added when the release is created.
@@ -62,7 +62,7 @@ No need to add a tag here, it'll be added when the release is created.
 
 Update the`package.json` file; add an extra field in the
 pre-release field, and initially also add `.pre`,
-for example `2.16.0-pre`.
+for example `2.17.0-pre`.
 
 ### Fix possible open issues
 
@@ -70,7 +70,7 @@ Check GitHub issues and pull requests:
 
 - <https://github.com/micro-os-plus/build-helper/issues/>
 
-and fix them; assign them to a milestone (like `2.16.0`).
+and fix them; assign them to a milestone (like `2.17.0`).
 
 ### Update `README-MAINTAINER.md`
 
@@ -84,8 +84,8 @@ related to the new version:
 
 - open the `CHANGELOG.md` file
 - check if all previous fixed issues are in
-- add a new entry like _* v2.16.0_
-- commit with a message like _prepare v2.16.0_
+- add a new entry like _* v2.17.0_
+- commit with a message like _prepare v2.17.0_
 
 ### Push changes
 
@@ -93,14 +93,14 @@ related to the new version:
 
 ### Commit the new version
 
-- select the `` branch
+- select the `xpack-development` branch
 - commit all changes
 - `npm pack` and check the content of the archive, which should list
   only `package.json`, `README.md`, `LICENSE`, `CHANGELOG.md`,
   the `doxygen-awesome-*.js` and `doxygen-custom/*` files;
   possibly adjust `.npmignore`
 - `npm version patch`, `npm version minor`, `npm version major`
-- push the `` branch to GitHub
+- push the `xpack-development` branch to GitHub
 - the `postversion` npm script should also update tags via `git push origin --tags`
 - wait for the CI job to complete
   (<https://github.com/micro-os-plus/build-helper-xpack/actions/workflows/test-ci.yml>)
@@ -123,16 +123,16 @@ Test the package.
 When the package is considered stable:
 
 - with a Git client (VS Code is fine)
-- merge `` into `xpack`
+- merge `xpack-development` into `xpack`
 - push to GitHub
-- select ``
+- select `xpack-development`
 
 ## Tag the npm package as `latest`
 
 When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @micro-os-plus/build-helper`
-- `npm dist-tag add @micro-os-plus/build-helper@2.16.0 latest`
+- `npm dist-tag add @micro-os-plus/build-helper@2.17.0 latest`
 - `npm dist-tag ls @micro-os-plus/build-helper`
 
 ---
