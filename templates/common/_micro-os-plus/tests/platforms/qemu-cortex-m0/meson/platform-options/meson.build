@@ -88,6 +88,14 @@ _local_compile_cpp_args += [
   '-fno-threadsafe-statics',
 ]
 
+if c_compiler.get_id() == 'gcc'
+  _local_compile_cpp_args += [
+    # parameter passing for argument of type 'os::rtos::memory::allocator_stateless_default_resource<os::rtos::thread>' changed in GCC 7.1
+    '-Wno-psabi',
+  ]
+endif
+
+
 _local_compile_c_args += common_options_dependency_compile_c_args
 _local_compile_cpp_args += common_options_dependency_compile_cpp_args
 

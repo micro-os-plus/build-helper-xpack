@@ -70,6 +70,8 @@ set(xpack_platform_common_args
 
   # ... libs-c/src/stdlib/exit.c:132:46
   # $<$<CXX_COMPILER_ID:GNU>:-Wno-missing-attributes>
+  # parameter passing for argument of type 'os::rtos::memory::allocator_stateless_default_resource<os::rtos::thread>' changed in GCC 7.1
+  $<$<CXX_COMPILER_ID:GNU>:-Wno-psabi>
 
   # $<$<COMPILE_LANGUAGE:C>:-fxxx>
 
