@@ -1,7 +1,7 @@
 {
   "minimumXpmakeRequired": "0.0.0",
   "license": "MIT",
-  "copyright": "Copyright (c) 2022 Liviu Ionescu",
+  "copyright": "Copyright (c) 2022-2025 Liviu Ionescu",
   "description": "Root components",
   "cdlComponents": {
     "micro-os-plus": {
