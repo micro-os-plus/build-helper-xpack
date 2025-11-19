@@ -145,9 +145,9 @@ xpm init -C tests
 ```
 
 ```sh
-npm install del-cli json liquidjs --save-dev -C tests
+npm --prefix tests install del-cli json liquidjs --save-dev
 xpm link @micro-os-plus/build-helper -C tests
-(cd tests; npm link @xpack/npm-packages-helper)
+npm --prefix tests link @xpack/npm-packages-helper)
 ```
 
 ```json
