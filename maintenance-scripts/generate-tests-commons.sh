@@ -136,16 +136,43 @@ else
   cd "${templates_folder_path}/common"
 
   # Main pass to copy/generate common files.
-  find . -type f -print0 | sort -zn | \
-    xargs -0 -I '{}' bash "${script_folder_path}/process-template-item.sh" --force '{}' "${project_folder_path}"
+  while IFS= read -r -d '' file
+  do
+    if [[ "${file}" != *"tests/platforms"* ]]
+    then
+      bash "${script_folder_path}/process-template-item.sh" --force "${file}" "${project_folder_path}"
+    else
+      platform_name="${file#*tests/platforms/}"
+      platform_name="${platform_name%%/*}"
+      platform_found="false"
+      for platform in "${xpack_tests_platforms_array[@]}"
+      do
+        if [[ "(${platform_name})" == "(${platform})" ]]
+        then
+          bash "${script_folder_path}/process-template-item.sh" --force "${file}" "${project_folder_path}"
+          platform_found="true"
+          break
+        fi
+      done
+      if [[ "${platform_found}" == "false" ]]
+      then
+        bash "${script_folder_path}/process-template-item.sh" --remove "${file}" "${project_folder_path}"
+      fi
+    fi
+  done < <(find . -type f -print0 | sort -zn)
 
   echo
   echo "First time proposals..."
 
   cd "${templates_folder_path}/first-time"
 
-  find . -type f -print0 | sort -zn | \
-    xargs -0 -I '{}' bash "${script_folder_path}/process-template-item.sh" '{}' "${project_folder_path}"
+  while IFS= read -r -d '' file
+  do
+    if [[ "${file}" != *"tests/platforms"* ]]
+    then
+      bash "${script_folder_path}/process-template-item.sh" "${file}" "${project_folder_path}"
+    fi
+  done < <(find . -type f -print0 | sort -zn)
 
 fi
 

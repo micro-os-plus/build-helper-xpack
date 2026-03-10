@@ -67,15 +67,31 @@ source "${npm_helper_folder_path}/maintenance-scripts/scripts-helper-source.sh"
 # set -x
 
 do_force="false"
+do_remove="false"
 
-if [ "${1}" == "--force" ]
-then
-  # Ask to override and write protect.
-  do_force="true"
+while [[ "${1}" == --* ]]
+do
+  case "${1}" in
+    --force)
+      # Ask to override and write protect.
+      do_force="true"
+      ;;
+
+    --remove)
+      # Ask to remove.
+      do_remove="true"
+      ;;
+
+    *)
+      echo "Unrecognised option '${1}'"
+      exit 1
+      ;;
+  esac
   shift
-fi
+done
 
 export do_force
+export do_remove
 
 # -----------------------------------------------------------------------------
 
@@ -106,6 +122,16 @@ fi
 if [ "$(basename "${from_relative_file_path}")" == ".DS_Store" ]
 then
   echo "${from_relative_file_path} ignored" # Skip macOS specifics.
+  exit 0
+fi
+
+if [ "${do_remove}" == "true" ]
+then
+  if [ -f "${to_absolute_file_path}" ]
+  then  
+    echo "removing: ${to_relative_file_path}"
+    rm -f "${to_absolute_file_path}"
+  fi
   exit 0
 fi
 
