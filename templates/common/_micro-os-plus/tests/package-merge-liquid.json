@@ -15,6 +15,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "@xpack/npm-packages-helper": "github:xpack/npm-packages-helper",
     "del-cli": "^7.0.0",
     "json": "^11.0.0",
     "liquidjs": "^10.25.0"
@@ -1506,7 +1507,6 @@
     }
   },
 {% endraw %} 
-  "testsConfig": {},
   "engines": {
     "node": ">=20.0"
   }
