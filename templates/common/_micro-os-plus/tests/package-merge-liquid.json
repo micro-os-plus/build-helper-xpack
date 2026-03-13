@@ -22,7 +22,9 @@
   },
   "scripts": {
     "generate-tests-commons": "bash xpacks/@micro-os-plus/build-helper/maintenance-scripts/generate-tests-commons.sh --micro-os-plus",
+    "npm-ci": "npm ci",
     "npm-install": "npm install",
+    "npm-link-helpers": "npm link @xpack/npm-packages-helper",
     "npm-outdated": "npm outdated",
     "deep-clean": "del-cli build node_modules xpacks package-lock.json"
   },
