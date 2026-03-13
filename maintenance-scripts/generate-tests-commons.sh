@@ -172,6 +172,18 @@ else
     if [[ "${file}" != *"tests/platforms"* ]]
     then
       bash "${script_folder_path}/process-template-item.sh" "${file}" "${project_folder_path}"
+    else
+      platform_name="${file#*tests/platforms/}"
+      platform_name="${platform_name%%/*}"
+      IFS=',' read -ra platforms <<< "$xpack_tests_platforms"
+      for platform in "${platforms[@]}"
+      do
+        if [[ "(${platform_name})" == "(${platform})" ]]
+        then
+          bash "${script_folder_path}/process-template-item.sh" "${file}" "${project_folder_path}"
+          break
+        fi
+      done
     fi
   done < <(find . -type f -print0 | sort -zn)
 
