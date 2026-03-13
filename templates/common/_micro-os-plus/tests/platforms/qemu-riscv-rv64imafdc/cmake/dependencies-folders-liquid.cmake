@@ -1,15 +1,14 @@
 # -----------------------------------------------------------------------------
-# DO NOT EDIT!
-# Automatically generated from build-helper/templates.
+# DO NOT EDIT! Automatically generated from build-helper/templates.
 #
 # This file is part of the µOS++ project (https://micro-os-plus.github.io/).
 # Copyright (c) 2022-2026 Liviu Ionescu. All rights reserved.
 #
-# Permission to use, copy, modify, and/or distribute this software
-# for any purpose is hereby granted, under the terms of the MIT license.
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose is hereby granted, under the terms of the MIT license.
 #
-# If a copy of the license was not distributed with this file, it can
-# be obtained from https://opensource.org/licenses/mit.
+# If a copy of the license was not distributed with this file, it can be
+# obtained from https://opensource.org/licenses/mit.
 #
 # -----------------------------------------------------------------------------
 
@@ -17,23 +16,23 @@
 
 # -----------------------------------------------------------------------------
 
-# Required in devices-qemu-riscv.
-set(xpack_device_compile_definition "MICRO_OS_PLUS_DEVICE_QEMU_RISCV_RV64IMAFDC")
-
-set(xpack_platform_compile_definition "MICRO_OS_PLUS_PLATFORM_QEMU_RISCV_RV64IMAFDC")
+message(
+  VERBOSE
+  "Including tests/platforms/${PLATFORM_NAME}/cmake/dependencies-folders.cmake..."
+)
 
 # -----------------------------------------------------------------------------
 set(xpack_dependencies_folders
-
-  # The BINARY_DIR is the `build/<config>` folder.
-  "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-riscv"
-  "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/devices-qemu-riscv"
-  "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/semihosting"
-  "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/startup"
-
-  # The SOURCE_DIR is the `tests` folder.
-  {% if packageScopedName == '@micro-os-plus/diag-trace' %}# {% endif %}"${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/diag-trace"
-  {% if packageScopedName == '@micro-os-plus/micro-test-plus' %}# {% endif %}"${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/micro-test-plus"
+    # Project dependencies.
+    ${xpack_dependencies_project_folders}
+    # The BINARY_DIR is the `build/<config>` folder.
+    "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-riscv"
+    "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/devices-qemu-riscv"
+    "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/semihosting"
+    "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/startup"
+    # The SOURCE_DIR is the `tests` folder.
+    {% if packageScopedName == '@micro-os-plus/diag-trace' %}# {% endif %}"${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/diag-trace"
+    {% if packageScopedName == '@micro-os-plus/micro-test-plus' %}# {% endif %}"${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/micro-test-plus"
 )
 
 # -----------------------------------------------------------------------------

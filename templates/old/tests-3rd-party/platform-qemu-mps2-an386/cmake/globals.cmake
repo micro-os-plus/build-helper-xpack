@@ -31,12 +31,12 @@ set(xpack_platform_common_args
   -mthumb
   # -mfloat-abi=soft
   -mfloat-abi=hard
-
+  #
   # -fno-move-loop-invariants
-
+  #
   # Embedded builds must be warning free.
   -Werror
-
+  #
   # -flto fails with undefined reference to `__assert_func'...
   # $<$<CONFIG:Release>:-flto>
   # $<$<CONFIG:MinSizeRel>:-flto>

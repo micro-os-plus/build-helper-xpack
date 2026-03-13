@@ -103,8 +103,9 @@ function(add_test_executable name)
     # Force the linker to keep the interrupt vectors which otherwise
     # are not referred from anywhere.
     -u_interrupt_vectors
-
+    #
     # nano has no exceptions.
+    #
     # -specs=nano.specs
 
     -Wl,--gc-sections
