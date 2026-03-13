@@ -145,7 +145,8 @@ else
       platform_name="${file#*tests/platforms/}"
       platform_name="${platform_name%%/*}"
       platform_found="false"
-      for platform in "${xpack_tests_platforms_array[@]}"
+      IFS=',' read -ra platforms <<< "$xpack_tests_platforms"
+      for platform in "${platforms[@]}"
       do
         if [[ "(${platform_name})" == "(${platform})" ]]
         then
