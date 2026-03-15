@@ -16,16 +16,19 @@
 
 # -----------------------------------------------------------------------------
 
-message(VERBOSE
-        "Including tests/platforms/${PLATFORM_NAME}/cmake/definitions.cmake...")
+message (VERBOSE
+         "Including tests/platforms/${PLATFORM_NAME}/cmake/definitions.cmake..."
+)
 
 # -----------------------------------------------------------------------------
 
 # Required in devices-qemu-riscv.
-set(xpack_device_compile_definition
-    "MICRO_OS_PLUS_DEVICE_QEMU_RISCV_RV64IMAFDC")
+set (xpack_device_compile_definition
+     "MICRO_OS_PLUS_DEVICE_QEMU_RISCV_RV64IMAFDC"
+)
 
-set(xpack_platform_compile_definition
-    "MICRO_OS_PLUS_PLATFORM_QEMU_RISCV_RV64IMAFDC")
+set (xpack_platform_compile_definition
+     "MICRO_OS_PLUS_PLATFORM_QEMU_RISCV_RV64IMAFDC"
+)
 
 # -----------------------------------------------------------------------------

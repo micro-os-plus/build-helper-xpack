@@ -15,55 +15,53 @@
 
 # -----------------------------------------------------------------------------
 
-message(VERBOSE "Processing 'tests/platforms/qemu-cortex-m4f'...")
+message (VERBOSE "Processing 'tests/platforms/qemu-cortex-m4f'...")
 
-include("cmake/platform-library.cmake")
-
-# -----------------------------------------------------------------------------
-
-# set(xpack_create_listing true) set(xpack_create_hex true)
+include ("cmake/platform-library.cmake")
 
 # -----------------------------------------------------------------------------
 
-if(ENABLE_MINIMAL_TEST)
-  add_cross_test_executable(minimal-test)
-  target_link_cross_test_libraries(minimal-test test::minimal)
+if (ENABLE_MINIMAL_TEST)
+  add_cross_test_executable (minimal-test)
+  target_link_cross_test_libraries (minimal-test test::minimal)
 
-  message(VERBOSE "A> minimal-test")
+  message (VERBOSE "A> minimal-test")
 
-  add_test(
+  add_test (
     NAME "minimal-test"
     COMMAND
       qemu-system-arm${extension} --machine mps2-an386 --cpu cortex-m4 --kernel
       minimal-test.elf --nographic -d unimp,guest_errors --semihosting-config
-      enable=on,target=native,arg=minimal-test,arg=one,arg=two)
-endif()
+      enable=on,target=native,arg=minimal-test,arg=one,arg=two
+  )
+endif ()
 
 # -----------------------------------------------------------------------------
 
-if(ENABLE_SAMPLE_TEST)
-  add_cross_test_executable(sample-test)
-  target_link_cross_test_libraries(sample-test test::sample)
+if (ENABLE_SAMPLE_TEST)
+  add_cross_test_executable (sample-test)
+  target_link_cross_test_libraries (sample-test test::sample)
 
-  message(VERBOSE "A> sample-test")
+  message (VERBOSE "A> sample-test")
 
-  add_test(
+  add_test (
     NAME "sample-test"
     COMMAND
       qemu-system-arm${extension} --machine mps2-an386 --cpu cortex-m4 --kernel
       sample-test.elf --nographic -d unimp,guest_errors --semihosting-config
-      enable=on,target=native,arg=sample-test,arg=one,arg=two)
-endif()
+      enable=on,target=native,arg=sample-test,arg=one,arg=two
+  )
+endif ()
 
 # -----------------------------------------------------------------------------
 
-if(ENABLE_UNIT_TEST)
-  add_cross_test_executable(unit-test)
-  target_link_cross_test_libraries(unit-test test::unit)
+if (ENABLE_UNIT_TEST)
+  add_cross_test_executable (unit-test)
+  target_link_cross_test_libraries (unit-test test::unit)
 
-  message(VERBOSE "A> unit-test")
+  message (VERBOSE "A> unit-test")
 
-  add_test(
+  add_test (
     NAME "unit-test"
     COMMAND
       qemu-system-arm${extension} --machine mps2-an386 --cpu cortex-m4 --kernel
@@ -71,6 +69,6 @@ if(ENABLE_UNIT_TEST)
       enable=on,target=native,arg=unit-test
     # --semihosting-config arg=--verbose
   )
-endif()
+endif ()
 
 # -----------------------------------------------------------------------------

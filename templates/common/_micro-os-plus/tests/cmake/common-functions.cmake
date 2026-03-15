@@ -16,67 +16,73 @@
 
 # -----------------------------------------------------------------------------
 
-message(VERBOSE "Including tests/cmake/common-functions.cmake...")
+message (VERBOSE "Including tests/cmake/common-functions.cmake...")
 
 # -----------------------------------------------------------------------------
 
-function(add_native_test_executable name)
-  add_executable(${name})
+function (add_native_test_executable name)
+  add_executable (${name})
 
-  set_target_properties(${name} PROPERTIES OUTPUT_NAME "${name}")
+  set_target_properties (${name} PROPERTIES OUTPUT_NAME "${name}")
 
   # https://cmake.org/cmake/help/v3.20/manual/cmake-generator-expressions.7.html
   # The link options were defined in `platform-native-interface`.
-  target_link_options(
+  target_link_options (
     ${name} PRIVATE
     $<$<PLATFORM_ID:Linux,Windows>:-Wl,-Map,platform-bin/${name}-map.txt> # -v
   )
 
-  if(xpack_create_listing)
-    add_custom_command(
+  if (XPACK_ENABLE_CREATE_LISTING)
+    add_custom_command (
       TARGET ${name}
       POST_BUILD
       # --all-headers -> Invalid/Unsupported object file format
       COMMAND ${CMAKE_OBJDUMP} --source --demangle --line-numbers --wide
               "$<TARGET_FILE:${name}>" > ${name}-list.txt
-      VERBATIM)
-  endif()
-endfunction()
+      VERBATIM
+    )
+  endif ()
+endfunction ()
 
 # -----------------------------------------------------------------------------
 
-function(add_cross_test_executable name)
-  add_executable(${name})
+function (add_cross_test_executable name)
+  add_executable (${name})
 
-  set_target_properties(${name} PROPERTIES OUTPUT_NAME "${name}")
+  set_target_properties (${name} PROPERTIES OUTPUT_NAME "${name}")
 
-  target_link_options(
+  target_link_options (
     ${name} PRIVATE -Wl,-Map,platform-bin/${name}-map.txt # -v
   )
 
   # TODO use add_custom_target()
   # https://cmake.org/cmake/help/v3.20/command/add_custom_command.html
-  add_custom_command(
-    TARGET ${name}
-    POST_BUILD
-    COMMAND ${CMAKE_SIZE} --format=berkeley "$<TARGET_FILE:${name}>")
+  if (XPACK_ENABLE_REPORT_SIZE)
+    add_custom_command (
+      TARGET ${name}
+      POST_BUILD
+      COMMAND ${CMAKE_SIZE} --format=berkeley "$<TARGET_FILE:${name}>"
+    )
+  endif ()
 
-  if(xpack_create_hex)
-    add_custom_command(
+  if (XPACK_ENABLE_CREATE_HEX)
+    add_custom_command (
       TARGET ${name}
       POST_BUILD
       COMMAND ${CMAKE_OBJCOPY} -O ihex "$<TARGET_FILE:${name}>"
-              "$<TARGET_FILE:${name}>.hex")
-  endif()
+              "$<TARGET_FILE:${name}>.hex"
+    )
+  endif ()
 
-  if(xpack_create_listing)
-    add_custom_command(
+  if (XPACK_ENABLE_CREATE_LISTING)
+    add_custom_command (
       TARGET ${name}
       POST_BUILD
       COMMAND ${CMAKE_OBJDUMP} --source --all-headers --demangle --line-numbers
               --wide "$<TARGET_FILE:${name}>" > ${name}-list.txt
-      VERBATIM)
-  endif()
-endfunction()
+      VERBATIM
+    )
+  endif ()
+endfunction ()
 
 # -----------------------------------------------------------------------------

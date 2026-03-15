@@ -16,23 +16,24 @@
 
 # -----------------------------------------------------------------------------
 
-message(
+message (
   VERBOSE
   "Including tests/platforms/${PLATFORM_NAME}/cmake/dependencies-folders.cmake..."
 )
 
 # -----------------------------------------------------------------------------
-set(xpack_dependencies_folders
-    # Project dependencies.
-    ${xpack_dependencies_project_folders}
-    # The BINARY_DIR is the `build/<config>` folder.
-    "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-riscv"
-    "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/devices-qemu-riscv"
-    "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/semihosting"
-    "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/startup"
-    # The SOURCE_DIR is the `tests` folder.
-    {% if packageScopedName == '@micro-os-plus/diag-trace' %}# {% endif %}"${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/diag-trace"
-    {% if packageScopedName == '@micro-os-plus/micro-test-plus' %}# {% endif %}"${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/micro-test-plus"
+set (
+  xpack_dependencies_folders
+  # Project dependencies.
+  ${xpack_dependencies_project_folders}
+  # The BINARY_DIR is the `build/<config>` folder.
+  "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-riscv"
+  "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/devices-qemu-riscv"
+  "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/semihosting"
+  "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/startup"
+  # The SOURCE_DIR is the `tests` folder.
+  {% if packageScopedName == '@micro-os-plus/diag-trace' %}# {% endif %}"${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/diag-trace"
+  {% if packageScopedName == '@micro-os-plus/micro-test-plus' %}# {% endif %}"${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/micro-test-plus"
 )
 
 # -----------------------------------------------------------------------------

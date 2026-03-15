@@ -15,20 +15,16 @@
 
 # -----------------------------------------------------------------------------
 
-message(VERBOSE "Processing 'tests/platforms/qemu-cortex-m7f'...")
+message (VERBOSE "Processing 'tests/platforms/qemu-cortex-m7f'...")
 
-include("cmake/platform-library.cmake")
-
-# -----------------------------------------------------------------------------
-
-# set(xpack_create_listing true) set(xpack_create_hex true)
+include ("cmake/platform-library.cmake")
 
 # -----------------------------------------------------------------------------
 
-if(ENABLE_MINIMAL_TEST)
-  add_cross_test_executable(minimal-test)
+if (ENABLE_MINIMAL_TEST)
+  add_cross_test_executable (minimal-test)
 
-  target_link_libraries(
+  target_link_libraries (
     minimal-test
     PRIVATE # The compile & link options common to all platforms.
             micro-os-plus::common-options
@@ -40,24 +36,26 @@ if(ENABLE_MINIMAL_TEST)
             micro-os-plus::diag-trace
             # Platform specific dependencies.
             micro-os-plus::platform # bring device & architecture too
-            micro-os-plus::semihosting)
+            micro-os-plus::semihosting
+  )
 
-  message(VERBOSE "A> minimal-test")
+  message (VERBOSE "A> minimal-test")
 
-  add_test(
+  add_test (
     NAME "minimal-test"
     COMMAND
       qemu-system-arm${extension} --machine mps2-an500 --cpu cortex-m7 --kernel
       minimal-test.elf --nographic -d unimp,guest_errors --semihosting-config
-      enable=on,target=native,arg=minimal-test,arg=one,arg=two)
-endif()
+      enable=on,target=native,arg=minimal-test,arg=one,arg=two
+  )
+endif ()
 
 # -----------------------------------------------------------------------------
 
-if(ENABLE_SAMPLE_TEST)
-  add_cross_test_executable(sample-test)
+if (ENABLE_SAMPLE_TEST)
+  add_cross_test_executable (sample-test)
 
-  target_link_libraries(
+  target_link_libraries (
     sample-test
     PRIVATE # The compile & link options common to all platforms.
             micro-os-plus::common-options
@@ -69,24 +67,26 @@ if(ENABLE_SAMPLE_TEST)
             micro-os-plus::diag-trace
             # Platform specific dependencies.
             micro-os-plus::platform # bring device & architecture too
-            micro-os-plus::semihosting)
+            micro-os-plus::semihosting
+  )
 
-  message(VERBOSE "A> sample-test")
+  message (VERBOSE "A> sample-test")
 
-  add_test(
+  add_test (
     NAME "sample-test"
     COMMAND
       qemu-system-arm${extension} --machine mps2-an500 --cpu cortex-m7 --kernel
       sample-test.elf --nographic -d unimp,guest_errors --semihosting-config
-      enable=on,target=native,arg=sample-test,arg=one,arg=two)
-endif()
+      enable=on,target=native,arg=sample-test,arg=one,arg=two
+  )
+endif ()
 
 # -----------------------------------------------------------------------------
 
-if(ENABLE_UNIT_TEST)
-  add_cross_test_executable(unit-test)
+if (ENABLE_UNIT_TEST)
+  add_cross_test_executable (unit-test)
 
-  target_link_libraries(
+  target_link_libraries (
     unit-test
     PRIVATE # The compile & link options common to all platforms.
             micro-os-plus::common-options
@@ -98,11 +98,12 @@ if(ENABLE_UNIT_TEST)
             micro-os-plus::diag-trace
             # Platform specific dependencies.
             micro-os-plus::platform # bring device & architecture too
-            micro-os-plus::semihosting)
+            micro-os-plus::semihosting
+  )
 
-  message(VERBOSE "A> unit-test")
+  message (VERBOSE "A> unit-test")
 
-  add_test(
+  add_test (
     NAME "unit-test"
     COMMAND
       qemu-system-arm${extension} --machine mps2-an500 --cpu cortex-m7 --kernel
@@ -110,6 +111,6 @@ if(ENABLE_UNIT_TEST)
       enable=on,target=native,arg=unit-test
     # --semihosting-config arg=--verbose
   )
-endif()
+endif ()
 
 # -----------------------------------------------------------------------------

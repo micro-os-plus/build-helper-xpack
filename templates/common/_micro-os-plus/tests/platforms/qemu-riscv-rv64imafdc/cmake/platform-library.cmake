@@ -16,31 +16,35 @@
 
 # -----------------------------------------------------------------------------
 
-message(VERBOSE
-        "Including tests/platforms/${PLATFORM_NAME}/platform-library.cmake...")
+message (VERBOSE
+         "Including tests/platforms/${PLATFORM_NAME}/platform-library.cmake..."
+)
 
 # -----------------------------------------------------------------------------
 
 # Validate.
-if(NOT DEFINED xpack_platform_compile_definition)
-  message(
+if (NOT DEFINED xpack_platform_compile_definition)
+  message (
     FATAL_ERROR
       "Define xpack_platform_compile_definition in platforms/${PLATFORM_NAME}/cmake/dependencies.cmake"
   )
-endif()
+endif ()
 
 # -----------------------------------------------------------------------------
 
 # Define the platform library.
-add_library(platform-qemu-riscv-rv64imafdc-interface INTERFACE EXCLUDE_FROM_ALL)
-
-target_include_directories(platform-qemu-riscv-rv64imafdc-interface
-                           INTERFACE "include")
-
-target_sources(platform-qemu-riscv-rv64imafdc-interface INTERFACE # None.
+add_library (
+  platform-qemu-riscv-rv64imafdc-interface INTERFACE EXCLUDE_FROM_ALL
 )
 
-target_compile_definitions(
+target_include_directories (
+  platform-qemu-riscv-rv64imafdc-interface INTERFACE "include"
+)
+
+target_sources (platform-qemu-riscv-rv64imafdc-interface INTERFACE # None.
+)
+
+target_compile_definitions (
   platform-qemu-riscv-rv64imafdc-interface
   INTERFACE
     "${xpack_platform_compile_definition}"
@@ -48,41 +52,46 @@ target_compile_definitions(
     # https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap02.html#tag_02_01_03
     _POSIX_C_SOURCE=200809L
     # For S_IREAD
-    _GNU_SOURCE)
+    _GNU_SOURCE
+)
 
-set(xpack_platform_common_args
-    # https://gcc.gnu.org/onlinedocs/gcc/RISC-V-Options.html
-    # Do not use rv64gc, the compiler does not match it as rv64imafdc.
-    -march=rv64imafdc_zicsr
-    -mabi=lp64d
-    -mcmodel=medany
-    -msmall-data-limit=8
-    # -mno-save-restore
-    #
-    # -fno-move-loop-invariants
-    -fno-exceptions
-    #
-    # Embedded builds must be warning free.
-    -Werror
-    # (.text._write_r+0x14): undefined reference to `_write'
-    # (.text._write_r+0x14): relocation truncated to fit: R_RISCV_GPREL_I
-    # against undefined symbol `_write' $<$<CONFIG:Release>:-flto>
-    # $<$<CONFIG:MinSizeRel>:-flto>
-    $<$<CONFIG:Debug>:-fno-omit-frame-pointer>
-    # ... libs-c/src/stdlib/exit.c:132:46
-    # $<$<CXX_COMPILER_ID:GNU>:-Wno-missing-attributes>
-    # $<$<COMPILE_LANGUAGE:C>:-fxxx>
-    # https://cmake.org/cmake/help/v3.20/manual/cmake-generator-expressions.7.html?highlight=compile_language#genex:COMPILE_LANGUAGE
-    # $<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions>
-    # $<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>
-    # $<$<COMPILE_LANGUAGE:CXX>:-fno-use-cxa-atexit>
-    $<$<COMPILE_LANGUAGE:CXX>:-fno-threadsafe-statics>)
+set (
+  xpack_platform_common_args
+  # https://gcc.gnu.org/onlinedocs/gcc/RISC-V-Options.html
+  # Do not use rv64gc, the compiler does not match it as rv64imafdc.
+  -march=rv64imafdc_zicsr
+  -mabi=lp64d
+  -mcmodel=medany
+  -msmall-data-limit=8
+  # -mno-save-restore
+  #
+  # -fno-move-loop-invariants
+  -fno-exceptions
+  #
+  # Embedded builds must be warning free.
+  -Werror
+  # (.text._write_r+0x14): undefined reference to `_write'
+  # (.text._write_r+0x14): relocation truncated to fit: R_RISCV_GPREL_I against
+  # undefined symbol `_write' $<$<CONFIG:Release>:-flto>
+  # $<$<CONFIG:MinSizeRel>:-flto>
+  $<$<CONFIG:Debug>:-fno-omit-frame-pointer>
+  # ... libs-c/src/stdlib/exit.c:132:46
+  # $<$<CXX_COMPILER_ID:GNU>:-Wno-missing-attributes>
+  # $<$<COMPILE_LANGUAGE:C>:-fxxx>
+  # https://cmake.org/cmake/help/v3.20/manual/cmake-generator-expressions.7.html?highlight=compile_language#genex:COMPILE_LANGUAGE
+  # $<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions>
+  # $<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>
+  # $<$<COMPILE_LANGUAGE:CXX>:-fno-use-cxa-atexit>
+  $<$<COMPILE_LANGUAGE:CXX>:-fno-threadsafe-statics>
+)
 
-target_compile_options(platform-qemu-riscv-rv64imafdc-interface
-                       INTERFACE ${xpack_platform_common_args})
+target_compile_options (
+  platform-qemu-riscv-rv64imafdc-interface
+  INTERFACE ${xpack_platform_common_args}
+)
 
 # When `-flto` is used, the compile options must be passed to the linker too.
-target_link_options(
+target_link_options (
   platform-qemu-riscv-rv64imafdc-interface
   INTERFACE
   #
@@ -107,27 +116,31 @@ target_link_options(
   -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-riscv/linker-scripts/sections-ram.ld
 )
 
-if("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "12.0.0")
-  target_link_options(
+if ("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "12.0.0")
+  target_link_options (
     platform-qemu-riscv-rv64imafdc-interface INTERFACE
     # .elf has a LOAD segment with RWX permissions (GCC 12)
-    -Wl,--no-warn-rwx-segment)
-endif()
+    -Wl,--no-warn-rwx-segment
+  )
+endif ()
 
-target_link_libraries(
+target_link_libraries (
   platform-qemu-riscv-rv64imafdc-interface
-  INTERFACE micro-os-plus::devices-qemu-riscv micro-os-plus::startup)
+  INTERFACE micro-os-plus::devices-qemu-riscv micro-os-plus::startup
+)
 
-if(COMMAND xpack_display_target_lists)
-  xpack_display_target_lists(platform-qemu-riscv-rv64imafdc-interface)
-endif()
+if (COMMAND xpack_display_target_lists)
+  xpack_display_target_lists (platform-qemu-riscv-rv64imafdc-interface)
+endif ()
 
 # -----------------------------------------------------------------------------
 
 # Aliases.
-add_library(micro-os-plus::platform ALIAS
-            platform-qemu-riscv-rv64imafdc-interface)
-message(VERBOSE
-        "> micro-os-plus::platform -> platform-qemu-riscv-rv64imafdc-interface")
+add_library (
+  micro-os-plus::platform ALIAS platform-qemu-riscv-rv64imafdc-interface
+)
+message (VERBOSE
+         "> micro-os-plus::platform -> platform-qemu-riscv-rv64imafdc-interface"
+)
 
 # -----------------------------------------------------------------------------

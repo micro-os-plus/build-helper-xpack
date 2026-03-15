@@ -15,54 +15,52 @@
 
 # -----------------------------------------------------------------------------
 
-message(VERBOSE "Processing 'tests/platforms/native'...")
+message (VERBOSE "Processing 'tests/platforms/native'...")
 
-include("cmake/platform-library.cmake")
-
-# -----------------------------------------------------------------------------
-
-# set(xpack_create_listing true)
+include ("cmake/platform-library.cmake")
 
 # -----------------------------------------------------------------------------
 
-if(ENABLE_MINIMAL_TEST)
-  add_native_test_executable(minimal-test)
-  target_link_native_test_libraries(minimal-test test::minimal)
+if (ENABLE_MINIMAL_TEST)
+  add_native_test_executable (minimal-test)
+  target_link_native_test_libraries (minimal-test test::minimal)
 
-  message(VERBOSE "A> minimal-test")
+  message (VERBOSE "A> minimal-test")
 
-  add_test(NAME "minimal-test" COMMAND minimal-test one two)
-  add_test(NAME "minimal-test --verbose" COMMAND minimal-test one two --verbose)
-  add_test(NAME "minimal-test --quiet" COMMAND minimal-test one two --quiet)
-  add_test(NAME "minimal-test --silent" COMMAND minimal-test one two --silent)
-endif()
-
-# -----------------------------------------------------------------------------
-
-if(ENABLE_SAMPLE_TEST)
-  add_native_test_executable(sample-test)
-  target_link_native_test_libraries(sample-test test::sample)
-
-  message(VERBOSE "A> sample-test")
-
-  add_test(NAME "sample-test" COMMAND sample-test one two)
-  add_test(NAME "sample-test --verbose" COMMAND sample-test one two --verbose)
-  add_test(NAME "sample-test --quiet" COMMAND sample-test one two --quiet)
-  add_test(NAME "sample-test --silent" COMMAND sample-test one two --silent)
-endif()
+  add_test (NAME "minimal-test" COMMAND minimal-test one two)
+  add_test (NAME "minimal-test --verbose" COMMAND minimal-test one two
+                                                  --verbose
+  )
+  add_test (NAME "minimal-test --quiet" COMMAND minimal-test one two --quiet)
+  add_test (NAME "minimal-test --silent" COMMAND minimal-test one two --silent)
+endif ()
 
 # -----------------------------------------------------------------------------
 
-if(ENABLE_UNIT_TEST)
-  add_native_test_executable(unit-test)
-  target_link_native_test_libraries(unit-test test::unit)
+if (ENABLE_SAMPLE_TEST)
+  add_native_test_executable (sample-test)
+  target_link_native_test_libraries (sample-test test::sample)
 
-  message(VERBOSE "A> unit-test")
+  message (VERBOSE "A> sample-test")
 
-  add_test(NAME "unit-test" COMMAND unit-test)
-  add_test(NAME "unit-test --verbose" COMMAND unit-test --verbose)
-  add_test(NAME "unit-test --quiet" COMMAND unit-test --quiet)
-  add_test(NAME "unit-test --silent" COMMAND unit-test --silent)
-endif()
+  add_test (NAME "sample-test" COMMAND sample-test one two)
+  add_test (NAME "sample-test --verbose" COMMAND sample-test one two --verbose)
+  add_test (NAME "sample-test --quiet" COMMAND sample-test one two --quiet)
+  add_test (NAME "sample-test --silent" COMMAND sample-test one two --silent)
+endif ()
+
+# -----------------------------------------------------------------------------
+
+if (ENABLE_UNIT_TEST)
+  add_native_test_executable (unit-test)
+  target_link_native_test_libraries (unit-test test::unit)
+
+  message (VERBOSE "A> unit-test")
+
+  add_test (NAME "unit-test" COMMAND unit-test)
+  add_test (NAME "unit-test --verbose" COMMAND unit-test --verbose)
+  add_test (NAME "unit-test --quiet" COMMAND unit-test --quiet)
+  add_test (NAME "unit-test --silent" COMMAND unit-test --silent)
+endif ()
 
 # -----------------------------------------------------------------------------

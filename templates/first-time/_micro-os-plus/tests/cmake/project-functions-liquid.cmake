@@ -15,12 +15,12 @@
 
 # -----------------------------------------------------------------------------
 
-message(VERBOSE "Including tests/cmake/project-functions.cmake...")
+message (VERBOSE "Including tests/cmake/project-functions.cmake...")
 
 # -----------------------------------------------------------------------------
 
-function(target_link_native_test_libraries name library_name)
-  target_link_libraries(
+function (target_link_native_test_libraries name library_name)
+  target_link_libraries (
     ${name}
     PRIVATE # The compile & link options common to all platforms.
             micro-os-plus::common-options
@@ -31,13 +31,14 @@ function(target_link_native_test_libraries name library_name)
             # Portable dependencies.
             micro-os-plus::diag-trace
             # Platform specific dependencies and common compile/link options.
-            micro-os-plus::platform)
-endfunction()
+            micro-os-plus::platform
+  )
+endfunction ()
 
 # -----------------------------------------------------------------------------
 
-function(target_link_cross_test_libraries name library_name)
-  target_link_libraries(
+function (target_link_cross_test_libraries name library_name)
+  target_link_libraries (
     ${name}
     PRIVATE # The compile & link options common to all platforms.
             micro-os-plus::common-options
@@ -49,7 +50,8 @@ function(target_link_cross_test_libraries name library_name)
             micro-os-plus::diag-trace
             # Platform specific dependencies.
             micro-os-plus::platform # bring device & architecture too
-            micro-os-plus::semihosting)
-endfunction()
+            micro-os-plus::semihosting
+  )
+endfunction ()
 
 # -----------------------------------------------------------------------------
