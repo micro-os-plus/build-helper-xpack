@@ -31,7 +31,7 @@ tested_library_dependency_compile_cpp_args = micro_os_plus_{{packageName | repla
 
 # -----------------------------------------------------------------------------
 
-if enable_minimal_test
+if xpack_enable_minimal_test
 
   name = 'minimal-test'
   test_dependency = test_minimal_dependency
@@ -156,7 +156,7 @@ endif
 
 # -----------------------------------------------------------------------------
 
-if enable_sample_test
+if xpack_enable_sample_test
 
   name = 'sample-test'
   test_dependency = test_sample_dependency
@@ -281,7 +281,7 @@ endif
 
 # -----------------------------------------------------------------------------
 
-if enable_unit_test
+if xpack_enable_unit_test
 
   name = 'unit-test'
   test_dependency = test_unit_dependency

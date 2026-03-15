@@ -19,13 +19,6 @@ message('Processing tests/platforms/qemu-cortex-m0...')
 
 # -----------------------------------------------------------------------------
 
-# Enable them only when needed.
-xpack_report_size = true
-xpack_create_listing = false
-xpack_create_hex = false
-
-# -----------------------------------------------------------------------------
-
 # Get the command names from the toolchain file.
 size = find_program('size')
 objdump = find_program('objdump')
@@ -49,7 +42,7 @@ tested_library_dependency_compile_cpp_args = micro_os_plus_{{packageName | repla
 
 # Define the tests executables.
 
-if enable_sample_test
+if xpack_enable_sample_test
 
   test_name = 'sample-test'
   test_dependency = test_sample_dependency
@@ -131,7 +124,7 @@ if enable_sample_test
   message('A> ' + test_name)
 
   # https://mesonbuild.com/Reference-manual_functions.html#custom_target
-  if xpack_report_size
+  if xpack_enable_report_size
     custom_target(
       test_name + '-size',
 
@@ -147,7 +140,7 @@ if enable_sample_test
     )
   endif
 
-  if xpack_create_listing
+  if xpack_enable_create_listing
     # --source --all-headers --demangle --line-numbers --wide "xxx.elf"
     custom_target(
       test_name + '-list',
@@ -164,12 +157,12 @@ if enable_sample_test
         '@INPUT@'
       ],
       build_always_stale: true,
-      build_by_default: xpack_create_listing,
+      build_by_default: xpack_enable_create_listing,
       capture: true,
     )
   endif
 
-  if xpack_create_hex
+  if xpack_enable_create_hex
     # -O ihex "xxx.elf"
     custom_target(
       test_name + '-hex',
@@ -184,7 +177,7 @@ if enable_sample_test
         '@OUTPUT@',
       ],
       build_always_stale: true,
-      build_by_default: xpack_create_hex,
+      build_by_default: xpack_enable_create_hex,
     )
   endif
 
@@ -211,7 +204,7 @@ endif
 
 # -----------------------------------------------------------------------------
 
-if enable_unit_test
+if xpack_enable_unit_test
 
   test_name = 'unit-test'
   test_dependency = test_unit_dependency
@@ -293,7 +286,7 @@ if enable_unit_test
   message('A> ' + test_name)
 
   # https://mesonbuild.com/Reference-manual_functions.html#custom_target
-  if xpack_report_size
+  if xpack_enable_report_size
     custom_target(
       test_name + '-size',
 
@@ -309,7 +302,7 @@ if enable_unit_test
     )
   endif
 
-  if xpack_create_listing
+  if xpack_enable_create_listing
     # --source --all-headers --demangle --line-numbers --wide "xxx.elf"
     custom_target(
       test_name + '-list',
@@ -326,12 +319,12 @@ if enable_unit_test
         '@INPUT@'
       ],
       build_always_stale: true,
-      build_by_default: xpack_create_listing,
+      build_by_default: xpack_enable_create_listing,
       capture: true,
     )
   endif
 
-  if xpack_create_hex
+  if xpack_enable_create_hex
     # -O ihex "xxx.elf"
     custom_target(
       test_name + '-hex',
@@ -346,7 +339,7 @@ if enable_unit_test
         '@OUTPUT@',
       ],
       build_always_stale: true,
-      build_by_default: xpack_create_hex,
+      build_by_default: xpack_enable_create_hex,
     )
   endif
 

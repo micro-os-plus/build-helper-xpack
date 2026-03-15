@@ -21,7 +21,7 @@ include ("cmake/platform-library.cmake")
 
 # -----------------------------------------------------------------------------
 
-if (ENABLE_MINIMAL_TEST)
+if (XPACK_ENABLE_MINIMAL_TEST)
   add_cross_test_executable (minimal-test)
   target_link_cross_test_libraries (minimal-test test::minimal)
 
@@ -38,7 +38,7 @@ endif ()
 
 # -----------------------------------------------------------------------------
 
-if (ENABLE_SAMPLE_TEST)
+if (XPACK_ENABLE_SAMPLE_TEST)
   add_cross_test_executable (sample-test)
   target_link_cross_test_libraries (sample-test test::sample)
 
@@ -55,7 +55,7 @@ endif ()
 
 # -----------------------------------------------------------------------------
 
-if (ENABLE_UNIT_TEST)
+if (XPACK_ENABLE_UNIT_TEST)
   add_cross_test_executable (unit-test)
   target_link_cross_test_libraries (unit-test test::unit)
 
