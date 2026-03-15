@@ -34,6 +34,7 @@ set (
   "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/startup"
   # The SOURCE_DIR is the `tests` folder.
   {% if packageScopedName == '@micro-os-plus/diag-trace' %}# {% endif %}"${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/diag-trace"
-  {% if packageScopedName == '@micro-os-plus/micro-test-plus' %}# {% endif %}"${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/micro-test-plus")
+  {% if packageScopedName == '@micro-os-plus/micro-test-plus' %}# {% endif %}"${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/micro-test-plus"
+)
 
 # -----------------------------------------------------------------------------
