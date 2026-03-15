@@ -238,3 +238,11 @@ endforeach
 message('> platform_native_dependency')
 
 # -----------------------------------------------------------------------------
+
+# Aliases.
+platform_dependency = platform_native_dependency
+platform_dependency_compile_c_args = platform_native_dependency_compile_c_args
+platform_dependency_compile_cpp_args = platform_native_dependency_compile_cpp_args
+message('> platform_dependency')
+
+# -----------------------------------------------------------------------------

@@ -149,3 +149,11 @@ endforeach
 message('> platform_qemu_cortex_m7f_dependency')
 
 # -----------------------------------------------------------------------------
+
+# Aliases.
+platform_dependency = platform_qemu_cortex_m7f_dependency
+platform_dependency_compile_c_args = platform_qemu_cortex_m7f_dependency_compile_c_args
+platform_dependency_compile_cpp_args = platform_qemu_cortex_m7f_dependency_compile_cpp_args
+message('> platform_dependency')
+
+# -----------------------------------------------------------------------------

@@ -45,10 +45,6 @@ tested_library_dependency = micro_os_plus_{{packageName | replace: "-", "_"}}_de
 tested_library_dependency_compile_c_args = micro_os_plus_{{packageName | replace: "-", "_"}}_dependency_compile_c_args
 tested_library_dependency_compile_cpp_args = micro_os_plus_{{packageName | replace: "-", "_"}}_dependency_compile_cpp_args
 
-platform_dependency = platform_qemu_riscv_rv32imac_dependency
-platform_dependency_compile_c_args = platform_qemu_riscv_rv32imac_dependency_compile_c_args
-platform_dependency_compile_cpp_args = platform_qemu_riscv_rv32imac_dependency_compile_cpp_args
-
 # -----------------------------------------------------------------------------
 
 # Define the tests executables.

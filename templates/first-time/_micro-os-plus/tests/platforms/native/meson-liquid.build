@@ -20,17 +20,14 @@ message('Processing tests/platforms/native...')
 # -----------------------------------------------------------------------------
 
 # https://mesonbuild.com/Unit-tests.html#malloc_perturb_
-xpack_environment = environment({'MALLOC_PERTURB_': '0'})
+xpack_environment = environment()
+xpack_environment.set('MALLOC_PERTURB_', '0')
 
 # -----------------------------------------------------------------------------
 
 tested_library_dependency = micro_os_plus_{{packageName | replace: "-", "_"}}_dependency
 tested_library_dependency_compile_c_args = micro_os_plus_{{packageName | replace: "-", "_"}}_dependency_compile_c_args
 tested_library_dependency_compile_cpp_args = micro_os_plus_{{packageName | replace: "-", "_"}}_dependency_compile_cpp_args
-
-platform_dependency = platform_native_dependency
-platform_dependency_compile_c_args = platform_native_dependency_compile_c_args
-platform_dependency_compile_cpp_args = platform_native_dependency_compile_cpp_args
 
 # -----------------------------------------------------------------------------
 
