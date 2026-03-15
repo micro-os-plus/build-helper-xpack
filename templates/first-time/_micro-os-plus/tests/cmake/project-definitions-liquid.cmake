@@ -13,32 +13,20 @@
 
 # -----------------------------------------------------------------------------
 # Project specific definitions.
-
-set (XPACK_ENABLE_MINIMAL_TEST true)
-set (XPACK_ENABLE_SAMPLE_TEST true)
-set (XPACK_ENABLE_UNIT_TEST true)
+{% for testName in packageTestsConfig.tests %}
+set (XPACK_ENABLE_{{ testName | upcase }}_TEST true)
+{%- endfor %}
 
 set (xpack_dependencies_project_folders)
 
 # Each test has its own library. Add only those enabled.
-if (XPACK_ENABLE_MINIMAL_TEST)
+{%- for testName in packageTestsConfig.tests %}
+if (XPACK_ENABLE_{{ testName | upcase }}_TEST)
   list (APPEND xpack_dependencies_project_folders
-        "${CMAKE_SOURCE_DIR}/minimal-test"
+        "${CMAKE_SOURCE_DIR}/{{ testName }}-test"
   )
 endif ()
-
-if (XPACK_ENABLE_SAMPLE_TEST)
-  list (APPEND xpack_dependencies_project_folders
-        "${CMAKE_SOURCE_DIR}/sample-test"
-  )
-endif ()
-
-if (XPACK_ENABLE_UNIT_TEST)
-  list (APPEND xpack_dependencies_project_folders
-        "${CMAKE_SOURCE_DIR}/unit-test"
-  )
-endif ()
-
+{% endfor %}
 # -----------------------------------------------------------------------------
 
 set (XPACK_ENABLE_REPORT_SIZE true)

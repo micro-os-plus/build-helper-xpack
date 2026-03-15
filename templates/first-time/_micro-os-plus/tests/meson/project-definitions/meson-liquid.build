@@ -13,26 +13,18 @@
 
 # -----------------------------------------------------------------------------
 # Project specific definitions.
-
-xpack_enable_minimal_test = true
-xpack_enable_sample_test = true
-xpack_enable_unit_test = true
+{% for testName in packageTestsConfig.tests %}
+xpack_enable_{{ testName }}_test = true
+{%- endfor %}
 
 xpack_dependencies_project_folders = []
  
 # Each test has its own library. Add only those enabled.
-if xpack_enable_minimal_test
-  xpack_dependencies_project_folders += [ 'minimal-test' ]
+{%- for testName in packageTestsConfig.tests %}
+if xpack_enable_{{ testName }}_test
+  xpack_dependencies_project_folders += [ '{{ testName }}-test' ]
 endif
-
-if xpack_enable_sample_test
-  xpack_dependencies_project_folders += [ 'sample-test' ]
-endif
-
-if xpack_enable_unit_test
-  xpack_dependencies_project_folders += [ 'unit-test' ]
-endif
-
+{% endfor %}
 # -----------------------------------------------------------------------------
 
 # Enable them only when needed.
@@ -41,4 +33,3 @@ xpack_enable_create_listing = false
 xpack_enable_create_hex = false
 
 # -----------------------------------------------------------------------------
-
