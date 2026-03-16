@@ -1,6 +1,6 @@
 {
   "name": "@micro-os-plus/build-helper",
-  "version": "3.0.0-pre",
+  "version": "3.0.0",
   "description": "A source package to assist the µOS++ builds",
   "main": "",
   "files": [
