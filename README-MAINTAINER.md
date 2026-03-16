@@ -99,20 +99,11 @@ related to the new version:
   only `package.json`, `README.md`, `LICENSE`, `CHANGELOG.md`,
   the `doxygen-awesome-*.js` and `doxygen-custom/*` files;
   possibly adjust `.npmignore`
-- `npm version patch`, `npm version minor`, `npm version major`
+- `npm version 3.0.0`
 - push the `xpack-development` branch to GitHub
 - the `postversion` npm script should also update tags via `git push origin --tags`
 - wait for the CI job to complete
   (<https://github.com/micro-os-plus/build-helper-xpack/actions/workflows/test-ci.yml>)
-
-## Publish to npmjs.com
-
-- `npm publish --tag next` (use `npm publish --access public` when
-  publishing for the first time)
-
-The version is visible at:
-
-- <https://www.npmjs.com/package/@micro-os-plus/build-helper?activeTab=versions>
 
 ## Test
 
@@ -126,32 +117,3 @@ When the package is considered stable:
 - merge `xpack-development` into `xpack`
 - push to GitHub
 - select `xpack-development`
-
-## Tag the npm package as `latest`
-
-When the release is considered stable, promote it as `latest`:
-
-- `npm dist-tag ls @micro-os-plus/build-helper`
-- `npm dist-tag add @micro-os-plus/build-helper@3.0.0 latest`
-- `npm dist-tag ls @micro-os-plus/build-helper`
-
----
-
-## How to add it to a new repo
-
-```sh
-mkdir -p tests
-xpm init -C tests
-```
-
-```sh
-npm --prefix tests install del-cli json liquidjs --save-dev
-xpm link @micro-os-plus/build-helper -C tests
-npm --prefix tests link @xpack/npm-packages-helper)
-```
-
-```json
-  "scripts": {
-    "generate-tests-commons-init": "bash xpacks/@xpack/docusaurus-template-liquid/maintenance-scripts/generate-website-commons.sh --micro-os-plus --init"
-  },
-```
