@@ -62,6 +62,6 @@ libraries, and this list of paths is passed to the linker as `-rpath`.
 
 Although CMake can directly define sequences of piped commands, meson
 can not, and requires an external script, available as
-`build-helper/dev-scripts/get-libraries-paths.sh`.
+`scripts/get-libraries-paths.sh`.
 
 It requires the name of the compiler (clang++ or g++).

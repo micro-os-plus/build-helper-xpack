@@ -31,7 +31,12 @@ target_compile_definitions (
             # remove DEBUG
             $<$<CONFIG:Debug>:DEBUG>
             $<$<CONFIG:Debug>:MICRO_OS_PLUS_DEBUG>
-            {% if packageScopedName == '@micro-os-plus/diag-trace' %}# {% endif %}$<$<CONFIG:Debug>:MICRO_OS_PLUS_TRACE>
+            {%
+            if
+            packageScopedName
+            ==
+            '@micro-os-plus/diag-trace'
+            %} # {% endif %}$<$<CONFIG:Debug>:MICRO_OS_PLUS_TRACE>
             MICRO_OS_PLUS_INCLUDE_CONFIG_H
 )
 

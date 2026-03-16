@@ -9,22 +9,25 @@
   },
   "license": "MIT",
   "$dependenciesUrls": {
+    "build-helper": "https://github.com/micro-os-plus/build-helper.git",
+    "npm-packages-helper": "https://github.com/xpack/npm-packages-helper.git",
     "del-cli": "https://www.npmjs.com/package/del-cli",
     "json": "https://www.npmjs.com/package/json",
     "liquidjs": "https://www.npmjs.com/package/liquidjs"
   },
   "dependencies": {},
   "devDependencies": {
+    "@micro-os-plus/build-helper": "github:micro-os-plus/build-helper-xpack",    
     "@xpack/npm-packages-helper": "github:xpack/npm-packages-helper",
     "del-cli": "^7.0.0",
     "json": "^11.0.0",
     "liquidjs": "^10.25.0"
   },
   "scripts": {
-    "generate-tests-commons": "bash xpacks/@micro-os-plus/build-helper/maintenance-scripts/generate-tests-commons.sh --micro-os-plus",
+    "generate-tests-commons": "bash node_modules/@micro-os-plus/build-helper/maintenance-scripts/generate-tests-commons.sh --micro-os-plus",
     "npm-ci": "npm ci",
     "npm-install": "npm install",
-    "npm-link-helpers": "npm link @xpack/npm-packages-helper",
+    "npm-link-helpers": "npm link @xpack/npm-packages-helper @micro-os-plus/build-helper",
     "npm-outdated": "npm outdated",
     "deep-clean": "del-cli build node_modules xpacks package-lock.json"
   },
@@ -46,7 +49,6 @@
     },
     "dependencies": {},
     "devDependencies": {
-      "@micro-os-plus/build-helper": "github:micro-os-plus/build-helper-xpack#v2.17.0",
 {% if githubProjectName != "diag-trace-xpack" %}
       "@micro-os-plus/diag-trace": "^4.2.2",
 {% endif %}
@@ -62,15 +64,15 @@
       "buildFolderRelativePath": "{{ 'build' | path_join: configuration.name | to_filename | downcase }}",
       "buildFolderRelativePathPosix": "{{ 'build' | path_posix_join: configuration.name | downcase }}",
       "commandCMakePrepare": "{{ properties.commandCMakeReconfigure }} --log-level=VERBOSE",
-      "commandCMakePrepareWithToolchain": "{{ properties.commandCMakePrepare }} -D CMAKE_TOOLCHAIN_FILE=xpacks/@micro-os-plus/build-helper/cmake/toolchains/{{ properties.toolchainFileName }}",
+      "commandCMakePrepareWithToolchain": "{{ properties.commandCMakePrepare }} -D CMAKE_TOOLCHAIN_FILE=cmake/toolchains/{{ properties.toolchainFileName }}",
       "commandCMakeReconfigure": "cmake -S . -B {{ properties.buildFolderRelativePathPosix }} -G Ninja{% if os.platform == 'win32' %} -D CMAKE_MAKE_PROGRAM=ninja.cmd{% endif %} -D CMAKE_BUILD_TYPE={{ properties.buildType }} -D PLATFORM_NAME={{ properties.platformName }} -D CMAKE_EXPORT_COMPILE_COMMANDS=ON",
       "commandCMakeBuild": "cmake --build {{ properties.buildFolderRelativePathPosix }}",
       "commandCMakeBuildVerbose": "cmake --build {{ properties.buildFolderRelativePathPosix }} --verbose",
       "commandCMakeClean": "cmake --build {{ properties.buildFolderRelativePathPosix }} --target clean",
       "commandCMakePerformTests": "ctest -V --test-dir {{ properties.buildFolderRelativePath }}",
       "commandMesonPrepare": "meson setup --backend ninja --buildtype {{ properties.buildType }} -D platform-name={{ properties.platformName }} {{ properties.buildFolderRelativePathPosix }} .",
-      "commandMesonPrepareWithToolchain": "meson setup --backend ninja --buildtype {{ properties.buildType }} -D platform-name={{ properties.platformName }} --native-file xpacks/@micro-os-plus/build-helper/meson/toolchains/{{ properties.toolchainFileName }} --native-file platforms/{{ properties.platformName }}/meson/native.ini {{ properties.buildFolderRelativePathPosix }} .",
-      "commandMesonPrepareCross": "meson setup --backend ninja --buildtype {{ properties.buildType }} -D platform-name={{ properties.platformName }} --cross xpacks/@micro-os-plus/build-helper/meson/toolchains/{{ properties.toolchainFileName }} --cross platforms/{{ properties.platformName }}/meson/cross.ini {{ properties.buildFolderRelativePathPosix }} .",
+      "commandMesonPrepareWithToolchain": "meson setup --backend ninja --buildtype {{ properties.buildType }} -D platform-name={{ properties.platformName }} --native-file meson/toolchains/{{ properties.toolchainFileName }} --native-file platforms/{{ properties.platformName }}/meson/native.ini {{ properties.buildFolderRelativePathPosix }} .",
+      "commandMesonPrepareCross": "meson setup --backend ninja --buildtype {{ properties.buildType }} -D platform-name={{ properties.platformName }} --cross meson/toolchains/{{ properties.toolchainFileName }} --cross platforms/{{ properties.platformName }}/meson/cross.ini {{ properties.buildFolderRelativePathPosix }} .",
       "commandMesonReconfigure": "meson setup --reconfigure {{ properties.buildFolderRelativePathPosix }} .",
       "commandMesonBuild": "meson compile -C {{ properties.buildFolderRelativePathPosix }}",
       "commandMesonBuildVerbose": "meson compile -C {{ properties.buildFolderRelativePathPosix }} --verbose",
@@ -256,7 +258,8 @@
       ],
       "compute-latest-non-darwin-configs": "{% assign configs = 'native-cmake-gcc,native-meson-gcc' | split: ',' %}",
       "compute-latest-configs": "{% assign configs = 'native-cmake-clang,native-meson-clang' | split: ',' %}{% for variant in properties.qemu-cortexm-variants %}{% for builder in properties.builders %}{% assign config = 'qemu-cortex-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}{% for variant in properties.qemu-aarch32-variants %}{% for builder in properties.builders %}{% assign config = 'qemu-aarch32-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}{% for variant in properties.qemu-aarch64-variants %}{% for builder in properties.builders %}{% assign config = 'qemu-aarch64-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}{% for variant in properties.qemu-riscv-variants %}{% for builder in properties.builders %}{% assign config = 'qemu-riscv-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}",
-      "compute-all-non-darwin-configs": "{% assign configs = '' | split: '' %}{% assign native-gcc-versions = properties.native-gcc-versions | split_lines  %}{% for builder in properties.builders %}{% for version in native-gcc-versions %}{% assign config = 'native-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}",
+      "compute-latest-cmake-configs": "{% assign configs = 'native-cmake-clang' | split: ',' %}{% assign builder = 'cmake' %}{% for variant in properties.qemu-cortexm-variants %}{% assign config = 'qemu-cortex-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% for variant in properties.qemu-aarch32-variants %}{% assign config = 'qemu-aarch32-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% for variant in properties.qemu-aarch64-variants %}{% assign config = 'qemu-aarch64-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% for variant in properties.qemu-riscv-variants %}{% assign config = 'qemu-riscv-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}",
+      "compute-latest-meson-configs": "{% assign configs = 'native-meson-clang' | split: ',' %}{% assign builder = 'meson' %}{% for variant in properties.qemu-cortexm-variants %}{% assign config = 'qemu-cortex-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% for variant in properties.qemu-aarch32-variants %}{% assign config = 'qemu-aarch32-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% for variant in properties.qemu-aarch64-variants %}{% assign config = 'qemu-aarch64-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% for variant in properties.qemu-riscv-variants %}{% assign config = 'qemu-riscv-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}",        "compute-all-non-darwin-configs": "{% assign configs = '' | split: '' %}{% assign native-gcc-versions = properties.native-gcc-versions | split_lines  %}{% for builder in properties.builders %}{% for version in native-gcc-versions %}{% assign config = 'native-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}",
       "compute-all-configs": "{% assign configs = '' | split: '' %}{% assign native-clang-versions = properties.native-clang-versions | split_lines %}{% assign arm-none-eabi-gcc-versions = properties.arm-none-eabi-gcc-versions | split_lines %}{% assign riscv-none-elf-gcc-versions = properties.riscv-none-elf-gcc-versions | split_lines %}{% for builder in properties.builders %}{% for version in native-clang-versions %}{% assign config = 'native-' | append: builder | append: '-clang' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}{% for variant in properties.qemu-cortexm-variants %}{% for builder in properties.builders %}{% for version in arm-none-eabi-gcc-versions %}{% assign config = 'qemu-cortex-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}{% endfor %}{% for variant in properties.qemu-aarch32-variants %}{% for builder in properties.builders %}{% for version in arm-none-eabi-gcc-versions %}{% assign config = 'qemu-aarch32-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}{% endfor %}{% for variant in properties.qemu-aarch64-variants %}{% for builder in properties.builders %}{% for version in arm-none-eabi-gcc-versions %}{% assign config = 'qemu-aarch64-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}{% endfor %}{% for variant in properties.qemu-riscv-variants %}{% for builder in properties.builders %}{% for version in riscv-none-elf-gcc-versions %}{% assign config = 'qemu-riscv-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}{% endfor %}",
       "actions-install-for-configs": "{% for config in configs %}{% for build-type in properties.build-types %}xpm install --config {{ config }}-{{ build-type }}{{ os.EOL }}{% endfor %}{% endfor %}",
       "actions-link-dependencies-for-configs": "{% for config in configs %}{% for build-type in properties.build-types %}xpm run link-dependencies --config {{ config }}-{{ build-type }}{{ os.EOL }}{% endfor %}{% endfor %}",
@@ -273,12 +276,9 @@
         "xpm install --config {% if os.platform == 'win32' %}native-cmake-gcc-debug{% else %}native-cmake-sys-debug{% endif %}",
         "xpm install --config {% if os.platform == 'win32' %}native-cmake-gcc-release{% else %}native-cmake-sys-release{% endif %}"
       ],
-      "link-helpers": [
-        "xpm link @micro-os-plus/build-helper"
-      ],
 {% endraw %}
       "link-dependencies": [
-        "xpm link @micro-os-plus/build-helper{% if githubProjectName != 'diag-trace-xpack' %} @micro-os-plus/diag-trace{% endif %}{% if githubProjectName != 'micro-test-plus-xpack' %} @micro-os-plus/micro-test-plus{% endif %}"
+        "xpm link{% if githubProjectName != 'diag-trace-xpack' %} @micro-os-plus/diag-trace{% endif %}{% if githubProjectName != 'micro-test-plus-xpack' %} @micro-os-plus/micro-test-plus{% endif %}"
       ],
 {% raw %}
       "test": [
@@ -333,6 +333,14 @@
       "test-latest": [
         "{% if os.platform != 'darwin' %}{{ properties.compute-latest-non-darwin-configs }}{{ properties.actions-test-for-configs }}{% endif %}",
         "{{ properties.compute-latest-configs }}{{ properties.actions-test-for-configs }}"
+      ],
+      "test-latest-cmake": [
+        "{% if os.platform != 'darwin' %}{% assign configs = 'native-cmake-gcc' | split: ',' %}{{ properties.actions-test-for-configs }}{% endif %}",
+        "{{ properties.compute-latest-cmake-configs }}{{ properties.actions-test-for-configs }}"
+      ],
+      "test-latest-meson": [
+        "{% if os.platform != 'darwin' %}{% assign configs = 'native-meson-gcc' | split: ',' %}{{ properties.actions-test-for-configs }}{% endif %}",
+        "{{ properties.compute-latest-meson-configs }}{{ properties.actions-test-for-configs }}"
       ],
       "clean-latest": [
         "{% if os.platform != 'darwin' %}{{ properties.compute-latest-non-darwin-configs }}{{ properties.actions-clean-for-configs }}{% endif %}",

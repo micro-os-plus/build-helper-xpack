@@ -29,7 +29,7 @@ assert(is_variable('xpack_platform_compile_definition'), 'Define xpack_platform_
 if build_machine.system() == 'linux' or build_machine.system() == 'darwin'
 
   _local_cxx_run_result = run_command(
-    xpack_tests_folder_path + '/xpacks/@micro-os-plus/build-helper/dev-scripts/get-libraries-paths.sh',
+    xpack_tests_folder_path + '/scripts/get-libraries-paths.sh',
     cpp_compiler.cmd_array()[0],
     check: false,
     capture: true
