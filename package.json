@@ -47,9 +47,9 @@
     "https://www.npmjs.com/package/liquidjs"
   ],
   "devDependencies": {
-    "del-cli": "^6.0.0",
+    "del-cli": "^7.0.0",
     "json": "^11.0.0",
-    "liquidjs": "^10.19.1"
+    "liquidjs": "^10.25.0"
   },
   "xpack": {
     "minimumXpmRequired": "0.20.5",
