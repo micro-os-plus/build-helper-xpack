@@ -62,7 +62,7 @@ No need to add a tag here, it'll be added when the release is created.
 
 Update the`package.json` file; add an extra field in the
 pre-release field, and initially also add `.pre`,
-for example `2.17.0-pre`.
+for example `3.0.0-pre`.
 
 ### Fix possible open issues
 
@@ -70,7 +70,7 @@ Check GitHub issues and pull requests:
 
 - <https://github.com/micro-os-plus/build-helper/issues/>
 
-and fix them; assign them to a milestone (like `2.17.0`).
+and fix them; assign them to a milestone (like `3.0.0`).
 
 ### Update `README-MAINTAINER.md`
 
@@ -84,8 +84,8 @@ related to the new version:
 
 - open the `CHANGELOG.md` file
 - check if all previous fixed issues are in
-- add a new entry like _* v2.17.0_
-- commit with a message like _prepare v2.17.0_
+- add a new entry like _* v3.0.0_
+- commit with a message like _prepare v3.0.0_
 
 ### Push changes
 
@@ -132,7 +132,7 @@ When the package is considered stable:
 When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @micro-os-plus/build-helper`
-- `npm dist-tag add @micro-os-plus/build-helper@2.17.0 latest`
+- `npm dist-tag add @micro-os-plus/build-helper@3.0.0 latest`
 - `npm dist-tag ls @micro-os-plus/build-helper`
 
 ---

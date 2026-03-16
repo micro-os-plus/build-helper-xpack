@@ -1,17 +1,19 @@
 {
   "name": "@micro-os-plus/build-helper",
-  "version": "2.18.0",
+  "version": "3.0.0-pre",
   "description": "A source package to assist the µOS++ builds",
   "main": "",
+  "files": [
+    "doxygen",
+    "maintenance-scripts"
+  ],
   "scripts": {
     "generate-top-commons": "bash node_modules/@xpack/npm-packages-helper/maintenance-scripts/generate-top-commons.sh --micro-os-plus",
     "npm-install": "npm install",
     "npm-link-helpers": "npm link @xpack/npm-packages-helper @xpack/docusaurus-template-liquid",
     "npm-outdated": "npm outdated",
     "npm-pack": "npm pack",
-    "npm-version-patch": "npm version patch",
-    "npm-version-minor": "npm version minor",
-    "xpm-link": "xpm link",
+    "npm-link": "npm link",
     "git-log": "git log --pretty='%cd * %h %s' --date=short",
     "deep-clean": "del-cli node_modules xpacks package-lock.json *.tgz",
     "postversion": "git push origin --all && git push origin --tags"

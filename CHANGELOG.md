@@ -6,9 +6,60 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2026-03-16
+
+* v3.0.0
+* 7ee89e3 move support code to template
+* 9682e75 2.18.0
+
+## 2026-03-15
+
+* 3bdee46 templates project-definitions-liquid
+* aefa86a meson: use define-executables
+* f2476c4 top meson-liquid.build add xpack_project_name
+* 72300aa fix cmake parenthesis
+* 8b456c1 templates remove old
+* e056672 templates xpack_enable_*
+* 2f358c2 settings.json cmake defaultFormatter
+* 8250db7 re-format cmake files
+* 3296919 add aliases to meson platform libraries
+
+## 2026-03-13
+
+* 2201f8d generate-tests-commons.sh fix first time
+* c80f759 template rework
+* 1371bb4 tests/package-merge-liquid.json update
+* 75ed21f generate-tests-commons.sh calculate platforms
+
+## 2026-03-11
+
+* b73299e templates/package-merge-liquid.json refer npm-packages-helper
+
+## 2026-03-10
+
+* fc65cfe package*.json update
+* 39db587 maintenance-scripts: filter platforms
+* 286c25a package-merge-liquid.json: matrix strategy
+* 6401dd4 copyright 2026 update
+
+## 2025-11-20
+
+* 09cfdd0 rename npm-pack
+
+## 2025-11-19
+
+* 693c6e3 README update
+
+## 2025-10-07
+
+* 884a59c update copyright notices
+
 ## 2025-08-20
 
-* v2.17.0
+## 2025-08-20
+
+* b05d63e 2.17.0
+* 35cf689 prepare v2.17.0
 * c462d9c templates add -Wno-psabi for gcc
 * 55fb3d7 templates update copyright notices
 * 3d83c03 update copyright licenses
