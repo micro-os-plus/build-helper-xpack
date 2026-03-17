@@ -20,7 +20,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Generic")
 endif ()
 
 # -----------------------------------------------------------------------------
-# Non-target specific definitions #
+# Non-target specific definitions.
 
 # The globals must be included in this scope, before creating any targets. The
 # compile options, symbols and include folders apply to all compiled sources,
@@ -54,7 +54,7 @@ message (VERBOSE "Adding top library...")
 add_subdirectory (".." "top-bin")
 
 # -----------------------------------------------------------------------------
-# Platform specifics #
+# Platform specifics.
 
 # Add the platform specific targets and tests. For consistency, the binaries are
 # created in the `platform-bin` folder.

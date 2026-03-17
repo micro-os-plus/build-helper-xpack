@@ -23,7 +23,7 @@ project ({{packageScope}}-{{packageName}}-tests
 )
 
 # -----------------------------------------------------------------------------
-# Project wide setup #
+# Project wide setup.
 
 # Enable the languages used in the tests.
 enable_language (C)

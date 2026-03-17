@@ -34,7 +34,7 @@ project('{{packageScope}}-{{packageName}}-tests',
 # gnu++2a, gnu++20, vc++14, vc++17, vc++latest
 
 # -----------------------------------------------------------------------------
-# Project specific definitions #
+# Project specific definitions.
 
 subdir('meson/project-definitions')
 
@@ -88,7 +88,7 @@ subdir('meson/enable-all-warnings')
 subdir('platforms/'+ xpack_platform_name + '/meson/definitions')
 
 # -----------------------------------------------------------------------------
-# Dependencies #
+# Dependencies.
 
 # Set `xpack_dependencies_folders` with the platform specific dependencies.
 subdir('platforms/'+ xpack_platform_name + '/meson/dependencies-folders')
@@ -114,7 +114,7 @@ xpack_tested_library_dependency_compile_cpp_args = {{packageScope | replace: "-"
 subdir('meson/define-executables')
 
 # -----------------------------------------------------------------------------
-# Platform specifics #
+# Platform specifics.
 
 # Include the platform specific targets and tests.
 subdir('platforms/' + xpack_platform_name)

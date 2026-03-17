@@ -65,7 +65,9 @@ set (
   -fno-exceptions
   #
   # -flto fails with undefined reference to `_write', `_fstat`...
-  # $<$<CONFIG:Release>:-flto> $<$<CONFIG:MinSizeRel>:-flto>
+  # $<$<CONFIG:Release>:-flto>
+  # 
+  # $<$<CONFIG:MinSizeRel>:-flto>
   $<$<CONFIG:Debug>:-fno-omit-frame-pointer>
   # ... libs-c/src/stdlib/exit.c:132:46
   # $<$<CXX_COMPILER_ID:GNU>:-Wno-missing-attributes>
