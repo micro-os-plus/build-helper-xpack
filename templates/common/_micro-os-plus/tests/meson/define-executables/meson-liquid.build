@@ -63,11 +63,11 @@ foreach test : tests
 
   _local_compile_c_args += xpack_tested_library_dependency_compile_c_args
   _local_compile_cpp_args += xpack_tested_library_dependency_compile_cpp_args
+{%- if packageScopedName != '@micro-os-plus/micro-test-plus' %}
 
-  if xpack_project_name != 'micro-test-plus'
-    _local_compile_c_args += micro_os_plus_micro_test_plus_dependency_compile_c_args
-    _local_compile_cpp_args += micro_os_plus_micro_test_plus_dependency_compile_cpp_args
-  endif
+  _local_compile_c_args += micro_os_plus_micro_test_plus_dependency_compile_c_args
+  _local_compile_cpp_args += micro_os_plus_micro_test_plus_dependency_compile_cpp_args
+{%- endif %}
 
   # _local_compile_c_args += micro_os_plus_diag_trace_dependency_compile_c_args
   # _local_compile_cpp_args += micro_os_plus_diag_trace_dependency_compile_cpp_args

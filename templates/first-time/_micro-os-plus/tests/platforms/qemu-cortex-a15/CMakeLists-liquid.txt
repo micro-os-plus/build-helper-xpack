@@ -15,10 +15,10 @@
 
 # -----------------------------------------------------------------------------
 
-message (VERBOSE "Processing 'tests/platforms/qemu-cortex-m4f'...")
+message (VERBOSE "Processing 'tests/platforms/qemu-cortex-a15'...")
 
 include ("cmake/platform-library.cmake")
-
+{% if packageScopedName == '@micro-os-plus/micro-test-plus' %}
 # -----------------------------------------------------------------------------
 
 if (XPACK_ENABLE_MINIMAL_TEST)
@@ -30,12 +30,13 @@ if (XPACK_ENABLE_MINIMAL_TEST)
   add_test (
     NAME "minimal-test"
     COMMAND
-      qemu-system-arm${extension} --machine mps2-an386 --cpu cortex-m4 --kernel
-      minimal-test.elf --nographic -d unimp,guest_errors --semihosting-config
+      qemu-system-arm${extension} --machine virt --cpu cortex-a15 --kernel
+      minimal-test.elf --nographic -smp 1 -d unimp,guest_errors
+      --semihosting-config
       enable=on,target=native,arg=minimal-test,arg=one,arg=two
   )
 endif ()
-
+{% endif %}
 # -----------------------------------------------------------------------------
 
 if (XPACK_ENABLE_SAMPLE_TEST)
@@ -47,8 +48,9 @@ if (XPACK_ENABLE_SAMPLE_TEST)
   add_test (
     NAME "sample-test"
     COMMAND
-      qemu-system-arm${extension} --machine mps2-an386 --cpu cortex-m4 --kernel
-      sample-test.elf --nographic -d unimp,guest_errors --semihosting-config
+      qemu-system-arm${extension} --machine virt --cpu cortex-a15 --kernel
+      sample-test.elf --nographic -smp 1 -d unimp,guest_errors
+      --semihosting-config
       enable=on,target=native,arg=sample-test,arg=one,arg=two
   )
 endif ()
@@ -64,10 +66,9 @@ if (XPACK_ENABLE_UNIT_TEST)
   add_test (
     NAME "unit-test"
     COMMAND
-      qemu-system-arm${extension} --machine mps2-an386 --cpu cortex-m4 --kernel
-      unit-test.elf --nographic -d unimp,guest_errors --semihosting-config
-      enable=on,target=native,arg=unit-test
-    # --semihosting-config arg=--verbose
+      qemu-system-arm${extension} --machine virt --cpu cortex-a15 --kernel
+      unit-test.elf --nographic -smp 1 -d unimp,guest_errors
+      --semihosting-config enable=on,target=native,arg=unit-test
   )
 endif ()
 

@@ -15,10 +15,10 @@
 
 # -----------------------------------------------------------------------------
 
-message (VERBOSE "Processing 'tests/platforms/qemu-riscv-rv64imafdc'...")
+message (VERBOSE "Processing 'tests/platforms/qemu-cortex-m3'...")
 
 include ("cmake/platform-library.cmake")
-
+{% if packageScopedName == '@micro-os-plus/micro-test-plus' %}
 # -----------------------------------------------------------------------------
 
 if (XPACK_ENABLE_MINIMAL_TEST)
@@ -30,13 +30,12 @@ if (XPACK_ENABLE_MINIMAL_TEST)
   add_test (
     NAME "minimal-test"
     COMMAND
-      qemu-system-riscv64${extension} --machine virt --cpu rv64 --kernel
-      minimal-test.elf -smp 1 -bios none --nographic -d unimp,guest_errors
-      --semihosting-config
+      qemu-system-arm${extension} --machine mps2-an385 --cpu cortex-m3 --kernel
+      minimal-test.elf --nographic -d unimp,guest_errors --semihosting-config
       enable=on,target=native,arg=minimal-test,arg=one,arg=two
   )
 endif ()
-
+{% endif %}
 # -----------------------------------------------------------------------------
 
 if (XPACK_ENABLE_SAMPLE_TEST)
@@ -48,9 +47,8 @@ if (XPACK_ENABLE_SAMPLE_TEST)
   add_test (
     NAME "sample-test"
     COMMAND
-      qemu-system-riscv64${extension} --machine virt --cpu rv64 --kernel
-      sample-test.elf -smp 1 -bios none --nographic -d unimp,guest_errors
-      --semihosting-config
+      qemu-system-arm${extension} --machine mps2-an385 --cpu cortex-m3 --kernel
+      sample-test.elf --nographic -d unimp,guest_errors --semihosting-config
       enable=on,target=native,arg=sample-test,arg=one,arg=two
   )
 endif ()
@@ -66,9 +64,10 @@ if (XPACK_ENABLE_UNIT_TEST)
   add_test (
     NAME "unit-test"
     COMMAND
-      qemu-system-riscv64${extension} --machine virt --cpu rv64 --kernel
-      unit-test.elf --nographic -smp 1 -bios none -d unimp,guest_errors
-      --semihosting-config enable=on,target=native,arg=unit-test
+      qemu-system-arm${extension} --machine mps2-an385 --cpu cortex-m3 --kernel
+      unit-test.elf --nographic -d unimp,guest_errors --semihosting-config
+      enable=on,target=native,arg=unit-test
+    # --semihosting-config arg=--verbose
   )
 endif ()
 

@@ -35,11 +35,10 @@
     "minimumXpmRequired": "0.23.2",
     "$dependenciesUrls": {
       "micro-os-plus": "https://github.com/micro-os-plus",
-      "build-helper": "https://www.npmjs.com/package/@micro-os-plus/build-helper",
-{% if githubProjectName != "diag-trace-xpack" %}
+{% if packageScopedName != '@micro-os-plus/diag-trace' %}
       "diag-trace": "https://www.npmjs.com/package/@micro-os-plus/diag-trace",
 {% endif %}
-{% if githubProjectName != "micro-test-plus-xpack" %}
+{% if packageScopedName != '@micro-os-plus/micro-test-plus' %}
       "micro-test-plus": "https://www.npmjs.com/package/@micro-os-plus/micro-test-plus",
 {% endif %}
       "xpack-dev-tools": "https://github.com/xpack-dev-tools",
@@ -49,10 +48,10 @@
     },
     "dependencies": {},
     "devDependencies": {
-{% if githubProjectName != "diag-trace-xpack" %}
+{% if packageScopedName != '@micro-os-plus/diag-trace' %}
       "@micro-os-plus/diag-trace": "^4.2.2",
 {% endif %}
-{% if githubProjectName != "micro-test-plus-xpack" %}
+{% if packageScopedName != '@micro-os-plus/micro-test-plus' %}
       "@micro-os-plus/micro-test-plus": "^3.2.2",
 {% endif %}
       "@xpack-dev-tools/cmake": "3.31.9-1.1",
@@ -278,7 +277,7 @@
       ],
 {% endraw %}
       "link-dependencies": [
-        "xpm link{% if githubProjectName != 'diag-trace-xpack' %} @micro-os-plus/diag-trace{% endif %}{% if githubProjectName != 'micro-test-plus-xpack' %} @micro-os-plus/micro-test-plus{% endif %}"
+        "xpm link{% if packageScopedName != '@micro-os-plus/diag-trace' %} @micro-os-plus/diag-trace{% endif %}{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}"
       ],
 {% raw %}
       "test": [

@@ -30,8 +30,9 @@ function (target_link_native_test_libraries name library_name)
             micro-os-plus::{{packageName}}
             # Portable dependencies.
             micro-os-plus::diag-trace
+            {% if packageScopedName == '@micro-os-plus/micro-test-plus' %}# {% endif %}micro-os-plus::micro-test-plus
             # Platform specific dependencies and common compile/link options.
-            micro-os-plus::platform
+            micro-os-plus::platform # bring device & architecture too
   )
 endfunction ()
 
@@ -48,6 +49,7 @@ function (target_link_cross_test_libraries name library_name)
             micro-os-plus::{{packageName}}
             # Portable dependencies.
             micro-os-plus::diag-trace
+            {% if packageScopedName == '@micro-os-plus/micro-test-plus' %}# {% endif %}micro-os-plus::micro-test-plus
             # Platform specific dependencies.
             micro-os-plus::platform # bring device & architecture too
             micro-os-plus::semihosting
