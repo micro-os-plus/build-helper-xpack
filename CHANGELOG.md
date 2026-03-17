@@ -6,9 +6,19 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2026-03-17
+
+* v3.0.1
+* a8f95f0 templates cosmetics
+* c481dd8 more conditionals in platforms
+
 ## 2026-03-16
 
-* v3.0.0
+* 7df349b package*.json bump deps
+* 81b9f48 test-ci.yml update
+* 736517c 3.0.0
+* 79db9c5 README update
+* bd99d5d prepare v3.0.0
 * 7ee89e3 move support code to template
 * 9682e75 2.18.0
 
