@@ -22,7 +22,7 @@ xpack_dependencies_project_folders = []
 # Each test has its own library. Add only those enabled.
 {%- for testName in packageTestsConfig.tests %}
 if xpack_enable_{{ testName }}_test
-  xpack_dependencies_project_folders += [ '{{ testName }}-test' ]
+  xpack_dependencies_project_folders += [ 'sources/{{ testName }}-test' ]
 endif
 {% endfor %}
 # -----------------------------------------------------------------------------

@@ -23,7 +23,7 @@ set (xpack_dependencies_project_folders)
 {%- for testName in packageTestsConfig.tests %}
 if (XPACK_ENABLE_{{ testName | upcase }}_TEST)
   list (APPEND xpack_dependencies_project_folders
-        "${CMAKE_SOURCE_DIR}/{{ testName }}-test"
+        "${CMAKE_SOURCE_DIR}/sources/{{ testName }}-test"
   )
 endif ()
 {% endfor %}
