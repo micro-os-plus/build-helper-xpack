@@ -41,7 +41,7 @@ target_compile_definitions (
 )
 
 set (
-  global_common_options
+  xpack_global_common_options
   -fmessage-length=0
   -fsigned-char
   # These are used in conjunction with linker `--gc-sections`.
@@ -56,8 +56,8 @@ set (
 xpack_set_all_compiler_warnings (all_warnings)
 
 target_compile_options (
-  micro-os-plus-common-options-interface INTERFACE ${global_common_options}
-                                                   ${all_warnings}
+  micro-os-plus-common-options-interface
+  INTERFACE ${xpack_global_common_options} ${all_warnings}
 )
 
 target_include_directories (
@@ -66,8 +66,8 @@ target_include_directories (
 
 # When `-flto` is used, the compile options must be passed to the linker too.
 target_link_options (
-  micro-os-plus-common-options-interface INTERFACE ${global_common_options}
-  $<$<CONFIG:Debug>:-v>
+  micro-os-plus-common-options-interface INTERFACE
+  ${xpack_global_common_options} $<$<CONFIG:Debug>:-v>
 )
 
 if (COMMAND xpack_display_target_lists)
