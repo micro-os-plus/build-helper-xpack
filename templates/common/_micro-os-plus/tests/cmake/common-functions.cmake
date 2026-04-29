@@ -20,6 +20,16 @@ message (VERBOSE "Including tests/cmake/common-functions.cmake...")
 
 # -----------------------------------------------------------------------------
 
+if (NOT CMAKE_SIZE)
+  set (CMAKE_SIZE "size")
+endif ()
+
+if (NOT CMAKE_OBJDUMP)
+  set (CMAKE_OBJDUMP "objdump")
+endif ()
+
+# -----------------------------------------------------------------------------
+
 function (add_native_test_executable name)
   add_executable (${name})
 
@@ -31,6 +41,16 @@ function (add_native_test_executable name)
     ${name} PRIVATE
     $<$<PLATFORM_ID:Linux,Windows>:-Wl,-Map,platform-bin/${name}-map.txt> # -v
   )
+
+  # TODO use add_custom_target()
+  # https://cmake.org/cmake/help/v3.20/command/add_custom_command.html
+  if (XPACK_ENABLE_REPORT_SIZE)
+    add_custom_command (
+      TARGET ${name}
+      POST_BUILD
+      COMMAND ${CMAKE_SIZE} "$<TARGET_FILE:${name}>"
+    )
+  endif ()
 
   if (XPACK_ENABLE_CREATE_LISTING)
     add_custom_command (
@@ -83,6 +103,23 @@ function (add_cross_test_executable name)
       VERBATIM
     )
   endif ()
+endfunction ()
+
+# -----------------------------------------------------------------------------
+
+function (add_compile_coverage_options target)
+  target_compile_options (
+    ${target}
+    PRIVATE $<$<CXX_COMPILER_ID:Clang,AppleClang>:-fprofile-instr-generate
+            -fcoverage-mapping -fcoverage-mcdc>
+  )
+endfunction ()
+
+function (add_link_coverage_options target)
+  target_link_options (
+    ${target} PRIVATE
+    $<$<CXX_COMPILER_ID:Clang,AppleClang>:-fprofile-instr-generate>
+  )
 endfunction ()
 
 # -----------------------------------------------------------------------------
