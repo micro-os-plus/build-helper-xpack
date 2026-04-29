@@ -49,10 +49,10 @@
     "dependencies": {},
     "devDependencies": {
 {% if packageScopedName != '@micro-os-plus/diag-trace' %}
-      "@micro-os-plus/diag-trace": "^4.2.2",
+      "@micro-os-plus/diag-trace": "^4.2.3",
 {% endif %}
 {% if packageScopedName != '@micro-os-plus/micro-test-plus' %}
-      "@micro-os-plus/micro-test-plus": "^3.3.0",
+      "@micro-os-plus/micro-test-plus": "^3.3.1",
 {% endif %}
       "@xpack-dev-tools/cmake": "3.31.9-1.1",
       "@xpack-dev-tools/meson-build": "1.8.5-1.1",
@@ -85,6 +85,7 @@
         "native-meson-clang",
         "qemu-cortex-m0-cmake-gcc",
         "qemu-cortex-m7f-cmake-gcc",
+        "qemu-aarch64-a72-cmake-gcc",
         "qemu-riscv-rv32imac-cmake-gcc",
         "qemu-cortex-m0-meson-gcc"
       ],
