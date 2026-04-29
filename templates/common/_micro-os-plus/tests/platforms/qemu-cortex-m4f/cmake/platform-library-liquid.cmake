@@ -33,19 +33,19 @@ endif ()
 # -----------------------------------------------------------------------------
 
 # Define the platform library.
-add_library (platform-qemu-cortex-m3-interface INTERFACE EXCLUDE_FROM_ALL)
+add_library (platform-qemu-cortex-m4f-interface INTERFACE EXCLUDE_FROM_ALL)
 
 target_include_directories (
-  platform-qemu-cortex-m3-interface
+  platform-qemu-cortex-m4f-interface
   INTERFACE # This file is included from the tests folder.
             "include"
 )
 
-target_sources (platform-qemu-cortex-m3-interface INTERFACE # None.
+target_sources (platform-qemu-cortex-m4f-interface INTERFACE # None.
 )
 
 target_compile_definitions (
-  platform-qemu-cortex-m3-interface
+  platform-qemu-cortex-m4f-interface
   INTERFACE
     "${xpack_platform_compile_definition}"
     # Full POSIX conformance:
@@ -57,9 +57,10 @@ target_compile_definitions (
 
 set (
   xpack_platform_common_args
-  -mcpu=cortex-m3
+  -mcpu=cortex-m4
   -mthumb
-  -mfloat-abi=soft
+  # -mfloat-abi=soft
+  -mfloat-abi=hard
   # -fno-move-loop-invariants
   #
   # Embedded builds must be warning free.
@@ -78,12 +79,21 @@ set (
 )
 
 target_compile_options (
-  platform-qemu-cortex-m3-interface INTERFACE ${xpack_platform_common_args}
+  platform-qemu-cortex-m4f-interface INTERFACE ${xpack_platform_common_args}
+)
+
+# The OBJECTS are compiled before the platform library, so they need to get the
+# same compile options.
+target_compile_options (
+  {{packageScope}}-{{packageName}}-objects
+  PRIVATE
+    $<TARGET_PROPERTY:micro-os-plus-common-options-interface,INTERFACE_COMPILE_OPTIONS>
+    ${xpack_platform_common_args}
 )
 
 # When `-flto` is used, the compile options must be passed to the linker too.
 target_link_options (
-  platform-qemu-cortex-m3-interface
+  platform-qemu-cortex-m4f-interface
   INTERFACE
   #
   # -v
@@ -105,34 +115,34 @@ target_link_options (
   -Wl,--gc-sections
   # Including files from other packages is not very nice, but functional. Use
   # absolute paths, otherwise set -L.
-  -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/devices-qemu-cortexm/linker-scripts/mem-mps2-an385.ld
+  -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/devices-qemu-cortexm/linker-scripts/mem-mps2-an386.ld
   -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-cortexm/linker-scripts/sections-flash.ld
   # -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-cortexm/linker-scripts/sections-ram.ld
 )
 
 if ("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "12.0.0")
   target_link_options (
-    platform-qemu-cortex-m3-interface INTERFACE
+    platform-qemu-cortex-m4f-interface INTERFACE
     # .elf has a LOAD segment with RWX permissions (GCC 12)
     -Wl,--no-warn-rwx-segment
   )
 endif ()
 
 target_link_libraries (
-  platform-qemu-cortex-m3-interface
+  platform-qemu-cortex-m4f-interface
   INTERFACE micro-os-plus::devices-qemu-cortexm micro-os-plus::startup
 )
 
 if (COMMAND xpack_display_target_lists)
-  xpack_display_target_lists (platform-qemu-cortex-m3-interface)
+  xpack_display_target_lists (platform-qemu-cortex-m4f-interface)
 endif ()
 
 # -----------------------------------------------------------------------------
 
 # Aliases.
-add_library (micro-os-plus::platform ALIAS platform-qemu-cortex-m3-interface)
+add_library (micro-os-plus::platform ALIAS platform-qemu-cortex-m4f-interface)
 message (VERBOSE
-         "> micro-os-plus::platform -> platform-qemu-cortex-m3-interface"
+         "> micro-os-plus::platform -> platform-qemu-cortex-m4f-interface"
 )
 
 # -----------------------------------------------------------------------------

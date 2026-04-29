@@ -33,17 +33,19 @@ endif ()
 # -----------------------------------------------------------------------------
 
 # Define the platform library.
-add_library (platform-qemu-cortex-m7f-interface INTERFACE EXCLUDE_FROM_ALL)
-
-target_include_directories (
-  platform-qemu-cortex-m7f-interface INTERFACE "include"
+add_library (
+  platform-qemu-riscv-rv64imafdc-interface INTERFACE EXCLUDE_FROM_ALL
 )
 
-target_sources (platform-qemu-cortex-m7f-interface INTERFACE # None.
+target_include_directories (
+  platform-qemu-riscv-rv64imafdc-interface INTERFACE "include"
+)
+
+target_sources (platform-qemu-riscv-rv64imafdc-interface INTERFACE # None.
 )
 
 target_compile_definitions (
-  platform-qemu-cortex-m7f-interface
+  platform-qemu-riscv-rv64imafdc-interface
   INTERFACE
     "${xpack_platform_compile_definition}"
     # Full POSIX conformance:
@@ -55,15 +57,22 @@ target_compile_definitions (
 
 set (
   xpack_platform_common_args
-  -mcpu=cortex-m7
-  -mthumb
-  # -mfloat-abi=soft
-  -mfloat-abi=hard
+  # https://gcc.gnu.org/onlinedocs/gcc/RISC-V-Options.html
+  # Do not use rv64gc, the compiler does not match it as rv64imafdc.
+  -march=rv64imafdc_zicsr
+  -mabi=lp64d
+  -mcmodel=medany
+  -msmall-data-limit=8
+  # -mno-save-restore
+  #
   # -fno-move-loop-invariants
+  -fno-exceptions # it fails at run-time.
   #
   # Embedded builds must be warning free.
   -Werror
-  # -flto fails to run on QEMU. $<$<CONFIG:Release>:-flto>
+  # (.text._write_r+0x14): undefined reference to `_write'
+  # (.text._write_r+0x14): relocation truncated to fit: R_RISCV_GPREL_I against
+  # undefined symbol `_write' $<$<CONFIG:Release>:-flto>
   # $<$<CONFIG:MinSizeRel>:-flto>
   $<$<CONFIG:Debug>:-fno-omit-frame-pointer>
   # ... libs-c/src/stdlib/exit.c:132:46
@@ -77,58 +86,70 @@ set (
 )
 
 target_compile_options (
-  platform-qemu-cortex-m7f-interface INTERFACE ${xpack_platform_common_args}
+  platform-qemu-riscv-rv64imafdc-interface
+  INTERFACE ${xpack_platform_common_args}
+)
+
+# The OBJECTS are compiled before the platform library, so they need to get the
+# same compile options.
+target_compile_options (
+  {{packageScope}}-{{packageName}}-objects
+  PRIVATE
+    $<TARGET_PROPERTY:micro-os-plus-common-options-interface,INTERFACE_COMPILE_OPTIONS>
+    ${xpack_platform_common_args}
 )
 
 # When `-flto` is used, the compile options must be passed to the linker too.
 target_link_options (
-  platform-qemu-cortex-m7f-interface
+  platform-qemu-riscv-rv64imafdc-interface
   INTERFACE
   #
   # -v
   #
   ${xpack_platform_common_args}
   -nostartfiles
-  # --specs=rdimon.specs -Wl,--start-group -lgcc -lc -lc -lm -lrdimon
-  # -Wl,--end-group
   #
   # Force the linker to keep the interrupt vectors which otherwise are not
   # referred from anywhere.
   #
-  # -u_interrupt_vectors nano has no  exceptions.
+  # -u_interrupt_vectors
+  #
+  # nano has no exceptions.
   #
   # -specs=nano.specs
   -Wl,--gc-sections
   # Including files from other packages is not very nice, but functional. Use
   # absolute paths, otherwise set -L.
-  -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/devices-qemu-cortexm/linker-scripts/mem-mps2-an500.ld
-  -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-cortexm/linker-scripts/sections-flash.ld
-  # -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-cortexm/linker-scripts/sections-ram.ld
+  -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/devices-qemu-riscv/linker-scripts/mem-virt-rv64.ld
+  # -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-riscv/linker-scripts/sections-flash.ld
+  -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-riscv/linker-scripts/sections-ram.ld
 )
 
 if ("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "12.0.0")
   target_link_options (
-    platform-qemu-cortex-m7f-interface INTERFACE
+    platform-qemu-riscv-rv64imafdc-interface INTERFACE
     # .elf has a LOAD segment with RWX permissions (GCC 12)
     -Wl,--no-warn-rwx-segment
   )
 endif ()
 
 target_link_libraries (
-  platform-qemu-cortex-m7f-interface
-  INTERFACE micro-os-plus::devices-qemu-cortexm micro-os-plus::startup
+  platform-qemu-riscv-rv64imafdc-interface
+  INTERFACE micro-os-plus::devices-qemu-riscv micro-os-plus::startup
 )
 
 if (COMMAND xpack_display_target_lists)
-  xpack_display_target_lists (platform-qemu-cortex-m7f-interface)
+  xpack_display_target_lists (platform-qemu-riscv-rv64imafdc-interface)
 endif ()
 
 # -----------------------------------------------------------------------------
 
 # Aliases.
-add_library (micro-os-plus::platform ALIAS platform-qemu-cortex-m7f-interface)
+add_library (
+  micro-os-plus::platform ALIAS platform-qemu-riscv-rv64imafdc-interface
+)
 message (VERBOSE
-         "> micro-os-plus::platform -> platform-qemu-cortex-m7f-interface"
+         "> micro-os-plus::platform -> platform-qemu-riscv-rv64imafdc-interface"
 )
 
 # -----------------------------------------------------------------------------

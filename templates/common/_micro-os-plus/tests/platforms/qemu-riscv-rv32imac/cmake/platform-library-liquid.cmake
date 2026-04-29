@@ -62,7 +62,7 @@ set (
   -mcmodel=medany
   -msmall-data-limit=8
   # -mno-save-restore
-  -fno-exceptions
+  -fno-exceptions # it fails at run-time.
   #
   # -fno-move-loop-invariants
   #
@@ -86,6 +86,15 @@ set (
 target_compile_options (
   platform-qemu-riscv-rv32imac-interface
   INTERFACE ${xpack_platform_common_args}
+)
+
+# The OBJECTS are compiled before the platform library, so they need to get the
+# same compile options.
+target_compile_options (
+  {{packageScope}}-{{packageName}}-objects
+  PRIVATE
+    $<TARGET_PROPERTY:micro-os-plus-common-options-interface,INTERFACE_COMPILE_OPTIONS>
+    ${xpack_platform_common_args}
 )
 
 # When `-flto` is used, the compile options must be passed to the linker too.

@@ -81,7 +81,7 @@ else
 endif
 
 _local_compile_cpp_args += [
-  '-fno-exceptions', # !!!
+  '-fno-exceptions', # it fails at run-time.
   # '-fno-rtti',
   # '-fno-use-cxa-atexit',
   '-fno-threadsafe-statics',

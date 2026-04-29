@@ -33,17 +33,17 @@ endif ()
 # -----------------------------------------------------------------------------
 
 # Define the platform library.
-add_library (platform-qemu-cortex-a15-interface INTERFACE EXCLUDE_FROM_ALL)
+add_library (platform-qemu-cortex-m7f-interface INTERFACE EXCLUDE_FROM_ALL)
 
 target_include_directories (
-  platform-qemu-cortex-a15-interface INTERFACE "include"
+  platform-qemu-cortex-m7f-interface INTERFACE "include"
 )
 
-target_sources (platform-qemu-cortex-a15-interface INTERFACE # None.
+target_sources (platform-qemu-cortex-m7f-interface INTERFACE # None.
 )
 
 target_compile_definitions (
-  platform-qemu-cortex-a15-interface
+  platform-qemu-cortex-m7f-interface
   INTERFACE
     "${xpack_platform_compile_definition}"
     # Full POSIX conformance:
@@ -55,15 +55,15 @@ target_compile_definitions (
 
 set (
   xpack_platform_common_args
-  # https://gcc.gnu.org/onlinedocs/gcc-11.3.0/gcc/ARM-Options.html#ARM-Options
-  -mcpu=cortex-a15
+  -mcpu=cortex-m7
+  -mthumb
+  # -mfloat-abi=soft
+  -mfloat-abi=hard
   # -fno-move-loop-invariants
   #
   # Embedded builds must be warning free.
   -Werror
-  # -flto fails with undefined reference to `_write', `_fstat`...
-  # $<$<CONFIG:Release>:-flto>
-  #
+  # -flto fails to run on QEMU. $<$<CONFIG:Release>:-flto>
   # $<$<CONFIG:MinSizeRel>:-flto>
   $<$<CONFIG:Debug>:-fno-omit-frame-pointer>
   # ... libs-c/src/stdlib/exit.c:132:46
@@ -77,61 +77,67 @@ set (
 )
 
 target_compile_options (
-  platform-qemu-cortex-a15-interface INTERFACE ${xpack_platform_common_args}
+  platform-qemu-cortex-m7f-interface INTERFACE ${xpack_platform_common_args}
+)
+
+# The OBJECTS are compiled before the platform library, so they need to get the
+# same compile options.
+target_compile_options (
+  {{packageScope}}-{{packageName}}-objects
+  PRIVATE
+    $<TARGET_PROPERTY:micro-os-plus-common-options-interface,INTERFACE_COMPILE_OPTIONS>
+    ${xpack_platform_common_args}
 )
 
 # When `-flto` is used, the compile options must be passed to the linker too.
 target_link_options (
-  platform-qemu-cortex-a15-interface
+  platform-qemu-cortex-m7f-interface
   INTERFACE
   #
   # -v
   #
   ${xpack_platform_common_args}
   -nostartfiles
-  #
   # --specs=rdimon.specs -Wl,--start-group -lgcc -lc -lc -lm -lrdimon
   # -Wl,--end-group
   #
   # Force the linker to keep the interrupt vectors which otherwise are not
   # referred from anywhere.
   #
-  # -u_interrupt_vectors
-  #
-  # nano has no exceptions.
+  # -u_interrupt_vectors nano has no  exceptions.
   #
   # -specs=nano.specs
   -Wl,--gc-sections
   # Including files from other packages is not very nice, but functional. Use
   # absolute paths, otherwise set -L.
-  -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/devices-qemu-aarch32/linker-scripts/mem-cortex-a15.ld
-  # -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-aarch32/linker-scripts/sections-flash.ld
-  -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-aarch32/linker-scripts/sections-ram.ld
+  -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/devices-qemu-cortexm/linker-scripts/mem-mps2-an500.ld
+  -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-cortexm/linker-scripts/sections-flash.ld
+  # -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-cortexm/linker-scripts/sections-ram.ld
 )
 
 if ("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "12.0.0")
   target_link_options (
-    platform-qemu-cortex-a15-interface INTERFACE
+    platform-qemu-cortex-m7f-interface INTERFACE
     # .elf has a LOAD segment with RWX permissions (GCC 12)
     -Wl,--no-warn-rwx-segment
   )
 endif ()
 
 target_link_libraries (
-  platform-qemu-cortex-a15-interface
-  INTERFACE micro-os-plus::devices-qemu-aarch32 micro-os-plus::startup
+  platform-qemu-cortex-m7f-interface
+  INTERFACE micro-os-plus::devices-qemu-cortexm micro-os-plus::startup
 )
 
 if (COMMAND xpack_display_target_lists)
-  xpack_display_target_lists (platform-qemu-cortex-a15-interface)
+  xpack_display_target_lists (platform-qemu-cortex-m7f-interface)
 endif ()
 
 # -----------------------------------------------------------------------------
 
 # Aliases.
-add_library (micro-os-plus::platform ALIAS platform-qemu-cortex-a15-interface)
+add_library (micro-os-plus::platform ALIAS platform-qemu-cortex-m7f-interface)
 message (VERBOSE
-         "> micro-os-plus::platform -> platform-qemu-cortex-a15-interface"
+         "> micro-os-plus::platform -> platform-qemu-cortex-m7f-interface"
 )
 
 # -----------------------------------------------------------------------------

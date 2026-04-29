@@ -48,13 +48,13 @@ returned by `SEMIHOSTING_SYS_HEAPINFO`.
 To run tests, pass the ELF file and the arguments:
 
 ```sh
-qemu-system-arm --machine mps2-an365 --cpu cortex-m3 --nographic -d unimp,guest_errors --kernel "unit-test.elf" --semihosting-config enable=on,target=native,arg=unit-test
+qemu-system-arm --machine mps2-an365 --cpu cortex-m3 --nographic -d unimp,guest_errors --kernel "unit-test.elf" --semihosting-config enable=on,target=native,arg=unit-test,arg=--reporter,arg=human
 ```
 
 For debug sessions start QEMU in GDB server mode by passing both `-s -S`:
 
 ```sh
-qemu-system-arm --machine mps2-an5365 --cpu cortex-m3 --nographic -d unimp,guest_errors -s -S --semihosting-config enable=on,target=native,arg=test
+qemu-system-arm --machine mps2-an5365 --cpu cortex-m3 --nographic -d unimp,guest_errors -s -S --semihosting-config enable=on,target=native,arg=unit-test,arg=--reporter,arg=human
 ```
 
 ## Links

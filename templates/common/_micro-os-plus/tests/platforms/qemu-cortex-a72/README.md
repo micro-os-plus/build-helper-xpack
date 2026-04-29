@@ -55,13 +55,13 @@ calling the `_start()` function.
 To run tests, pass the ELF file and the arguments:
 
 ```sh
-qemu-system-aarch64 --machine virt --cpu cortex-a72 --nographic -smp 1 -d unimp,guest_errors --kernel "unit-test.elf" --semihosting-config enable=on,target=native,arg=unit-test
+qemu-system-aarch64 --machine virt --cpu cortex-a72 --nographic -smp 1 -d unimp,guest_errors --kernel "unit-test.elf" --semihosting-config enable=on,target=native,arg=unit-test,arg=--reporter,arg=human
 ```
 
 For debug sessions start QEMU in GDB server mode by passing both `-s -S`:
 
 ```sh
-qemu-system-aarch64 --machine virt --cpu cortex-a72 --nographic -smp 1 -d unimp,guest_errors -s -S --semihosting-config enable=on,target=native,arg=test
+qemu-system-aarch64 --machine virt --cpu cortex-a72 --nographic -smp 1 -d unimp,guest_errors -s -S --semihosting-config enable=on,target=native,arg=unit-test,arg=--reporter,arg=human
 ```
 
 ## Links

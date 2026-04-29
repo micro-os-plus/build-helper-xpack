@@ -36,9 +36,8 @@ endif ()
 if (CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "Darwin")
   # On non-Windows, get the actual libraries paths by asking the compiler.
   execute_process (
-    COMMAND
-      "${CMAKE_SOURCE_DIR}/scripts/get-libraries-paths.sh"
-      ${CMAKE_CXX_COMPILER}
+    COMMAND "${CMAKE_SOURCE_DIR}/scripts/get-libraries-paths.sh"
+            ${CMAKE_CXX_COMPILER}
     OUTPUT_VARIABLE cxx_library_path
     OUTPUT_STRIP_TRAILING_WHITESPACE
   )
@@ -144,6 +143,15 @@ target_compile_options (
   platform-native-interface INTERFACE ${xpack_platform_common_args}
 )
 
+# The OBJECTS are compiled before the platform library, so they need to get the
+# same compile options.
+target_compile_options (
+  {{packageScope}}-{{packageName}}-objects
+  PRIVATE
+    $<TARGET_PROPERTY:micro-os-plus-common-options-interface,INTERFACE_COMPILE_OPTIONS>
+    ${xpack_platform_common_args}
+)
+
 # On macOS, GCC 11 gets confused. dyld[72401]: Symbol not found:
 # (__ZNKSt3_V214error_category10_M_messageB5cxx11Ei)
 target_link_options (
@@ -154,8 +162,8 @@ target_link_options (
   #
   # -v
   #
-  # On Windows configuring the path to access the compiler DLLs is tedious,
-  # it is much easier to build everything static.
+  # On Windows configuring the path to access the compiler DLLs is tedious, it
+  # is much easier to build everything static.
   $<$<PLATFORM_ID:Windows>:-static>
   # Once -rpath is configured properly, there is no need for statics.
   # $<$<AND:$<C_COMPILER_ID:GNU>,$<PLATFORM_ID:Darwin>>:-static-libgcc>
