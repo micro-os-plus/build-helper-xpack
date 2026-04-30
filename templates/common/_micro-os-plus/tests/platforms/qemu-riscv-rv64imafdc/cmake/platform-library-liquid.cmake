@@ -89,7 +89,7 @@ target_compile_options (
   platform-qemu-riscv-rv64imafdc-interface
   INTERFACE ${xpack_platform_common_args}
 )
-
+{% if packageConfig.hasObjectLibrary == "true" %}
 # The OBJECTS are compiled before the platform library, so they need to get the
 # same compile options.
 target_compile_options (
@@ -98,7 +98,7 @@ target_compile_options (
     $<TARGET_PROPERTY:micro-os-plus-common-options-interface,INTERFACE_COMPILE_OPTIONS>
     ${xpack_platform_common_args}
 )
-
+{% endif %}
 # When `-flto` is used, the compile options must be passed to the linker too.
 target_link_options (
   platform-qemu-riscv-rv64imafdc-interface

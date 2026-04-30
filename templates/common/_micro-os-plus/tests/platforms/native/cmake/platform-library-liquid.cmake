@@ -142,7 +142,7 @@ endif ()
 target_compile_options (
   platform-native-interface INTERFACE ${xpack_platform_common_args}
 )
-
+{% if packageConfig.hasObjectLibrary == "true" %}
 # The OBJECTS are compiled before the platform library, so they need to get the
 # same compile options.
 target_compile_options (
@@ -151,7 +151,7 @@ target_compile_options (
     $<TARGET_PROPERTY:micro-os-plus-common-options-interface,INTERFACE_COMPILE_OPTIONS>
     ${xpack_platform_common_args}
 )
-
+{% endif %}
 # On macOS, GCC 11 gets confused. dyld[72401]: Symbol not found:
 # (__ZNKSt3_V214error_category10_M_messageB5cxx11Ei)
 target_link_options (
