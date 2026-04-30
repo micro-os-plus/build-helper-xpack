@@ -35,7 +35,8 @@
   "cmake.ignoreCMakeListsMissing": true,
   "cmake.configureOnOpen": false,
   "[cmake]": {
-    "editor.defaultFormatter": "cheshirekow.cmake-format"
+    "editor.defaultFormatter": "cheshirekow.cmake-format",
+    "editor.formatOnSave": false
   },
   "cmakeFormat.args": [
     "--dangle-parens",
