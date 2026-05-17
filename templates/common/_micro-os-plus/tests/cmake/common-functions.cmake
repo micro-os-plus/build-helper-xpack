@@ -107,7 +107,7 @@ endfunction ()
 
 # -----------------------------------------------------------------------------
 
-function (add_compile_coverage_options target)
+function (add_compile_coverage_private_options target)
   target_compile_options (
     ${target}
     PRIVATE $<$<CXX_COMPILER_ID:Clang,AppleClang>:-fprofile-instr-generate
@@ -115,10 +115,33 @@ function (add_compile_coverage_options target)
   )
 endfunction ()
 
-function (add_link_coverage_options target)
+function (add_link_coverage_private_options target)
   target_link_options (
     ${target} PRIVATE
     $<$<CXX_COMPILER_ID:Clang,AppleClang>:-fprofile-instr-generate>
+  )
+endfunction ()
+
+# -----------------------------------------------------------------------------
+
+function (add_compile_common_private_options target)
+  target_include_directories (
+    ${target}
+    PRIVATE
+      $<TARGET_PROPERTY:micro-os-plus::common-options,INTERFACE_INCLUDE_DIRECTORIES>
+      $<TARGET_PROPERTY:micro-os-plus::platform,INTERFACE_INCLUDE_DIRECTORIES>
+  )
+  target_compile_definitions (
+    ${target}
+    PRIVATE
+      $<TARGET_PROPERTY:micro-os-plus::common-options,INTERFACE_COMPILE_DEFINITIONS>
+      $<TARGET_PROPERTY:micro-os-plus::platform,INTERFACE_COMPILE_DEFINITIONS>
+  )
+  target_compile_options (
+    ${target}
+    PRIVATE
+      $<TARGET_PROPERTY:micro-os-plus::common-options,INTERFACE_COMPILE_OPTIONS>
+      $<TARGET_PROPERTY:micro-os-plus::platform,INTERFACE_COMPILE_OPTIONS>
   )
 endfunction ()
 
