@@ -58,3 +58,17 @@ can not, and requires an external script, available as
 `scripts/get-libraries-paths.sh`.
 
 It requires the name of the compiler (clang++ or g++).
+
+### Coverage
+
+Currently coverage is implemented only on macOS and uses the system
+`llvm-cov`.
+
+To enable it, set `XPACK_ENABLE_COVERAGE` to `true` in `CMakeLists.txt`.
+
+To show coverage for a single file, add the relative path as the 3rd
+argument to `show-coverage.sh`, prefixed by `../../../../`:
+
+```
+"../../../../src/doubly-list-links.cpp"
+```
