@@ -299,8 +299,7 @@ macro (xpack_set_all_compiler_warnings variable_name)
         $<$<COMPILE_LANGUAGE:C>:-Wold-style-definition>
         $<$<COMPILE_LANGUAGE:C>:-Wstrict-prototypes>
         # ---------------------------------------------------------------------
-        # GNU C++ only.
-        # inherits the "cxx11" ABI tag that 'std::string'
+        # GNU C++ only. It inherits the "cxx11" ABI tag for 'std::string'.
         # $<$<COMPILE_LANGUAGE:CXX>:-Wabi-tag>
         $<$<COMPILE_LANGUAGE:CXX>:-Wctor-dtor-privacy>
         $<$<COMPILE_LANGUAGE:CXX>:-Wnoexcept>

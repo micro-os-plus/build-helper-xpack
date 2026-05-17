@@ -41,8 +41,7 @@ target_include_directories (
   platform-qemu-riscv-rv64imafdc-interface INTERFACE "include"
 )
 
-target_sources (platform-qemu-riscv-rv64imafdc-interface INTERFACE # None.
-)
+target_sources (platform-qemu-riscv-rv64imafdc-interface INTERFACE)
 
 target_compile_definitions (
   platform-qemu-riscv-rv64imafdc-interface

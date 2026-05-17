@@ -39,8 +39,7 @@ target_include_directories (
   platform-qemu-cortex-m7f-interface INTERFACE "include"
 )
 
-target_sources (platform-qemu-cortex-m7f-interface INTERFACE # None.
-)
+target_sources (platform-qemu-cortex-m7f-interface INTERFACE)
 
 target_compile_definitions (
   platform-qemu-cortex-m7f-interface

@@ -65,12 +65,11 @@ add_library (platform-native-interface INTERFACE EXCLUDE_FROM_ALL)
 
 target_include_directories (
   platform-native-interface
-  INTERFACE # This file is included from the tests folder.
-            "include"
+  # The files are included from the tests folder.
+  INTERFACE "include"
 )
 
-target_sources (platform-native-interface INTERFACE # None.
-)
+target_sources (platform-native-interface INTERFACE)
 
 target_compile_definitions (
   platform-native-interface

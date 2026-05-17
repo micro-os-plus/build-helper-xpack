@@ -41,8 +41,7 @@ target_include_directories (
             "include"
 )
 
-target_sources (platform-qemu-cortex-m3-interface INTERFACE # None.
-)
+target_sources (platform-qemu-cortex-m3-interface INTERFACE)
 
 target_compile_definitions (
   platform-qemu-cortex-m3-interface

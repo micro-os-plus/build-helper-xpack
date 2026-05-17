@@ -39,8 +39,7 @@ target_include_directories (
   platform-qemu-cortex-a15-interface INTERFACE "include"
 )
 
-target_sources (platform-qemu-cortex-a15-interface INTERFACE # None.
-)
+target_sources (platform-qemu-cortex-a15-interface INTERFACE)
 
 target_compile_definitions (
   platform-qemu-cortex-a15-interface

@@ -55,9 +55,7 @@ target_compile_options (
   INTERFACE ${xpack_global_common_options} ${all_warnings}
 )
 
-target_include_directories (
-  micro-os-plus-common-options-interface INTERFACE # None.
-)
+target_include_directories (micro-os-plus-common-options-interface INTERFACE)
 
 # When `-flto` is used, the compile options must be passed to the linker too.
 target_link_options (
