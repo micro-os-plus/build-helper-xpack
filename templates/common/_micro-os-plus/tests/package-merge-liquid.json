@@ -259,7 +259,8 @@
       "compute-latest-non-darwin-configs": "{% assign configs = 'native-cmake-gcc,native-meson-gcc' | split: ',' %}",
       "compute-latest-configs": "{% assign configs = 'native-cmake-clang,native-meson-clang' | split: ',' %}{% for variant in properties.qemu-cortexm-variants %}{% for builder in properties.builders %}{% assign config = 'qemu-cortex-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}{% for variant in properties.qemu-aarch32-variants %}{% for builder in properties.builders %}{% assign config = 'qemu-aarch32-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}{% for variant in properties.qemu-aarch64-variants %}{% for builder in properties.builders %}{% assign config = 'qemu-aarch64-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}{% for variant in properties.qemu-riscv-variants %}{% for builder in properties.builders %}{% assign config = 'qemu-riscv-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}",
       "compute-latest-cmake-configs": "{% assign configs = 'native-cmake-clang' | split: ',' %}{% assign builder = 'cmake' %}{% for variant in properties.qemu-cortexm-variants %}{% assign config = 'qemu-cortex-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% for variant in properties.qemu-aarch32-variants %}{% assign config = 'qemu-aarch32-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% for variant in properties.qemu-aarch64-variants %}{% assign config = 'qemu-aarch64-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% for variant in properties.qemu-riscv-variants %}{% assign config = 'qemu-riscv-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}",
-      "compute-latest-meson-configs": "{% assign configs = 'native-meson-clang' | split: ',' %}{% assign builder = 'meson' %}{% for variant in properties.qemu-cortexm-variants %}{% assign config = 'qemu-cortex-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% for variant in properties.qemu-aarch32-variants %}{% assign config = 'qemu-aarch32-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% for variant in properties.qemu-aarch64-variants %}{% assign config = 'qemu-aarch64-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% for variant in properties.qemu-riscv-variants %}{% assign config = 'qemu-riscv-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}",        "compute-all-non-darwin-configs": "{% assign configs = '' | split: '' %}{% assign native-gcc-versions = properties.native-gcc-versions | split_lines  %}{% for builder in properties.builders %}{% for version in native-gcc-versions %}{% assign config = 'native-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}",
+      "compute-latest-meson-configs": "{% assign configs = 'native-meson-clang' | split: ',' %}{% assign builder = 'meson' %}{% for variant in properties.qemu-cortexm-variants %}{% assign config = 'qemu-cortex-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% for variant in properties.qemu-aarch32-variants %}{% assign config = 'qemu-aarch32-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% for variant in properties.qemu-aarch64-variants %}{% assign config = 'qemu-aarch64-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}{% for variant in properties.qemu-riscv-variants %}{% assign config = 'qemu-riscv-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}",
+      "compute-all-non-darwin-configs": "{% assign configs = '' | split: '' %}{% assign native-gcc-versions = properties.native-gcc-versions | split_lines  %}{% for builder in properties.builders %}{% for version in native-gcc-versions %}{% assign config = 'native-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}",
       "compute-all-configs": "{% assign configs = '' | split: '' %}{% assign native-clang-versions = properties.native-clang-versions | split_lines %}{% assign arm-none-eabi-gcc-versions = properties.arm-none-eabi-gcc-versions | split_lines %}{% assign riscv-none-elf-gcc-versions = properties.riscv-none-elf-gcc-versions | split_lines %}{% for builder in properties.builders %}{% for version in native-clang-versions %}{% assign config = 'native-' | append: builder | append: '-clang' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}{% for variant in properties.qemu-cortexm-variants %}{% for builder in properties.builders %}{% for version in arm-none-eabi-gcc-versions %}{% assign config = 'qemu-cortex-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}{% endfor %}{% for variant in properties.qemu-aarch32-variants %}{% for builder in properties.builders %}{% for version in arm-none-eabi-gcc-versions %}{% assign config = 'qemu-aarch32-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}{% endfor %}{% for variant in properties.qemu-aarch64-variants %}{% for builder in properties.builders %}{% for version in arm-none-eabi-gcc-versions %}{% assign config = 'qemu-aarch64-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}{% endfor %}{% for variant in properties.qemu-riscv-variants %}{% for builder in properties.builders %}{% for version in riscv-none-elf-gcc-versions %}{% assign config = 'qemu-riscv-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}{% endfor %}",
       "actions-install-for-configs": "{% for config in configs %}{% for build-type in properties.build-types %}xpm install --config {{ config }}-{{ build-type }}{{ os.EOL }}{% endfor %}{% endfor %}",
       "actions-link-dependencies-for-configs": "{% for config in configs %}{% for build-type in properties.build-types %}xpm run link-dependencies --config {{ config }}-{{ build-type }}{{ os.EOL }}{% endfor %}{% endfor %}",
@@ -842,6 +843,7 @@
       },
       "native-cmake-sys-debug": {
         "inherits": [
+          "short-win-paths-properties",
           "cmake-actions",
           "native-actions",
           "native-dependencies"
@@ -851,7 +853,8 @@
           "platformName": "native"
         },
         "actions": {
-          "prepare": "{{ properties.commandCMakePrepare }}"
+          "prepare": "{{ properties.commandCMakePrepare }}",
+          "shortConfigurationName": "ncsd"
         }
       },
       "native-cmake-sys-release": {
@@ -859,11 +862,13 @@
           "native-cmake-sys-debug"
         ],
         "properties": {
-          "buildType": "Release"
+          "buildType": "Release",
+          "shortConfigurationName": "ncsr"
         }
       },
       "native-meson-sys-debug": {
         "inherits": [
+          "short-win-paths-properties",
           "meson-native-actions",
           "native-actions",
           "native-dependencies"
@@ -873,7 +878,8 @@
           "platformName": "native"
         },
         "actions": {
-          "prepare": "{{ properties.commandMesonPrepare }}"
+          "prepare": "{{ properties.commandMesonPrepare }}",
+          "shortConfigurationName": "nmsd"
         }
       },
       "native-meson-sys-release": {
@@ -881,12 +887,14 @@
           "native-meson-sys-debug"
         ],
         "properties": {
-          "buildType": "release"
+          "buildType": "release",
+          "shortConfigurationName": "nmsr"
         }
       },
       "native-cmake-gcc": {
         "hidden": true,
         "inherits": [
+          "short-win-paths-properties",
           "cmake-actions",
           "native-actions",
           "native-dependencies"
@@ -900,6 +908,7 @@
       "native-meson-gcc": {
         "hidden": true,
         "inherits": [
+          "short-win-paths-properties",
           "meson-native-actions",
           "native-actions",
           "native-dependencies"
@@ -924,7 +933,10 @@
           "inherits": [
             "native-{{ matrix.builder }}-gcc",
             "native-gcc{{ matrix.native-gcc-version }}-dependencies"
-          ]
+          ],
+          "properties": {
+            "shortConfigurationName": "n{{ matrix.builder | slice:0 | downcase }}g{{ matrix.native-gcc-version | slice:0 | downcase }}d"
+          }
         }
       },
       "native-{{ matrix.builder }}-gcc{{ matrix.native-gcc-version }}-release": {
@@ -942,13 +954,15 @@
             "native-{{ matrix.builder }}-gcc{{ matrix.native-gcc-version }}-debug"
           ],
           "properties": {
-            "buildType": "{% case matrix.builder %}{% when 'cmake' %}Release{% when 'meson' %}release{% else %}unknown{% endcase %}"
+            "buildType": "{% case matrix.builder %}{% when 'cmake' %}Release{% when 'meson' %}release{% else %}unknown{% endcase %}",
+            "shortConfigurationName": "n{{ matrix.builder | slice:0 | downcase }}g{{ matrix.native-gcc-version | slice:0 | downcase }}r"          
           }
         }
       },
       "native-cmake-clang": {
         "hidden": true,
         "inherits": [
+          "short-win-paths-properties",
           "cmake-actions",
           "native-actions",
           "native-dependencies"
@@ -962,6 +976,7 @@
       "native-meson-clang": {
         "hidden": true,
         "inherits": [
+          "short-win-paths-properties",
           "meson-native-actions",
           "native-actions",
           "native-dependencies"
@@ -986,7 +1001,10 @@
           "inherits": [
             "native-{{ matrix.builder }}-clang",
             "native-clang{{ matrix.native-clang-version }}-dependencies"
-          ]
+          ],
+          "properties": {
+            "shortConfigurationName": "n{{ matrix.builder | slice:0 | downcase }}c{{ matrix.native-clang-version | slice:0 | downcase }}d"
+          }
         }
       },
       "native-{{ matrix.builder }}-clang{{ matrix.native-clang-version }}-release": {
@@ -1004,7 +1022,8 @@
             "native-{{ matrix.builder }}-clang{{ matrix.native-clang-version }}-debug"
           ],
           "properties": {
-            "buildType": "{% case matrix.builder %}{% when 'cmake' %}Release{% when 'meson' %}release{% else %}unknown{% endcase %}"
+            "buildType": "{% case matrix.builder %}{% when 'cmake' %}Release{% when 'meson' %}release{% else %}unknown{% endcase %}",
+            "shortConfigurationName": "n{{ matrix.builder | slice:0 | downcase }}c{{ matrix.native-clang-version | slice:0 | downcase }}r"          
           }
         }
       },
@@ -1072,7 +1091,7 @@
             "cross-arm-none-eabi-gcc-dependencies"
           ],
           "properties": {
-            "shortConfigurationName": "m{{ matrix.qemu-cortexm-variant }}c{{ matrix.arm-none-eabi-gcc-version }}d"
+            "shortConfigurationName": "q{{ matrix.qemu-cortexm-variant }}cg{{ matrix.arm-none-eabi-gcc-version }}d"
           }
         }
       },
@@ -1092,7 +1111,7 @@
           ],
           "properties": {
             "buildType": "MinSizeRel",
-            "shortConfigurationName": "m{{ matrix.qemu-cortexm-variant }}c{{ matrix.arm-none-eabi-gcc-version }}r"
+            "shortConfigurationName": "q{{ matrix.qemu-cortexm-variant }}cg{{ matrix.arm-none-eabi-gcc-version }}r"
           }
         }
       },
@@ -1112,7 +1131,7 @@
             "cross-arm-none-eabi-gcc-dependencies"
           ],
           "properties": {
-            "shortConfigurationName": "m{{ matrix.qemu-cortexm-variant }}m{{ matrix.arm-none-eabi-gcc-version }}d"
+            "shortConfigurationName": "q{{ matrix.qemu-cortexm-variant }}mg{{ matrix.arm-none-eabi-gcc-version }}d"
           }
         }
       },
@@ -1132,7 +1151,7 @@
           ],
           "properties": {
             "buildType": "minsize",
-            "shortConfigurationName": "m{{ matrix.qemu-cortexm-variant }}m{{ matrix.arm-none-eabi-gcc-version }}r"
+            "shortConfigurationName": "q{{ matrix.qemu-cortexm-variant }}mg{{ matrix.arm-none-eabi-gcc-version }}r"
           }
         }
       },
@@ -1198,7 +1217,7 @@
             "cross-arm-none-eabi-gcc-dependencies"
           ],
           "properties": {
-            "shortConfigurationName": "a{{ matrix.qemu-aarch32-variant }}c{{ matrix.arm-none-eabi-gcc-version }}d"
+            "shortConfigurationName": "q{{ matrix.qemu-aarch32-variant }}cg{{ matrix.arm-none-eabi-gcc-version }}d"
           }
         }
       },
@@ -1218,7 +1237,7 @@
           ],
           "properties": {
             "buildType": "MinSizeRel",
-            "shortConfigurationName": "a{{ matrix.qemu-aarch32-variant }}c{{ matrix.arm-none-eabi-gcc-version }}r"
+            "shortConfigurationName": "q{{ matrix.qemu-aarch32-variant }}cg{{ matrix.arm-none-eabi-gcc-version }}r"
           }
         }
       },
@@ -1238,7 +1257,7 @@
             "cross-arm-none-eabi-gcc-dependencies"
           ],
           "properties": {
-            "shortConfigurationName": "a{{ matrix.qemu-aarch32-variant }}m{{ matrix.arm-none-eabi-gcc-version }}d"
+            "shortConfigurationName": "q{{ matrix.qemu-aarch32-variant }}mg{{ matrix.arm-none-eabi-gcc-version }}d"
           }
         }
       },
@@ -1258,7 +1277,7 @@
           ],
           "properties": {
             "buildType": "minsize",
-            "shortConfigurationName": "a{{ matrix.qemu-aarch32-variant }}m{{ matrix.arm-none-eabi-gcc-version }}r"
+            "shortConfigurationName": "q{{ matrix.qemu-aarch32-variant }}mg{{ matrix.arm-none-eabi-gcc-version }}r"
           }
         }
       },
@@ -1324,7 +1343,7 @@
             "cross-aarch64-none-elf-gcc-dependencies"
           ],
           "properties": {
-            "shortConfigurationName": "b{{ matrix.qemu-aarch64-variant }}c{{ matrix.aarch64-none-elf-gcc-version }}d"
+            "shortConfigurationName": "q{{ matrix.qemu-aarch64-variant }}cg{{ matrix.aarch64-none-elf-gcc-version }}d"
           }
         }
       },
@@ -1344,7 +1363,7 @@
           ],
           "properties": {
             "buildType": "MinSizeRel",
-            "shortConfigurationName": "b{{ matrix.qemu-aarch64-variant }}c{{ matrix.aarch64-none-elf-gcc-version }}r"
+            "shortConfigurationName": "q{{ matrix.qemu-aarch64-variant }}cg{{ matrix.aarch64-none-elf-gcc-version }}r"
           }
         }
       },
@@ -1364,7 +1383,7 @@
             "cross-aarch64-none-elf-gcc-dependencies"
           ],
           "properties": {
-            "shortConfigurationName": "b{{ matrix.qemu-aarch64-variant }}m{{ matrix.aarch64-none-elf-gcc-version }}d"
+            "shortConfigurationName": "q{{ matrix.qemu-aarch64-variant }}mg{{ matrix.aarch64-none-elf-gcc-version }}d"
           }
         }
       },
@@ -1384,7 +1403,7 @@
           ],
           "properties": {
             "buildType": "minsize",
-            "shortConfigurationName": "b{{ matrix.qemu-aarch64-variant }}m{{ matrix.aarch64-none-elf-gcc-version }}r"
+            "shortConfigurationName": "q{{ matrix.qemu-aarch64-variant }}mg{{ matrix.aarch64-none-elf-gcc-version }}r"
           }
         }
       },
@@ -1450,7 +1469,7 @@
             "cross-riscv-none-elf-gcc-dependencies"
           ],
           "properties": {
-            "shortConfigurationName": "r{{ matrix.qemu-riscv-variant }}c{{ matrix.riscv-none-elf-gcc-version }}d"
+            "shortConfigurationName": "q{{ matrix.qemu-riscv-variant | slice: 0, 4 }}cg{{ matrix.riscv-none-elf-gcc-version }}d"
           }
         }
       },
@@ -1470,7 +1489,7 @@
           ],
           "properties": {
             "buildType": "MinSizeRel",
-            "shortConfigurationName": "r{{ matrix.qemu-riscv-variant }}c{{ matrix.riscv-none-elf-gcc-version }}r"
+            "shortConfigurationName": "q{{ matrix.qemu-riscv-variant | slice: 0, 4 }}cg{{ matrix.riscv-none-elf-gcc-version }}r"
           }
         }
       },
@@ -1490,7 +1509,7 @@
             "cross-riscv-none-elf-gcc-dependencies"
           ],
           "properties": {
-            "shortConfigurationName": "r{{ matrix.qemu-riscv-variant }}m{{ matrix.riscv-none-elf-gcc-version }}d"
+            "shortConfigurationName": "q{{ matrix.qemu-riscv-variant | slice: 0, 4 }}mg{{ matrix.riscv-none-elf-gcc-version }}d"
           }
         }
       },
@@ -1510,7 +1529,7 @@
           ],
           "properties": {
             "buildType": "minsize",
-            "shortConfigurationName": "r{{ matrix.qemu-riscv-variant }}m{{ matrix.riscv-none-elf-gcc-version }}r"
+            "shortConfigurationName": "q{{ matrix.qemu-riscv-variant | slice: 0, 4 }}mg{{ matrix.riscv-none-elf-gcc-version }}r"
           }
         }
       }
