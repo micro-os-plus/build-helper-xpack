@@ -24,7 +24,7 @@ message('Processing tests/meson/define-executables...')
 tests = []
 
 # Each test has its own library. Add only those enabled.
-{%- for testName in packageTestsConfig.tests %}
+{%- for testName in testsConfig.tests %}
 if xpack_enable_{{testName}}_test
   tests += {
     'name': '{{ testName }}-test',

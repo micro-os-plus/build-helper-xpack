@@ -13,14 +13,14 @@
 
 # -----------------------------------------------------------------------------
 # Project specific definitions.
-{% for testName in packageTestsConfig.tests %}
+{% for testName in testsConfig.tests %}
 xpack_enable_{{ testName }}_test = true
 {%- endfor %}
 
 xpack_dependencies_project_folders = []
  
 # Each test has its own library. Add only those enabled.
-{%- for testName in packageTestsConfig.tests %}
+{%- for testName in testsConfig.tests %}
 if xpack_enable_{{ testName }}_test
   xpack_dependencies_project_folders += [ 'sources/{{ testName }}-test' ]
 endif
