@@ -146,3 +146,63 @@ function (add_compile_common_private_options target)
 endfunction ()
 
 # -----------------------------------------------------------------------------
+
+# add_compare_files_test(NAME <compare-name> DEPENDS <depends-name> FILES
+# <output-file> <reference-file>)
+#
+# Registers a compare test named <compare-name>. The test runs compare-files.sh
+# to verify <output-file> against <reference-file>. The compare test depends on
+# <depends-name>.
+
+function (add_compare_files_test)
+
+  cmake_parse_arguments (PARSE_ARGV 0 arg "" "NAME;DEPENDS" "FILES")
+
+  list (GET arg_FILES 0 output_file)
+  list (GET arg_FILES 1 reference_file)
+
+  add_test (
+    NAME "${arg_NAME}"
+    COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/../../scripts/compare-files.sh"
+            "${output_file}" "${reference_file}"
+  )
+
+  set_tests_properties ("${arg_NAME}" PROPERTIES DEPENDS "${arg_DEPENDS}")
+
+endfunction ()
+
+# -----------------------------------------------------------------------------
+
+# add_qemu_test(NAME <test-name> COMMAND <elf-name> [argv[1] argv[2] ...])
+#
+# Registers a QEMU run test.
+#
+# <elf-name> is the base name of the ELF file (without the .elf extension) and
+# becomes argv[0] in the semihosting configuration. The remaining arguments are
+# passed as argv[1], argv[2], etc.
+
+function (add_qemu_test)
+
+  cmake_parse_arguments (PARSE_ARGV 0 arg "" "NAME" "COMMAND")
+
+  # First element is the ELF base name (argv[0] in the semihosting config).
+  list (GET arg_COMMAND 0 elf_name)
+
+  # Build the --semihosting-config value from the full argument list.
+  set (semihosting_config "enable=on,target=native")
+  foreach (a IN LISTS arg_COMMAND)
+    string (APPEND semihosting_config ",arg=${a}")
+  endforeach ()
+
+  add_test (
+    NAME "${arg_NAME}"
+    COMMAND
+      ${XPACK_QEMU_BINARY}${extension} ${XPACK_QEMU_MACHINE_ARGS} --kernel
+      "${elf_name}.elf" ${XPACK_QEMU_EXTRA_ARGS} --semihosting-config
+      "${semihosting_config}"
+  )
+
+endfunction ()
+
+# -----------------------------------------------------------------------------
+
