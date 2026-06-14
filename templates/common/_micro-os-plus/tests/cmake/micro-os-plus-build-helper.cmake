@@ -448,6 +448,9 @@ function (xpack_display_target_lists target)
 
   if (include_paths)
     foreach (file_path IN LISTS include_paths)
+      if (NOT IS_ABSOLUTE "${file_path}")
+        set (file_path "${CMAKE_CURRENT_SOURCE_DIR}/${file_path}")
+      endif ()
       file (RELATIVE_PATH file_relative_path "${relative_to_path}"
             "${file_path}"
       )
@@ -463,6 +466,9 @@ function (xpack_display_target_lists target)
 
   if (include_paths)
     foreach (file_path IN LISTS include_paths)
+      if (NOT IS_ABSOLUTE "${file_path}")
+        set (file_path "${CMAKE_CURRENT_SOURCE_DIR}/${file_path}")
+      endif ()
       file (RELATIVE_PATH file_relative_path "${relative_to_path}"
             "${file_path}"
       )
@@ -478,6 +484,9 @@ function (xpack_display_target_lists target)
 
   if (sources_paths)
     foreach (file_path IN LISTS sources_paths)
+      if (NOT IS_ABSOLUTE "${file_path}")
+        set (file_path "${CMAKE_CURRENT_SOURCE_DIR}/${file_path}")
+      endif ()
       file (RELATIVE_PATH file_relative_path "${relative_to_path}"
             "${file_path}"
       )
@@ -493,6 +502,9 @@ function (xpack_display_target_lists target)
 
   if (sources_paths)
     foreach (file_path IN LISTS sources_paths)
+      if (NOT IS_ABSOLUTE "${file_path}")
+        set (file_path "${CMAKE_CURRENT_SOURCE_DIR}/${file_path}")
+      endif ()
       file (RELATIVE_PATH file_relative_path "${relative_to_path}"
             "${file_path}"
       )
