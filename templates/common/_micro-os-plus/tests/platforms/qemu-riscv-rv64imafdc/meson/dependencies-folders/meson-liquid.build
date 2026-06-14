@@ -18,7 +18,7 @@
 # -----------------------------------------------------------------------------
 
 # The base folder is `tests`. The order is significant.
-xpack_dependencies_folders = xpack_dependencies_project_folders + [
+xpack_dependencies_folders = [
 
   'xpacks/@micro-os-plus/diag-trace', # -
   {% if packageScopedName == '@micro-os-plus/micro-test-plus' %}# {% endif %}'xpacks/@micro-os-plus/micro-test-plus', # -
@@ -40,5 +40,9 @@ xpack_dependencies_folders = xpack_dependencies_project_folders + [
 
   'platforms/qemu-riscv-rv64imafdc/meson/platform-library',
 ]
+
+# The project folders are added at the end, to be able to refer to the 
+# dependencies.
+xpack_dependencies_folders += xpack_dependencies_project_folders
 
 # -----------------------------------------------------------------------------

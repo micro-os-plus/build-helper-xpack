@@ -1,0 +1,36 @@
+{
+    "$comment": "DO NOT EDIT! Automatically generated from build-helper/templates.",
+    "osPlatforms": {
+        "linux": {
+            "c": "gcc",
+            "cpp": "g++",
+            "ar": "gcc-ar",
+            "ranlib": "gcc-ranlib",
+            "size": "size",
+            "objcopy": "objcopy",
+            "objdump": "objdump",
+            "strip": "strip"
+        },
+        "darwin": {
+            "c": "gcc",
+            "cpp": "g++",
+            "$comment": "On macOS, no gcc-ar or gcc-ranlib.",
+            "ar": "ar",
+            "ranlib": "ranlib",
+            "size": "size",
+            "objcopy": "objcopy",
+            "objdump": "objdump",
+            "strip": "strip"
+        },
+        "windows": {
+            "c": "gcc.cmd",
+            "cpp": "g++.cmd",
+            "ar": "gcc-ar.cmd",
+            "ranlib": "gcc-ranlib.cmd",
+            "size": "size.cmd",
+            "objcopy": "objcopy.cmd",
+            "objdump": "objdump.cmd",
+            "strip": "strip.cmd"
+        }
+    }
+}

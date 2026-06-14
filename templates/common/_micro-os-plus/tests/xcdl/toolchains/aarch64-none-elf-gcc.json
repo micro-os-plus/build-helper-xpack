@@ -1,0 +1,35 @@
+{
+    "$comment": "DO NOT EDIT! Automatically generated from build-helper/templates.",
+    "osPlatforms": {
+        "linux": {
+            "c": "aarch64-none-elf-gcc",
+            "cpp": "aarch64-none-elf-g++",
+            "ar": "aarch64-none-elf-gcc-ar",
+            "ranlib": "aarch64-none-elf-gcc-ranlib",
+            "size": "aarch64-none-elf-size",
+            "objcopy": "aarch64-none-elf-objcopy",
+            "objdump": "aarch64-none-elf-objdump",
+            "strip": "aarch64-none-elf-strip"
+        },
+        "darwin": {
+            "c": "aarch64-none-elf-gcc",
+            "cpp": "aarch64-none-elf-g++",
+            "ar": "aarch64-none-elf-gcc-ar",
+            "ranlib": "aarch64-none-elf-gcc-ranlib",
+            "size": "aarch64-none-elf-size",
+            "objcopy": "aarch64-none-elf-objcopy",
+            "objdump": "aarch64-none-elf-objdump",
+            "strip": "aarch64-none-elf-strip"
+        },
+        "windows": {
+            "c": "aarch64-none-elf-gcc.cmd",
+            "cpp": "aarch64-none-elf-g++.cmd",
+            "ar": "aarch64-none-elf-gcc-ar.cmd",
+            "ranlib": "aarch64-none-elf-gcc-ranlib.cmd",
+            "size": "aarch64-none-elf-size.cmd",
+            "objcopy": "aarch64-none-elf-objcopy.cmd",
+            "objdump": "aarch64-none-elf-objdump.cmd",
+            "strip": "aarch64-none-elf-strip.cmd"
+        }
+    }
+}

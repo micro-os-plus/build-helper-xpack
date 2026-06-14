@@ -26,7 +26,7 @@ message (VERBOSE
 if (NOT DEFINED xpack_platform_compile_definition)
   message (
     FATAL_ERROR
-      "Define xpack_platform_compile_definition in platforms/${PLATFORM_NAME}/cmake/dependencies.cmake"
+      "Define xpack_platform_compile_definition in platforms/${PLATFORM_NAME}/cmake/definitions.cmake"
   )
 endif ()
 
