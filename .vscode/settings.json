@@ -34,6 +34,7 @@
   ],
   "cmake.ignoreCMakeListsMissing": true,
   "cmake.configureOnOpen": false,
+  "cmake.defaultKit": "Unspecified",
   "[cmake]": {
     "editor.defaultFormatter": "cheshirekow.cmake-format",
     "editor.formatOnSave": false
