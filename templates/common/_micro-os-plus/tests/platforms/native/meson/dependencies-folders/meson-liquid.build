@@ -34,8 +34,4 @@ xpack_dependencies_folders = [
   'platforms/native/meson/platform-library',
 ]
 
-# The project folders are added at the end, to be able to refer to the 
-# dependencies.
-xpack_dependencies_folders += xpack_dependencies_project_folders
-
 # -----------------------------------------------------------------------------
