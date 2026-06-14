@@ -13,6 +13,7 @@
     "npm-packages-helper": "https://github.com/xpack/npm-packages-helper.git",
     "del-cli": "https://www.npmjs.com/package/del-cli",
     "json": "https://www.npmjs.com/package/json",
+    "json5": "https://www.npmjs.com/package/json5",
     "liquidjs": "https://www.npmjs.com/package/liquidjs"
   },
   "dependencies": {},
@@ -21,6 +22,7 @@
     "@xpack/npm-packages-helper": "github:xpack/npm-packages-helper",
     "del-cli": "^7.0.0",
     "json": "^11.0.0",
+    "json5": "^2.2.3",
     "liquidjs": "^10.25.0"
   },
   "scripts": {
@@ -281,10 +283,15 @@
       "actions-clean-for-configs": "{% for config in configs %}{% for build-type in properties.build-types %}xpm run clean --config {{ config }}-{{ build-type }}{{ os.EOL }}{% endfor %}{% endfor %}"
     },
     "actions": {
+      "xcdl-export": [
+        "bash scripts/xcdl-export.sh sources/*/xcdl-package.jsonc"
+      ],
       "install": [
         "xpm install",
         "xpm install --config {% if os.platform == 'win32' %}native-cmake-gcc-debug{% else %}native-cmake-sys-debug{% endif %}",
-        "xpm install --config {% if os.platform == 'win32' %}native-cmake-gcc-release{% else %}native-cmake-sys-release{% endif %}"
+        "xpm install --config {% if os.platform == 'win32' %}native-cmake-gcc-release{% else %}native-cmake-sys-release{% endif %}",
+        "xpm install --config {% if os.platform == 'win32' %}native-meson-gcc-debug{% else %}native-meson-sys-debug{% endif %}",
+        "xpm install --config {% if os.platform == 'win32' %}native-meson-gcc-release{% else %}native-meson-sys-release{% endif %}"
       ],
 {% endraw %}
       "link-dependencies": [
@@ -293,6 +300,12 @@
 {% raw %}
       "test": [
         "xpm run {% if os.platform == 'win32' %}test-native-cmake-gcc{% else %}test-native-cmake-sys{% endif %}"
+      ],
+      "test-meson": [
+        "xpm run {% if os.platform == 'win32' %}test-native-meson-gcc{% else %}test-native-meson-sys{% endif %}"
+      ],
+      "test-xcdl": [
+        "xpm run {% if os.platform == 'win32' %}test-native-xcdl-gcc{% else %}test-native-xcdl-sys{% endif %}"
       ],
       "install-ci": [
         "xpm install",
