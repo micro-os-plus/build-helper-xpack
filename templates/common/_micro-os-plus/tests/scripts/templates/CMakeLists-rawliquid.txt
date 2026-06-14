@@ -1,0 +1,94 @@
+{%- assign packageScope = package.name | remove_first: '@' | split: '/' | first %}
+{%- assign packageName = package.name | remove_first: '@' | split: '/' | last %}
+{%- assign component = xcdl.cdlPackage.cdlComponents[0] %}
+{%- assign nameDash = component.name | replace: '.', '-' %}
+{%- assign nameDoubleColon = component.name | replace: '.', '::' %}
+{%- assign staticArtefacts = component.cdlArtefacts | where: 'type', 'staticLibrary' %}
+{%- assign staticArtefact = staticArtefacts | first %}
+{%- assign objectsArtefacts = component.cdlArtefacts | where: 'type', 'objectFiles' %}
+{%- assign objectsArtefact = objectsArtefacts | first -%}
+# -----------------------------------------------------------------------------
+# DO NOT EDIT! Automatically generated from {{jsonFilePath}}.
+#
+# This file is part of the µOS++ project (https://micro-os-plus.github.io/).
+# Copyright (c) 2021-2026 Liviu Ionescu. All rights reserved.
+#
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose is hereby granted, under the terms of the MIT license.
+#
+# If a copy of the license was not distributed with this file, it can be
+# obtained from https://opensource.org/licenses/mit.
+#
+# -----------------------------------------------------------------------------
+
+# This file is intended to be consumed with:
+#
+# `add_subdirectory("{{outputFolderPath}}")`
+#
+# The result is an interface library that can be added to the linker with:
+#
+# `target_link_libraries(your-target PUBLIC {{nameDash}})`
+
+# -----------------------------------------------------------------------------
+
+message (VERBOSE "Processing '{{outputFolderPath}}'...")
+
+# -----------------------------------------------------------------------------
+
+# https://cmake.org/cmake/help/v3.20/command/add_library.html?highlight=interface#interface-libraries
+# Visibility keywords: INTERFACE passes properties up to targets that link
+# against it.
+add_library ({{nameDash}}-interface INTERFACE EXCLUDE_FROM_ALL)
+{%- if component.publicIncludeFolders and component.publicIncludeFolders.size > 0 %}
+
+target_include_directories (
+  {{nameDash}}-interface 
+  INTERFACE{% for folder in component.publicIncludeFolders %}{% if forloop.first %} {% else %}
+            {% endif %}"{{folder}}"{% endfor %}
+)
+{%- endif %}
+{%- if component.sourceFiles and component.sourceFiles.size > 0 %}
+
+target_sources (
+  {{nameDash}}-interface
+  INTERFACE{% for file in component.sourceFiles %}{% if forloop.first %} {% else %}
+            {% endif %}"{{file}}"{% endfor %}
+)
+{%- endif %}
+{%- if component.publicDefines and component.publicDefines.size > 0 %}
+
+target_compile_definitions (
+  {{nameDash}}-interface 
+  INTERFACE{% for define in component.publicDefines %}{% if forloop.first %} {% else %}
+            {% endif %}"{{define}}"{% endfor %}
+)
+{%- endif %}
+{%- if component.publicCompilerOptions and component.publicCompilerOptions.size > 0 %}
+
+target_compile_options (
+  {{nameDash}}-interface 
+  INTERFACE{% for option in component.publicCompilerOptions %}{% if forloop.first %} {% else %}
+            {% endif %}"{{option}}"{% endfor %}
+)
+{%- endif %}
+{%- if component.dependencies and component.dependencies.size > 0 %}
+
+target_link_libraries (
+  {{nameDash}}-interface 
+  INTERFACE{% for dependency in component.dependencies %}{% assign dependencyDoubleColon = dependency | replace: '.', '::' %}{% if forloop.first %} {% else %}
+            {% endif %}"{{dependencyDoubleColon}}"{% endfor %}
+)
+{%- endif %}
+
+if (COMMAND xpack_display_target_lists)
+  xpack_display_target_lists ({{nameDash}}-interface)
+endif ()
+
+# -----------------------------------------------------------------------------
+# Aliases.
+
+# https://cmake.org/cmake/help/v3.20/command/add_library.html#alias-libraries
+add_library ({{nameDoubleColon}} ALIAS {{nameDash}}-interface)
+message (VERBOSE "> {{nameDoubleColon}} -> {{nameDash}}-interface")
+
+# -----------------------------------------------------------------------------
