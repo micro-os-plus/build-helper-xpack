@@ -78,7 +78,7 @@ compile_args += [
 
 _local_dependencies += [
 {%- for dependency in component.dependencies %}
-{%- assign dependencyUnderscore = dependency | replace: '-', '_' | replace: '.', '_' %}
+{%- assign dependencyUnderscore = dependency | replace: '.static', '' | replace: '.objects', '' | replace: '-', '_' | replace: '.', '_' %}
   {{dependencyUnderscore}}_dependency,
 {%- endfor %}
 ]

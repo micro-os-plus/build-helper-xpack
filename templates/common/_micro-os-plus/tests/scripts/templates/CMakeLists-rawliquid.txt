@@ -2,7 +2,7 @@
 {%- assign packageName = package.name | remove_first: '@' | split: '/' | last %}
 {%- assign component = xcdl.cdlPackage.cdlComponents[0] %}
 {%- assign nameDash = component.name | replace: '.', '-' %}
-{%- assign nameDoubleColon = component.name | replace: '.', '::' %}
+{%- assign nameDoubleColon = component.name | replace_first: '.', '::' | replace: '.', '-' %}
 {%- assign staticArtefacts = component.cdlArtefacts | where: 'type', 'staticLibrary' %}
 {%- assign staticArtefact = staticArtefacts | first %}
 {%- assign objectsArtefacts = component.cdlArtefacts | where: 'type', 'objectFiles' %}
@@ -75,7 +75,7 @@ target_compile_options (
 
 target_link_libraries (
   {{nameDash}}-interface 
-  INTERFACE{% for dependency in component.dependencies %}{% assign dependencyDoubleColon = dependency | replace: '.', '::' %}{% if forloop.first %} {% else %}
+  INTERFACE{% for dependency in component.dependencies %}{% assign dependencyDoubleColon = dependency | replace_first: '.', '::' | replace: '.', '-' %}{% if forloop.first %} {% else %}
             {% endif %}"{{dependencyDoubleColon}}"{% endfor %}
 )
 {%- endif %}

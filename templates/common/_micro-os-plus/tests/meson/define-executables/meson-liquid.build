@@ -92,14 +92,7 @@ foreach test : tests
   # The current test.
   _local_dependencies += [ test_dependency ] # <--- 
 
-  # Tested library.
-  _local_dependencies += [ xpack_tested_library_dependency ]
-  
-  # Portable dependencies.
-  if xpack_project_name != 'micro-test-plus'
-    # _local_dependencies += [  micro_os_plus_micro_test_plus_dependency ]
-  endif
-
+  # TODO: remove it after updating architecture dependencies.
   _local_dependencies += [ micro_os_plus_diag_trace_dependency ]
 
   # Platform specific dependencies. Bring device & architecture too
