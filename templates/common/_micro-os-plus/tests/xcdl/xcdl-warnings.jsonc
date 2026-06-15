@@ -1,0 +1,108 @@
+{
+  // DO NOT EDIT! 
+  // Automatically generated from build-helper/templates.
+  "$schema": "https://xpack.github.io/xcdl/schemas/xcdl-2.0.0.json",
+  "minimumXcdlRequired": "2.0.0",
+  "license": "MIT",
+  "copyright": "Copyright (c) 2026 Liviu Ionescu. All rights reserved.",
+  "cdlComponents": [
+    {
+      "name": "warnings",
+      "display": "Compiler Warnings",
+      "description": "As many warnings as possible, to ensure tests are warning free",
+      "properties": {
+        "gcc7": [
+          // Common GNU C & C++.
+          "-Waggregate-return",
+          "-Wcast-align",
+          "-Wcast-qual",
+          "-Wconversion",
+          "-Wdouble-promotion",
+          "-Wduplicated-branches",
+          "-Wduplicated-cond",
+          "-Wextra",
+          "-Wfloat-conversion",
+          "-Wfloat-equal",
+          "-Wformat-nonliteral",
+          "-Wformat-overflow=2",
+          "-Wformat-security",
+          "-Wformat-signedness",
+          "-Wformat-truncation=2",
+          "-Wformat-y2k",
+          "-Wformat=2",
+          "-Wlogical-op",
+          "-Wmissing-declarations",
+          "-Wnull-dereference",
+          "-Wpacked",
+          "-Wpadded",
+          "-Wpointer-arith",
+          "-Wredundant-decls",
+          "-Wshadow",
+          "-Wshift-overflow=2",
+          "-Wsign-conversion",
+          "-Wswitch-default",
+          "-Wswitch-enum",
+          "-Wundef",
+          "-Wuninitialized",
+          "-Wvla"
+        ],
+        "gcc7c": [
+          "-Wbad-function-cast",
+          "-Wc++-compat",
+          "-Wduplicate-decl-specifier",
+          "-Wmissing-prototypes",
+          "-Wnested-externs",
+          "-Wold-style-definition",
+          "-Wstrict-prototypes"
+        ],
+        "gcc7cpp": [
+          "-Wctor-dtor-privacy",
+          "-Wnoexcept",
+          "-Wnon-virtual-dtor",
+          "-Wold-style-cast",
+          "-Woverloaded-virtual",
+          "-Wplacement-new=2",
+          "-Wregister",
+          "-Wsign-promo",
+          "-Wstrict-null-sentinel",
+          "-Wsuggest-final-methods",
+          "-Wsuggest-final-types",
+          "-Wsuggest-override",
+          "-Wuseless-cast",
+          "-Wzero-as-null-pointer-constant"
+        ],
+        "gcc8cpp": [
+          "-Wextra-semi"
+        ],
+        "gcc10": [
+          "-Warith-conversion"
+        ],
+        "gcc10cpp": [
+          "-Wcomma-subscript",
+          "-Wredundant-tags",
+          "-Wvolatile"
+        ]
+      },
+      "publicCompilerOptions": {
+        "warnings": [
+          "-Wall",
+          // clang warnings
+          "{% if compiler.dialect == 'clang' %}-Weverything{% endif %}",
+          "{% if compiler.id == 'appleClang' %}-Wno-poison-system-directories{% endif %}",
+          // gcc warnings
+          "{% if compiler.dialect == 'gnu' and compiler.version | semver_ge:'7.0.0' %}{{properties.gcc7 | join ' '}}{% endif %}",
+          // Older GCC may include non-existent SDK folders.
+          "{% if compiler.dialect == 'gnu' and os.platform != 'darwin' %}-Wmissing-include-dirs{% endif %}",
+          "{% if compiler.dialect == 'gnu' and compiler.version | semver_ge:'7.0.0' %}{{properties.gcc7 | join ' '}}{% endif %}",
+          "{% if compiler.dialect == 'gnu' and compiler.version | semver_ge:'7.0.0' and compile.language == 'c' %}{{properties.gcc7c | join ' '}}{% endif %}",
+          "{% if compiler.dialect == 'gnu' and compiler.version | semver_ge:'7.0.0' and compile.language == 'cpp' %}{{properties.gcc7cpp | join ' '}}{% endif %}",
+          "{% if compiler.dialect == 'gnu' and compiler.version | semver_ge:'8.0.0' and compile.language == 'cpp' %}{{properties.gcc8cpp | join ' '}}{% endif %}",
+          "{% if compiler.dialect == 'gnu' and compiler.version | semver_ge:'10.0.0' %}{{properties.gcc10 | join ' '}}{% endif %}",
+          "{% if compiler.dialect == 'gnu' and compiler.version | semver_ge:'10.0.0' and compile.language == 'cpp' %}{{properties.gcc10cpp | join ' '}}{% endif %}",
+          // # RISC-V 10.1 fails with `note: replace the class-key with 'struct'`.
+          "{% if compiler.dialect == 'gnu' and compiler.version | semver_ne:'10.1.0' and compile.language == 'cpp' %}-Wmismatched-tags{% endif %}"
+        ]
+      }
+    }
+  ]
+}

@@ -23,15 +23,16 @@ message (
 
 # -----------------------------------------------------------------------------
 
+# The SOURCE_DIR is the `tests` folder; the BINARY_DIR is the `build/<config>`
+# folder.
+
 set (
   xpack_dependencies_folders
-  # Project dependencies.
-  ${xpack_dependencies_project_folders}
-  # The BINARY_DIR is the `build/<config>` folder.
-  "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-synthetic-posix"
-  # The SOURCE_DIR is the `tests` folder.
+  # Portable dependencies.
   {% if packageScopedName == '@micro-os-plus/diag-trace' %}# {% endif %}"${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/diag-trace"
   {% if packageScopedName == '@micro-os-plus/micro-test-plus' %}# {% endif %}"${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/micro-test-plus"
+  # Platform specific dependencies.
+  "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-synthetic-posix"
 )
 
 # -----------------------------------------------------------------------------

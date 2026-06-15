@@ -66,7 +66,7 @@ add_library (platform-native-interface INTERFACE EXCLUDE_FROM_ALL)
 target_include_directories (
   platform-native-interface
   # The files are included from the tests folder.
-  INTERFACE "include"
+  INTERFACE "${CMAKE_CURRENT_LIST_DIR}/../include"
 )
 
 target_sources (platform-native-interface INTERFACE)

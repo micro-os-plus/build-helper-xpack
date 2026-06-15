@@ -37,8 +37,8 @@ add_library (platform-qemu-cortex-m3-interface INTERFACE EXCLUDE_FROM_ALL)
 
 target_include_directories (
   platform-qemu-cortex-m3-interface
-  INTERFACE # This file is included from the tests folder.
-            "include"
+  # The files are included from the tests folder.
+  INTERFACE "${CMAKE_CURRENT_LIST_DIR}/../include"
 )
 
 target_sources (platform-qemu-cortex-m3-interface INTERFACE)

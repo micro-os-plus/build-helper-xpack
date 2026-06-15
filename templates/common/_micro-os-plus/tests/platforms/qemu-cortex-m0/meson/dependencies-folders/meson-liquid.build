@@ -39,8 +39,6 @@ xpack_dependencies_folders = [
 
   # +(arm_cmsis_core_m, devices_cortexm, startup) >devices_qemu_cortexm
   xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/devices-qemu-cortexm',
-
-  'platforms/qemu-cortex-m0/meson/platform-library',
 ]
 
 # -----------------------------------------------------------------------------

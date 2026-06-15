@@ -38,7 +38,9 @@ add_library (
 )
 
 target_include_directories (
-  platform-qemu-riscv-rv64imafdc-interface INTERFACE "include"
+  platform-qemu-riscv-rv64imafdc-interface
+  # The files are included from the tests folder.
+  INTERFACE "${CMAKE_CURRENT_LIST_DIR}/../include"
 )
 
 target_sources (platform-qemu-riscv-rv64imafdc-interface INTERFACE)

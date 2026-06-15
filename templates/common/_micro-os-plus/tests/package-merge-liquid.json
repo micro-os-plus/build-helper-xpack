@@ -301,6 +301,9 @@
       "test": [
         "xpm run {% if os.platform == 'win32' %}test-native-cmake-gcc{% else %}test-native-cmake-sys{% endif %}"
       ],
+      "test-cmake": [
+        "xpm run {% if os.platform == 'win32' %}test-native-cmake-gcc{% else %}test-native-cmake-sys{% endif %}"
+      ],
       "test-meson": [
         "xpm run {% if os.platform == 'win32' %}test-native-meson-gcc{% else %}test-native-meson-sys{% endif %}"
       ],

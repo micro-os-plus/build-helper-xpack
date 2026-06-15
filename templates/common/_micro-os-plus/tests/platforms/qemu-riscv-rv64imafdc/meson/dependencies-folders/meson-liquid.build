@@ -37,8 +37,6 @@ xpack_dependencies_folders = [
 
   # -
   xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/devices-qemu-riscv',
-
-  'platforms/qemu-riscv-rv64imafdc/meson/platform-library',
 ]
 
 # -----------------------------------------------------------------------------

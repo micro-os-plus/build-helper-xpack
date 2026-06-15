@@ -18,9 +18,10 @@
 # https://cmake.org/cmake/help/v3.20/
 cmake_minimum_required (VERSION 3.20)
 
-project ({{packageScope}}-{{packageName}}-tests
-         DESCRIPTION "{{topConfig.descriptiveName}} tests"
-         LANGUAGES CXX
+project (
+  {{packageScope}}-{{packageName}}-tests
+  DESCRIPTION "{{topConfig.descriptiveName}} tests"
+  LANGUAGES CXX
 )
 
 # -----------------------------------------------------------------------------

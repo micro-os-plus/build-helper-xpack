@@ -99,6 +99,9 @@ foreach dep: xpack_dependencies_folders
   subdir(dep)
 endforeach
 
+# Include the platform library.
+subdir('platforms/' + xpack_platform_name + '/meson/platform-library')
+
 # -----------------------------------------------------------------------------
 
 # Include the project library, defined one level above.
@@ -107,7 +110,7 @@ subdir('top')
 
 # -----------------------------------------------------------------------------
 
-foreach dep: xpack_dependencies_project_folders
+foreach dep: xpack_dependencies_tests_folders
   message('Adding test from ' + dep + '...')
   subdir(dep)
 endforeach
@@ -121,9 +124,9 @@ xpack_tested_library_dependency_compile_cpp_args = {{packageScope | replace: "-"
 subdir('meson/define-executables')
 
 # -----------------------------------------------------------------------------
-# Platform specifics.
+# Artefact specifics.
 
-# Include the platform specific targets and tests.
+# Include the platform specific artefacts and tests.
 subdir('platforms/' + xpack_platform_name)
 
 # -----------------------------------------------------------------------------

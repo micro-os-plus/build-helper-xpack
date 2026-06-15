@@ -1,0 +1,62 @@
+{
+  // DO NOT EDIT! 
+  // Automatically generated from build-helper/templates.
+  "$schema": "https://xpack.github.io/xcdl/schemas/xcdl-2.0.0.json",
+  "minimumXcdlRequired": "2.0.0",
+  "license": "MIT",
+  "copyright": "Copyright (c) 2026 Liviu Ionescu. All rights reserved",
+  "cdlComponents": [
+    {
+      "name": "/micro-os-plus",
+      "display": "µOS++",
+      "description": "The µOS++ C++ Framework",
+      "docsUrl": "https://micro-os-plus.github.io/",
+      "cdlComponents": [
+        {
+          "name": "architectures",
+          "display": "Architectures",
+          "description": "The µOS++ supported architectures",
+          "$comments": [
+            "Architecture packages will add components here."
+          ]
+        },
+        {
+          "name": "devices",
+          "display": "Devices",
+          "description": "The µOS++ supported devices",
+          "$comments": [
+            "Device packages will add components here."
+          ]
+        },
+        {
+          "name": "platforms",
+          "display": "Platforms",
+          "description": "The µOS++ supported platforms",
+          "$comments": [
+            "Platform packages will add components here."
+          ]
+        }
+      ],
+      "cdlInterfaces": [
+        {
+          "name": "architecture",
+          "display": "Architecture Interface",
+          "description": "Only one architecture interface must be implemented by the architecture library",
+          "legalValues": 1
+        },
+        {
+          "name": "device",
+          "display": "Device Interface",
+          "description": "Only one device interface must be implemented by the device library",
+          "legalValues": 1
+        },
+        {
+          "name": "platform",
+          "display": "Platform Interface",
+          "description": "Only one platform interface must be implemented by the platform library",
+          "legalValues": 1
+        }
+      ]
+    }
+  ]
+}

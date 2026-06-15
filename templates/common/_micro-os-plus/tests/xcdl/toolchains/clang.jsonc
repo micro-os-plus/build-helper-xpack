@@ -1,0 +1,21 @@
+{
+  // DO NOT EDIT! 
+  // Automatically generated from build-helper/templates.
+  "osPlatforms": {
+    "linux": {
+      "c": "clang",
+      "cpp": "clang++",
+      "ar": "llvm-ar"
+    },
+    "darwin": {
+      "c": "clang",
+      "cpp": "clang++",
+      "ar": "llvm-ar"
+    },
+    "windows": {
+      "c": "clang.cmd",
+      "cpp": "clang++.cmd",
+      "ar": "llvm-ar.cmd"
+    }
+  }
+}

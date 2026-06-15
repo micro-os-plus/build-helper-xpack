@@ -36,7 +36,9 @@ endif ()
 add_library (platform-qemu-cortex-a72-interface INTERFACE EXCLUDE_FROM_ALL)
 
 target_include_directories (
-  platform-qemu-cortex-a72-interface INTERFACE "include"
+  platform-qemu-cortex-a72-interface
+  # The files are included from the tests folder.
+  INTERFACE "${CMAKE_CURRENT_LIST_DIR}/../include"
 )
 
 target_sources (platform-qemu-cortex-a72-interface INTERFACE)

@@ -17,12 +17,12 @@
 set (XPACK_ENABLE_{{ testName | upcase }}_TEST true)
 {%- endfor %}
 
-set (xpack_dependencies_project_folders)
+set (xpack_dependencies_tests_folders)
 
 # Each test has its own library. Add only those enabled.
 {%- for testName in testsConfig.tests %}
 if (XPACK_ENABLE_{{ testName | upcase }}_TEST)
-  list (APPEND xpack_dependencies_project_folders
+  list (APPEND xpack_dependencies_tests_folders
         "${CMAKE_SOURCE_DIR}/sources/{{ testName }}-test"
   )
 endif ()

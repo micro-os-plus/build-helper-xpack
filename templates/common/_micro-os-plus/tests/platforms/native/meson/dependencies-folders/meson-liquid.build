@@ -29,9 +29,6 @@ xpack_dependencies_folders = [
 
   # (architecture) -
   xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/architecture-synthetic-posix',
-
-  # (platform) architecture-synthetic-posix
-  'platforms/native/meson/platform-library',
 ]
 
 # -----------------------------------------------------------------------------

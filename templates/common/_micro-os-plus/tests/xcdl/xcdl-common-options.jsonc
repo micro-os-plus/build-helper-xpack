@@ -1,0 +1,47 @@
+{
+  // DO NOT EDIT! 
+  // Automatically generated from build-helper/templates.
+  "$schema": "https://xpack.github.io/xcdl/schemas/xcdl-2.0.0.json",
+  "minimumXcdlRequired": "2.0.0",
+  "license": "MIT",
+  "copyright": "Copyright (c) 2026 Liviu Ionescu. All rights reserved",
+  "cdlComponents": [
+    {
+      "name": "common.compiler-options",
+      "display": "Common Portable Options",
+      "description": "The common options used for all builds on all platforms",
+      "includeCDLs": [
+        "xcdl-warnings.jsonc"
+      ],
+      "publicDefines": [
+        "{% if buildType == 'debug' %}MICRO_OS_PLUS_DEBUG{% endif %}",
+        "{% if buildType == 'debug' %}MICRO_OS_PLUS_TRACE{% endif %}",
+      ],
+      "publicCompilerOptions": {
+        "optimisations": [
+          "-fmessage-length=0",
+          "-fsigned-char",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fdiagnostics-color=always"
+        ]
+      },
+      "$TODO": "xpack_set_all_compiler_warnings",
+      "cdlOptions": [
+        {
+          "name": "verbose-link",
+          "display": "Verbose link",
+          "description": "Make the linker verbose",
+          "activeIf": [
+            "buildType === 'debug'"
+          ],
+          "publicCompilerOptions": {
+            "linker": [
+              "-v"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

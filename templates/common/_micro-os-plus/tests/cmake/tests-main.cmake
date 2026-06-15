@@ -39,6 +39,9 @@ include ("cmake/common-options-library.cmake")
 # Platform specific definitions.
 include ("platforms/${PLATFORM_NAME}/cmake/definitions.cmake")
 
+# -----------------------------------------------------------------------------
+# Dependencies.
+
 # Set `xpack_dependencies_folders` with the platform specific dependencies.
 include ("platforms/${PLATFORM_NAME}/cmake/dependencies-folders.cmake")
 
@@ -47,6 +50,9 @@ xpack_add_dependencies_subdirectories (
   "${xpack_dependencies_folders}" "xpacks-bin"
 )
 
+# Include the platform library.
+include ("platforms/${PLATFORM_NAME}/cmake/platform-library.cmake")
+
 # -----------------------------------------------------------------------------
 
 # Add the project library, defined one level above.
@@ -54,10 +60,17 @@ message (VERBOSE "Adding top library...")
 add_subdirectory (".." "top-bin")
 
 # -----------------------------------------------------------------------------
-# Platform specifics.
 
-# Add the platform specific targets and tests. For consistency, the binaries are
-# created in the `platform-bin` folder.
+# Iterate the tests and `add_subdirectory()`.
+xpack_add_dependencies_subdirectories (
+  "${xpack_dependencies_tests_folders}" "tests-bin"
+)
+
+# -----------------------------------------------------------------------------
+# Artefact specifics.
+
+# Include the platform specific artefacts and tests. The
+# binaries are created in the `platform-bin` folder.
 add_subdirectory ("platforms/${PLATFORM_NAME}" "platform-bin")
 
 # -----------------------------------------------------------------------------
