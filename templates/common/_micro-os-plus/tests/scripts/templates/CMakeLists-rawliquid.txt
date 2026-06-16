@@ -1,6 +1,6 @@
 {%- assign packageScope = package.name | remove_first: '@' | split: '/' | first %}
 {%- assign packageName = package.name | remove_first: '@' | split: '/' | last %}
-{%- assign component = xcdl.cdlPackage.cdlComponents[0] %}
+{%- assign component = xcdl.cdlComponents[0] %}
 {%- assign nameDash = component.name | replace: '.', '-' %}
 {%- assign nameDoubleColon = component.name | replace_first: '.', '::' | replace: '.', '-' %}
 {%- assign staticArtefacts = component.cdlArtefacts | where: 'type', 'staticLibrary' %}
@@ -30,7 +30,9 @@
 # `target_link_libraries(your-target PUBLIC {{nameDash}})`
 
 # -----------------------------------------------------------------------------
-
+{% if component.description %}
+# {{component.description}}.
+{%- endif %}
 message (VERBOSE "Processing '{{outputFolderPath}}'...")
 
 # -----------------------------------------------------------------------------

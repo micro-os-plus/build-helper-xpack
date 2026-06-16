@@ -111,48 +111,6 @@ function substitute_file()
   serialise_object_property_to "xcdl_context" "xcdl" \
     "$(echo "${xcdl_package_json}")" 
 
-
-
-
-  # component=$(echo "${xcdl_package_json}" | json cdlPackage.cdlComponents | json 0)
-
-  # serialise_string_property_to "xcdl_context" "name" \
-  #   "$(echo "${component}" | json name)" "xcdl_"
-
-  # serialise_string_property_to "xcdl_context" "description" \
-  #   "$(echo "${component}" | json description)" "xcdl_"
-
-  # serialise_array_property_to "xcdl_context" "publicIncludeFolders" \
-  #   "$(folders=$(echo "${component}" | json "publicIncludeFolders" -o json-0); echo "${folders:-[]}")" "xcdl_"
-
-  # serialise_array_property_to "xcdl_context" "sourceFiles" \
-  #   "$(files=$(echo "${component}" | json "sourceFiles" -o json-0); echo "${files:-[]}")" "xcdl_"
-
-  # serialise_array_property_to "xcdl_context" "publicDefines" \
-  #   "$(defs=$(echo "${component}" | json "publicDefines" -o json-0); echo "${defs:-[]}")" "xcdl_"
-
-  # options=$(echo "${component}" | json publicCompilerOptions)
-
-  # if [ -n "${options}" ]
-  # then
-  #   echo "compiler options:"
-  #   echo "${options}" 
-  #   exit 1
-
-  #   opts_target=$(echo "${component}" | json "publicCompilerOptions.target" -o json-0); echo "${opts_target:-[]}"
-  #   opts_optimisations=$(echo "${component}" | json "publicCompilerOptions.optimisations" -o json-0); echo "${opts_optimisations:-[]}"
-  #   opts_warnings=$(echo "${component}" | json "publicCompilerOptions.warnings" -o json-0); echo "${opts_warnings:-[]}"
-  #   opts_debugging=$(echo "${component}" | json "publicCompilerOptions.debugging" -o json-0); echo "${opts_debugging:-[]}"
-  #   opts_miscellaneous=$(echo "${component}" | json "publicCompilerOptions.miscellaneous" -o json-0); echo "${opts_miscellaneous:-[]}"
-  # fi
-
-  # opts=""
-  # serialise_array_property_to "xcdl_context" "publicCompilerOptions" \
-  #   "$(echo "${opts:-[]}")" "xcdl_"
-
-  # serialise_array_property_to "xcdl_context" "dependencies" \
-  #   "$(deps=$(echo "${component}" | json "dependencies" -o json-0); echo "${deps:-[]}")" "xcdl_"
-
   echo
   echo -n '"xcdl_context": '
   echo "${xcdl_context}" | json
