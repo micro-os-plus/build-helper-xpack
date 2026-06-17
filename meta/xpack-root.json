@@ -5,28 +5,28 @@
   "description": "Root components",
   "cdlComponents": [
     {
-      "name": "micro-os-plus",
+      "id": "micro-os-plus",
       "description": "The top µOS++ node",
       "cdlInterfaces": [
         {
-          "name": "architecture",
+          "id": "architecture",
           "description": "The generic architecture, to guarantee a single implementation",
           "customDefine": "$MICRO_OS_PLUS_INCLUDE_ARCHITECTURE"
         },
         {
-          "name": "device",
+          "id": "device",
           "description": "The generic device, to guarantee a single implementation",
           "customDefine": "$MICRO_OS_PLUS_INCLUDE_DEVICE"
         },
         {
-          "name": "platform",
+          "id": "platform",
           "description": "The generic platform/board, to guarantee a single implementation",
           "customDefine": "$MICRO_OS_PLUS_INCLUDE_PLATFORM"
         }
       ]
     },
     {
-      "name": "xpack-3rd-party",
+      "id": "xpack-3rd-party",
       "description": "The top node for 3rd party components"
     }
   ]
