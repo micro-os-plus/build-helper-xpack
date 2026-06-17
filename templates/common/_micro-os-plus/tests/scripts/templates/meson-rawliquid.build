@@ -1,7 +1,7 @@
 {%- assign packageScope = package.name | remove_first: '@' | split: '/' | first %}
 {%- assign packageName = package.name | remove_first: '@' | split: '/' | last %}
 {%- assign component = xcdl.cdlComponents[0] %}
-{%- assign nameUnderscore = component.name | replace: '-', '_' | replace: '.', '_' -%}
+{%- assign nameUnderscore = component.id | replace: '-', '_' | replace: '.', '_' -%}
 # -----------------------------------------------------------------------------
 # DO NOT EDIT!
 # Automatically generated from {{jsonFilePath}}.
@@ -17,11 +17,11 @@
 #
 # -----------------------------------------------------------------------------
 
-# This file is intended to be consumed with:
+# This file is intended to be used by applications via:
 #
 # `subdir('{{outputFolderPath}}')`
 #
-# The result is a dependency that can be referred as:
+# This creates a dependency that can be linked to a target with:
 #
 # `dependencies: [{{nameUnderscore}}_dependency],`
 
