@@ -7,17 +7,17 @@
   "copyright": "Copyright (c) 2026 Liviu Ionescu. All rights reserved.",
   "cdlOptions": [
     {
-      "name": "common.report-size",
+      "id": "common.report-size",
       "display": "Report Size",
       "description": "Global switch to report the size of the generated binaries"
     },
     {
-      "name": "common.create-hex",
+      "id": "common.create-hex",
       "display": "Create Hex",
       "description": "Global switch to create the hex binaries"
     },
     {
-      "name": "common.create-listing",
+      "id": "common.create-listing",
       "display": "Create Listing",
       "description": "Global switch to create the disassembly listings"
     }

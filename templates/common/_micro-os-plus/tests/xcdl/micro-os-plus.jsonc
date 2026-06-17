@@ -7,13 +7,14 @@
   "copyright": "Copyright (c) 2026 Liviu Ionescu. All rights reserved",
   "cdlComponents": [
     {
-      "name": "/micro-os-plus",
+      "id": "micro-os-plus",
+      "root": true,
       "display": "µOS++",
       "description": "The µOS++ C++ Framework",
       "docsUrl": "https://micro-os-plus.github.io/",
       "cdlComponents": [
         {
-          "name": "architectures",
+          "id": "architectures",
           "display": "Architectures",
           "description": "The µOS++ supported architectures",
           "$comments": [
@@ -21,7 +22,7 @@
           ]
         },
         {
-          "name": "devices",
+          "id": "devices",
           "display": "Devices",
           "description": "The µOS++ supported devices",
           "$comments": [
@@ -29,7 +30,7 @@
           ]
         },
         {
-          "name": "platforms",
+          "id": "platforms",
           "display": "Platforms",
           "description": "The µOS++ supported platforms",
           "$comments": [
@@ -39,19 +40,19 @@
       ],
       "cdlInterfaces": [
         {
-          "name": "architecture",
+          "id": "architecture",
           "display": "Architecture Interface",
           "description": "Only one architecture interface must be implemented by the architecture library",
           "legalValues": 1
         },
         {
-          "name": "device",
+          "id": "device",
           "display": "Device Interface",
           "description": "Only one device interface must be implemented by the device library",
           "legalValues": 1
         },
         {
-          "name": "platform",
+          "id": "platform",
           "display": "Platform Interface",
           "description": "Only one platform interface must be implemented by the platform library",
           "legalValues": 1

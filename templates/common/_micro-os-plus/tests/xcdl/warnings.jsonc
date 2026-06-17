@@ -7,7 +7,7 @@
   "copyright": "Copyright (c) 2026 Liviu Ionescu. All rights reserved.",
   "cdlComponents": [
     {
-      "name": "warnings",
+      "id": "warnings",
       "display": "Compiler Warnings",
       "description": "As many warnings as possible, to ensure tests are warning free",
       "properties": {
