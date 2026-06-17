@@ -284,7 +284,7 @@
     },
     "actions": {
       "xcdl-export": [
-        "bash scripts/xcdl-export.sh sources/*/xcdl-package.jsonc"
+        "bash scripts/xcdl-export.sh sources/*/xcdl-*.jsonc"
       ],
       "install": [
         "xpm install",
