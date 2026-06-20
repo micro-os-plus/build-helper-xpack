@@ -28,9 +28,13 @@ message (
 
 set (
   xpack_dependencies_folders
+  #
   # Portable dependencies.
-  {% if packageScopedName == '@micro-os-plus/diag-trace' %}# {% endif %}"${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/diag-trace"
-  {% if packageScopedName == '@micro-os-plus/micro-test-plus' %}# {% endif %}"${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/micro-test-plus"
+  "${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/diag-trace"
+  {%- if packageScopedName != '@micro-os-plus/micro-test-plus' %}
+  "${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/micro-test-plus"
+  {%- endif %}
+  #
   # Platform specific dependencies.
   "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-synthetic-posix"
 )

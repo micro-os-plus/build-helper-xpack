@@ -14,16 +14,16 @@
 # -----------------------------------------------------------------------------
 # Project specific definitions.
 {% for testName in testsConfig.tests %}
-set (XPACK_ENABLE_{{ testName | upcase }}_TEST true)
+set (XPACK_ENABLE_{{ testName | replace: '-', '_' | upcase }}_TEST true)
 {%- endfor %}
 
 set (xpack_dependencies_tests_folders)
 
 # Each test has its own library. Add only those enabled.
 {%- for testName in testsConfig.tests %}
-if (XPACK_ENABLE_{{ testName | upcase }}_TEST)
+if (XPACK_ENABLE_{{ testName | replace: '-', '_' | upcase }}_TEST)
   list (APPEND xpack_dependencies_tests_folders
-        "${CMAKE_SOURCE_DIR}/sources/{{ testName }}-test"
+        "${CMAKE_SOURCE_DIR}/sources/{{ testName }}"
   )
 endif ()
 {% endfor %}

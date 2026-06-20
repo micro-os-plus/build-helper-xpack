@@ -25,12 +25,12 @@ tests = []
 
 # Each test has its own library. Add only those enabled.
 {%- for testName in testsConfig.tests %}
-if xpack_enable_{{testName}}_test
+if xpack_enable_{{testName | replace: '-', '_' }}_test
   tests += {
     'name': '{{ testName }}-test',
-    'dependency': tests_{{ testName }}_dependency,
-    'compile_c_args': tests_{{ testName }}_dependency_compile_c_args,
-    'compile_cpp_args': tests_{{ testName }}_dependency_compile_cpp_args,
+    'dependency': tests_{{ testName  | replace: '-', '_' }}_dependency,
+    'compile_c_args': tests_{{ testName | replace: '-', '_' }}_dependency_compile_c_args,
+    'compile_cpp_args': tests_{{ testName | replace: '-', '_' }}_dependency_compile_cpp_args,
   }
 endif
 {% endfor %}
