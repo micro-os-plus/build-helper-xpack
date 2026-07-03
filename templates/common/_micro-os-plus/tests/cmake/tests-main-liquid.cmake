@@ -42,6 +42,13 @@ include ("platforms/${PLATFORM_NAME}/cmake/definitions.cmake")
 # -----------------------------------------------------------------------------
 # Dependencies.
 
+{% if packageScopedName == '@micro-os-plus/diag-trace' -%}
+# Add the project library, defined one level above.
+message (VERBOSE "Adding top library...")
+add_subdirectory (".." "top-bin")
+
+{% endif -%}
+
 # Set `xpack_dependencies_folders` with the platform specific dependencies.
 include ("platforms/${PLATFORM_NAME}/cmake/dependencies-folders.cmake")
 
@@ -53,11 +60,14 @@ xpack_add_dependencies_subdirectories (
 # Include the platform library.
 include ("platforms/${PLATFORM_NAME}/cmake/platform-library.cmake")
 
+{% if packageScopedName != '@micro-os-plus/diag-trace' -%}
 # -----------------------------------------------------------------------------
 
 # Add the project library, defined one level above.
 message (VERBOSE "Adding top library...")
 add_subdirectory (".." "top-bin")
+
+{% endif -%}
 
 # -----------------------------------------------------------------------------
 

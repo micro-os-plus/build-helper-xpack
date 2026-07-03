@@ -122,9 +122,7 @@ target_link_libraries (
   INTERFACE micro-os-plus::devices-qemu-cortexm micro-os-plus::startup
 )
 
-if (COMMAND xpack_display_target_lists)
-  xpack_display_target_lists (platform-qemu-cortex-m0-interface)
-endif ()
+xpack_display_target_lists (platform-qemu-cortex-m0-interface)
 
 # -----------------------------------------------------------------------------
 

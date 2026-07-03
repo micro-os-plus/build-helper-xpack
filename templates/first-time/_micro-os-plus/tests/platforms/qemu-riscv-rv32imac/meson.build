@@ -65,7 +65,7 @@ if xpack_enable_unit_test
       '-smp', '1',
       '-bios', 'none',
       '-d', 'unimp,guest_errors',
-      '--semihosting-config', 'enable=on,target=native,arg=unit-test',
+      '--semihosting-config', 'enable=on,target=native,arg=unit-test,arg=--reporter,arg=human',
     ],
     env: xpack_environment
   )

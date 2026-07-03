@@ -123,9 +123,7 @@ target_link_libraries (
   INTERFACE micro-os-plus::devices-qemu-aarch32 micro-os-plus::startup
 )
 
-if (COMMAND xpack_display_target_lists)
-  xpack_display_target_lists (platform-qemu-cortex-a15-interface)
-endif ()
+xpack_display_target_lists (platform-qemu-cortex-a15-interface)
 
 # -----------------------------------------------------------------------------
 

@@ -31,7 +31,9 @@ target_compile_definitions (
             # remove DEBUG
             $<$<CONFIG:Debug>:DEBUG>
             $<$<CONFIG:Debug>:MICRO_OS_PLUS_DEBUG>
+{%- if packageScopedName != '@micro-os-plus/diag-trace' %}
             $<$<CONFIG:Debug>:MICRO_OS_PLUS_TRACE>
+{%- endif %}
             MICRO_OS_PLUS_INCLUDE_CONFIG_H
 )
 
@@ -63,9 +65,7 @@ target_link_options (
   ${xpack_global_common_options} $<$<CONFIG:Debug>:-v>
 )
 
-if (COMMAND xpack_display_target_lists)
-  xpack_display_target_lists (micro-os-plus-common-options-interface)
-endif ()
+xpack_display_target_lists (micro-os-plus-common-options-interface)
 
 # -----------------------------------------------------------------------------
 

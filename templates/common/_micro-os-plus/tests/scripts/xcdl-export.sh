@@ -3,7 +3,7 @@
 
 # -----------------------------------------------------------------------------
 # DO NOT EDIT!
-# Automatically generated from npm-packages-helper/templates/*.
+# Automatically generated from build-helper/templates/*.
 #
 # This file is part of the µOS++ project (http://micro-os-plus.github.io).
 # Copyright (c) 2024-2026 Liviu Ionescu.  All rights reserved.

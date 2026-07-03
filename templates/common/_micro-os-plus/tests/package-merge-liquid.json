@@ -64,6 +64,7 @@
     "properties": {
       "buildFolderRelativePath": "{{ 'build' | path_join: configuration.name | to_filename | downcase }}",
       "buildFolderRelativePathPosix": "{{ 'build' | path_posix_join: configuration.name | downcase }}",
+      "commandClearBuildFolder": "node scripts/clear-build-folder.mjs {{ properties.buildFolderRelativePathPosix }}",
       "commandCMakeGenerateNative": "{{ properties.commandCMakeRefresh }} --log-level=VERBOSE",
       "commandCMakeGenerateNativeWithToolchain": "{{ properties.commandCMakeGenerateNative }} -D CMAKE_TOOLCHAIN_FILE=cmake/toolchains/{{ properties.toolchainFileName }}",
       "commandCMakeGenerateCross": "{{ properties.commandCMakeRefresh }} --log-level=VERBOSE -D CMAKE_TOOLCHAIN_FILE=cmake/toolchains/{{ properties.toolchainFileName }}",
@@ -635,7 +636,8 @@
           "cmake-native-actions"
         ],
         "actions": {
-          "setup": "{{ properties.commandCMakeGenerateCross }}"
+          "setup": "{{ properties.commandCMakeGenerateCross }}",
+          "clear": "{{ properties.commandClearBuildFolder }}"
         }
       },
       "meson-native-actions": {
@@ -648,7 +650,8 @@
             "{{ properties.commandMesonBuild }}"
           ],
           "test": "{{ properties.commandMesonPerformTests }}",
-          "clean": "{{ properties.commandMesonClean }}"
+          "clean": "{{ properties.commandMesonClean }}",
+          "clear": "{{ properties.commandClearBuildFolder }}"
         }
       },
       "meson-cross-actions": {
@@ -670,7 +673,8 @@
             "{{ properties.commandXcdlBuild }}"
           ],
           "test": "{{ properties.commandXcdlPerformTests }}",
-          "clean": "{{ properties.commandXcdlClean }}"
+          "clean": "{{ properties.commandXcdlClean }}",
+          "clear": "{{ properties.commandClearBuildFolder }}"
         }
       },
       "xcdl-cross-actions": {
@@ -688,6 +692,7 @@
           "install": [
             "xpm install --config {{ configuration.name }}"
           ],
+          "clear": "{{ properties.commandClearBuildFolder }}",
           "link-dependencies": [
             "xpm link --config {{ configuration.name }} @micro-os-plus/architecture-synthetic-posix"
           ]

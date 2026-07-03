@@ -177,9 +177,7 @@ target_link_libraries (
   INTERFACE micro-os-plus::architecture-synthetic-posix
 )
 
-if (COMMAND xpack_display_target_lists)
-  xpack_display_target_lists (platform-native-interface)
-endif ()
+xpack_display_target_lists (platform-native-interface)
 
 # -----------------------------------------------------------------------------
 

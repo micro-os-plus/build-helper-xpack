@@ -449,16 +449,16 @@ function (xpack_display_target_lists target)
   if (include_paths)
     foreach (file_path IN LISTS include_paths)
       if ("${file_path}" MATCHES "^\\$<")
-        message (VERBOSE "+ ${file_path}")
+        message (VERBOSE "+ih -I ${file_path}")
         continue ()
       endif ()
       if (NOT IS_ABSOLUTE "${file_path}")
         set (file_path "${CMAKE_CURRENT_SOURCE_DIR}/${file_path}")
       endif ()
-      file (RELATIVE_PATH file_relative_path "${relative_to_path}"
+      file (RELATIVE_PATH file_relative_path "${CMAKE_SOURCE_DIR}"
             "${file_path}"
       )
-      message (VERBOSE "+ -I ${file_relative_path}")
+      message (VERBOSE "+ih -I ${file_relative_path}")
     endforeach ()
   endif ()
 
@@ -471,16 +471,16 @@ function (xpack_display_target_lists target)
   if (include_paths)
     foreach (file_path IN LISTS include_paths)
       if ("${file_path}" MATCHES "^\\$<")
-        message (VERBOSE "+ ${file_path}")
+        message (VERBOSE "+h -I ${file_path}")
         continue ()
       endif ()
       if (NOT IS_ABSOLUTE "${file_path}")
         set (file_path "${CMAKE_CURRENT_SOURCE_DIR}/${file_path}")
       endif ()
-      file (RELATIVE_PATH file_relative_path "${relative_to_path}"
+      file (RELATIVE_PATH file_relative_path "${CMAKE_SOURCE_DIR}"
             "${file_path}"
       )
-      message (VERBOSE "+ -I ${file_relative_path}")
+      message (VERBOSE "+h -I ${file_relative_path}")
     endforeach ()
   endif ()
 
@@ -493,16 +493,16 @@ function (xpack_display_target_lists target)
   if (sources_paths)
     foreach (file_path IN LISTS sources_paths)
       if ("${file_path}" MATCHES "^\\$<")
-        message (VERBOSE "+ ${file_path}")
+        message (VERBOSE "+is ${file_path}")
         continue ()
       endif ()
       if (NOT IS_ABSOLUTE "${file_path}")
         set (file_path "${CMAKE_CURRENT_SOURCE_DIR}/${file_path}")
       endif ()
-      file (RELATIVE_PATH file_relative_path "${relative_to_path}"
+      file (RELATIVE_PATH file_relative_path "${CMAKE_SOURCE_DIR}"
             "${file_path}"
       )
-      message (VERBOSE "+ ${file_relative_path}")
+      message (VERBOSE "+is ${file_relative_path}")
     endforeach ()
   endif ()
 
@@ -514,13 +514,17 @@ function (xpack_display_target_lists target)
 
   if (sources_paths)
     foreach (file_path IN LISTS sources_paths)
+      if ("${file_path}" MATCHES "^\\$<")
+        message (VERBOSE "+s ${file_path}")
+        continue ()
+      endif ()
       if (NOT IS_ABSOLUTE "${file_path}")
         set (file_path "${CMAKE_CURRENT_SOURCE_DIR}/${file_path}")
       endif ()
-      file (RELATIVE_PATH file_relative_path "${relative_to_path}"
+      file (RELATIVE_PATH file_relative_path "${CMAKE_SOURCE_DIR}"
             "${file_path}"
       )
-      message (VERBOSE "+ ${file_relative_path}")
+      message (VERBOSE "+s ${file_relative_path}")
     endforeach ()
   endif ()
 
@@ -532,7 +536,7 @@ function (xpack_display_target_lists target)
 
   if (compile_definitions)
     foreach (def IN LISTS compile_definitions)
-      message (VERBOSE "+ -D ${def}")
+      message (VERBOSE "+id -D ${def}")
     endforeach ()
   endif ()
 
@@ -544,7 +548,7 @@ function (xpack_display_target_lists target)
 
   if (compile_definitions)
     foreach (def IN LISTS compile_definitions)
-      message (VERBOSE "+ -D ${def}")
+      message (VERBOSE "+d -D ${def}")
     endforeach ()
   endif ()
 
@@ -556,7 +560,7 @@ function (xpack_display_target_lists target)
 
   if (compile_options)
     foreach (opt IN LISTS compile_options)
-      message (VERBOSE "+ ${opt}")
+      message (VERBOSE "+ic ${opt}")
     endforeach ()
   endif ()
 
@@ -568,7 +572,7 @@ function (xpack_display_target_lists target)
 
   if (compile_options)
     foreach (opt IN LISTS compile_options)
-      message (VERBOSE "+ ${opt}")
+      message (VERBOSE "+c ${opt}")
     endforeach ()
   endif ()
 
@@ -580,7 +584,7 @@ function (xpack_display_target_lists target)
 
   if (link_libraries)
     foreach (lib IN LISTS link_libraries)
-      message (VERBOSE "+L ${lib}")
+      message (VERBOSE "+iL ${lib}")
     endforeach ()
   endif ()
 
@@ -604,7 +608,7 @@ function (xpack_display_target_lists target)
 
   if (link_options)
     foreach (opt IN LISTS link_options)
-      message (VERBOSE "+l ${opt}")
+      message (VERBOSE "+il ${opt}")
     endforeach ()
   endif ()
 

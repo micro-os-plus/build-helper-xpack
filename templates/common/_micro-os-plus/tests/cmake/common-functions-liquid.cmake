@@ -35,6 +35,13 @@ function (add_native_test_executable name)
 
   set_target_properties (${name} PROPERTIES OUTPUT_NAME "${name}")
 
+{%- if packageScopedName == '@micro-os-plus/diag-trace' %}
+
+  if (NOT name STREQUAL "null-test")
+    target_compile_definitions (${name} PUBLIC "MICRO_OS_PLUS_TRACE")
+  endif ()
+{%- endif %}
+
   # https://cmake.org/cmake/help/v3.20/manual/cmake-generator-expressions.7.html
   # The link options were defined in `platform-native-interface`.
   target_link_options (
@@ -70,6 +77,12 @@ function (add_cross_test_executable name)
   add_executable (${name})
 
   set_target_properties (${name} PROPERTIES OUTPUT_NAME "${name}")
+{%- if packageScopedName == '@micro-os-plus/diag-trace' %}
+
+  if (NOT name STREQUAL "null-test")
+    target_compile_definitions (${name} PUBLIC "MICRO_OS_PLUS_TRACE")
+  endif ()
+{%- endif %}
 
   target_link_options (
     ${name} PRIVATE -Wl,-Map,platform-bin/${name}-map.txt # -v

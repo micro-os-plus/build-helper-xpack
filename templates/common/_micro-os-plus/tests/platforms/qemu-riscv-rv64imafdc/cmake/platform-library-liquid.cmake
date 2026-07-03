@@ -130,9 +130,7 @@ target_link_libraries (
   INTERFACE micro-os-plus::devices-qemu-riscv micro-os-plus::startup
 )
 
-if (COMMAND xpack_display_target_lists)
-  xpack_display_target_lists (platform-qemu-riscv-rv64imafdc-interface)
-endif ()
+xpack_display_target_lists (platform-qemu-riscv-rv64imafdc-interface)
 
 # -----------------------------------------------------------------------------
 
