@@ -132,7 +132,7 @@ if get_option('buildtype') == 'release' or get_option('buildtype') == 'minsize' 
 endif
 
 if c_compiler.get_id().contains('clang')
-  _local_compile_args += [
+  _local_compile_cpp_args += [
     '-stdlib=libc++',
   ]
 endif
