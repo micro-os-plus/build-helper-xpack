@@ -59,7 +59,7 @@ current_year=$(date +"%Y")
 # Note: __EOF__ is NOT quoted to allow substitutions.
 cat <<__EOF__
 /*
- * This file is part of the µOS++ project (https://micro-os-plus.github.com/).
+ * This file is part of the µOS++ project (https://micro-os-plus.github.io/).
  * Copyright (c) ${current_year} Liviu Ionescu. All rights reserved.
  *
  * Permission to use, copy, modify, and/or distribute this software
