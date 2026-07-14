@@ -1,4 +1,5 @@
 # -----------------------------------------------------------------------------
+# DO NOT EDIT! Automatically generated from build-helper/templates.
 #
 # This file is part of the µOS++ project (https://micro-os-plus.github.io/).
 # Copyright (c) 2022-2026 Liviu Ionescu. All rights reserved.
@@ -26,8 +27,10 @@ function (target_link_native_test_libraries name test_library_name)
             micro-os-plus::common-options
             # Library with the current test.
             ${test_library_name}
+{%- if packageScopedName != '@micro-os-plus/diag-trace' %}
             # TODO: remove it after updating architecture dependencies.
             micro-os-plus::diag-trace
+{%- endif %}
             # Platform dependency.
             micro-os-plus::platform # bring device & architecture too
   )
@@ -35,15 +38,17 @@ endfunction ()
 
 # -----------------------------------------------------------------------------
 
-function (target_link_cross_test_libraries name library_name)
+function (target_link_cross_test_libraries name test_library_name)
   target_link_libraries (
     ${name}
     PRIVATE # The compile & link options common to all platforms.
             micro-os-plus::common-options
             # Library with the current test.
             ${test_library_name}
+{%- if packageScopedName != '@micro-os-plus/diag-trace' %}
             # TODO: remove it after updating architecture dependencies.
             micro-os-plus::diag-trace
+{%- endif %}
             # Platform specific dependencies.
             micro-os-plus::platform # bring device & architecture too
             micro-os-plus::semihosting
