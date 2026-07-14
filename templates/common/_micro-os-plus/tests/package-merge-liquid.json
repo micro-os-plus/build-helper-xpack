@@ -51,10 +51,10 @@
     "dependencies": {},
     "devDependencies": {
 {% if packageScopedName != '@micro-os-plus/diag-trace' %}
-      "@micro-os-plus/diag-trace": "^4.2.3",
+      "@micro-os-plus/diag-trace": "^5.0.0",
 {% endif %}
 {% if packageScopedName != '@micro-os-plus/micro-test-plus' %}
-      "@micro-os-plus/micro-test-plus": "^4.1.1",
+      "@micro-os-plus/micro-test-plus": "^5.0.0",
 {% endif %}
       "@xpack-dev-tools/cmake": "3.31.9-1.1",
       "@xpack-dev-tools/meson-build": "1.8.5-1.1",
