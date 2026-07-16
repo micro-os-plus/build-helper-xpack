@@ -213,7 +213,7 @@ endif
 
 _local_dependencies += [
   common_options_dependency,
-  micro_os_plus_architecture_synthetic_posix_dependency
+  micro_os_plus_architectures_synthetic_posix_dependency
 ]
 
 # https://mesonbuild.com/Reference-manual_functions.html#declare_dependency

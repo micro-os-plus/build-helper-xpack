@@ -174,7 +174,7 @@ endif ()
 
 target_link_libraries (
   platform-native-interface
-  INTERFACE micro-os-plus::architecture-synthetic-posix
+  INTERFACE micro-os-plus::architectures-synthetic-posix
 )
 
 xpack_display_target_lists (platform-native-interface)
