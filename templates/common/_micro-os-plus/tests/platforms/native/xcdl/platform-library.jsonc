@@ -5,10 +5,7 @@
   "minimumXcdlRequired": "2.0.0",
   "license": "MIT",
   "copyright": "Copyright (c) 2026 Liviu Ionescu. All rights reserved.",
-  "properties": {
-    "platformDefine": "MICRO_OS_PLUS_PLATFORM_NATIVE",
-    "deviceDefine": "MICRO_OS_PLUS_DEVICE_NATIVE"
-  },
+  "properties": {},
   "cdlComponents": [
     {
       "id": "native",
@@ -22,9 +19,7 @@
       // to be 200809L before any header is included:
       // https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap02.html#tag_02_01_03
       "publicDefines": [
-        "_POSIX_C_SOURCE=200809L",
-        "{{properties.platformDefine}}",
-        "{{properties.deviceDefine}}"
+        "_POSIX_C_SOURCE=200809L"
       ],
       // Apple clang 13 does not support -Wunused-but-set-variable.
       "publicCompilerOptions": {
@@ -46,7 +41,7 @@
       "dependencies": [
         "micro-os-plus.device"
       ],
-      // "customDefine": "{{properties.platformDefine}}",
+      // "defaultDefine": "{{properties.platformDefine}}",
       "cdlOptions": [
         {
           "id": "win32",

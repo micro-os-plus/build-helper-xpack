@@ -85,8 +85,6 @@ message('Platform name: ' + xpack_platform_name)
 subdir('meson/common-options-library')
 subdir('meson/enable-all-warnings')
 
-subdir('platforms/'+ xpack_platform_name + '/meson/definitions')
-
 # -----------------------------------------------------------------------------
 # Dependencies.
 

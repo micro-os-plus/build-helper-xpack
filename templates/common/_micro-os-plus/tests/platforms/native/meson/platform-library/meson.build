@@ -22,10 +22,6 @@ message('Including tests/platforms/' + xpack_platform_name + '/meson/platform-li
 
 # -----------------------------------------------------------------------------
 
-assert(is_variable('xpack_platform_compile_definition'), 'Define xpack_platform_compile_definition in platforms/' + xpack_platform_name + '/meson.build')
-
-# -----------------------------------------------------------------------------
-
 if build_machine.system() == 'linux' or build_machine.system() == 'darwin'
 
   _local_cxx_run_result = run_command(
@@ -77,8 +73,6 @@ _local_sources += [
 ]
 
 _local_compile_definitions += [
-  '-D' + xpack_platform_compile_definition,
-
   # Full POSIX conformance:
   # https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap02.html#tag_02_01_03
   '-D_POSIX_C_SOURCE=200809L',
@@ -213,7 +207,7 @@ endif
 
 _local_dependencies += [
   common_options_dependency,
-  micro_os_plus_architectures_synthetic_posix_dependency
+  micro_os_plus_architecture_dependency
 ]
 
 # https://mesonbuild.com/Reference-manual_functions.html#declare_dependency

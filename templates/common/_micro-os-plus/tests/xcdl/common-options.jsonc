@@ -14,8 +14,7 @@
         "xcdl-warnings.jsonc"
       ],
       "publicDefines": [
-        "{% if buildType == 'debug' %}MICRO_OS_PLUS_DEBUG{% endif %}",
-        "{% if buildType == 'debug' %}MICRO_OS_PLUS_TRACE{% endif %}",
+        "{% if buildType == 'debug' %}MICRO_OS_PLUS_DEBUG_ENABLED{% endif %}",
       ],
       "publicCompilerOptions": {
         "optimisations": [

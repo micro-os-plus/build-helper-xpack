@@ -22,16 +22,6 @@ message (VERBOSE
 
 # -----------------------------------------------------------------------------
 
-# Validate.
-if (NOT DEFINED xpack_platform_compile_definition)
-  message (
-    FATAL_ERROR
-      "Define xpack_platform_compile_definition in platforms/${PLATFORM_NAME}/cmake/definitions.cmake"
-  )
-endif ()
-
-# -----------------------------------------------------------------------------
-
 # Compute RPATH; return result in `rpath_options_list`.
 if (CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "Darwin")
   # On non-Windows, get the actual libraries paths by asking the compiler.
@@ -74,7 +64,6 @@ target_sources (platform-native-interface INTERFACE)
 target_compile_definitions (
   platform-native-interface
   INTERFACE
-    "${xpack_platform_compile_definition}"
     # Full POSIX conformance:
     # https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap02.html#tag_02_01_03
     _POSIX_C_SOURCE=200809L
@@ -174,7 +163,7 @@ endif ()
 
 target_link_libraries (
   platform-native-interface
-  INTERFACE micro-os-plus::architectures-synthetic-posix
+  INTERFACE micro-os-plus::architecture
 )
 
 xpack_display_target_lists (platform-native-interface)

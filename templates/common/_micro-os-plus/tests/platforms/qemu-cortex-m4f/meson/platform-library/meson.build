@@ -21,10 +21,6 @@ message('Including tests/platforms/' + xpack_platform_name + '/meson/platform-li
 
 # -----------------------------------------------------------------------------
 
-assert(is_variable('xpack_platform_compile_definition'), 'Define xpack_platform_compile_definition in platforms/' + xpack_platform_name + '/meson.build')
-
-# -----------------------------------------------------------------------------
-
 _local_compile_args = [] # Common C/C++ args.
 _local_compile_c_args = []
 _local_compile_cpp_args = []
@@ -48,8 +44,6 @@ _local_sources += [
 
 # Compiler definitions must passed as options.
 _local_compile_definitions += [
-  '-D' + xpack_platform_compile_definition,
-
   # Full POSIX conformance:
   # https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap02.html#tag_02_01_03
   '-D_POSIX_C_SOURCE=200809L',

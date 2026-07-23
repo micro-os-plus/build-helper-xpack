@@ -7,8 +7,8 @@
   "copyright": "Copyright (c) 2026 Liviu Ionescu. All rights reserved",
   "cdlComponents": [
     {
-      "id": "micro-os-plus",
       "root": true,
+      "id": "micro-os-plus",
       "display": "µOS++",
       "description": "The µOS++ C++ Framework",
       "docsUrl": "https://micro-os-plus.github.io/",
@@ -57,7 +57,22 @@
           "description": "Only one platform interface must be implemented by the platform library",
           "legalValues": 1
         }
+      ],
+      "cdlOptions": [
+        {
+          "id": "debug",
+          "display": "Debug",
+          "description": "Enable or disable debug mode",
+          "defaultValue": false,
+          // "defaultDefine": "MICRO_OS_PLUS_DEBUG_ENABLED"
+        }
       ]
+    },
+    {
+      "root": true,
+      "id": "xpack-3rd-party",
+      "display": "3rd party components",
+      "description": "The top node for 3rd party components"
     }
   ]
 }

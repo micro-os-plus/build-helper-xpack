@@ -30,11 +30,7 @@ target_compile_definitions (
   INTERFACE # NDEBUG is provided by the toolchain definitions on release. TODO:
             # remove DEBUG
             $<$<CONFIG:Debug>:DEBUG>
-            $<$<CONFIG:Debug>:MICRO_OS_PLUS_DEBUG>
-{%- if packageScopedName != '@micro-os-plus/diag-trace' %}
-            $<$<CONFIG:Debug>:MICRO_OS_PLUS_TRACE>
-{%- endif %}
-            MICRO_OS_PLUS_INCLUDE_CONFIG_H
+            $<$<CONFIG:Debug>:MICRO_OS_PLUS_DEBUG_ENABLED>
 )
 
 set (

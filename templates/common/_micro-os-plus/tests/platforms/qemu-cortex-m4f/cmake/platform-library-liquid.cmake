@@ -22,16 +22,6 @@ message (VERBOSE
 
 # -----------------------------------------------------------------------------
 
-# Validate.
-if (NOT DEFINED xpack_platform_compile_definition)
-  message (
-    FATAL_ERROR
-      "Define xpack_platform_compile_definition in platforms/${PLATFORM_NAME}/cmake/definitions.cmake"
-  )
-endif ()
-
-# -----------------------------------------------------------------------------
-
 # Define the platform library.
 add_library (platform-qemu-cortex-m4f-interface INTERFACE EXCLUDE_FROM_ALL)
 
@@ -46,7 +36,6 @@ target_sources (platform-qemu-cortex-m4f-interface INTERFACE)
 target_compile_definitions (
   platform-qemu-cortex-m4f-interface
   INTERFACE
-    "${xpack_platform_compile_definition}"
     # Full POSIX conformance:
     # https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap02.html#tag_02_01_03
     _POSIX_C_SOURCE=200809L

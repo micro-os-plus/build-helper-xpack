@@ -36,9 +36,6 @@ include ("cmake/common-functions.cmake")
 # to all platforms.
 include ("cmake/common-options-library.cmake")
 
-# Platform specific definitions.
-include ("platforms/${PLATFORM_NAME}/cmake/definitions.cmake")
-
 # -----------------------------------------------------------------------------
 # Dependencies.
 
