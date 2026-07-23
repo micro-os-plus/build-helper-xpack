@@ -2,11 +2,11 @@
  * This file is part of the µOS++ project (https://micro-os-plus.github.io/).
  * Copyright (c) 2016-2026 Liviu Ionescu. All rights reserved.
  *
- * Permission to use, copy, modify, and/or distribute this software
- * for any purpose is hereby granted, under the terms of the MIT license.
+ * Permission to use, copy, modify, and/or distribute this software for any
+ * purpose is hereby granted, under the terms of the MIT license.
  *
- * If a copy of the license was not distributed with this file, it can
- * be obtained from https://opensource.org/licenses/mit.
+ * If a copy of the license was not distributed with this file, it can be
+ * obtained from https://opensource.org/licenses/mit.
  */
 
 // ----------------------------------------------------------------------------
@@ -576,7 +576,7 @@ os_main (int argc, char* argv[])
  - `new`/`delete` in C++ (thread safe)
 
  The default application memory manager is set in the
- `os_startup_initialize_free_store()` function, called by the
+ `os_startup_initialise_free_store()` function, called by the
  startup code when running on bare metal.
 
  On synthetic POSIX platforms the default memory manager is
