@@ -1,9 +1,6 @@
 /*
- * DO NOT EDIT!
- * Automatically generated from build-helper/templates.
- *
  * This file is part of the µOS++ project (https://micro-os-plus.github.io/).
- * Copyright (c) 2017-2026 Liviu Ionescu. All rights reserved.
+ * Copyright (c) 2022-2026 Liviu Ionescu. All rights reserved.
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose is hereby granted, under the terms of the MIT license.
@@ -14,12 +11,8 @@
 
 // ----------------------------------------------------------------------------
 
-#ifndef MICRO_OS_PLUS_PLATFORM_H_
-#define MICRO_OS_PLUS_PLATFORM_H_
-
-// ----------------------------------------------------------------------------
-
-#include <micro-os-plus/device.h>
+#ifndef MICRO_OS_PLUS_PROJECT_CONFIG_H_
+#define MICRO_OS_PLUS_PROJECT_CONFIG_H_
 
 // ----------------------------------------------------------------------------
 
@@ -27,6 +20,6 @@
 
 // ----------------------------------------------------------------------------
 
-#endif // MICRO_OS_PLUS_PLATFORM_H_
+#endif // MICRO_OS_PLUS_PROJECT_CONFIG_H_
 
 // ----------------------------------------------------------------------------
