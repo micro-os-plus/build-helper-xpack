@@ -26,8 +26,17 @@ xpack_dependencies_folders = [
 
   # Order matters: dependencies must precede their dependants.
 
+{%- if packageScopedName != '@micro-os-plus/diag-trace' %}
+
   # Dependencies: none.
   'xpacks/@micro-os-plus/diag-trace',
+{%- endif %}
+
+{%- if packageScopedName != '@micro-os-plus/micro-test-plus' %}
+
+  # Dependencies: diag.trace.
+  'xpacks/@micro-os-plus/micro-test-plus',
+{%- endif %}
   
   # Dependencies: none.
   xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/architecture-synthetic-posix',

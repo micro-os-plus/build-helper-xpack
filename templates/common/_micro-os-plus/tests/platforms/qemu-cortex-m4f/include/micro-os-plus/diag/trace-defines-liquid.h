@@ -8,12 +8,13 @@
 
 // ----------------------------------------------------------------------------
 
-#if defined(MICRO_OS_PLUS_TRACE)
+{%- if packageScopedName != '@micro-os-plus/diag-trace' %}
 
 // The portable trace::printf() code.
 #if !defined(MICRO_OS_PLUS_DIAG_TRACE_ENABLED)
 #define MICRO_OS_PLUS_DIAG_TRACE_ENABLED
 #endif // !defined(MICRO_OS_PLUS_DIAG_TRACE_ENABLED)
+{%- endif %}
 
 // The size in bytes of the stack buffer used by vsnprintf() to store the
 // diagnostics line.
@@ -36,8 +37,6 @@
 // #if !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_DEBUG_ENABLED)
 // #define MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_DEBUG_ENABLED
 // #endif // !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_DEBUG_ENABLED)
-
-#endif // defined(MICRO_OS_PLUS_TRACE)
 
 // ----------------------------------------------------------------------------
 
