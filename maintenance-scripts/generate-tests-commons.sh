@@ -79,10 +79,12 @@ current_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_pa
 project_folder_path="$(dirname "${current_folder_path}")"
 tests_folder_path="${project_folder_path}/tests"
 templates_folder_path="$(dirname "${script_folder_path}")/templates"
+partials_folder_path="$(dirname "${script_folder_path}")/templates/partials"
 
 export current_folder_path
 export project_folder_path
 export templates_folder_path
+export partials_folder_path
 export tests_folder_path
 
 # -----------------------------------------------------------------------------
