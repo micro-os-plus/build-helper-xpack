@@ -14,9 +14,9 @@
 #endif // !defined(MICRO_OS_PLUS_STARTUP_ENABLED)
 
 // Add guard checks for data & bss.
-// #if !defined(MICRO_OS_PLUS_STARTUP_INITIALISE_MULTIPLE_RAM_SECTIONS_ENABLED)
-// #define MICRO_OS_PLUS_STARTUP_INITIALISE_MULTIPLE_RAM_SECTIONS_ENABLED
-// #endif // !defined(MICRO_OS_PLUS_STARTUP_INITIALISE_MULTIPLE_RAM_SECTIONS_ENABLED)
+// #if !defined(MICRO_OS_PLUS_STARTUP_GUARD_CHECKS_ENABLED)
+// #define MICRO_OS_PLUS_STARTUP_GUARD_CHECKS_ENABLED
+// #endif // !defined(MICRO_OS_PLUS_STARTUP_GUARD_CHECKS_ENABLED)
 
 // Iterate over the array of multiple RAM sections, if supported by the
 // architecture. #if
