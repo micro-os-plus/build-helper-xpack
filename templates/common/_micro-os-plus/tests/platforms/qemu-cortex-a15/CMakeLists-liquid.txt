@@ -1,4 +1,5 @@
 # -----------------------------------------------------------------------------
+# DO NOT EDIT! Automatically generated from build-helper/templates.
 #
 # This file is part of the µOS++ project (https://micro-os-plus.github.io/).
 # Copyright (c) 2022-2026 Liviu Ionescu. All rights reserved.
@@ -15,12 +16,12 @@
 
 # -----------------------------------------------------------------------------
 
-message (VERBOSE "Processing 'tests/platforms/qemu-cortex-m7f'...")
+message (VERBOSE "Processing 'tests/platforms/qemu-cortex-a15'...")
 
 # -----------------------------------------------------------------------------
 
 set (XPACK_QEMU_BINARY "qemu-system-arm")
-set (XPACK_QEMU_MACHINE_ARGS --machine mps2-an500 --cpu cortex-m7)
-set (XPACK_QEMU_EXTRA_ARGS --nographic -d unimp,guest_errors)
+set (XPACK_QEMU_MACHINE_ARGS --machine virt --cpu cortex-a15)
+set (XPACK_QEMU_EXTRA_ARGS --nographic -smp 1 -d unimp,guest_errors)
 {%- assign nameDash = packageScopedName | replace: '@', '' | replace: '/', '-' -%}
 {%- render './platforms/CMakeLists.liquid' packageScopedName: packageScopedName, testsConfig: testsConfig, nameDash: nameDash, suffix: '' %}

@@ -1,4 +1,5 @@
 # -----------------------------------------------------------------------------
+# DO NOT EDIT! Automatically generated from build-helper/templates.
 #
 # This file is part of the µOS++ project (https://micro-os-plus.github.io/).
 # Copyright (c) 2022-2026 Liviu Ionescu. All rights reserved.
@@ -15,25 +16,12 @@
 
 # -----------------------------------------------------------------------------
 
-message (VERBOSE "Processing 'tests/platforms/qemu-riscv-rv32imac'...")
+message (VERBOSE "Processing 'tests/platforms/qemu-cortex-m4f'...")
 
 # -----------------------------------------------------------------------------
 
-# NOTE: Exceptions are disabled.
-
-# -----------------------------------------------------------------------------
-
-set (XPACK_QEMU_BINARY "qemu-system-riscv32")
-set (XPACK_QEMU_MACHINE_ARGS --machine virt --cpu rv32)
-set (
-  XPACK_QEMU_EXTRA_ARGS
-  -smp
-  1
-  -bios
-  none
-  --nographic
-  -d
-  unimp,guest_errors
-)
+set (XPACK_QEMU_BINARY "qemu-system-arm")
+set (XPACK_QEMU_MACHINE_ARGS --machine mps2-an386 --cpu cortex-m4)
+set (XPACK_QEMU_EXTRA_ARGS --nographic -d unimp,guest_errors)
 {%- assign nameDash = packageScopedName | replace: '@', '' | replace: '/', '-' -%}
-{%- render './platforms/CMakeLists.liquid' packageScopedName: packageScopedName, testsConfig: testsConfig, nameDash: nameDash, suffix: '-noexcept' %}
+{%- render './platforms/CMakeLists.liquid' packageScopedName: packageScopedName, testsConfig: testsConfig, nameDash: nameDash, suffix: '' %}
