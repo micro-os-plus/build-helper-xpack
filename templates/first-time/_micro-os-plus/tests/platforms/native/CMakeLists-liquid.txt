@@ -17,54 +17,174 @@
 
 message (VERBOSE "Processing 'tests/platforms/native'...")
 
-include ("cmake/platform-library.cmake")
-{% if packageScopedName == '@micro-os-plus/micro-test-plus' %}
 # -----------------------------------------------------------------------------
 
-if (XPACK_ENABLE_MINIMAL_TEST)
-  add_native_test_executable (minimal-test)
-  target_link_native_test_libraries (minimal-test test::minimal)
+{%- assign nameDash = packageScopedName | replace: '@', '' | replace: '/', '-' %}
 
-  message (VERBOSE "A> minimal-test")
+if (CMAKE_BUILD_TYPE STREQUAL "Debug" AND CMAKE_CXX_COMPILER_ID STREQUAL
+                                          "AppleClang"
+)
+  # Enable it temporarily to check the coverage on macOS.
+  set (XPACK_ENABLE_COVERAGE true)
+endif ()
+{%- if testsConfig.useStaticLibrary %}
 
-  add_test (NAME "minimal-test" COMMAND minimal-test one two)
-  add_test (NAME "minimal-test --verbose" COMMAND minimal-test one two
-                                                  --verbose
+# The libraries are compiled before the platform library, so they need to get
+# the same compile options.
+add_compile_common_private_options (
+  {{nameDash}}-static-library
+)
+
+if (XPACK_ENABLE_COVERAGE)
+  add_compile_coverage_private_options (
+    {{nameDash}}-static-library
   )
-  add_test (NAME "minimal-test --quiet" COMMAND minimal-test one two --quiet)
-  add_test (NAME "minimal-test --silent" COMMAND minimal-test one two --silent)
 endif ()
-{% endif %}
+{%- endif %}
+{% for testName in testsConfig.tests %}
+{%- assign testUpperCase = testName | upcase %}
 # -----------------------------------------------------------------------------
 
-if (XPACK_ENABLE_SAMPLE_TEST)
-  add_native_test_executable (sample-test)
-  target_link_native_test_libraries (sample-test test::sample)
+if (XPACK_ENABLE_{{testUpperCase}}_TEST)
+  add_native_test_executable ({{testName}}-test)
+  target_link_native_test_libraries ({{testName}}-test tests::{{testName}})
 
-  message (VERBOSE "A> sample-test")
+{%- if testName == 'unit' %}
 
-  add_test (NAME "sample-test" COMMAND sample-test one two)
-{%- if packageScopedName == '@micro-os-plus/micro-test-plus' %}
-  add_test (NAME "sample-test --verbose" COMMAND sample-test one two --verbose)
-  add_test (NAME "sample-test --quiet" COMMAND sample-test one two --quiet)
-  add_test (NAME "sample-test --silent" COMMAND sample-test one two --silent)
+  if (XPACK_ENABLE_COVERAGE)
+    add_compile_coverage_private_options ({{testName}}-test)
+    add_link_coverage_private_options ({{testName}}-test)
+  endif ()
+{%- elsif testName == 'minimal' and packageScopedName == '@micro-os-plus/micro-test-plus' %}
+
+  # Only for this test, always define the trace macros, to check if the tracing
+  # support compiles  correctly.
+  target_compile_definitions (
+    minimal-test
+    PRIVATE MICRO_OS_PLUS_MICRO_TEST_PLUS_TRACE_CONSTRUCTORS_ENABLED
+            MICRO_OS_PLUS_MICRO_TEST_PLUS_TRACE_ENABLED
+  )
 {%- endif %}
-endif ()
 
-# -----------------------------------------------------------------------------
+  xpack_display_target_lists ({{testName}}-test)
+  message (VERBOSE "A> {{testName}}-test")
 
-if (XPACK_ENABLE_UNIT_TEST)
-  add_native_test_executable (unit-test)
-  target_link_native_test_libraries (unit-test test::unit)
+  # ---------------------------------------------------------------------------
+  # TAP reporter
 
-  message (VERBOSE "A> unit-test")
+  # --verbose
+  add_test (
+    NAME "{{testName}}-test-verbose" COMMAND {{testName}}-test one two --output-file {{testName}}-test-verbose.tap --verbose
+  )
 
-  add_test (NAME "unit-test" COMMAND unit-test)
-{%- if packageScopedName == '@micro-os-plus/micro-test-plus' %}
-  add_test (NAME "unit-test --verbose" COMMAND unit-test --verbose)
-  add_test (NAME "unit-test --quiet" COMMAND unit-test --quiet)
-  add_test (NAME "unit-test --silent" COMMAND unit-test --silent)
+{%- if testName == 'unit' %}
+
+  if (XPACK_ENABLE_COVERAGE)
+    set_tests_properties (
+      "{{testName}}-test-verbose"
+      PROPERTIES ENVIRONMENT
+                 "LLVM_PROFILE_FILE={{testName}}-test-verbose.profraw"
+    )
+
+    add_test (
+      NAME "{{testName}}-test-verbose-coverage"
+      COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/../../scripts/show-coverage.sh"
+              {{testName}}-test {{testName}}-test-verbose
+    )
+    set_tests_properties (
+      "{{testName}}-test-verbose-coverage"
+      PROPERTIES DEPENDS "{{testName}}-test-verbose"
+    )
+  endif ()
 {%- endif %}
-endif ()
 
+  add_compare_files_test (
+    NAME "{{testName}}-test-verbose-compare"
+    DEPENDS "{{testName}}-test-verbose"
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/{{testName}}-test-verbose.tap"
+          "${CMAKE_CURRENT_SOURCE_DIR}/../../assets/tap/{{testName}}-test.tap"
+  )
+
+  # default
+  add_test (
+    NAME "{{testName}}-test" COMMAND {{testName}}-test one two --output-file {{testName}}-test.tap
+  )
+  add_compare_files_test (
+    NAME "{{testName}}-test-compare"
+    DEPENDS "{{testName}}-test"
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/{{testName}}-test.tap"
+          "${CMAKE_CURRENT_SOURCE_DIR}/../../assets/tap/{{testName}}-test.tap"
+  )
+
+  # --quiet
+  add_test (NAME "{{testName}}-test-quiet"
+            COMMAND {{testName}}-test one two --output-file {{testName}}-test-quiet.tap --quiet
+  )
+  add_compare_files_test (
+    NAME "{{testName}}-test-quiet-compare"
+    DEPENDS "{{testName}}-test-quiet"
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/{{testName}}-test-quiet.tap"
+          "${CMAKE_CURRENT_SOURCE_DIR}/../../assets/tap/{{testName}}-test.tap"
+  )
+
+  # --silent
+  add_test (NAME "{{testName}}-test-silent"
+            COMMAND {{testName}}-test one two --output-file {{testName}}-test-silent.tap --silent
+  )
+  add_compare_files_test (
+    NAME "{{testName}}-test-silent-compare"
+    DEPENDS "{{testName}}-test-silent"
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/{{testName}}-test-silent.tap"
+          "${CMAKE_CURRENT_SOURCE_DIR}/../../assets/tap/{{testName}}-test.tap"
+  )
+
+  # ---------------------------------------------------------------------------
+  # Human reporter
+
+  # --verbose
+  add_test (
+    NAME "{{testName}}-test-reporter-human-verbose" COMMAND {{testName}}-test one two --reporter human --output-file {{testName}}-test-verbose.txt --verbose
+  )
+  add_compare_files_test (
+    NAME "{{testName}}-test-reporter-human-verbose-compare"
+    DEPENDS "{{testName}}-test-reporter-human-verbose"
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/{{testName}}-test-verbose.txt"
+          "${CMAKE_CURRENT_SOURCE_DIR}/../../assets/txt/{{testName}}-test.txt"
+  )
+
+  # default
+  add_test (
+    NAME "{{testName}}-test-reporter-human" COMMAND {{testName}}-test one two --reporter human --output-file {{testName}}-test.txt
+  )
+  add_compare_files_test (
+    NAME "{{testName}}-test-reporter-human-compare"
+    DEPENDS "{{testName}}-test-reporter-human"
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/{{testName}}-test.txt"
+          "${CMAKE_CURRENT_SOURCE_DIR}/../../assets/txt/{{testName}}-test.txt"
+  )
+
+  # --quiet
+  add_test (
+    NAME "{{testName}}-test-reporter-human-quiet" COMMAND {{testName}}-test one two --reporter human --output-file {{testName}}-test-quiet.txt --quiet
+  )
+  add_compare_files_test (
+    NAME "{{testName}}-test-reporter-human-quiet-compare"
+    DEPENDS "{{testName}}-test-reporter-human-quiet"
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/{{testName}}-test-quiet.txt"
+          "${CMAKE_CURRENT_SOURCE_DIR}/../../assets/txt/{{testName}}-test-quiet.txt"
+  )
+
+  # --silent
+  add_test (
+    NAME "{{testName}}-test-reporter-human-silent" COMMAND {{testName}}-test one two --reporter human --output-file {{testName}}-test-silent.txt --silent
+  )
+  add_compare_files_test (
+    NAME "{{testName}}-test-reporter-human-silent-compare"
+    DEPENDS "{{testName}}-test-reporter-human-silent"
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/{{testName}}-test-silent.txt"
+          "${CMAKE_CURRENT_SOURCE_DIR}/../../assets/txt/{{testName}}-test-silent.txt"
+  )
+
+endif ()
+{% endfor %}
 # -----------------------------------------------------------------------------

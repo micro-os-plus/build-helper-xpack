@@ -1,0 +1,44 @@
+{%- assign nameDash = packageScopedName | replace: '@', '' | replace: '/', '-' %}
+{%- if testsConfig.useStaticLibrary %}
+
+# The libraries are compiled before the platform library, so they need to get
+# the same compile options.
+add_compile_common_private_options (
+  {{nameDash}}-static-library
+)
+{%- endif %}
+{% for testName in testsConfig.tests %}
+{%- assign testUpperCase = testName | upcase %}
+# -----------------------------------------------------------------------------
+
+if (XPACK_ENABLE_{{testUpperCase}}_TEST)
+  add_cross_test_executable ({{testName}}-test)
+  target_link_cross_test_libraries ({{testName}}-test tests::{{testName}})
+
+  xpack_display_target_lists ({{testName}}-test)
+  message (VERBOSE "A> {{testName}}-test")
+
+  add_qemu_test (
+    NAME "{{testName}}-test" COMMAND {{testName}}-test one two --output-file {{testName}}-test{{suffix}}.tap
+  )
+  add_compare_files_test (
+    NAME "{{testName}}-test-compare"
+    DEPENDS "{{testName}}-test"
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/{{testName}}-test{{suffix}}.tap"
+          "${CMAKE_CURRENT_SOURCE_DIR}/../../assets/tap/{{testName}}-test{{suffix}}.tap"
+  )
+{%- if testName == 'unit' %}
+
+  add_qemu_test (
+    NAME "{{testName}}-test-reporter-human" COMMAND {{testName}}-test one two --reporter human --output-file {{testName}}-test{{suffix}}.txt
+  )
+  add_compare_files_test (
+    NAME "{{testName}}-test-reporter-human-compare"
+    DEPENDS "{{testName}}-test-reporter-human"
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/{{testName}}-test{{suffix}}.txt"
+          "${CMAKE_CURRENT_SOURCE_DIR}/../../assets/txt/{{testName}}-test{{suffix}}.txt"
+  )
+{%- endif %}
+endif ()
+{% endfor %}
+# -----------------------------------------------------------------------------
