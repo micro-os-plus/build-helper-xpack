@@ -58,7 +58,7 @@ foreach test : tests
 {%- if packageScopedName == '@micro-os-plus/diag-trace' %}
 
   if test_name != 'null-test'
-    _local_compile_args += [ '-DMICRO_OS_PLUS_TRACE' ]
+    _local_compile_args += [ '-DMICRO_OS_PLUS_DIAG_TRACE_ENABLED' ]
   endif
 {%- endif %}
 

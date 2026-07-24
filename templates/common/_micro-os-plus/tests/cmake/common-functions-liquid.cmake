@@ -38,7 +38,7 @@ function (add_native_test_executable name)
 {%- if packageScopedName == '@micro-os-plus/diag-trace' %}
 
   if (NOT name STREQUAL "null-test")
-    target_compile_definitions (${name} PUBLIC "MICRO_OS_PLUS_TRACE_ENABLED")
+    target_compile_definitions (${name} PUBLIC "MICRO_OS_PLUS_DIAG_TRACE_ENABLED")
   endif ()
 {%- endif %}
 
@@ -80,7 +80,7 @@ function (add_cross_test_executable name)
 {%- if packageScopedName == '@micro-os-plus/diag-trace' %}
 
   if (NOT name STREQUAL "null-test")
-    target_compile_definitions (${name} PUBLIC "MICRO_OS_PLUS_TRACE_ENABLED")
+    target_compile_definitions (${name} PUBLIC "MICRO_OS_PLUS_DIAG_TRACE_ENABLED")
   endif ()
 {%- endif %}
 

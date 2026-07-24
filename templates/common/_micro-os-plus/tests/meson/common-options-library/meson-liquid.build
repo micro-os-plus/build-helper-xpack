@@ -36,7 +36,7 @@ if c_compiler.get_id() == 'gcc' or c_compiler.get_id().contains('clang')
     _local_compile_definitions += [ '-DDEBUG' ]
     _local_compile_definitions += [ '-DMICRO_OS_PLUS_DEBUG_ENABLED' ]
   {%- if packageScopedName != '@micro-os-plus/diag-trace' %}
-    # _local_compile_definitions += [ '-DMICRO_OS_PLUS_TRACE' ]
+    # _local_compile_definitions += [ '-DMICRO_OS_PLUS_DIAG_TRACE_ENABLED' ]
   {%- endif %}
     _local_link_args += [ '-v' ]
   endif
