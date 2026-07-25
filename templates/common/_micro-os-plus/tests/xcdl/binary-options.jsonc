@@ -1,6 +1,6 @@
 {
   // DO NOT EDIT! 
-  // Automatically generated from build-helper/templates.
+  // Automatically generated from build-helper/templates/*.
   "$schema": "https://xpack.github.io/xcdl/schemas/xcdl-2.0.0.json",
   "minimumXcdlRequired": "2.0.0",
   "license": "MIT",

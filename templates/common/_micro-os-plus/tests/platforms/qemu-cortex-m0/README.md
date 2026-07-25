@@ -1,7 +1,7 @@
 # platforms/qemu-cortex-m0
 
 > DO NOT EDIT!
-> Automatically generated from build-helper/templates.
+> Automatically generated from build-helper/templates/*.
 
 Support files for building Cortex-M0 application to run on the
 QEMU "mps2-an385" emulated board (which is a Cortex-M3 board).

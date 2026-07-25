@@ -1,6 +1,6 @@
 # CMake Tips and tricks
 
-DO NOT EDIT! Automatically generated from build-helper/templates.
+DO NOT EDIT! Automatically generated from build-helper/templates/*.
 
 Extracts from Craig Scott's "Professional CMake - A Practical Guide".
 

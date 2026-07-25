@@ -1,7 +1,7 @@
 # platforms/qemu-riscv-rv64imafdc
 
 > DO NOT EDIT!
-> Automatically generated from build-helper/templates.
+> Automatically generated from build-helper/templates/*.
 
 Support files for building application to run on the QEMU "virt"
 emulated board.

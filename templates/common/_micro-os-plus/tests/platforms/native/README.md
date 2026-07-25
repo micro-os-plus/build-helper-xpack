@@ -1,7 +1,7 @@
 # platforms/native
 
 > DO NOT EDIT!
-> Automatically generated from build-helper/templates.
+> Automatically generated from build-helper/templates/*.
 
 Support files for building applications to run as native processes.
 

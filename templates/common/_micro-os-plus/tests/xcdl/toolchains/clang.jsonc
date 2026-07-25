@@ -1,6 +1,6 @@
 {
   // DO NOT EDIT! 
-  // Automatically generated from build-helper/templates.
+  // Automatically generated from build-helper/templates/*.
   "osPlatforms": {
     "linux": {
       "c": "clang",

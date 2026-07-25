@@ -1,6 +1,6 @@
 # CMake
 
-DO NOT EDIT! Automatically generated from build-helper/templates.
+DO NOT EDIT! Automatically generated from build-helper/templates/*.
 
 These files are intended as helpers during CMake builds.
 
