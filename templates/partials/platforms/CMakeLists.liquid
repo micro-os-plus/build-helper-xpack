@@ -8,7 +8,7 @@ add_compile_common_private_options (
 )
 {%- endif %}
 {% for testName in testsConfig.tests %}
-{%- assign testUpperCase = testName | upcase %}
+{%- assign testUpperCase = testName | replace: '-', '_' | upcase %}
 # -----------------------------------------------------------------------------
 
 if (XPACK_ENABLE_{{testUpperCase}}_TEST)
@@ -17,6 +17,13 @@ if (XPACK_ENABLE_{{testUpperCase}}_TEST)
 
   xpack_display_target_lists ({{testName}}-test)
   message (VERBOSE "A> {{testName}}-test")
+
+{%- if packageScopedName != '@micro-os-plus/micro-test-plus' %}
+
+  add_qemu_test (
+    NAME "{{testName}}-test" COMMAND {{testName}}-test one two
+  )
+{%- else %}
 
   add_qemu_test (
     NAME "{{testName}}-test" COMMAND {{testName}}-test one two --output-file {{testName}}-test{{suffix}}.tap
@@ -38,6 +45,7 @@ if (XPACK_ENABLE_{{testUpperCase}}_TEST)
     FILES "${CMAKE_CURRENT_BINARY_DIR}/{{testName}}-test{{suffix}}.txt"
           "${CMAKE_CURRENT_SOURCE_DIR}/../../assets/txt/{{testName}}-test{{suffix}}.txt"
   )
+{%- endif %}
 {%- endif %}
 endif ()
 {% endfor %}

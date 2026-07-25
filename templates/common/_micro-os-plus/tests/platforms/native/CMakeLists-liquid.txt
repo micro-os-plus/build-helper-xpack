@@ -43,7 +43,7 @@ if (XPACK_ENABLE_COVERAGE)
 endif ()
 {%- endif %}
 {% for testName in testsConfig.tests %}
-{%- assign testUpperCase = testName | upcase %}
+{%- assign testUpperCase = testName | replace: '-', '_' | upcase %}
 # -----------------------------------------------------------------------------
 
 if (XPACK_ENABLE_{{testUpperCase}}_TEST)
@@ -69,6 +69,33 @@ if (XPACK_ENABLE_{{testUpperCase}}_TEST)
 
   xpack_display_target_lists ({{testName}}-test)
   message (VERBOSE "A> {{testName}}-test")
+
+{%- if packageScopedName != '@micro-os-plus/micro-test-plus' %}
+
+  add_test (
+    NAME "{{testName}}-test" COMMAND {{testName}}-test one two
+  )
+{%- if testName == 'unit' %}
+
+  if (XPACK_ENABLE_COVERAGE)
+    set_tests_properties (
+      "{{testName}}-test"
+      PROPERTIES ENVIRONMENT
+                 "LLVM_PROFILE_FILE={{testName}}-test.profraw"
+    )
+
+    add_test (
+      NAME "{{testName}}-test-coverage"
+      COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/../../scripts/show-coverage.sh"
+              {{testName}}-test {{testName}}-test
+    )
+    set_tests_properties (
+      "{{testName}}-test-coverage"
+      PROPERTIES DEPENDS "{{testName}}-test"
+    )
+  endif ()
+{%- endif %}
+{%- else %}
 
   # ---------------------------------------------------------------------------
   # TAP reporter
@@ -185,7 +212,7 @@ if (XPACK_ENABLE_{{testUpperCase}}_TEST)
     FILES "${CMAKE_CURRENT_BINARY_DIR}/{{testName}}-test-silent.txt"
           "${CMAKE_CURRENT_SOURCE_DIR}/../../assets/txt/{{testName}}-test-silent.txt"
   )
-
+{% endif %}
 endif ()
 {% endfor %}
 # -----------------------------------------------------------------------------
