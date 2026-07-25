@@ -1,0 +1,29 @@
+# -----------------------------------------------------------------------------
+
+# https://mesonbuild.com/Unit-tests.html#malloc_perturb_
+xpack_environment = environment()
+xpack_environment.set('MALLOC_PERTURB_', '0')
+{% for testName in testsConfig.tests %}
+# -----------------------------------------------------------------------------
+{%- if forloop.first %}
+
+# Define the tests commands.
+{%- endif %}
+
+if (xpack_enable_{{testName}}_test)
+
+  # https://mesonbuild.com/Reference-manual_functions.html#test
+  test(
+    '{{testName}}-test',
+    qemu,
+    args: qemu_machine_args + 
+      [ '--kernel', {{testName}}_test ] + 
+      qemu_extra_args + 
+      [ '--semihosting-config', 
+      'enable=on,target=native,arg={{testName}}-test,arg=one,arg=two' ],
+    env: xpack_environment
+  )
+
+endif
+{% endfor %}
+# -----------------------------------------------------------------------------

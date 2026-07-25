@@ -1,0 +1,28 @@
+# -----------------------------------------------------------------------------
+# DO NOT EDIT! 
+# Automatically generated from build-helper/templates.
+#
+# This file is part of the µOS++ project (https://micro-os-plus.github.io/).
+# Copyright (c) 2022-2026 Liviu Ionescu. All rights reserved.
+#
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose is hereby granted, under the terms of the MIT license.
+#
+# If a copy of the license was not distributed with this file, it can be
+# obtained from https://opensource.org/licenses/mit.
+#
+# -----------------------------------------------------------------------------
+
+# Create the platform specific test executables.
+
+# -----------------------------------------------------------------------------
+
+message('Processing tests/platforms/qemu-cortex-m0...')
+
+# -----------------------------------------------------------------------------
+
+qemu = find_program('qemu-system-arm')
+qemu_machine_args = [ '--machine', 'mps2-an385', '--cpu', 'cortex-m3' ]
+qemu_extra_args = [ '--nographic', '-d', 'unimp,guest_errors' ]
+
+{% render './platforms/meson.liquid' packageScopedName: packageScopedName, testsConfig: testsConfig %}
