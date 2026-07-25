@@ -1,0 +1,1 @@
+{% render './platforms/include/micro-os-plus/micro-test-plus-defines-liquid.h' packageScopedName: packageScopedName, testsConfig: testsConfig %}

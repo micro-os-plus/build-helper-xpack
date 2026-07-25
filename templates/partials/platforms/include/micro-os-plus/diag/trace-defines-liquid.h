@@ -26,16 +26,21 @@
 #define MICRO_OS_PLUS_DIAG_TRACE_PRINTF_BUFFER_ARRAY_SIZE_INTEGER (512)
 #endif // !defined(MICRO_OS_PLUS_DIAG_TRACE_PRINTF_BUFFER_ARRAY_SIZE_INTEGER)
 
-// The synthetic POSIX architecture is an environment that allows to run µOS++
-// applications on a POSIX host, using the POSIX API.
-#if !defined(MICRO_OS_PLUS_DIAG_TRACE_POSIX_ENABLED)
-#define MICRO_OS_PLUS_DIAG_TRACE_POSIX_ENABLED
-#endif // !defined(MICRO_OS_PLUS_DIAG_TRACE_POSIX_ENABLED)
+// The semihosting trace::printf() implementation.
+#if !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_ENABLED)
+#define MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_ENABLED
+#endif // !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_ENABLED)
 
-// The diag trace channel is implemented over the POSIX standard output.
-#if !defined(MICRO_OS_PLUS_DIAG_TRACE_POSIX_STDOUT_ENABLED)
-#define MICRO_OS_PLUS_DIAG_TRACE_POSIX_STDOUT_ENABLED
-#endif // !defined(MICRO_OS_PLUS_DIAG_TRACE_POSIX_STDOUT_ENABLED)
+// A diag trace channel implemented over the semihosting SYS_WRITE call on
+// STDOUT.
+#if !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_STDOUT_ENABLED)
+#define MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_STDOUT_ENABLED
+#endif // !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_STDOUT_ENABLED)
+
+// A diag trace channel implemented over the semihosting SYS_WRITE0 call
+// #if !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_DEBUG_ENABLED)
+// #define MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_DEBUG_ENABLED
+// #endif // !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_DEBUG_ENABLED)
 
 // ----------------------------------------------------------------------------
 

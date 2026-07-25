@@ -1,0 +1,1 @@
+{% render './platforms/include/micro-os-plus/project-config-liquid.h' packageScopedName: packageScopedName, testsConfig: testsConfig %}

@@ -1,0 +1,1 @@
+{% render './platforms/include/micro-os-plus/semihosting-defines-liquid.h' packageScopedName: packageScopedName, testsConfig: testsConfig %}
