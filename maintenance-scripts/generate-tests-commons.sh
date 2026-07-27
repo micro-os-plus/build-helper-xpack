@@ -81,6 +81,10 @@ tests_folder_path="${project_folder_path}/tests"
 templates_folder_path="$(dirname "${script_folder_path}")/templates"
 partials_folder_path="$(dirname "${script_folder_path}")/templates/partials"
 
+templates_relative_folder_path="${templates_folder_path#${project_folder_path}/}"
+templates_relative_folder_path="${templates_relative_folder_path#*node_modules/@xpack/}"
+templates_relative_folder_path="${templates_relative_folder_path#*node_modules/@micro-os-plus/}"
+
 export current_folder_path
 export project_folder_path
 export templates_folder_path
@@ -111,6 +115,7 @@ fi
 
 if [ "${do_init}" == "true" ]
 then
+  export substitution_prefix=""
   cd "${templates_folder_path}/common/_micro-os-plus/tests"
   substitute "package-merge-liquid.json" "package.json" "${project_folder_path}/tests"
   exit 0
@@ -136,6 +141,7 @@ else
   echo "Processing template from ${templates_folder_path}..."
 
   cd "${templates_folder_path}/common"
+  export substitution_prefix="${templates_relative_folder_path}/common"
 
   # Main pass to copy/generate common files.
   while IFS= read -r -d '' file
@@ -168,6 +174,7 @@ else
   echo "First time proposals..."
 
   cd "${templates_folder_path}/first-time"
+  export substitution_prefix="${templates_relative_folder_path}/first-time"
 
   while IFS= read -r -d '' file
   do

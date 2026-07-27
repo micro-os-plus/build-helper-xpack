@@ -1,0 +1,78 @@
+{
+  // DO NOT EDIT!  Automatically generated from template file:
+  // {{fromFilePath}}
+  "$schema": "https://xpack.github.io/xcdl/schemas/xcdl-2.0.0.json",
+  "minimumXcdlRequired": "2.0.0",
+  "license": "MIT",
+  "copyright": "Copyright (c) 2026 Liviu Ionescu. All rights reserved",
+  {% raw %}"cdlComponents": [
+    {
+      "root": true,
+      "id": "micro-os-plus",
+      "display": "µOS++",
+      "description": "The µOS++ C++ Framework",
+      "docsUrl": "https://micro-os-plus.github.io/",
+      "cdlComponents": [
+        {
+          "id": "architectures",
+          "display": "Architectures",
+          "description": "The µOS++ supported architectures",
+          "$comments": [
+            "Architecture packages will add components here."
+          ]
+        },
+        {
+          "id": "devices",
+          "display": "Devices",
+          "description": "The µOS++ supported devices",
+          "$comments": [
+            "Device packages will add components here."
+          ]
+        },
+        {
+          "id": "platforms",
+          "display": "Platforms",
+          "description": "The µOS++ supported platforms",
+          "$comments": [
+            "Platform packages will add components here."
+          ]
+        }
+      ],
+      "cdlInterfaces": [
+        {
+          "id": "architecture",
+          "display": "Architecture Interface",
+          "description": "Only one architecture interface must be implemented by the architecture library",
+          "legalValues": 1
+        },
+        {
+          "id": "device",
+          "display": "Device Interface",
+          "description": "Only one device interface must be implemented by the device library",
+          "legalValues": 1
+        },
+        {
+          "id": "platform",
+          "display": "Platform Interface",
+          "description": "Only one platform interface must be implemented by the platform library",
+          "legalValues": 1
+        }
+      ],
+      "cdlOptions": [
+        {
+          "id": "debug",
+          "display": "Debug",
+          "description": "Enable or disable debug mode",
+          "defaultValue": false,
+          // "defaultDefine": "MICRO_OS_PLUS_DEBUG_ENABLED"
+        }
+      ]
+    },
+    {
+      "root": true,
+      "id": "xpack-3rd-party",
+      "display": "3rd party components",
+      "description": "The top node for 3rd party components"
+    }
+  ]{% endraw %}
+}

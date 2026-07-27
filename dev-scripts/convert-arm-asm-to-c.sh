@@ -78,8 +78,8 @@ cat <<__EOF__
 // clang-format off
 // ----------------------------------------------------------------------------
 
-#include <micro-os-plus/architecture.h>
-#include <micro-os-plus/architecture-cortexm/exception-handlers.h>
+#include "micro-os-plus/architecture.h"
+#include "micro-os-plus/architecture-cortexm/exception-handlers.h"
 
 // ----------------------------------------------------------------------------
 

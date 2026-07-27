@@ -1,5 +1,6 @@
 # -----------------------------------------------------------------------------
-# DO NOT EDIT! Automatically generated from build-helper/templates/*.
+# DO NOT EDIT! Automatically generated from template file:
+# {{fromFilePath}}
 #
 # This file is part of the µOS++ project (https://micro-os-plus.github.io/).
 # Copyright (c) 2022-2026 Liviu Ionescu. All rights reserved.
@@ -36,7 +37,7 @@ set (
 {%- if packageScopedName != '@micro-os-plus/micro-test-plus' %}
   "${CMAKE_SOURCE_DIR}/xpacks/@micro-os-plus/micro-test-plus"
 {%- endif %}
-
+  #
   # Platform specific dependencies.
   "${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/architecture-synthetic-posix"
 )

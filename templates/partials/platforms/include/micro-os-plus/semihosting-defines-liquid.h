@@ -1,5 +1,5 @@
-// DO NOT EDIT!
-// Automatically generated from build-helper/templates/*.
+// DO NOT EDIT!  Automatically generated from template file:
+// {{fromFilePath}}
 // TODO: generate it via xcdl, and remove this other one from the tests.
 
 // ----------------------------------------------------------------------------

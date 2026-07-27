@@ -3,8 +3,8 @@
 {%- assign component = xcdl.cdlComponents[0] %}
 {%- assign nameUnderscore = component.id | replace: '-', '_' | replace: '.', '_' -%}
 # -----------------------------------------------------------------------------
-# DO NOT EDIT!
-# Automatically generated from {{jsonFilePath}}.
+# DO NOT EDIT! Automatically generated from template file:
+# {{jsonFilePath}}
 #
 # This file is part of the µOS++ project (https://micro-os-plus.github.io/).
 # Copyright (c) 2022-2026 Liviu Ionescu. All rights reserved.

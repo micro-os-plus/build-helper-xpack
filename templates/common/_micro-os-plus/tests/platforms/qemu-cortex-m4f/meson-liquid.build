@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
-# DO NOT EDIT! 
-# Automatically generated from build-helper/templates/*.
+# DO NOT EDIT! Automatically generated from template file:
+# {{fromFilePath}}
 #
 # This file is part of the µOS++ project (https://micro-os-plus.github.io/).
 # Copyright (c) 2022-2026 Liviu Ionescu. All rights reserved.
@@ -25,4 +25,4 @@ qemu = find_program('qemu-system-arm')
 qemu_machine_args = [ '--machine', 'mps2-an386', '--cpu', 'cortex-m4' ]
 qemu_extra_args = [ '--nographic', '-d', 'unimp,guest_errors' ]
 
-{% render './platforms/meson.liquid' packageScopedName: packageScopedName, testsConfig: testsConfig %}
+{% render './platforms/meson.liquid' packageScopedName: packageScopedName, testsConfig: testsConfig, fromFilePath: fromFilePath%}
