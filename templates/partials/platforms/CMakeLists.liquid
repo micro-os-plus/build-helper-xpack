@@ -6,6 +6,13 @@
 add_compile_common_private_options (
   {{nameDash}}-static-library
 )
+{%- elsif testsConfig.useObjectsLibrary %}
+
+# The libraries are compiled before the platform library, so they need to get
+# the same compile options.
+add_compile_common_private_options (
+  {{nameDash}}-objects-library
+)
 {%- endif %}
 {% for testName in testsConfig.tests %}
 {%- assign testUpperCase = testName | replace: '-', '_' | upcase %}
