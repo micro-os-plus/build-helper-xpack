@@ -26,7 +26,7 @@
     "liquidjs": "^10.25.0"
   },
   "scripts": {
-    "generate-tests-commons": "bash node_modules/@micro-os-plus/build-helper/maintenance-scripts/generate-tests-commons.sh --micro-os-plus",
+    "generate-tests-commons": "node node_modules/@micro-os-plus/build-helper/maintenance-scripts/generate-tests-commons.mjs --micro-os-plus",
     "npm-ci": "npm ci",
     "npm-install": "npm install",
     "npm-link-helpers": "npm link @xpack/npm-packages-helper @micro-os-plus/build-helper",
