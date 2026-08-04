@@ -5,7 +5,8 @@
   "main": "",
   "files": [
     "doxygen",
-    "maintenance-scripts"
+    "maintenance-scripts",
+    "templates"
   ],
   "scripts": {
     "generate-top-commons": "bash node_modules/@xpack/npm-packages-helper/maintenance-scripts/generate-top-commons.sh --micro-os-plus",
