@@ -6,9 +6,152 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2026-08-04
+
+* v4.0.0
+* 83dca5a convert to xcdl-export-liquid.mjs
+
+## 2026-08-03
+
+* 3102d15 convert generate-tests-commons.mjs
+* 1032b15 platform-library-liquid.cmake add -fsanitize to native
+* 833ce10 comment out doxygen DOT_MULTI_TARGETS
+
+## 2026-07-28
+
+* becc293 process {{fromFilePath}}
+* 51ff57d process useObjectsLibrary
+
+## 2026-07-25
+
+* c8c29c0 update Automatically generated notice
+* 5827755 partials: update DO NOT EDIT notice
+* 5ea79ad templates: update partials
+* a21ffb1 templates: move most headers to partials
+* 6126bee rework platform meson.build & move to common
+* 3c9640c update templates startup-defines.h
+
+## 2026-07-24
+
+* baa340d move platform CMakeLists-liquid.txt to common DO NOT EDIT
+* 0b0cae6 re-work template CMakeLists-liquid.txt
+* 0ae2d23 generate-tests-commons: add partials_folder_path
+* 3dad652 templates MICRO_OS_PLUS_DIAG_TRACE_ENABLED
+* c5829dc templates trace-defines-liquid.h
+
+## 2026-07-23
+
+* 3d6bd72 templates cosmetise .h files
+* 21a0758 xpack-root.json
+* f5457f7 templates updates for xcdl
+* f08a07e fix copyright notices
+
+## 2026-07-19
+
+* 20bb869 template first-time cleanups
+* e200c66 package-merge-liquid update for buildVerbose
+
+## 2026-07-16
+
+* 5335862 templates/native update reference
+
+## 2026-07-15
+
+* 0fd46a1 package-merge-liquid.json bump deps
+* 0f33d2f tmplates micro-os-plus updates
+
+## 2026-07-03
+
+* fc5cc68 templates update for diag-trace
+* 8022db3 add DO NOT EDIT
+* c56d3f3 add -stdlib=libc++ to cpp in meson
+* 8a6450e fix project url to github.io
+
+## 2026-07-02
+
+* 783a895 package-merge-liquid.json cosmetics
+
+## 2026-07-01
+
+* b1e4677 package-merge-liquid.json update more xcdl
+
+## 2026-06-20
+
+* 90a3081 micro-os-plus templates updates
+
+## 2026-06-17
+
+* b5d7b1a package-merge-liquid.json update xcdl-export
+* 0b3e4c7 xpack-root.json update
+* 882dca3 tests/xcdl files update
+* 9e0e289 cmake & meson templates update
+
+## 2026-06-16
+
+* 81353d7 templates remove cdlPackage
+
+## 2026-06-15
+
+* 9bfd5b2 templates cmake - meson consistency
+* ad54bd8 templates updates
+* d783bce templates build-helper NOT IS_ABSOLUTE
+* fcb0557 package-merge-liquid.json: update tests
+* 15e3a67 template meson cleanups
+
+## 2026-06-14
+
+* d128ce3 xpack-root update
+* 071fc8c add copilot-instructions
+* 3476e71 .vscode empty cmake-kits
+* e61e222 _micro-os-plus template add xcdl-export
+* 68687c5 _micro-os-plus template update
+
+## 2026-05-22
+
+* 8cbce34 add cmake add_compare_files_test & add_qemu_test
+* 82469e7 add scripts/compare-files.sh
+
+## 2026-05-17
+
+* 770559b templates config updates
+* 7148fde package-merge-liquid.json: bump deps
+* e4306f7 add scripts/show-coverage.sh
+* 8d790cc CMakeLists.txt LANGUAGES CXX
+* 92620ab README: add coverage
+* 09954b1 package-merge-liquid.json: short-win-paths-properties
+* 7050d51 platform object library cleanups
+* 4a4da07 xpack_display_target_lists() update
+* fdb7cc3 cosmetics
+* 418450b add_compile_coverage_private_options
+* 099e079 copyright notices reformat
+
+## 2026-04-30
+
+* 2562f9e package-merge-liquid bump micro-test-plus 4.0.0
+* 5d397d3 common-options fix liquid
+* c691192 .vscode/settings.json fix cmake formatOnSave
+* bff7b31 platforms: README updates
+* ab68d27 fix if hasObjectLibrary
+
+## 2026-04-29
+
+* 5983234 platforms: updates
+* 415736f meson/common-options aarch64 -Og
+* 85091bc common-options-library-liquid.cmake: xpack_global_common_options
+* e6dcb63 common-functions.cmake: add size & objdump
+* 672bb7e toolchains: aarch64 use -Og
+* 059bd05 package-merge-liquid.json: bump deps
+
+## 2026-03-23
+
+* 9b3a70d package-merge-liquid: micro-test-plus 3.3.0
+* a88605a add empty .npmignore
+* b088baf move tests to sources
+
 ## 2026-03-17
 
-* v3.0.1
+* d4f5167 3.0.1
+* ab4918d prepare v3.0.1
 * a8f95f0 templates cosmetics
 * c481dd8 more conditionals in platforms
 

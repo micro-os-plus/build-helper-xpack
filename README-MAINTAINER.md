@@ -62,15 +62,15 @@ No need to add a tag here, it'll be added when the release is created.
 
 Update the`package.json` file; add an extra field in the
 pre-release field, and initially also add `.pre`,
-for example `3.0.1-pre`.
+for example `4.0.0-pre`.
 
 ### Fix possible open issues
 
 Check GitHub issues and pull requests:
 
-- <https://github.com/micro-os-plus/build-helper/issues/>
+- <https://github.com/micro-os-plus/build-helper-xpack/issues/>
 
-and fix them; assign them to a milestone (like `3.0.1`).
+and fix them; assign them to a milestone (like `4.0.0`).
 
 ### Update `README-MAINTAINER.md`
 
@@ -84,8 +84,8 @@ related to the new version:
 
 - open the `CHANGELOG.md` file
 - check if all previous fixed issues are in
-- add a new entry like _* v3.0.1_
-- commit with a message like _prepare v3.0.1_
+- add a new entry like _* v4.0.0_
+- commit with a message like _prepare v4.0.0_
 
 ### Push changes
 
@@ -99,7 +99,7 @@ related to the new version:
   only `package.json`, `README.md`, `LICENSE`, `CHANGELOG.md`,
   the `doxygen-awesome-*.js` and `doxygen-custom/*` files;
   possibly adjust `.npmignore`
-- `npm version 3.0.1`
+- `npm version 4.0.0`
 - push the `xpack-development` branch to GitHub
 - the `postversion` npm script should also update tags via `git push origin --tags`
 - wait for the CI job to complete
