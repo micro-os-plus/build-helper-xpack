@@ -23,7 +23,7 @@
     "del-cli": "^7.0.0",
     "json": "^11.0.0",
     "json5": "^2.2.3",
-    "liquidjs": "^10.25.0"
+    "liquidjs": "^10.28.0"
   },
   "scripts": {
     "generate-tests-commons": "node node_modules/@micro-os-plus/build-helper/maintenance-scripts/generate-tests-commons.mjs --micro-os-plus",
@@ -204,18 +204,18 @@
         "https://www.npmjs.com/package/@xpack-dev-tools/openocd"
       ],
       "dependencies-releases": {
-        "@micro-os-plus/architecture-synthetic-posix": "^4.0.4",
-        "@micro-os-plus/architecture-cortexm": "^6.3.0",
-        "@micro-os-plus/devices-qemu-cortexm": "^5.1.0",
-        "@micro-os-plus/architecture-riscv": "^4.1.0",
-        "@micro-os-plus/devices-qemu-riscv": "^1.0.1",
-        "@micro-os-plus/architecture-aarch32": "^3.2.0",
-        "@micro-os-plus/devices-qemu-aarch32": "^4.1.0",
-        "@micro-os-plus/architecture-aarch64": "^3.2.0",
-        "@micro-os-plus/devices-qemu-aarch64": "^4.1.0",
-        "@micro-os-plus/semihosting": "^8.0.0",
-        "@micro-os-plus/startup": "^5.2.0",
-        "@xpack-3rd-party/arm-cmsis-core": "5.4.0-6",
+        "@micro-os-plus/architecture-synthetic-posix": "^5.0.0",
+        "@micro-os-plus/architecture-cortexm": "^7.0.0",
+        "@micro-os-plus/devices-qemu-cortexm": "^6.0.0",
+        "@micro-os-plus/architecture-riscv": "^5.0.0",
+        "@micro-os-plus/devices-qemu-riscv": "^2.0.0",
+        "@micro-os-plus/architecture-aarch32": "^4.0.0",
+        "@micro-os-plus/devices-qemu-aarch32": "^5.0.0",
+        "@micro-os-plus/architecture-aarch64": "^4.0.0",
+        "@micro-os-plus/devices-qemu-aarch64": "^5.0.0",
+        "@micro-os-plus/semihosting": "^9.0.0",
+        "@micro-os-plus/startup": "^6.0.0",
+        "@xpack-3rd-party/arm-cmsis-core": "5.4.0-7",
         "@xpack-dev-tools/qemu-arm": "9.2.4-1.1",
         "@xpack-dev-tools/qemu-riscv": "9.2.4-1.1",
         "@xpack-dev-tools/openocd": "0.12.0-7.1"
@@ -294,7 +294,7 @@
     },
     "actions": {
       "xcdl-export": [
-        "bash scripts/xcdl-export.sh sources/*/xcdl-*.jsonc"
+        "node scripts/xcdl-export.mjs sources/*/xcdl-*.jsonc"
       ],
       "install": [
         "xpm install",
