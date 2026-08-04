@@ -184,27 +184,34 @@ There are a few GCC specific warnings, that are not accepted by clang,
 for example:
 
 ```c
-#if defined(__GNUC__) && !defined(__clang__)
+#if defined(__clang__)
+#elif defined(__GNUC__)
 #pragma GCC diagnostic ignored "-Wuseless-cast"
 #pragma GCC diagnostic ignored "-Wsuggest-final-types"
 #pragma GCC diagnostic ignored "-Wsuggest-final-methods"
 #if __GNUC__ >= 10
 #pragma GCC diagnostic ignored "-Wredundant-tags"
-#endif
-#endif
+#endif // __GNUC__ >= 10
+#endif // defined(__clang__)
 ```
 
 For header files included in both C and C++ sources, it might be
 necessary to disable the `-Wold-style-cast` warning:
 
 ```c
+#if defined(__GNUC__)
 #pragma GCC diagnostic push
 
 #if defined(__cplusplus)
 #pragma GCC diagnostic ignored "-Wold-style-cast"
-#endif
+#endif // defined(__cplusplus)
+#endif // defined(__GNUC__)
 
+// ...
+
+#if defined(__GNUC__)
 #pragma GCC diagnostic pop
+#endif // defined(__GNUC__)
 ```
 
 Other warnings:
@@ -232,13 +239,19 @@ is ok, but there are several clang specific warnings, that need conditional
 compiling like:
 
 ```c
+#if defined(__GNUC__)
 #pragma GCC diagnostic push
 
 #if defined(__clang__)
 #pragma clang diagnostic ignored "-Wc++98-compat"
-#endif
+#endif // defined(__clang__)
+#endif // defined(__GNUC__)
 
+// ...
+
+#if defined(__GNUC__)
 #pragma GCC diagnostic pop
+#endif // defined(__GNUC__)
 ```
 
 Other warnings:
