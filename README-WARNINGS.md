@@ -175,6 +175,7 @@ Silencing GCC warnings is strightforward:
 
 ```c
 #pragma GCC diagnostic push
+
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
 #pragma GCC diagnostic pop
