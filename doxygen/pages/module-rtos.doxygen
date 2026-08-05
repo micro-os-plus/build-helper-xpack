@@ -63,16 +63,23 @@ os_main (int argc, char* argv[])
     }
 
     {
+#if defined(__GNUC__)
 #pragma GCC diagnostic push
+
 #if defined(__clang__)
 #pragma clang diagnostic ignored "-Wexit-time-destructors"
 #endif
+#endif // defined(__GNUC__)
+
       // Statically allocated threads.
       static thread_inclusive<> sth1
         { func, nullptr };
       static thread_inclusive<> sth2
         { "sth2", func, nullptr };
+        
+#if defined(__GNUC__)
 #pragma GCC diagnostic pop
+#endif // defined(__GNUC__)
 
       sth1.join ();
       sth2.join ();
