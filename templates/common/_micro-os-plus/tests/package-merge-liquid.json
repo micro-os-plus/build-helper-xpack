@@ -204,7 +204,7 @@
         "https://www.npmjs.com/package/@xpack-dev-tools/openocd"
       ],
       "dependencies-releases": {
-        "@micro-os-plus/architecture-synthetic-posix": "^5.0.0",
+        "@micro-os-plus/architecture-synthetic-posix": "^5.0.1",
         "@micro-os-plus/architecture-cortexm": "^7.0.0",
         "@micro-os-plus/devices-qemu-cortexm": "^6.0.0",
         "@micro-os-plus/architecture-riscv": "^5.0.0",
@@ -280,7 +280,7 @@
       "add-qemu-aarch32-variants-versions-to-configs-for-builder": "{% assign arm-none-eabi-gcc-versions = properties.arm-none-eabi-gcc-versions | split_lines %}{% for variant in properties.qemu-aarch32-variants %}{% for version in arm-none-eabi-gcc-versions %}{% assign config = 'qemu-aarch32-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}",
       "add-qemu-aarch64-variants-versions-to-configs-for-builder": "{% assign arm-none-eabi-gcc-versions = properties.arm-none-eabi-gcc-versions | split_lines %}{% for variant in properties.qemu-aarch64-variants %}{% for version in arm-none-eabi-gcc-versions %}{% assign config = 'qemu-aarch64-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}",
       "add-qemu-riscv-variants-versions-to-configs-for-builder": "{% assign riscv-none-elf-gcc-versions = properties.riscv-none-elf-gcc-versions | split_lines %}{% for variant in properties.qemu-riscv-variants %}{% for version in riscv-none-elf-gcc-versions %}{% assign config = 'qemu-riscv-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}",
-      "add-all-configs-for-builder": "{% if os.platform != 'darwin' %}{{ properties.add-native-gcc-version-to-configs-for-builder }}{% endif %}{{ properties.add-native-clang-versions-to-configs-for-builder }}{{ properties.add-qemu-cortexm-variants-versions-to-configs-for-builder }}{{ properties.add-qemu-aarch32-variants-versions-to-configs-for-builder }}{{ properties.add-qemu-aarch64-variants-versions-to-configs-for-builder }}{{ properties.add-qemu-riscv-variants-versions-to-configs-for-builder }}",
+      "add-all-configs-for-builder": "{% if os.platform != 'darwin' %}{{ properties.add-native-gcc-versions-to-configs-for-builder }}{% endif %}{{ properties.add-native-clang-versions-to-configs-for-builder }}{{ properties.add-qemu-cortexm-variants-versions-to-configs-for-builder }}{{ properties.add-qemu-aarch32-variants-versions-to-configs-for-builder }}{{ properties.add-qemu-aarch64-variants-versions-to-configs-for-builder }}{{ properties.add-qemu-riscv-variants-versions-to-configs-for-builder }}",
       "compute-all-cmake-configs": "{% assign configs = '' | split: '' %}{% assign builder = 'cmake' %}{{ properties.add-all-configs-for-builder }}",
       "compute-all-meson-configs": "{% assign configs = '' | split: '' %}{% assign builder = 'meson' %}{{ properties.add-all-configs-for-builder }}",
       "compute-all-configs": "{% assign configs = '' | split: '' %}{% for builder in properties.builders %}{{ properties.add-all-configs-for-builder }}{% endfor %}",

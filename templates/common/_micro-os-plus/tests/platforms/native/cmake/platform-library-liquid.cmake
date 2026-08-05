@@ -27,7 +27,7 @@ message (VERBOSE
 if (CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "Darwin")
   # On non-Windows, get the actual libraries paths by asking the compiler.
   execute_process (
-    COMMAND "${CMAKE_SOURCE_DIR}/scripts/get-libraries-paths.sh"
+    COMMAND bash "${CMAKE_SOURCE_DIR}/scripts/get-libraries-paths.sh"
             ${CMAKE_CXX_COMPILER}
     OUTPUT_VARIABLE cxx_library_path
     OUTPUT_STRIP_TRAILING_WHITESPACE
@@ -78,13 +78,16 @@ set (
   $<$<C_COMPILER_ID:Clang,AppleClang>:-Wno-unknown-warning-option>
   $<$<C_COMPILER_ID:Clang,AppleClang>:-Wno-documentation>
   $<$<PLATFORM_ID:Darwin>:-Wno-missing-include-dirs>
-  $<$<CONFIG:Debug>:-fsanitize=address,undefined>
-  $<$<CONFIG:Debug>:-fno-sanitize-recover=all>
 )
 
 if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
   list (APPEND xpack_platform_common_args
         $<$<C_COMPILER_ID:Clang,AppleClang>:-Wno-used-but-marked-unused>
+  )
+else() # Linux, macOS
+  list (APPEND xpack_platform_common_args
+        $<$<CONFIG:Debug>:-fsanitize=address,undefined>
+        $<$<CONFIG:Debug>:-fno-sanitize-recover=all>
   )
 endif ()
 
@@ -142,7 +145,7 @@ target_link_options (
   # When `-flto` is used, the compile options must be passed to the linker too.
   ${xpack_platform_common_args}
   #
-  # -v
+  $<$<CONFIG:Debug>:-v>
   #
   # On Windows configuring the path to access the compiler DLLs is tedious, it
   # is much easier to build everything static.
