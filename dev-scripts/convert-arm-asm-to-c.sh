@@ -116,9 +116,11 @@ typedef void
 
 // ----------------------------------------------------------------------------
 
+#if defined(__GNUC__)
 #pragma GCC diagnostic push
 
 #pragma GCC diagnostic ignored "-Wpedantic"
+#endif // defined(__GNUC__)
 
 /**
  * The table of interrupt handlers. It has an explicit section name
@@ -173,7 +175,9 @@ sed -e 's|^|    |'
 cat <<__EOF__
 };
 
+#if defined(__GNUC__)
 #pragma GCC diagnostic pop
+#endif // defined(__GNUC__)
 
 // ----------------------------------------------------------------------------
 
