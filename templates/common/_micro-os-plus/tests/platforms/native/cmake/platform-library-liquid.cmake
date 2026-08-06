@@ -80,14 +80,16 @@ set (
   $<$<PLATFORM_ID:Darwin>:-Wno-missing-include-dirs>
 )
 
-if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
-  list (APPEND xpack_platform_common_args
-        $<$<C_COMPILER_ID:Clang,AppleClang>:-Wno-used-but-marked-unused>
-  )
-else() # Linux, macOS
+if (CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
   list (APPEND xpack_platform_common_args
         $<$<CONFIG:Debug>:-fsanitize=address,undefined>
         $<$<CONFIG:Debug>:-fno-sanitize-recover=all>
+  )
+endif ()
+
+if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
+  list (APPEND xpack_platform_common_args
+        $<$<C_COMPILER_ID:Clang,AppleClang>:-Wno-used-but-marked-unused>
   )
 endif ()
 
@@ -155,8 +157,13 @@ target_link_options (
   # $<$<AND:$<C_COMPILER_ID:GNU>,$<PLATFORM_ID:Darwin>>:-static-libstdc++>
   $<$<PLATFORM_ID:Darwin>:-Wl,-dead_strip>
   $<$<PLATFORM_ID:Linux,Windows>:-Wl,--gc-sections>
-  $<$<PLATFORM_ID:Linux,Darwin>:${rpath_options_list}>
 )
+
+if (NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
+  target_link_options (
+    platform-native-interface INTERFACE ${rpath_options_list}
+  )
+endif ()
 
 if ("${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
   # https://clang.llvm.org/docs/Toolchain.html#compiler-runtime
@@ -168,8 +175,7 @@ if ("${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
 endif ()
 
 target_link_libraries (
-  platform-native-interface
-  INTERFACE micro-os-plus::architecture
+  platform-native-interface INTERFACE micro-os-plus::architecture
 )
 
 xpack_display_target_lists (platform-native-interface)
