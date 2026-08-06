@@ -25,8 +25,8 @@ message('Including tests/platforms/' + xpack_platform_name + '/meson/platform-li
 if build_machine.system() == 'linux' or build_machine.system() == 'darwin'
 
   _local_cxx_run_result = run_command(
-    'bash',
-    xpack_tests_folder_path + '/scripts/get-libraries-paths.sh',
+    'node',
+    xpack_tests_folder_path + '/scripts/get-libraries-paths.mjs',
     cpp_compiler.cmd_array()[0],
     check: false,
     capture: true

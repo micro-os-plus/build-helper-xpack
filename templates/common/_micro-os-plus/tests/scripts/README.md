@@ -1,6 +1,6 @@
 # README
 
-## `get-libraries-paths.sh`
+## `get-libraries-paths.mjs`
 
 To get the libraries paths, ask the compiler:
 
@@ -9,7 +9,7 @@ To get the libraries paths, ask the compiler:
 if (CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "Darwin")
   # On non-Windows, get the actual libraries paths by asking the compiler.
   execute_process (
-    COMMAND bash "${CMAKE_SOURCE_DIR}/scripts/get-libraries-paths.sh"
+    COMMAND node "${CMAKE_SOURCE_DIR}/scripts/get-libraries-paths.mjs"
             ${CMAKE_CXX_COMPILER}
     OUTPUT_VARIABLE cxx_library_path
     OUTPUT_STRIP_TRAILING_WHITESPACE
