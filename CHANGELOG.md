@@ -6,9 +6,33 @@ Please check
 [GitHub](https://github.com/micro-os-plus/build-helper-xpack/issues/)
 and close existing issues and pull requests.
 
-## 2026-08-04
+## 2026-08-07
 
 * v4.0.0
+* af402b5 templates check get-libraries-paths.mjs result
+* 8c306b9 package-merge-liquid.json bump diag-trace version
+* a8545bf test-ci: fail-fast false
+
+## 2026-08-06
+
+* 44a411f package-merge-liquid.json bump micro-test-plus
+* d3855c3 convert get-libraries-paths-liquid.mjs
+* 53e3bf3 native cmake updates
+
+## 2026-08-05
+
+* 940e8a5 README updates
+* 979718e cmake & meson updates for other platforms
+* 2020294 module-rtos.doxygen update #if defined()
+* d370869 convert-arm*.sh update #if defined()
+* bfc21a0 package-merge-liquid.json bump deps
+* cc7a6c5 README update
+
+## 2026-08-04
+
+* 564c272 README-WARNINGS updates
+* 8205d23 package.json add templates
+* 875d026 prepare v4.0.0
 * 83dca5a convert to xcdl-export-liquid.mjs
 
 ## 2026-08-03
