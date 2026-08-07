@@ -53,6 +53,8 @@ jobs:
     runs-on:  ${{ matrix.os }}
 
     strategy:
+      # Do not cancel the other matrix jobs if one of them fails.
+      fail-fast: false
       matrix:
         # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners
         os: [ 'ubuntu-24.04', 'ubuntu-24.04-arm', 'macos-15-intel', 'macos-15', 'windows-2025' ]
