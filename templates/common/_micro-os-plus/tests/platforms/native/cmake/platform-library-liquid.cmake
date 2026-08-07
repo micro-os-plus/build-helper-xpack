@@ -31,7 +31,15 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "Darwin")
             ${CMAKE_CXX_COMPILER}
     OUTPUT_VARIABLE cxx_library_path
     OUTPUT_STRIP_TRAILING_WHITESPACE
+    RESULT_VARIABLE get_libraries_paths_result
   )
+
+  if (NOT get_libraries_paths_result EQUAL 0)
+    message (
+      FATAL_ERROR
+        "get-libraries-paths.mjs failed with exit code ${get_libraries_paths_result}"
+    )
+  endif ()
 
   set (rpath_options_list)
 

@@ -32,6 +32,10 @@ if build_machine.system() == 'linux' or build_machine.system() == 'darwin'
     capture: true
   )
 
+  if _local_cxx_run_result.returncode() != 0
+    error('get-libraries-paths.mjs failed with exit code ' + _local_cxx_run_result.returncode().to_string())
+  endif
+
   _local_cxx_run_result_stderr = _local_cxx_run_result.stderr()
   if _local_cxx_run_result_stderr != ''
      message(_local_cxx_run_result_stderr)
