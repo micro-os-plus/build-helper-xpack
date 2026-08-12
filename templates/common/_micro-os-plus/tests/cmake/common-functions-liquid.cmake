@@ -47,7 +47,7 @@ function (add_native_test_executable name)
   # The link options were defined in `platform-native-interface`.
   target_link_options (
     ${name} PRIVATE
-    $<$<PLATFORM_ID:Linux,Windows>:-Wl,-Map,platform-bin/${name}-map.txt> # -v
+    $<$<PLATFORM_ID:Linux,Windows>:-Wl,-Map,platform-bin/${name}-map.txt>
   )
 
   # TODO use add_custom_target()
