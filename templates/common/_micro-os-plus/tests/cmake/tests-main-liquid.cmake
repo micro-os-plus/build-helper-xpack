@@ -40,45 +40,64 @@ include ("cmake/common-options-library.cmake")
 # -----------------------------------------------------------------------------
 # Dependencies.
 
+# Set `xpack_dependencies_folders` with the platform specific dependencies.
+include ("platforms/${PLATFORM_NAME}/cmake/dependencies-folders.cmake")
+
 {% if packageScopedName == '@micro-os-plus/diag-trace' -%}
 # Add the project library, defined one level above.
+message (VERBOSE "")
 message (VERBOSE "Adding top library...")
+message (VERBOSE "")
 add_subdirectory (".." "top-bin")
 
 {% endif -%}
 
-# Set `xpack_dependencies_folders` with the platform specific dependencies.
-include ("platforms/${PLATFORM_NAME}/cmake/dependencies-folders.cmake")
-
 # Iterate the platform dependencies and `add_subdirectory()`.
+message (VERBOSE "")
+message (VERBOSE "Adding dependencies libraries...")
 xpack_add_dependencies_subdirectories (
-  "${xpack_dependencies_folders}" "xpacks-bin"
+  "${xpack_dependencies_folders}" "dependencies-bin"
 )
 
-# Include the platform library.
-include ("platforms/${PLATFORM_NAME}/cmake/platform-library.cmake")
+# -----------------------------------------------------------------------------
+
+# Add the platform library. The artefacts are created in the
+# `platform-bin` folder.
+message (VERBOSE "")
+message (VERBOSE "Adding platform library...")
+message (VERBOSE "")
+add_subdirectory ("platforms/${PLATFORM_NAME}" "platform-bin")
 
 {% if packageScopedName != '@micro-os-plus/diag-trace' -%}
 # -----------------------------------------------------------------------------
 
 # Add the project library, defined one level above.
+message (VERBOSE "")
 message (VERBOSE "Adding top library...")
+message (VERBOSE "")
 add_subdirectory (".." "top-bin")
 
 {% endif -%}
 
 # -----------------------------------------------------------------------------
 
-# Iterate the tests and `add_subdirectory()`.
+# Iterate the folders from `project-definitions.cmake` and `add_subdirectory()`.
+message (VERBOSE "")
+message (VERBOSE "Adding tests libraries...")
 xpack_add_dependencies_subdirectories (
   "${xpack_dependencies_tests_folders}" "tests-bin"
 )
 
 # -----------------------------------------------------------------------------
-# Artefact specifics.
 
-# Include the platform specific artefacts and tests. The binaries are created in
-# the `platform-bin` folder.
-add_subdirectory ("platforms/${PLATFORM_NAME}" "platform-bin")
+# With all libraries processed, include the artefacts and tests definitions.
+message (VERBOSE "")
+message (VERBOSE "Adding tests artefacts...")
+message (VERBOSE "")
+include ("platforms/${PLATFORM_NAME}/cmake/artefacts.cmake")
+
+# -----------------------------------------------------------------------------
+
+message (VERBOSE "")
 
 # -----------------------------------------------------------------------------
