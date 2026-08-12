@@ -17,7 +17,7 @@
 
 # -----------------------------------------------------------------------------
 
-message (VERBOSE "Including tests/cmake/common-functions.cmake...")
+message (VERBOSE "Including 'tests/cmake/common-functions.cmake'...")
 
 # -----------------------------------------------------------------------------
 

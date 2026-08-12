@@ -18,7 +18,7 @@
 
 # -----------------------------------------------------------------------------
 
-message (VERBOSE "Including tests/cmake/common-options-library.cmake...")
+message (VERBOSE "Including 'tests/cmake/common-options-library.cmake'...")
 
 # -----------------------------------------------------------------------------
 

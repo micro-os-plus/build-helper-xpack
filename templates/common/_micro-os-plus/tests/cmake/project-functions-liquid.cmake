@@ -17,7 +17,7 @@
 
 # -----------------------------------------------------------------------------
 
-message (VERBOSE "Including tests/cmake/project-functions.cmake...")
+message (VERBOSE "Including 'tests/cmake/project-functions.cmake'...")
 
 # -----------------------------------------------------------------------------
 

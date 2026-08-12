@@ -19,7 +19,7 @@
 
 message (
   VERBOSE
-  "Including tests/platforms/${PLATFORM_NAME}/cmake/dependencies-folders.cmake..."
+  "Including 'tests/platforms/${PLATFORM_NAME}/cmake/dependencies-folders.cmake'..."
 )
 
 # -----------------------------------------------------------------------------

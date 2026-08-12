@@ -18,7 +18,7 @@
 
 # -----------------------------------------------------------------------------
 
-message (VERBOSE "Including micro-os-plus-build-helper.cmake...")
+message (VERBOSE "Including 'micro-os-plus-build-helper.cmake'...")
 
 # -----------------------------------------------------------------------------
 

@@ -34,7 +34,7 @@
 {% if component.description %}
 # {{component.description}}.
 {%- endif %}
-message (VERBOSE "Processing '{{outputFolderPath}}'...")
+message (VERBOSE "Processing '{{outputFolderPath}}/'...")
 
 # -----------------------------------------------------------------------------
 
