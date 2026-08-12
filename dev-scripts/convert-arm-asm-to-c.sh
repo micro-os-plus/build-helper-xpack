@@ -186,6 +186,7 @@ cat <<__EOF__
  * specific handler is not present in the application code.
  * When in DEBUG, trigger a debug exception to clearly notify
  * the user of the exception and help identify the cause.
+ * Otherwise enter a forever loop.
  */
 void __attribute__ ((section(".after_vectors")))
 Default_Handler(void)
@@ -195,6 +196,7 @@ Default_Handler(void)
 #endif
   while (1)
     {
+      micro_os_plus_architecture_wfi();
     }
 }
 
