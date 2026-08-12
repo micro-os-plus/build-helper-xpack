@@ -34,11 +34,13 @@ const npmHelperMaintenanceScriptsPath = path.join(
   'node_modules',
   '@xpack',
   'npm-packages-helper',
-  'maintenance-scripts',
+  'maintenance-scripts'
 )
 
 const { substitute } = await import(
-  pathToFileURL(path.join(npmHelperMaintenanceScriptsPath, 'scripts-helper.mjs')).href
+  pathToFileURL(
+    path.join(npmHelperMaintenanceScriptsPath, 'scripts-helper.mjs')
+  ).href
 )
 
 // ----------------------------------------------------------------------------
@@ -46,7 +48,9 @@ const { substitute } = await import(
 const argv = process.argv.slice(2)
 
 if (argv.length < 1) {
-  console.log(`Usage: ${scriptName} <xcdl-package.jsonc> [<xcdl-package.jsonc>...]`)
+  console.log(
+    `Usage: ${scriptName} <xcdl-package.jsonc> [<xcdl-package.jsonc>...]`
+  )
   process.exit(1)
 }
 
@@ -56,7 +60,7 @@ const substituteFile = (xcdlJsoncPath) => {
   const outputFolderPath = path.dirname(xcdlJsoncPath)
 
   console.log()
-  console.log(`Processing ${xcdlJsoncPath}...`)
+  console.log(`Processing '${xcdlJsoncPath}'...`)
 
   if (!existsSync(xcdlJsoncPath)) {
     console.log(`missing mandatory ${xcdlJsoncPath}...`)
