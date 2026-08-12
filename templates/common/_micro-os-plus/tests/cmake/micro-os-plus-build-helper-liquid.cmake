@@ -123,8 +123,9 @@ macro (xpack_add_dependencies_subdirectories dependencies_folders base_bin_path)
       file (RELATIVE_PATH relative_path ${CMAKE_SOURCE_DIR}
             ${dependency_folder}
       )
-      message (VERBOSE "Adding '${relative_path}'...")
+      # message (VERBOSE "Adding '${relative_path}'...")
       get_filename_component (folder_name ${dependency_folder} NAME)
+      message (VERBOSE "")
       add_subdirectory (
         "${dependency_folder}" "${base_bin_path}/${folder_name}"
       )
