@@ -175,10 +175,9 @@ function (add_compare_files_test)
   list (GET arg_FILES 0 output_file)
   list (GET arg_FILES 1 reference_file)
 
-  add_test (
-    NAME "${arg_NAME}"
-    COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/../../scripts/compare-files.sh"
-            "${output_file}" "${reference_file}"
+  add_test (NAME "${arg_NAME}"
+            COMMAND bash "${CMAKE_SOURCE_DIR}/scripts/compare-files.sh"
+                    "${output_file}" "${reference_file}"
   )
 
   set_tests_properties ("${arg_NAME}" PROPERTIES DEPENDS "${arg_DEPENDS}")
