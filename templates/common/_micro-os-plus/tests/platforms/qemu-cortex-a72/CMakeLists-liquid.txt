@@ -22,18 +22,18 @@ message (VERBOSE "Processing 'tests/platforms/${PLATFORM_NAME}/'...")
 # -----------------------------------------------------------------------------
 
 # Define the platform library.
-add_library (platform-qemu-cortex-a72-interface INTERFACE EXCLUDE_FROM_ALL)
+add_library (micro-os-plus-platform-interface INTERFACE EXCLUDE_FROM_ALL)
 
 target_include_directories (
-  platform-qemu-cortex-a72-interface
+  micro-os-plus-platform-interface
   # The files are included from the tests folder.
   INTERFACE "include"
 )
 
-target_sources (platform-qemu-cortex-a72-interface INTERFACE)
+target_sources (micro-os-plus-platform-interface INTERFACE)
 
 target_compile_definitions (
-  platform-qemu-cortex-a72-interface
+  micro-os-plus-platform-interface
   INTERFACE
     # Full POSIX conformance:
     # https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap02.html#tag_02_01_03
@@ -69,12 +69,12 @@ set (
 )
 
 target_compile_options (
-  platform-qemu-cortex-a72-interface INTERFACE ${xpack_platform_common_args}
+  micro-os-plus-platform-interface INTERFACE ${xpack_platform_common_args}
 )
 
 # When `-flto` is used, the compile options must be passed to the linker too.
 target_link_options (
-  platform-qemu-cortex-a72-interface
+  micro-os-plus-platform-interface
   INTERFACE
   #
   # -v
@@ -102,25 +102,25 @@ target_link_options (
 
 if ("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "12.0.0")
   target_link_options (
-    platform-qemu-cortex-a72-interface INTERFACE
+    micro-os-plus-platform-interface INTERFACE
     # .elf has a LOAD segment with RWX permissions (GCC 12)
     -Wl,--no-warn-rwx-segment
   )
 endif ()
 
 target_link_libraries (
-  platform-qemu-cortex-a72-interface
-  INTERFACE micro-os-plus::devices-qemu-aarch64 micro-os-plus::startup
+  micro-os-plus-platform-interface INTERFACE micro-os-plus::devices-qemu-aarch64
+                                             micro-os-plus::startup
 )
 
-xpack_display_target_lists (platform-qemu-cortex-a72-interface)
+xpack_display_target_lists (micro-os-plus-platform-interface)
 
 # -----------------------------------------------------------------------------
 
 # Aliases.
-add_library (micro-os-plus::platform ALIAS platform-qemu-cortex-a72-interface)
+add_library (micro-os-plus::platform ALIAS micro-os-plus-platform-interface)
 message (VERBOSE
-         "> micro-os-plus::platform -> platform-qemu-cortex-a72-interface"
+         "> micro-os-plus::platform -> micro-os-plus-platform-interface"
 )
 
 # -----------------------------------------------------------------------------

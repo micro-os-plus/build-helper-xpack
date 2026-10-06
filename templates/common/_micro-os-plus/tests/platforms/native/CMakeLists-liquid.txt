@@ -50,14 +50,16 @@ endif ()
 # -----------------------------------------------------------------------------
 
 # Define the platform library.
-add_library (platform-native-interface INTERFACE EXCLUDE_FROM_ALL)
+add_library (micro-os-plus-platform-interface INTERFACE EXCLUDE_FROM_ALL)
 
-target_include_directories (platform-native-interface INTERFACE "include")
+target_include_directories (
+  micro-os-plus-platform-interface INTERFACE "include"
+)
 
-target_sources (platform-native-interface INTERFACE)
+target_sources (micro-os-plus-platform-interface INTERFACE)
 
 target_compile_definitions (
-  platform-native-interface
+  micro-os-plus-platform-interface
   INTERFACE
     # Full POSIX conformance:
     # https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap02.html#tag_02_01_03
@@ -130,13 +132,13 @@ endif ()
 # error: no member named 'quick_exit' in the global namespace using ::quick_exit
 # _LIBCPP_USING_IF_EXISTS; ~~^ 2 errors generated.
 target_compile_options (
-  platform-native-interface INTERFACE ${xpack_platform_common_args}
+  micro-os-plus-platform-interface INTERFACE ${xpack_platform_common_args}
 )
 
 # On macOS, GCC 11 gets confused. dyld[72401]: Symbol not found:
 # (__ZNKSt3_V214error_category10_M_messageB5cxx11Ei)
 target_link_options (
-  platform-native-interface
+  micro-os-plus-platform-interface
   INTERFACE
   # When `-flto` is used, the compile options must be passed to the linker too.
   ${xpack_platform_common_args}
@@ -155,29 +157,31 @@ target_link_options (
 
 if (NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
   target_link_options (
-    platform-native-interface INTERFACE ${rpath_options_list}
+    micro-os-plus-platform-interface INTERFACE ${rpath_options_list}
   )
 endif ()
 
 if ("${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
   # https://clang.llvm.org/docs/Toolchain.html#compiler-runtime
   target_link_options (
-    platform-native-interface INTERFACE -rtlib=compiler-rt
+    micro-os-plus-platform-interface INTERFACE -rtlib=compiler-rt
     $<$<PLATFORM_ID:Linux>:-lunwind>
     $<$<PLATFORM_ID:Linux,Darwin>:-fuse-ld=lld>
   )
 endif ()
 
 target_link_libraries (
-  platform-native-interface INTERFACE micro-os-plus::architecture
+  micro-os-plus-platform-interface INTERFACE micro-os-plus::architecture
 )
 
-xpack_display_target_lists (platform-native-interface)
+xpack_display_target_lists (micro-os-plus-platform-interface)
 
 # -----------------------------------------------------------------------------
 
 # Aliases.
-add_library (micro-os-plus::platform ALIAS platform-native-interface)
-message (VERBOSE "> micro-os-plus::platform -> platform-native-interface")
+add_library (micro-os-plus::platform ALIAS micro-os-plus-platform-interface)
+message (VERBOSE
+         "> micro-os-plus::platform -> micro-os-plus-platform-interface"
+)
 
 # -----------------------------------------------------------------------------

@@ -206,6 +206,7 @@ if (options.doInit) {
 } else {
   console.log()
   console.log(`Processing template from ${templatesFolderPath}...`)
+  console.log()
 
   const commonFolderPath = path.join(templatesFolderPath, 'common')
   const commonSubstitutionPrefix = `${templatesRelativeFolderPath}/common`
@@ -239,7 +240,8 @@ if (options.doInit) {
 
   console.log()
   console.log('First time proposals...')
-
+  console.log()
+  
   const firstTimeFolderPath = path.join(templatesFolderPath, 'first-time')
   const firstTimeSubstitutionPrefix = `${templatesRelativeFolderPath}/first-time`
 

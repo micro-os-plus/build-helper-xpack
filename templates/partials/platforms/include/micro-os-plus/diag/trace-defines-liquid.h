@@ -39,9 +39,9 @@
 #endif // !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_STDOUT_ENABLED)
 
 // A diag trace channel implemented over the semihosting SYS_WRITE0 call
-// #if !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_DEBUG_ENABLED)
+#if !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_DEBUG_ENABLED)
 // #define MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_DEBUG_ENABLED
-// #endif // !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_DEBUG_ENABLED)
+#endif // !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_DEBUG_ENABLED)
 
 // ----------------------------------------------------------------------------
 

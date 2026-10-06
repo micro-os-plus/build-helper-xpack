@@ -52,4 +52,8 @@ xpack_dependencies_folders = [
   xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/startup',
 ]
 
+xpack_dependencies_libraries = [
+  'micro_os_plus_devices_qemu_cortexm_vectors_mps2_an385_dependency'
+]
+
 # -----------------------------------------------------------------------------

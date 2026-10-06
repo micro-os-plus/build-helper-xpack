@@ -24,16 +24,23 @@ The source files to be added to user projects are:
 
 - none
 
+## Memory map
+
+The `virt` machine defines:
+
+- virtual flash 0x00000000, 64 MiB, usable only as `-bios`
+- the RAM region 0x40000000 (1 GiB), with the actual value as given by
+  `-m`, 128 MiB if mising.
+
+Semihosting heap base: 0x44000000, limit: 0x48000000, stack base: 0x48000000, limit: 0x44000000.
+
 ## Memory range
 
 The applications are built for the following memory range:
 
-- RAM: 0x4000_0000-0x43FF_FFFF (64 MB)
-- HEAP: 0x4400_0000-0x47FF_FFFF (64 MB)
+- RAM: 0x4000_0000 - 0x43FF_FFFF (64 MB)
+- HEAP: 0x4400_0000 - 0x47FF_FFFF (64 MB)
 - stack: 0x4800_0000
-
-The heap and stack are set automatically in `_startup()` to the values
-returned by `SEMIHOSTING_SYS_HEAPINFO`.
 
 ## QEMU invocation
 

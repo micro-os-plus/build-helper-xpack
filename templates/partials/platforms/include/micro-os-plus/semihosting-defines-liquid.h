@@ -28,9 +28,9 @@
 #endif // !defined(MICRO_OS_PLUS_SEMIHOSTING_STARTUP_ENABLED)
 
 // Enable debugging for the semihosting trace channel faults.
-// #if !defined(MICRO_OS_PLUS_SEMIHOSTING_DEBUG_FAULTS_ENABLED)
+#if !defined(MICRO_OS_PLUS_SEMIHOSTING_DEBUG_FAULTS_ENABLED)
 // #define MICRO_OS_PLUS_SEMIHOSTING_DEBUG_FAULTS_ENABLED
-// #endif // !defined(MICRO_OS_PLUS_SEMIHOSTING_DEBUG_FAULTS_ENABLED)
+#endif // !defined(MICRO_OS_PLUS_SEMIHOSTING_DEBUG_FAULTS_ENABLED)
 
 // ----------------------------------------------------------------------------
 

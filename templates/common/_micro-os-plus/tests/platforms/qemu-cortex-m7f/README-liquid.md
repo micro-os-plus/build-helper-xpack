@@ -6,6 +6,8 @@
 Support files for building application to run on the QEMU "mps2-an500"
 emulated board.
 
+- [Application Note AN500](https://documentation-service.arm.com/static/5ed112fcca06a95ce53f8eb3)
+
 ## Include folders
 
 The following folders should be passed to the compiler during the build:
@@ -24,17 +26,23 @@ The source files to be added to user projects are:
 
 - none
 
+## Memory map
+
+The `mps2-an500` machine defines:
+
+- ZBT SSRAM 1, 0x0000_0000 – 0x003F_FFFF, 4 MiB, Primary execution memory. This is where the Cortex-M7 vector table lives at reset
+- ZBT SSRAM 2&3, 0x2000_0000 – 0x203F_FFFF, 2+2 MiB, Real RAM
+- PSRAM, 0x6000_0000 - 0x60FF_FFFF, 16 MB, External PSRAM (slow, but large)
+
+Semihosting heap base: 0x60000000, limit: 0x61000000, stack base: 0x61000000, limit: 0x60000000
+
 ## Memory range
 
-The applications are built for the following memory range:
+The applications are built for the following memory ranges:
 
-- FLASH: 0x0000_0000-0x007F_FFFF (8 MB)
-- RAM: 0x2000_0000-0x207F_FFFF (8 MB)
-- HEAP: 0x6000_0000-0x60FF_FFFF (16 MB)
-- stack: 0x6100_0000
-
-The heap and stack are set automatically in `_startup()` to the values
-returned by `SEMIHOSTING_SYS_HEAPINFO`.
+- FLASH: 0x0000_0000 - 0x003F_FFFF (4 MB)
+- RAM: 0x2000_0000 - 0x203F_FFFF (4 MB)
+- stack: 0x2040_0000
 
 ## QEMU invocation
 

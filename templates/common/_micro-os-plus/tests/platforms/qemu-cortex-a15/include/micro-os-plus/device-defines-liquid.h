@@ -8,9 +8,9 @@
 
 // ----------------------------------------------------------------------------
 
-#if !defined(MICRO_OS_PLUS_DEVICE_QEMU_CORTEX_A15)
-#define MICRO_OS_PLUS_DEVICE_QEMU_CORTEX_A15
-#endif // !defined(MICRO_OS_PLUS_DEVICE_QEMU_CORTEX_A15)
+#if !defined(MICRO_OS_PLUS_DEVICES_QEMU_CORTEX_CORE_A15)
+#define MICRO_OS_PLUS_DEVICES_QEMU_CORTEX_CORE_A15
+#endif // !defined(MICRO_OS_PLUS_DEVICES_QEMU_CORTEX_CORE_A15)
 
 // ----------------------------------------------------------------------------
 

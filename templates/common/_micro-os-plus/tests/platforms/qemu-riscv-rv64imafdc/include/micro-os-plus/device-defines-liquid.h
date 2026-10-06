@@ -8,9 +8,9 @@
 
 // ----------------------------------------------------------------------------
 
-#if !defined(MICRO_OS_PLUS_DEVICE_QEMU_RISCV_RV64IMAFDC)
-#define MICRO_OS_PLUS_DEVICE_QEMU_RISCV_RV64IMAFDC
-#endif // !defined(MICRO_OS_PLUS_DEVICE_QEMU_RISCV_RV64IMAFDC)
+#if !defined(MICRO_OS_PLUS_DEVICE_QEMU_RISCV_CORE_RV64IMAFDC)
+#define MICRO_OS_PLUS_DEVICE_QEMU_RISCV_CORE_RV64IMAFDC
+#endif // !defined(MICRO_OS_PLUS_DEVICE_QEMU_RISCV_CORE_RV64IMAFDC)
 
 // ----------------------------------------------------------------------------
 

@@ -6,6 +6,9 @@
 Support files for building Cortex-M3 application to run on the
 QEMU "mps2-an385" emulated board (which is a Cortex-M3 board).
 
+- [Application Note AN385](https://documentation-service.arm.com/static/5ed107a5ca06a95ce53f89e3)
+- [DAI0385C.PDF](https://developer.arm.com/documentation/dai0385/c/DAI0385C_cortex_m3_on_v2m_mps2.pdf)
+
 ## Include folders
 
 The following folders should be passed to the compiler during the build:
@@ -24,17 +27,23 @@ The source files to be added to user projects are:
 
 - none
 
+## Memory map
+
+The `mps2-an385` machine defines:
+
+- ZBT SSRAM 1, 0x0000_0000 – 0x003F_FFFF, 4 MiB, Primary execution memory. This is where the Cortex-M3 vector table lives at reset
+- ZBT SSRAM 2&3, 0x2000_0000 – 0x203F_FFFF, 2+2 MiB, Real RAM
+- PSRAM, 0x2100_0000–0x21FF_FFFF, 16 MiB
+
+Semihosting heap base: 0x21000000, limit: 0x22000000, stack base: 0x22000000, limit: 0x21000000.
+
 ## Memory range
 
-The applications are built for the following memory range:
+The applications are built for the following memory ranges:
 
-- FLASH: 0x0000_0000-0x007F_FFFF (8 MB)
-- RAM: 0x2000_0000-0x207F_FFFF (8 MB)
-- HEAP: 0x2100_0000-0x21FF_FFFF (16 MB)
-- stack: 0x2200_0000
-
-The heap and stack are set automatically in `_startup()` to the values
-returned by `SEMIHOSTING_SYS_HEAPINFO`.
+- FLASH: 0x0000_0000-0x003F_FFFF (4 MB)
+- RAM: 0x2000_0000-0x203F_FFFF (4 MB)
+- stack: 0x2040_0000
 
 ## QEMU invocation
 

@@ -6,6 +6,9 @@
 Support files for building application to run on the QEMU "mps2-an386"
 emulated board.
 
+- [AN386 — ARM Cortex-M4 SMM on V2M-MPS2](https://developer.arm.com/documentation/dai0386/latest/)
+- [DAI0386C PDF](https://pack-content.cmsis.io/Keil/V2M-MPS2_CMx_BSP/1.8.2/Boards/ARM/V2M-MPS2/Documents/DAI0386C_cortex_m4_on_v2m_mps2.pdf)
+
 ## Include folders
 
 The following folders should be passed to the compiler during the build:
@@ -24,17 +27,23 @@ The source files to be added to user projects are:
 
 - none
 
+## Memory map
+
+The `mps2-an385` machine defines:
+
+- ZBT SSRAM 1, 0x0000_0000 – 0x003F_FFFF, 4 MiB, Primary execution memory. This is where the Cortex-M4 vector table lives at reset
+- ZBT SSRAM 2&3, 0x2000_0000 – 0x203F_FFFF, 2+2 MiB, Real RAM
+- PSRAM, 0x2100_0000–0x21FF_FFFF, 16 MiB
+
+Semihosting heap base: 0x21000000, limit: 0x22000000, stack base: 0x22000000, limit: 0x21000000.
+
 ## Memory range
 
-The applications are built for the following memory range:
+The applications are built for the following memory ranges:
 
-- FLASH: 0x0000_0000-0x007F_FFFF (8 MB)
-- RAM: 0x2000_0000-0x207F_FFFF (8 MB)
-- HEAP: 0x6000_0000-0x60FF_FFFF (16 MB)
-- stack: 0x6100_0000
-
-The heap and stack are set automatically in `_startup()` to the values
-returned by `SEMIHOSTING_SYS_HEAPINFO`.
+- FLASH: 0x0000_0000-0x003F_FFFF (4 MB)
+- RAM: 0x2000_0000-0x203F_FFFF (4 MB)
+- stack: 0x2040_0000
 
 ## QEMU invocation
 

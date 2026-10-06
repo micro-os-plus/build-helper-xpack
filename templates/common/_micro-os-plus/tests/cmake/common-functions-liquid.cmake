@@ -44,7 +44,7 @@ function (add_native_test_executable name)
 {%- endif %}
 
   # https://cmake.org/cmake/help/v3.20/manual/cmake-generator-expressions.7.html
-  # The link options were defined in `platform-native-interface`.
+  # The link options were defined in `micro-os-plus-platform-interface`.
   target_link_options (
     ${name} PRIVATE $<$<PLATFORM_ID:Linux,Windows>:-Wl,-Map,${name}-map.txt>
   )
