@@ -55,7 +55,7 @@ This is the **µOS++ build helper** project, part of
 
 - `/dev-scripts`: Contains scripts for development tasks, such as build automation, testing, and deployment
 - '/doxygen': Contains Doxygen configuration files and related documentation resources
-- '/maintenance-scripts': Contains scripts for maintenance tasks, such as template processing
+- '/maintenance/scripts': Contains scripts for maintenance tasks, such as template processing
 - /templates: Contains template files for code generation, documentation, and other project-related resources
 
 ## Code Review

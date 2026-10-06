@@ -50,11 +50,11 @@ export script_folder_name="$(basename "${script_folder_path}")"
 
 # set -x
 
-# The script is invoked from xpacks/@micro-os-plus/build-helper/maintenance-scripts/generate-commons.sh.
+# The script is invoked from xpacks/@micro-os-plus/build-helper/maintenance/scripts/generate-commons.sh.
 
-npm_helper_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))/node_modules/@xpack/npm-packages-helper"
+npm_helper_folder_path="$(dirname $(dirname $(dirname $(dirname $(dirname "${script_folder_path}")))))/node_modules/@xpack/npm-packages-helper"
 
-source "${npm_helper_folder_path}/maintenance-scripts/scripts-helper-source.sh"
+source "${npm_helper_folder_path}/maintenance/scripts/scripts-helper-source.sh"
 
 # -----------------------------------------------------------------------------
 

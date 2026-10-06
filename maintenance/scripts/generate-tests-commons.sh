@@ -53,10 +53,10 @@ export script_folder_name="$(basename "${script_folder_path}")"
 argv="$@"
 
 # Runs as
-# .../xpacks/@micros-os-plus/build-helper/maintenance-scripts/generate-commons.sh
-npm_helper_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))/node_modules/@xpack/npm-packages-helper"
+# .../xpacks/@micros-os-plus/build-helper/maintenance/scripts/generate-commons.sh
+npm_helper_folder_path="$(dirname $(dirname $(dirname $(dirname $(dirname "${script_folder_path}")))))/node_modules/@xpack/npm-packages-helper"
 
-source "${npm_helper_folder_path}/maintenance-scripts/scripts-helper-source.sh"
+source "${npm_helper_folder_path}/maintenance/scripts/scripts-helper-source.sh"
 
 # Parse --init, --dry-run, --xpack, --xpack-dev-tools
 # and leave variables in the environment.
@@ -75,11 +75,11 @@ then
   exit 1
 fi
 
-current_folder_path="$(dirname $(dirname $(dirname $(dirname "${script_folder_path}"))))"
+current_folder_path="$(dirname $(dirname $(dirname $(dirname $(dirname "${script_folder_path}")))))"
 project_folder_path="$(dirname "${current_folder_path}")"
 tests_folder_path="${project_folder_path}/tests"
-templates_folder_path="$(dirname "${script_folder_path}")/templates"
-partials_folder_path="$(dirname "${script_folder_path}")/templates/partials"
+templates_folder_path="$(dirname $(dirname "${script_folder_path}"))/templates"
+partials_folder_path="${templates_folder_path}/partials"
 
 templates_relative_folder_path="${templates_folder_path#${project_folder_path}/}"
 templates_relative_folder_path="${templates_relative_folder_path#*node_modules/@xpack/}"

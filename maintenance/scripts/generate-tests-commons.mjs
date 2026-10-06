@@ -38,13 +38,14 @@ const scriptName = path.basename(scriptPath)
 const scriptFolderPath = path.dirname(scriptPath)
 
 // Runs as
-// .../tests/node_modules/@micro-os-plus/build-helper/maintenance-scripts/generate-tests-commons.mjs
-const nodeModulesFolderPath = path.dirname(path.dirname(path.dirname(scriptFolderPath)))
+// .../tests/node_modules/@micro-os-plus/build-helper/maintenance/scripts/generate-tests-commons.mjs
+const nodeModulesFolderPath = path.dirname(path.dirname(path.dirname(path.dirname(scriptFolderPath))))
 const npmHelperMaintenanceScriptsPath = path.join(
   nodeModulesFolderPath,
   '@xpack',
   'npm-packages-helper',
-  'maintenance-scripts',
+  'maintenance',
+  'scripts',
 )
 
 const {
@@ -60,7 +61,10 @@ const {
 
 // ----------------------------------------------------------------------------
 
-const templatesFolderPath = path.join(path.dirname(scriptFolderPath), 'templates')
+const templatesFolderPath = path.join(
+  path.dirname(path.dirname(scriptFolderPath)),
+  'templates',
+)
 const partialsFolderPath = path.join(templatesFolderPath, 'partials')
 
 // ----------------------------------------------------------------------------
@@ -156,9 +160,9 @@ if (!options.isMicroOsPlus) {
 }
 
 // The script is invoked via the following tests npm script:
-// "generate-tests-commons": "node node_modules/@micro-os-plus/build-helper/maintenance-scripts/generate-tests-commons.mjs"
+// "generate-tests-commons": "node node_modules/@micro-os-plus/build-helper/maintenance/scripts/generate-tests-commons.mjs"
 const currentFolderPath = path.dirname(
-  path.dirname(path.dirname(path.dirname(scriptFolderPath))),
+  path.dirname(path.dirname(path.dirname(path.dirname(scriptFolderPath)))),
 )
 const projectFolderPath = path.dirname(currentFolderPath)
 const testsFolderPath = path.join(projectFolderPath, 'tests')

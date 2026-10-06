@@ -5,11 +5,11 @@
   "main": "",
   "files": [
     "doxygen",
-    "maintenance-scripts",
+    "maintenance",
     "templates"
   ],
   "scripts": {
-    "generate-top-commons": "bash node_modules/@xpack/npm-packages-helper/maintenance-scripts/generate-top-commons.sh --micro-os-plus",
+    "generate-top-commons": "bash node_modules/@xpack/npm-packages-helper/maintenance/scripts/generate-top-commons.sh --micro-os-plus",
     "npm-install": "npm install",
     "npm-link-helpers": "npm link @xpack/npm-packages-helper @xpack/docusaurus-template-liquid",
     "npm-outdated": "npm outdated",
