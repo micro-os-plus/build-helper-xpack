@@ -12,7 +12,7 @@ This project is linked as submodule to:
 
 ## clone-and-link-all-git-repos.sh
 
-Script to download all source xPacks.
+Script to download all source xpm packages.
 
 The first argument is an optional destination folder path. The default is
 `${HOME}/Work/micro-os-plus-xpack-repos`.
@@ -27,7 +27,6 @@ To get the very latest version, get the script from the
 ```sh
 curl -L https://raw.githubusercontent.com/micro-os-plus/build-helper-xpack//scripts/clone-and-link-all-git-repos.sh | bash
 ```
-
 
 ## generate-vectors-from-arm-startup.sh
 
