@@ -47,8 +47,9 @@ set (CMAKE_CXX_EXTENSIONS OFF)
 # recommended, to help IDEs construct the index.
 set (CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Enable this to see the dependency graph. set_property(GLOBAL PROPERTY
-# GLOBAL_DEPENDS_DEBUG_MODE 1)
+# Enable this to see the dependency graph.
+#
+# set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_DEBUG_MODE 1)
 
 # -----------------------------------------------------------------------------
 

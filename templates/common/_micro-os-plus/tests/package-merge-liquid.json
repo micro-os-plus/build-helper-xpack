@@ -26,7 +26,7 @@
     "liquidjs": "^10.28.0"
   },
   "scripts": {
-    "generate-tests-commons": "node node_modules/@micro-os-plus/build-helper/maintenance-scripts/generate-tests-commons.mjs --micro-os-plus",
+    "generate-tests-commons": "node node_modules/@micro-os-plus/build-helper/maintenance/scripts/generate-tests-commons.mjs --micro-os-plus",
     "npm-ci": "npm ci",
     "npm-install": "npm install",
     "npm-link-helpers": "npm link @xpack/npm-packages-helper @micro-os-plus/build-helper",
@@ -68,7 +68,7 @@
       "commandClearBuildFolder": "node scripts/clear-build-folder.mjs {{ properties.buildFolderRelativePathPosix }}",
       "commandCMakeGenerateNative": "{{ properties.commandCMakeRefresh }} --log-level=VERBOSE",
       "commandCMakeGenerateNativeWithToolchain": "{{ properties.commandCMakeGenerateNative }} -D CMAKE_TOOLCHAIN_FILE=cmake/toolchains/{{ properties.toolchainFileName }}",
-      "commandCMakeGenerateCross": "{{ properties.commandCMakeRefresh }} --log-level=VERBOSE -D CMAKE_TOOLCHAIN_FILE=cmake/toolchains/{{ properties.toolchainFileName }}",
+     "commandCMakeGenerateCross": "{{ properties.commandCMakeRefresh }} --log-level=VERBOSE -D CMAKE_TOOLCHAIN_FILE={% if os.platform == 'win32' %}%CD%/cmake/toolchains/{{ properties.toolchainFileName }}{% else %}$(pwd)/cmake/toolchains/{{ properties.toolchainFileName }}{% endif %}",
       "commandCMakeRefresh": "cmake -S . -B {{ properties.buildFolderRelativePathPosix }} -G Ninja{% if os.platform == 'win32' %} -D CMAKE_MAKE_PROGRAM=ninja.cmd{% endif %} -D CMAKE_BUILD_TYPE={{ properties.buildType }} -D PLATFORM_NAME={{ properties.platformName }} -D CMAKE_EXPORT_COMPILE_COMMANDS=ON",
       "commandCMakeBuild": "cmake --build {{ properties.buildFolderRelativePathPosix }}{% if properties.buildVerbose == 'true' %} --verbose{% endif %}",
       "commandCMakeClean": "cmake --build {{ properties.buildFolderRelativePathPosix }} --target clean",
@@ -204,18 +204,20 @@
         "https://www.npmjs.com/package/@xpack-dev-tools/openocd"
       ],
       "dependencies-releases": {
-        "@micro-os-plus/architecture-synthetic-posix": "^5.0.1",
-        "@micro-os-plus/architecture-cortexm": "^7.0.0",
-        "@micro-os-plus/devices-qemu-cortexm": "^6.0.0",
-        "@micro-os-plus/architecture-riscv": "^5.0.0",
-        "@micro-os-plus/devices-qemu-riscv": "^2.0.0",
-        "@micro-os-plus/architecture-aarch32": "^4.0.0",
-        "@micro-os-plus/devices-qemu-aarch32": "^5.0.0",
-        "@micro-os-plus/architecture-aarch64": "^4.0.0",
-        "@micro-os-plus/devices-qemu-aarch64": "^5.0.0",
-        "@micro-os-plus/semihosting": "^9.0.0",
-        "@micro-os-plus/startup": "^6.0.0",
+        "@micro-os-plus/architecture-synthetic-posix": "^5.0.2",
+        "@micro-os-plus/architecture-cortexm": "^8.2.0",
+        "@micro-os-plus/devices-qemu-cortexm": "^7.0.1",
+        "@micro-os-plus/architecture-riscv": "^6.0.0",
+        "@micro-os-plus/devices-qemu-riscv": "^2.1.0",
+        "@micro-os-plus/devices-raspberry-pi": "github:micro-os-plus/devices-raspberry-pi-xpack",
+        "@micro-os-plus/architecture-aarch32": "^4.1.0",
+        "@micro-os-plus/devices-qemu-aarch32": "^5.0.1",
+        "@micro-os-plus/architecture-aarch64": "^4.1.0",
+        "@micro-os-plus/devices-qemu-aarch64": "^5.0.1",
+        "@micro-os-plus/semihosting": "^11.0.0",
+        "@micro-os-plus/startup": "^9.1.0",
         "@xpack-3rd-party/arm-cmsis-core": "5.4.0-7",
+        "@xpack-3rd-party/raspberrypi-pico-sdk": "2.3.0-5",
         "@xpack-dev-tools/qemu-arm": "9.2.4-1.1",
         "@xpack-dev-tools/qemu-riscv": "9.2.4-1.1",
         "@xpack-dev-tools/openocd": "0.12.0-7.1"
@@ -227,7 +229,8 @@
         "m0",
         "m3",
         "m4f",
-        "m7f"
+        "m7f",
+        "m33"
       ],
       "qemu-aarch32-variants": [
         "a15"
@@ -274,6 +277,8 @@
       "compute-latest-cmake-configs": "{% assign configs = '' | split: '' %}{% assign builder = 'cmake' %}{{ properties.add-latest-configs-for-builder }}",
       "compute-latest-meson-configs": "{% assign configs = '' | split: '' %}{% assign builder = 'meson' %}{{ properties.add-latest-configs-for-builder }}",
       "compute-latest-configs": "{% assign configs = '' | split: '' %}{% for builder in properties.builders %}{{ properties.add-latest-configs-for-builder }}{% endfor %}",
+      "add-boards-configs": "{% for board in properties.configs-boards %}{% assign config = board | append: '-cmake-gcc' %}{% assign configs = configs | push: config %}{% endfor %}",
+      "compute-boards-configs": "{% assign configs = '' | split: '' %}{{ properties.add-boards-configs }}",
       "add-native-gcc-versions-to-configs-for-builder": "{% assign native-gcc-versions = properties.native-gcc-versions | split_lines %}{% for version in native-gcc-versions %}{% assign config = 'native-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}",
       "add-native-clang-versions-to-configs-for-builder": "{% assign native-clang-versions = properties.native-clang-versions | split_lines %}{% for version in native-clang-versions %}{% assign config = 'native-' | append: builder | append: '-clang' | append: version %}{% assign configs = configs | push: config %}{% endfor %}",
       "add-qemu-cortexm-variants-versions-to-configs-for-builder": "{% assign arm-none-eabi-gcc-versions = properties.arm-none-eabi-gcc-versions | split_lines %}{% for variant in properties.qemu-cortexm-variants %}{% for version in arm-none-eabi-gcc-versions %}{% assign config = 'qemu-cortex-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}",
@@ -288,9 +293,13 @@
       "actions-link-dependencies-for-configs": "{% for config in configs %}{% for build-type in properties.build-types %}xpm run link-dependencies --config {{ config }}-{{ build-type }}{{ os.EOL }}{% endfor %}{% endfor %}",
       "actions-setup-build-test-for-configs": "{% for config in configs %}{{ properties.actions-setup-build-test-for-config }}{% endfor %}",
       "actions-setup-build-test-for-config": "{% for build-type in properties.build-types %}{% for test-action in properties.test-actions %}xpm run {{ test-action }} --config {{ config }}-{{ build-type }}{{ os.EOL }}{% endfor %}{% endfor %}",
+      "actions-build-for-configs": "{% for config in configs %}{{ properties.action-build-for-config }}{{ os.EOL }}{% endfor %}",
       "actions-test-for-configs": "{% for config in configs %}{{ properties.action-test-for-config }}{{ os.EOL }}{% endfor %}",
       "action-test-for-config": "xpm run test-{{ config }}",
-      "actions-clean-for-configs": "{% for config in configs %}{% for build-type in properties.build-types %}xpm run clean --config {{ config }}-{{ build-type }}{{ os.EOL }}{% endfor %}{% endfor %}"
+      "action-build-for-config": "xpm run build-{{ config }}",
+      "actions-clean-for-configs": "{% for config in configs %}{% for build-type in properties.build-types %}xpm run clean --config {{ config }}-{{ build-type }} --ignore-errors{{ os.EOL }}{% endfor %}{% endfor %}",
+      "actions-clear-for-configs": "{% for config in configs %}{% for build-type in properties.build-types %}xpm run clear --config {{ config }}-{{ build-type }} --ignore-errors{{ os.EOL }}{% endfor %}{% endfor %}"
+
     },
     "actions": {
       "xcdl-export": [
@@ -1392,7 +1401,7 @@
           "hidden": true,
           "inherits": [
             "short-win-paths-properties",
-            "cmake-native-actions",
+            "cmake-cross-actions",
             "aarch64-actions",
             "bare-metal-dependencies",
             "aarch64-dependencies",

@@ -40,6 +40,7 @@ include ("cmake/common-options-library.cmake")
 # -----------------------------------------------------------------------------
 # Dependencies.
 
+message (VERBOSE "")
 # Set `xpack_dependencies_folders` with the platform specific dependencies.
 include ("platforms/${PLATFORM_NAME}/cmake/dependencies-folders.cmake")
 
@@ -51,6 +52,18 @@ message (VERBOSE "")
 add_subdirectory (".." "top-bin")
 
 {% endif -%}
+
+foreach (folder ${xpack_dependencies_folders})
+  file (RELATIVE_PATH relative_folder "${CMAKE_SOURCE_DIR}" "${folder}")
+  message (VERBOSE "  ${relative_folder}")
+endforeach ()
+
+message (VERBOSE "")
+# Set `xpack_dependencies_libraries` with the platform specific libraries.
+include ("platforms/${PLATFORM_NAME}/cmake/dependencies-libraries.cmake")
+foreach (library ${xpack_dependencies_libraries})
+  message (VERBOSE "  ${library}")
+endforeach ()
 
 # Iterate the platform dependencies and `add_subdirectory()`.
 message (VERBOSE "")

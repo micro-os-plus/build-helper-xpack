@@ -19,8 +19,8 @@
 
 // ----------------------------------------------------------------------------
 // Platform configuration definitions.
-// Assembly files should define `#define __ASSEMBLY__ 1` before including
-// this file. If so, this file should define only preprocessor macros.
+// .S assembly files have `#define __ASSEMBLER__ 1`.
+// If so, this file should define only preprocessor macros.
 
 // ...
 

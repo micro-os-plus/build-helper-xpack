@@ -26,6 +26,11 @@ if (!buildFolderPath) {
   process.exit(1)
 }
 
+if (!fs.existsSync(buildFolderPath)) {
+  console.error(`Error: '${buildFolderPath}' does not exist.`)
+  process.exit(1)
+}
+
 if (!fs.statSync(buildFolderPath).isDirectory()) {
   console.error(`Error: '${buildFolderPath}' is not a folder.`)
   process.exit(1)

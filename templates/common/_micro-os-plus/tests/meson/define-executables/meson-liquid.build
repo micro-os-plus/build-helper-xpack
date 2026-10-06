@@ -79,8 +79,8 @@ foreach test : tests
   # _local_compile_c_args += micro_os_plus_diag_trace_dependency_compile_c_args
   # _local_compile_cpp_args += micro_os_plus_diag_trace_dependency_compile_cpp_args
 
-  _local_compile_c_args += platform_dependency_compile_c_args
-  _local_compile_cpp_args += platform_dependency_compile_cpp_args
+  _local_compile_c_args += micro_os_plus_platform_dependency_compile_c_args
+  _local_compile_cpp_args += micro_os_plus_platform_dependency_compile_cpp_args
 
   if xpack_platform_name != 'native'
     # _local_compile_c_args += micro_os_plus_semihosting_dependency_compile_c_args
@@ -103,11 +103,13 @@ foreach test : tests
   _local_dependencies += [ micro_os_plus_diag_trace_dependency ]
 
   # Platform specific dependencies. Bring device & architecture too
-  _local_dependencies += [ platform_dependency ]
+  _local_dependencies += [ micro_os_plus_platform_dependency ]
 
   if xpack_platform_name != 'native'
     _local_dependencies += [ micro_os_plus_semihosting_dependency ]
   endif
+
+  _local_dependencies += xpack_dependencies_libraries
 
   # ---------------------------------------------------------------------------
 

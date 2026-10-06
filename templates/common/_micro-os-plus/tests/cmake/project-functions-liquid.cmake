@@ -21,13 +21,17 @@ message (VERBOSE "Including 'tests/cmake/project-functions.cmake'...")
 
 # -----------------------------------------------------------------------------
 
-function (target_link_native_test_libraries name test_library_name)
+# `xpack_dependencies_libraries` is defined in each platform
+# `cmake/dependencies-libraries.cmake` file.
+
+function (target_link_native_test_libraries name)
   target_link_libraries (
     ${name}
     PRIVATE # The compile & link options common to all platforms.
             micro-os-plus::common-options
             # Library with the current test.
-            ${test_library_name}
+            ${ARGN}
+            ${xpack_dependencies_libraries}
 {%- if packageScopedName != '@micro-os-plus/diag-trace' %}
             # TODO: remove it after updating architecture dependencies.
             micro-os-plus::diag-trace
@@ -35,17 +39,28 @@ function (target_link_native_test_libraries name test_library_name)
             # Platform dependency.
             micro-os-plus::platform # bring device & architecture too
   )
+
+  if (NOT ARGN)
+    message (
+      FATAL_ERROR
+        "target_link_native_test_libraries: at least one library required"
+    )
+  endif ()
 endfunction ()
 
 # -----------------------------------------------------------------------------
 
-function (target_link_cross_test_libraries name test_library_name)
+# `xpack_dependencies_libraries` is defined in each platform
+# `cmake/dependencies-libraries.cmake` file.
+
+function (target_link_cross_test_libraries name)
   target_link_libraries (
     ${name}
     PRIVATE # The compile & link options common to all platforms.
             micro-os-plus::common-options
             # Library with the current test.
-            ${test_library_name}
+            ${ARGN}
+            ${xpack_dependencies_libraries}
 {%- if packageScopedName != '@micro-os-plus/diag-trace' %}
             # TODO: remove it after updating architecture dependencies.
             micro-os-plus::diag-trace
@@ -54,6 +69,13 @@ function (target_link_cross_test_libraries name test_library_name)
             micro-os-plus::platform # bring device & architecture too
             micro-os-plus::semihosting
   )
+  
+  if (NOT ARGN)
+    message (
+      FATAL_ERROR
+        "target_link_cross_test_libraries: at least one library required"
+    )
+  endif ()
 endfunction ()
 
 # -----------------------------------------------------------------------------

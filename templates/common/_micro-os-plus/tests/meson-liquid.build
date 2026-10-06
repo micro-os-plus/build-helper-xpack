@@ -106,7 +106,7 @@ foreach dep: xpack_dependencies_folders
 endforeach
 
 # Include the platform library.
-subdir('platforms/' + xpack_platform_name + '/meson/platform-library')
+subdir('platforms/' + xpack_platform_name)
 
 {% if packageScopedName != '@micro-os-plus/diag-trace' -%}
 # -----------------------------------------------------------------------------
@@ -126,6 +126,9 @@ endforeach
 
 # -----------------------------------------------------------------------------
 
+# Set `xpack_dependencies_libraries` with the platform specific dependencies.
+subdir('platforms/'+ xpack_platform_name + '/meson/dependencies-libraries')
+
 xpack_tested_library_dependency = {{packageScope | replace: "-", "_"}}_{{packageName | replace: "-", "_"}}_dependency
 xpack_tested_library_dependency_compile_c_args = {{packageScope | replace: "-", "_"}}_{{packageName | replace: "-", "_"}}_dependency_compile_c_args
 xpack_tested_library_dependency_compile_cpp_args = {{packageScope | replace: "-", "_"}}_{{packageName | replace: "-", "_"}}_dependency_compile_cpp_args
@@ -136,6 +139,6 @@ subdir('meson/define-executables')
 # Artefact specifics.
 
 # Include the platform specific artefacts and tests.
-subdir('platforms/' + xpack_platform_name)
+subdir('platforms/' + xpack_platform_name + '/meson/artefacts')
 
 # -----------------------------------------------------------------------------

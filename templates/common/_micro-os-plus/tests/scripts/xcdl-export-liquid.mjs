@@ -34,7 +34,7 @@ const npmHelperMaintenanceScriptsPath = path.join(
   'node_modules',
   '@xpack',
   'npm-packages-helper',
-  'maintenance-scripts'
+  'maintenance/scripts'
 )
 
 const { substitute } = await import(

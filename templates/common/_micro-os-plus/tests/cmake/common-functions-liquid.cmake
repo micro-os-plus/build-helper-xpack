@@ -46,8 +46,7 @@ function (add_native_test_executable name)
   # https://cmake.org/cmake/help/v3.20/manual/cmake-generator-expressions.7.html
   # The link options were defined in `platform-native-interface`.
   target_link_options (
-    ${name} PRIVATE
-    $<$<PLATFORM_ID:Linux,Windows>:-Wl,-Map,platform-bin/${name}-map.txt>
+    ${name} PRIVATE $<$<PLATFORM_ID:Linux,Windows>:-Wl,-Map,${name}-map.txt>
   )
 
   # TODO use add_custom_target()
@@ -69,6 +68,12 @@ function (add_native_test_executable name)
               "$<TARGET_FILE:${name}>" > ${name}-list.txt
       VERBATIM
     )
+
+    set_property (
+      TARGET ${name}
+      APPEND
+      PROPERTY ADDITIONAL_CLEAN_FILES "${name}-list.txt"
+    )
   endif ()
 endfunction ()
 
@@ -85,8 +90,13 @@ function (add_cross_test_executable name)
   endif ()
 {%- endif %}
 
-  target_link_options (
-    ${name} PRIVATE -Wl,-Map,platform-bin/${name}-map.txt # -v
+  target_link_options (${name} PRIVATE -Wl,-Map,${name}-map.txt # -v
+  )
+
+  set_property (
+    TARGET ${name}
+    APPEND
+    PROPERTY ADDITIONAL_CLEAN_FILES "${name}-map.txt"
   )
 
   # TODO use add_custom_target()
@@ -106,6 +116,12 @@ function (add_cross_test_executable name)
       COMMAND ${CMAKE_OBJCOPY} -O ihex "$<TARGET_FILE:${name}>"
               "$<TARGET_FILE:${name}>.hex"
     )
+
+    set_property (
+      TARGET ${name}
+      APPEND
+      PROPERTY ADDITIONAL_CLEAN_FILES "$<TARGET_FILE:${name}>.hex"
+    )
   endif ()
 
   if (XPACK_ENABLE_CREATE_LISTING)
@@ -115,6 +131,12 @@ function (add_cross_test_executable name)
       COMMAND ${CMAKE_OBJDUMP} --source --all-headers --demangle --line-numbers
               --wide "$<TARGET_FILE:${name}>" > ${name}-list.txt
       VERBATIM
+    )
+
+    set_property (
+      TARGET ${name}
+      APPEND
+      PROPERTY ADDITIONAL_CLEAN_FILES "${name}-list.txt"
     )
   endif ()
 endfunction ()
@@ -138,25 +160,78 @@ endfunction ()
 
 # -----------------------------------------------------------------------------
 
-function (add_compile_common_private_options target)
+function (prepend_compile_common_private_options target)
+  # Preserve whatever is already on the target's INCLUDE_DIRECTORIES so it can
+  # be re-appended after common-options/platform instead of staying in front.
+  get_target_property (
+    existing_include_directories ${target} INCLUDE_DIRECTORIES
+  )
+  if (existing_include_directories STREQUAL
+      "existing_include_directories-NOTFOUND"
+  )
+    set (existing_include_directories "")
+  endif ()
+
+  set_target_properties (${target} PROPERTIES INCLUDE_DIRECTORIES "")
+
   target_include_directories (
     ${target}
     PRIVATE
       $<TARGET_PROPERTY:micro-os-plus::common-options,INTERFACE_INCLUDE_DIRECTORIES>
       $<TARGET_PROPERTY:micro-os-plus::platform,INTERFACE_INCLUDE_DIRECTORIES>
   )
+
+  if (existing_include_directories)
+    target_include_directories (
+      ${target} PRIVATE ${existing_include_directories}
+    )
+  endif ()
+
+  # Preserve whatever is already on the target's COMPILE_DEFINITIONS so it can
+  # be re-appended after common-options/platform instead of staying in front.
+  get_target_property (
+    existing_compile_definitions ${target} COMPILE_DEFINITIONS
+  )
+  if (existing_compile_definitions STREQUAL
+      "existing_compile_definitions-NOTFOUND"
+  )
+    set (existing_compile_definitions "")
+  endif ()
+
+  set_target_properties (${target} PROPERTIES COMPILE_DEFINITIONS "")
+
   target_compile_definitions (
     ${target}
     PRIVATE
       $<TARGET_PROPERTY:micro-os-plus::common-options,INTERFACE_COMPILE_DEFINITIONS>
       $<TARGET_PROPERTY:micro-os-plus::platform,INTERFACE_COMPILE_DEFINITIONS>
   )
+
+  if (existing_compile_definitions)
+    target_compile_definitions (
+      ${target} PRIVATE ${existing_compile_definitions}
+    )
+  endif ()
+
+  # Preserve whatever is already on the target's COMPILE_OPTIONS so it can be
+  # re-appended after common-options/platform instead of staying in front.
+  get_target_property (existing_compile_options ${target} COMPILE_OPTIONS)
+  if (existing_compile_options STREQUAL "existing_compile_options-NOTFOUND")
+    set (existing_compile_options "")
+  endif ()
+
+  set_target_properties (${target} PROPERTIES COMPILE_OPTIONS "")
+
   target_compile_options (
     ${target}
     PRIVATE
       $<TARGET_PROPERTY:micro-os-plus::common-options,INTERFACE_COMPILE_OPTIONS>
       $<TARGET_PROPERTY:micro-os-plus::platform,INTERFACE_COMPILE_OPTIONS>
   )
+
+  if (existing_compile_options)
+    target_compile_options (${target} PRIVATE ${existing_compile_options})
+  endif ()
 endfunction ()
 
 # -----------------------------------------------------------------------------
@@ -212,7 +287,7 @@ function (add_qemu_test)
     COMMAND
       ${XPACK_QEMU_BINARY}${extension} ${XPACK_QEMU_MACHINE_ARGS} --kernel
       "${elf_name}.elf" ${XPACK_QEMU_EXTRA_ARGS} --semihosting-config
-      "${semihosting_config}"
+      "${semihosting_config}" -D ${arg_NAME}-qemu.log
   )
 
 endfunction ()

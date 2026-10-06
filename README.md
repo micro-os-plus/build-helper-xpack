@@ -120,7 +120,7 @@ The xPack Build Framework is neutral to the actual system build generator
 used.
 
 Currently all µOS++ source libraries support both **CMake** and **meson**,
-and an internal xPack builder is planned.
+and an internal `xcdl` builder is planned.
 
 ### Build & integration info
 
