@@ -69,7 +69,7 @@ function (target_link_cross_test_libraries name)
             micro-os-plus::platform # bring device & architecture too
             micro-os-plus::semihosting
   )
-  
+
   if (NOT ARGN)
     message (
       FATAL_ERROR

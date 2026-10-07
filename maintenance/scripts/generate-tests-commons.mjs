@@ -234,7 +234,8 @@ if (options.doInit) {
         substitutionPrefix: commonSubstitutionPrefix,
       })
     } else {
-      removeTemplateItem(item, projectFolderPath, options)
+      console.log(`Preserving file: ${item}`)
+      // removeTemplateItem(item, projectFolderPath, options)
     }
   }
 
