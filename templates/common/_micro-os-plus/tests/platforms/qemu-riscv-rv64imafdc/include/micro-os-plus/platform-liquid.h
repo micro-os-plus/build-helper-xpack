@@ -1,1 +1,1 @@
-{% render './platforms/include/micro-os-plus/platform-liquid.h' packageScopedName: packageScopedName, testsConfig: testsConfig, fromFilePath: fromFilePath%}
+{% render './platforms/include/micro-os-plus/platform-liquid.h' packageScopedName: packageScopedName, testsConfig: testsConfig, fromFilePath: fromFilePath, currentYear: currentYear %}

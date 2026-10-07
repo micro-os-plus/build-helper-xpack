@@ -1,1 +1,1 @@
-{% render './platforms/include/micro-os-plus/diag/trace-defines-liquid.h' packageScopedName: packageScopedName, testsConfig: testsConfig, fromFilePath: fromFilePath%}
+{% render './platforms/include/micro-os-plus/diag/trace-defines-liquid.h' packageScopedName: packageScopedName, testsConfig: testsConfig, fromFilePath: fromFilePath, currentYear: currentYear %}

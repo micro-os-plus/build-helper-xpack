@@ -13,25 +13,21 @@
 #
 # -----------------------------------------------------------------------------
 
-# https://mesonbuild.com/Machine-files.html
-# https://mesonbuild.com/Cross-compilation.html
-# https://mesonbuild.com/Reference-tables.html#cpu-families
+# Define a list of libraries dependencies.
 
-# The binaries are in the toolchain file.
+# -----------------------------------------------------------------------------
 
-[host_machine]
-system = 'bare'
-cpu_family = 'riscv32'
-cpu = 'rv32imac'
-endian = 'little'
+message (
+  VERBOSE
+  "Including 'tests/platforms/${PLATFORM_NAME}/cmake/dependencies-libraries.cmake'..."
+)
 
-[constants]
+# -----------------------------------------------------------------------------
 
-[properties]
+# More libraries in addition to common ones (common-options, diag-trace, and
+# platform). Included in `cmake/project-functions.cmake`.
 
-[built-in options]
-warning_level = '0'
-werror = true
-# layout = 'flat' # 'mirror' # Broken!
+# None so far.
+set (xpack_dependencies_libraries)
 
 # -----------------------------------------------------------------------------
