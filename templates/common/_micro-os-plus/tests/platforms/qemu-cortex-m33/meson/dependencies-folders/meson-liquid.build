@@ -1,0 +1,46 @@
+# -----------------------------------------------------------------------------
+# DO NOT EDIT! Automatically generated from template file:
+# {{fromFilePath}}
+#
+# This file is part of the µOS++ project (https://micro-os-plus.github.io/).
+# Copyright (c) 2022-{{currentYear}} Liviu Ionescu. All rights reserved.
+#
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose is hereby granted, under the terms of the MIT license.
+#
+# If a copy of the license was not distributed with this file, it can be
+# obtained from https://opensource.org/licenses/mit.
+#
+# -----------------------------------------------------------------------------
+
+# Define a list of folders where the platform dependencies are located.
+
+# -----------------------------------------------------------------------------
+
+# The base folder is `tests`.
+xpack_dependencies_folders = [
+
+  # Order matters: dependencies must precede their dependants.
+
+  # Dependencies: none.
+  'xpacks/@micro-os-plus/diag-trace',
+
+  # Dependencies: none.
+  xpack_build_folder_relative_path + '/xpacks/@xpack-3rd-party/arm-cmsis-core',
+
+  # Dependencies: none.
+  # Hidden dependency: semihosting.
+  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/architecture-cortexm',
+
+  # Dependencies: arm_cmsis_core_m, architecture, diag.trace.
+  # Hidden dependency: semihosting.
+  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/devices-qemu-cortexm',
+
+  # Dependencies: diag.trace, architecture.
+  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/semihosting',
+
+  # Dependencies: architecture, diag.trace, semihosting.
+  xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/startup',
+]
+
+# -----------------------------------------------------------------------------

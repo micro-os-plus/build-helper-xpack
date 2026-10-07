@@ -1,0 +1,83 @@
+# -----------------------------------------------------------------------------
+# DO NOT EDIT! Automatically generated from template file:
+# {{fromFilePath}}
+#
+# This file is part of the µOS++ project (https://micro-os-plus.github.io/).
+# Copyright (c) 2023-{{currentYear}} Liviu Ionescu. All rights reserved.
+#
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose is hereby granted, under the terms of the MIT license.
+#
+# If a copy of the license was not distributed with this file, it can be
+# obtained from https://opensource.org/licenses/mit.
+#
+# -----------------------------------------------------------------------------
+
+message (VERBOSE "Processing 'tests/platforms/${PLATFORM_NAME}/device/'...")
+
+# -----------------------------------------------------------------------------
+
+# Define the device library.
+add_library (micro-os-plus-device-interface INTERFACE EXCLUDE_FROM_ALL)
+
+# -----------------------------------------------------------------------------
+
+target_include_directories (
+  micro-os-plus-device-interface
+  INTERFACE "include"
+            # Vendored CMSIS headers (register/bit-field definitions, no HAL);
+            # kept from the original CubeMX-generated project, all the rest of
+            # which (Core/, Drivers/STM32F7xx_HAL_Driver/, the generated CMake,
+            # the .ioc) was removed once this platform stopped using the
+            # HAL/CubeMX bring-up.
+            "stm32cubemx/Drivers/CMSIS/Device/ST/STM32F7xx/Include"
+            "stm32cubemx/Drivers/CMSIS/Include"
+)
+
+target_compile_definitions (
+  micro-os-plus-device-interface INTERFACE STM32F767xx
+)
+
+target_sources (
+  micro-os-plus-device-interface
+  INTERFACE "src/vectors-stm32f767xx.c" "src/system-stm32f767xx.cpp"
+            "src/system-clock.cpp"
+)
+
+target_compile_options (
+  micro-os-plus-device-interface
+  INTERFACE $<$<COMPILE_LANGUAGE:C>:-Wno-missing-prototypes>
+            $<$<COMPILE_LANGUAGE:C>:-Wno-nested-externs>
+            $<$<COMPILE_LANGUAGE:C>:-Wno-strict-prototypes>
+            $<$<COMPILE_LANGUAGE:C>:-Wno-c++-compat>
+            $<$<COMPILE_LANGUAGE:C>:-Wno-old-style-definition>
+            -Wno-missing-declarations
+            -Wno-padded
+            -Wno-conversion
+            -Wno-sign-conversion
+            -Wno-unused-parameter
+            -Wno-redundant-decls
+)
+
+target_link_options (
+  micro-os-plus-device-interface
+  INTERFACE
+  # Prefer absolute paths over paths relative to the build folder.
+  -T${CMAKE_CURRENT_SOURCE_DIR}/linker-scripts/mem.ld
+  -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/startup/linker-scripts/section-interrupt-vectors.ld
+  -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/startup/linker-scripts/sections.ld
+)
+
+target_link_libraries (
+  micro-os-plus-device-interface INTERFACE micro-os-plus::architecture
+)
+
+xpack_display_target_lists (micro-os-plus-device-interface)
+
+# -----------------------------------------------------------------------------
+
+# Aliases.
+add_library (micro-os-plus::device ALIAS micro-os-plus-device-interface)
+message (VERBOSE "> micro-os-plus::device -> micro-os-plus-device-interface")
+
+# -----------------------------------------------------------------------------

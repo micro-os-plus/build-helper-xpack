@@ -1,7 +1,7 @@
+// ----------------------------------------------------------------------------
 // DO NOT EDIT!  Automatically generated from template file:
 // {{fromFilePath}}
-// TODO: generate it via xcdl, and remove this other one from the tests.
-
+// TODO: generate it via xcdl, when available.
 // ----------------------------------------------------------------------------
 
 #ifndef MICRO_OS_PLUS_DIAG_TRACE_DEFINES_H_

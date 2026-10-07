@@ -1,0 +1,47 @@
+// ----------------------------------------------------------------------------
+// DO NOT EDIT! Automatically generated from template file:
+// {{fromFilePath}}
+// TODO: generate it via xcdl, when available.
+// ----------------------------------------------------------------------------
+
+#ifndef MICRO_OS_PLUS_DIAG_TRACE_DEFINES_H_
+#define MICRO_OS_PLUS_DIAG_TRACE_DEFINES_H_
+
+// ----------------------------------------------------------------------------
+
+// Hack used until xcdl will generate different files for debug configurations.
+// For now tie the diag trace to the debug configuration.
+#if defined(MICRO_OS_PLUS_DEBUG_ENABLED)
+// The portable trace::printf() code.
+#if !defined(MICRO_OS_PLUS_DIAG_TRACE_ENABLED)
+#define MICRO_OS_PLUS_DIAG_TRACE_ENABLED
+#endif // !defined(MICRO_OS_PLUS_DIAG_TRACE_ENABLED)
+#endif // defined(MICRO_OS_PLUS_DEBUG_ENABLED)
+
+// The size in bytes of the stack buffer used by vsnprintf() to store the
+// diagnostics line.
+#if !defined(MICRO_OS_PLUS_DIAG_TRACE_PRINTF_BUFFER_ARRAY_SIZE_INTEGER)
+#define MICRO_OS_PLUS_DIAG_TRACE_PRINTF_BUFFER_ARRAY_SIZE_INTEGER (512)
+#endif // !defined(MICRO_OS_PLUS_DIAG_TRACE_PRINTF_BUFFER_ARRAY_SIZE_INTEGER)
+
+// The semihosting trace::printf() implementation.
+#if !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_ENABLED)
+#define MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_ENABLED
+#endif // !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_ENABLED)
+
+// A diag trace channel implemented over the semihosting SYS_WRITE call on
+// STDOUT.
+#if !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_STDOUT_ENABLED)
+#define MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_STDOUT_ENABLED
+#endif // !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_STDOUT_ENABLED)
+
+// A diag trace channel implemented over the semihosting SYS_WRITE0 call
+#if !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_DEBUG_ENABLED)
+// #define MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_DEBUG_ENABLED
+#endif // !defined(MICRO_OS_PLUS_DIAG_TRACE_SEMIHOSTING_DEBUG_ENABLED)
+
+// ----------------------------------------------------------------------------
+
+#endif // MICRO_OS_PLUS_DIAG_TRACE_DEFINES_H_
+
+// ----------------------------------------------------------------------------
