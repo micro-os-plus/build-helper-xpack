@@ -1,9 +1,10 @@
-# platforms/native
+# platforms/synthetic-posix
 
 > DO NOT EDIT! Automatically generated from template file:
 > {{fromFilePath}}
 
-Support files for building applications to run as native processes.
+Support files for building applications to run as native processes on POSIX
+systems, like macOS and GNU/Linux.
 
 ## Include folders
 
@@ -47,24 +48,6 @@ require explicitly referring to the shared libraries specific to the
 toolchain, and it is important to avoid using the similar system
 libraries, since sometimes they might not be compatible.
 
-### Windows
-
-Windows is a special case, since the DLLs referred by the generated binaries
-are generally not available in the standard distribution and the toolchain
-provided libraries are mandatory.
-
-Separate libraries are available for 64/32-bit binaries, in the
-`x86_64-w64-mingw32/lib`, respectively `i686-w64-mingw32/lib`,
-when available.
-
-The actual location of the C++ libraries can be obtained by asking
-the C++ compiler, for example with `-print-file-name=<library>.dll`.
-
-This path can be later used to adjust the environment PATH to include
-the libraries.
-
-However, in order to simplify things, the Windows builds use `-static`.
-
 ### GNU/Linux & macOS
 
 For GNU/Linux & macOS builds, the compiler is asked the locations of the
@@ -86,6 +69,6 @@ To enable it, set `XPACK_ENABLE_COVERAGE` to `true` in `CMakeLists.txt`.
 To show coverage for a single file, add the relative path as the 3rd
 argument to `show-coverage.sh`, prefixed by `../../../../`:
 
-```
+```txt
 "../../../../src/doubly-list-links.cpp"
 ```
