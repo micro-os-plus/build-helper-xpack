@@ -66,15 +66,15 @@
       "buildFolderRelativePath": "{{ 'build' | path_join: configuration.name | to_filename | downcase }}",
       "buildFolderRelativePathPosix": "{{ 'build' | path_posix_join: configuration.name | downcase }}",
       "commandClearBuildFolder": "node scripts/clear-build-folder.mjs {{ properties.buildFolderRelativePathPosix }}",
-      "commandCMakeGenerateNative": "{{ properties.commandCMakeRefresh }} --log-level=VERBOSE",
-      "commandCMakeGenerateNativeWithToolchain": "{{ properties.commandCMakeGenerateNative }} -D CMAKE_TOOLCHAIN_FILE=cmake/toolchains/{{ properties.toolchainFileName }}",
+      "commandCMakeGenerateNativePosix": "{{ properties.commandCMakeRefresh }} --log-level=VERBOSE",
+      "commandCMakeGenerateNativePosixWithToolchain": "{{ properties.commandCMakeGenerateNativePosix }} -D CMAKE_TOOLCHAIN_FILE=cmake/toolchains/{{ properties.toolchainFileName }}",
      "commandCMakeGenerateCross": "{{ properties.commandCMakeRefresh }} --log-level=VERBOSE -D CMAKE_TOOLCHAIN_FILE={% if os.platform == 'win32' %}%CD%/cmake/toolchains/{{ properties.toolchainFileName }}{% else %}$(pwd)/cmake/toolchains/{{ properties.toolchainFileName }}{% endif %}",
       "commandCMakeRefresh": "cmake -S . -B {{ properties.buildFolderRelativePathPosix }} -G Ninja{% if os.platform == 'win32' %} -D CMAKE_MAKE_PROGRAM=ninja.cmd{% endif %} -D CMAKE_BUILD_TYPE={{ properties.buildType }} -D PLATFORM_NAME={{ properties.platformName }} -D CMAKE_EXPORT_COMPILE_COMMANDS=ON",
       "commandCMakeBuild": "cmake --build {{ properties.buildFolderRelativePathPosix }}{% if properties.buildVerbose == 'true' %} --verbose{% endif %}",
       "commandCMakeClean": "cmake --build {{ properties.buildFolderRelativePathPosix }} --target clean",
       "commandCMakePerformTests": "ctest -V --test-dir {{ properties.buildFolderRelativePath }}",
-      "commandMesonSetupNative": "meson setup --backend ninja --buildtype {{ properties.buildType }} -D platform-name={{ properties.platformName }} {{ properties.buildFolderRelativePathPosix }} .",
-      "commandMesonSetupNativeWithToolchain": "meson setup --backend ninja --buildtype {{ properties.buildType }} -D platform-name={{ properties.platformName }} --native-file meson/toolchains/{{ properties.toolchainFileName }} --native-file platforms/{{ properties.platformName }}/meson/native.ini {{ properties.buildFolderRelativePathPosix }} .",
+      "commandMesonSetupNativePosix": "meson setup --backend ninja --buildtype {{ properties.buildType }} -D platform-name={{ properties.platformName }} {{ properties.buildFolderRelativePathPosix }} .",
+      "commandMesonSetupNativePosixWithToolchain": "meson setup --backend ninja --buildtype {{ properties.buildType }} -D platform-name={{ properties.platformName }} --native-file meson/toolchains/{{ properties.toolchainFileName }} --native-file platforms/{{ properties.platformName }}/meson/native.ini {{ properties.buildFolderRelativePathPosix }} .",
       "commandMesonSetupCross": "meson setup --backend ninja --buildtype {{ properties.buildType }} -D platform-name={{ properties.platformName }} --cross meson/toolchains/{{ properties.toolchainFileName }} --cross platforms/{{ properties.platformName }}/meson/cross.ini {{ properties.buildFolderRelativePathPosix }} .",
       "commandMesonRefresh": "meson setup --reconfigure {{ properties.buildFolderRelativePathPosix }} .",
       "commandMesonBuild": "meson compile -C {{ properties.buildFolderRelativePathPosix }}{% if properties.buildVerbose == 'true' %} --verbose{% endif %}",
@@ -88,11 +88,11 @@
       "commandXcdlClean": "echo xcdl build -C {{ properties.buildFolderRelativePathPosix }} --target clean",
       "commandXcdlPerformTests": "echo xcdl test -C {{ properties.buildFolderRelativePathPosix }} --verbose",
       "configs-ci-non-darwin": [
-        "native-cmake-gcc"
+        "synthetic-posix-cmake-gcc"
       ],
       "configs-ci": [
-        "native-cmake-clang",
-        "native-meson-clang",
+        "synthetic-posix-cmake-clang",
+        "synthetic-posix-meson-clang",
         "qemu-cortex-m0-cmake-gcc",
         "qemu-cortex-m7f-cmake-gcc",
         "qemu-aarch64-a72-cmake-gcc",
@@ -100,12 +100,12 @@
         "qemu-cortex-m0-meson-gcc"
       ],
       "configs-selected-non-darwin": [
-        "native-cmake-gcc",
-        "native-meson-gcc"
+        "synthetic-posix-cmake-gcc",
+        "synthetic-posix-meson-gcc"
       ],
       "configs-selected": [
-        "native-cmake-clang",
-        "native-meson-clang",
+        "synthetic-posix-cmake-clang",
+        "synthetic-posix-meson-clang",
         "qemu-cortex-m0-cmake-gcc",
         "qemu-cortex-m0-meson-gcc",
         "qemu-cortex-m4f-cmake-gcc",
@@ -114,6 +114,21 @@
         "qemu-aarch64-a72-meson-gcc",
         "qemu-riscv-rv32imac-cmake-gcc",
         "qemu-riscv-rv32imac-meson-gcc"
+      ],
+      "$configs-boards": [
+        "nucleo-f411re",
+        "nucleo-f411re-cubemx",
+        "nucleo-f411re-cubemx-startup",
+        "nucleo-f767zi",
+        "nucleo-f767zi-cubemx",
+        "nucleo-h533re",
+        "nucleo-h533re-cubemx",
+        "raspberry-pi-pico",
+        "raspberry-pi-pico-sdk",
+        "raspberry-pi-pico-2-arm",
+        "raspberry-pi-pico-2-arm-sdk",
+        "raspberry-pi-pico-2-riscv",
+        "raspberry-pi-pico-2-riscv-sdk"
       ],
       "$native-gcc-url": "https://www.npmjs.com/package/@xpack-dev-tools/gcc",
       "native-gcc-releases": {
@@ -222,7 +237,7 @@
         "@xpack-dev-tools/qemu-riscv": "9.2.4-1.1",
         "@xpack-dev-tools/openocd": "0.12.0-7.1"
       },
-      "native-dependencies": [
+      "synthetic-posix-dependencies": [
         "@micro-os-plus/architecture-synthetic-posix"
       ],
       "qemu-cortexm-variants": [
@@ -255,32 +270,32 @@
         "build",
         "test"
       ],
-      "add-native-sys-to-configs-for-builder": "{% assign config = 'native-' | append: builder | append: '-sys' %}{% assign configs = configs | push: config %}",
-      "add-native-gcc-to-configs-for-builder": "{% assign config = 'native-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}",
-      "add-native-clang-to-configs-for-builder": "{% assign config = 'native-' | append: builder | append: '-clang' %}{% assign configs = configs | push: config %}",
-      "add-native-to-configs-for-builder": "{% if os.platform == 'win32' %}{{ properties.add-native-gcc-to-configs-for-builder }}{% else %}{{ properties.add-native-sys-to-configs-for-builder }}{% endif %}",
-      "compute-default-cmake-configs": "{% assign configs = '' | split: '' %}{% assign builder = 'cmake' %}{{ properties.add-native-to-configs-for-builder }}",
-      "compute-default-meson-configs": "{% assign configs = '' | split: '' %}{% assign builder = 'meson' %}{{ properties.add-native-to-configs-for-builder }}",
-      "compute-default-xcdl-configs": "{% assign configs = '' | split: '' %}{% assign builder = 'xcdl' %}{{ properties.add-native-to-configs-for-builder }}",
-      "compute-default-configs": "{% assign configs = '' | split: '' %}{% for builder in properties.builders %}{{ properties.add-native-to-configs-for-builder }}{% endfor %}",
+      "add-synthetic-posix-sys-to-configs-for-builder": "{% assign config = 'synthetic-posix-' | append: builder | append: '-sys' %}{% assign configs = configs | push: config %}",
+      "add-synthetic-posix-gcc-to-configs-for-builder": "{% assign config = 'synthetic-posix-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}",
+      "add-synthetic-posix-clang-to-configs-for-builder": "{% assign config = 'synthetic-posix-' | append: builder | append: '-clang' %}{% assign configs = configs | push: config %}",
+      "add-synthetic-posix-to-configs-for-builder": "{% if os.platform == 'win32' %}{{ properties.add-synthetic-posix-gcc-to-configs-for-builder }}{% else %}{{ properties.add-synthetic-posix-sys-to-configs-for-builder }}{% endif %}",
+      "compute-default-cmake-configs": "{% assign configs = '' | split: '' %}{% assign builder = 'cmake' %}{{ properties.add-synthetic-posix-to-configs-for-builder }}",
+      "compute-default-meson-configs": "{% assign configs = '' | split: '' %}{% assign builder = 'meson' %}{{ properties.add-synthetic-posix-to-configs-for-builder }}",
+      "compute-default-xcdl-configs": "{% assign configs = '' | split: '' %}{% assign builder = 'xcdl' %}{{ properties.add-synthetic-posix-to-configs-for-builder }}",
+      "compute-default-configs": "{% assign configs = '' | split: '' %}{% for builder in properties.builders %}{{ properties.add-synthetic-posix-to-configs-for-builder }}{% endfor %}",
       "add-ci-non-darwin-configs": "{% for config in properties.configs-ci-non-darwin %}{% assign configs = configs | push: config %}{% endfor %}",
       "add-ci-configs": "{% for config in properties.configs-ci %}{% assign configs = configs | push: config %}{% endfor %}",
       "compute-ci-configs": "{% assign configs = '' | split: '' %}{% if os.platform != 'darwin' %}{{ properties.add-ci-non-darwin-configs }}{% endif %}{{ properties.add-ci-configs }}",
       "add-selected-configs": "{% for config in properties.configs-selected %}{% assign configs = configs | push: config %}{% endfor %}",
-      "add-selected-non-darwin-configs": "{% for config in properties.configs-selected=non-darwin %}{% assign configs = configs | push: config %}{% endfor %}",
+      "add-selected-non-darwin-configs": "{% for config in properties.configs-selected-non-darwin %}{% assign configs = configs | push: config %}{% endfor %}",
       "compute-selected-configs": "{% assign configs = '' | split: '' %}{% if os.platform != 'darwin' %}{{ properties.add-selected-non-darwin-configs }}{% endif %}{{ properties.add-selected-configs }}",
       "add-qemu-cortexm-variants-to-configs-for-builder": "{% for variant in properties.qemu-cortexm-variants %}{% assign config = 'qemu-cortex-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}",
       "add-qemu-aarch32-variants-to-configs-for-builder": "{% for variant in properties.qemu-aarch32-variants %}{% assign config = 'qemu-aarch32-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}",
       "add-qemu-aarch64-variants-to-configs-for-builder": "{% for variant in properties.qemu-aarch64-variants %}{% assign config = 'qemu-aarch64-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}",
       "add-qemu-riscv-variants-to-configs-for-builder": "{% for variant in properties.qemu-riscv-variants %}{% assign config = 'qemu-riscv-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}",
-      "add-latest-configs-for-builder": "{% if os.platform != 'darwin' %}{{ properties.add-native-gcc-to-configs-for-builder }}{% endif %}{{ properties.add-native-clang-to-configs-for-builder }}{{ properties.add-qemu-cortexm-variants-to-configs-for-builder }}{{ properties.add-qemu-aarch32-variants-to-configs-for-builder }}{{ properties.add-qemu-aarch64-variants-to-configs-for-builder }}{{ properties.add-qemu-riscv-variants-to-configs-for-builder }}",
+      "add-latest-configs-for-builder": "{% if os.platform != 'darwin' %}{{ properties.add-synthetic-posix-gcc-to-configs-for-builder }}{% endif %}{{ properties.add-synthetic-posix-clang-to-configs-for-builder }}{{ properties.add-qemu-cortexm-variants-to-configs-for-builder }}{{ properties.add-qemu-aarch32-variants-to-configs-for-builder }}{{ properties.add-qemu-aarch64-variants-to-configs-for-builder }}{{ properties.add-qemu-riscv-variants-to-configs-for-builder }}",
       "compute-latest-cmake-configs": "{% assign configs = '' | split: '' %}{% assign builder = 'cmake' %}{{ properties.add-latest-configs-for-builder }}",
       "compute-latest-meson-configs": "{% assign configs = '' | split: '' %}{% assign builder = 'meson' %}{{ properties.add-latest-configs-for-builder }}",
       "compute-latest-configs": "{% assign configs = '' | split: '' %}{% for builder in properties.builders %}{{ properties.add-latest-configs-for-builder }}{% endfor %}",
       "add-boards-configs": "{% for board in properties.configs-boards %}{% assign config = board | append: '-cmake-gcc' %}{% assign configs = configs | push: config %}{% endfor %}",
       "compute-boards-configs": "{% assign configs = '' | split: '' %}{{ properties.add-boards-configs }}",
-      "add-native-gcc-versions-to-configs-for-builder": "{% assign native-gcc-versions = properties.native-gcc-versions | split_lines %}{% for version in native-gcc-versions %}{% assign config = 'native-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}",
-      "add-native-clang-versions-to-configs-for-builder": "{% assign native-clang-versions = properties.native-clang-versions | split_lines %}{% for version in native-clang-versions %}{% assign config = 'native-' | append: builder | append: '-clang' | append: version %}{% assign configs = configs | push: config %}{% endfor %}",
+      "add-native-gcc-versions-to-configs-for-builder": "{% assign native-gcc-versions = properties.native-gcc-versions | split_lines %}{% for version in native-gcc-versions %}{% assign config = 'synthetic-posix-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}",
+      "add-native-clang-versions-to-configs-for-builder": "{% assign native-clang-versions = properties.native-clang-versions | split_lines %}{% for version in native-clang-versions %}{% assign config = 'synthetic-posix-' | append: builder | append: '-clang' | append: version %}{% assign configs = configs | push: config %}{% endfor %}",
       "add-qemu-cortexm-variants-versions-to-configs-for-builder": "{% assign arm-none-eabi-gcc-versions = properties.arm-none-eabi-gcc-versions | split_lines %}{% for variant in properties.qemu-cortexm-variants %}{% for version in arm-none-eabi-gcc-versions %}{% assign config = 'qemu-cortex-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}",
       "add-qemu-aarch32-variants-versions-to-configs-for-builder": "{% assign arm-none-eabi-gcc-versions = properties.arm-none-eabi-gcc-versions | split_lines %}{% for variant in properties.qemu-aarch32-variants %}{% for version in arm-none-eabi-gcc-versions %}{% assign config = 'qemu-aarch32-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}",
       "add-qemu-aarch64-variants-versions-to-configs-for-builder": "{% assign arm-none-eabi-gcc-versions = properties.arm-none-eabi-gcc-versions | split_lines %}{% for variant in properties.qemu-aarch64-variants %}{% for version in arm-none-eabi-gcc-versions %}{% assign config = 'qemu-aarch64-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}",
@@ -304,6 +319,14 @@
     "actions": {
       "xcdl-export": [
         "node scripts/xcdl-export.mjs sources/*/xcdl-*.jsonc"
+      ],
+      "convert-vectors": [
+        "node scripts/convert-startup-to-vectors.mjs platforms/nucleo-h533re/device/stm32cubemx/startup_stm32h533xx.s platforms/nucleo-h533re/device/src/vectors-stm32h533xx.c",
+        "node scripts/convert-startup-to-vectors.mjs platforms/nucleo-f411re/device/stm32cubemx/startup_stm32f411xe.s platforms/nucleo-f411re/device/src/vectors-stm32f411xe.c",
+        "node scripts/convert-startup-to-vectors.mjs platforms/nucleo-f767zi/device/stm32cubemx/startup_stm32f767xx.s platforms/nucleo-f767zi/device/src/vectors-stm32f767xx.c"
+      ],
+      "clear": [
+        "{{ properties.compute-default-configs }}{{ properties.actions-clear-for-configs }}"
       ],
       "install": [
         "xpm install",
@@ -330,6 +353,9 @@
       "clean": [
         "{{ properties.compute-default-configs }}{{ properties.actions-clean-for-configs }}"
       ],
+      "clear-ci": [
+        "{{ properties.compute-ci-configs }}{{ properties.actions-clear-for-configs }}"
+      ],
       "install-ci": [
         "xpm install",
         "{{ properties.compute-ci-configs }}{{ properties.actions-install-for-configs }}"
@@ -344,6 +370,9 @@
       "clean-ci": [
         "{{ properties.compute-ci-configs }}{{ properties.actions-clean-for-configs }}"
       ],
+      "clear-selected": [
+        "{{ properties.compute-selected-configs }}{{ properties.actions-clear-for-configs }}"
+      ],
       "install-selected": [
         "xpm install",
         "{{ properties.compute-selected-configs }}{{ properties.actions-install-for-configs }}"
@@ -357,6 +386,9 @@
       ],
       "clean-selected": [
         "{{ properties.compute-selected-configs }}{{ properties.actions-clean-for-configs }}"
+      ],
+      "clear-latest": [
+        "{{ properties.compute-latest-configs }}{{ properties.actions-clear-for-configs }}"
       ],
       "install-latest": [
         "xpm install",
@@ -378,6 +410,26 @@
       "clean-latest": [
         "{{ properties.compute-latest-configs }}{{ properties.actions-clean-for-configs }}"
       ],
+      "clear-boards": [
+        "{{ properties.compute-boards-configs }}{{ properties.actions-clear-for-configs }}"
+      ],
+      "install-boards": [
+        "xpm install",
+        "{{ properties.compute-boards-configs }}{{ properties.actions-install-for-configs }}"
+      ],
+      "link-dependencies-boards": [
+        "xpm run link-dependencies",
+        "{{ properties.compute-boards-configs }}{{ properties.actions-link-dependencies-for-configs }}"
+      ],
+      "build-boards": [
+        "{{ properties.compute-boards-configs }}{{ properties.actions-build-for-configs }}"
+      ],
+      "clean-boards": [
+        "{{ properties.compute-boards-configs }}{{ properties.actions-clean-for-configs }}"
+      ],
+      "clear-all": [
+        "{{ properties.compute-all-configs }}{{ properties.actions-clear-for-configs }}"
+      ],
       "install-all": [
         "xpm install",
         "{{ properties.compute-all-configs }}{{ properties.actions-install-for-configs }}"
@@ -398,32 +450,32 @@
       "clean-all": [
         "{{ properties.compute-all-configs }}{{ properties.actions-clean-for-configs }}"
       ],
-      "test-native-{{ matrix.builder }}-all": {
+      "test-synthetic-posix-{{ matrix.builder }}-all": {
         "matrix": {
           "builder": [
             "{{ properties.builders | join_lines }}"
           ]
         },
         "template": [
-          "xpm run test-native-{{ matrix.builder }}-sys{% if os.platform != 'darwin' %} --ignore-errors{% endif %}",
-          "{% assign native-gcc-versions = properties.native-gcc-versions | split_lines %}{% for version in native-gcc-versions %}{% if os.platform == 'darwin' %}echo {% endif %}xpm run test-native-{{ matrix.builder }}-gcc{{ version }}{{ os.EOL }}{% endfor %}",
-          "{% assign native-clang-versions = properties.native-clang-versions | split_lines %}{% for version in native-clang-versions %}xpm run test-native-{{ matrix.builder }}-clang{{ version }}{{ os.EOL }}{% endfor %}"
+          "xpm run test-synthetic-posix-{{ matrix.builder }}-sys{% if os.platform != 'darwin' %} --ignore-errors{% endif %}",
+          "{% assign native-gcc-versions = properties.native-gcc-versions | split_lines %}{% for version in native-gcc-versions %}{% if os.platform == 'darwin' %}echo {% endif %}xpm run test-synthetic-posix-{{ matrix.builder }}-gcc{{ version }}{{ os.EOL }}{% endfor %}",
+          "{% assign native-clang-versions = properties.native-clang-versions | split_lines %}{% for version in native-clang-versions %}xpm run test-synthetic-posix-{{ matrix.builder }}-clang{{ version }}{{ os.EOL }}{% endfor %}"
         ]
       },
-      "test-native-{{ matrix.builder }}-sys": {
+      "test-synthetic-posix-{{ matrix.builder }}-sys": {
         "matrix": {
           "builder": [
             "{{ properties.builders | join_lines }}"
           ]
         },
         "template": [
-          "{% assign config = 'native-' | append: matrix.builder | append: '-sys' %}{{ properties.actions-setup-build-test-for-config }}"
+          "{% assign config = 'synthetic-posix-' | append: matrix.builder | append: '-sys' %}{{ properties.actions-setup-build-test-for-config }}"
         ]
       },
-      "test-native-xcdl-sys": [
-        "{% assign config = 'native-xcdl-sys' %}{{ properties.actions-setup-build-test-for-config }}"
+      "test-synthetic-posix-xcdl-sys": [
+        "{% assign config = 'synthetic-posix-xcdl-sys' %}{{ properties.actions-setup-build-test-for-config }}"
       ],
-      "test-native-{{ matrix.builder }}-gcc{{ matrix.native-gcc-version }}": {
+      "test-synthetic-posix-{{ matrix.builder }}-gcc{{ matrix.native-gcc-version }}": {
         "matrix": {
           "builder": [
             "{{ properties.builders | join_lines }}"
@@ -434,10 +486,10 @@
           ]
         },
         "template": [
-          "{% assign config = 'native-' | append: matrix.builder | append: '-gcc' | append: matrix.native-gcc-version %}{{ properties.actions-setup-build-test-for-config }}"
+          "{% assign config = 'synthetic-posix-' | append: matrix.builder | append: '-gcc' | append: matrix.native-gcc-version %}{{ properties.actions-setup-build-test-for-config }}"
         ]
       },
-      "test-native-{{ matrix.builder }}-clang{{ matrix.native-clang-version }}": {
+      "test-synthetic-posix-{{ matrix.builder }}-clang{{ matrix.native-clang-version }}": {
         "matrix": {
           "builder": [
             "{{ properties.builders | join_lines }}"
@@ -448,7 +500,7 @@
           ]
         },
         "template": [
-          "{% assign config = 'native-' | append: matrix.builder | append: '-clang' | append: matrix.native-clang-version %}{{ properties.actions-setup-build-test-for-config }}"
+          "{% assign config = 'synthetic-posix-' | append: matrix.builder | append: '-clang' | append: matrix.native-clang-version %}{{ properties.actions-setup-build-test-for-config }}"
         ]
       },
       "test-qemu-cortex-{{ matrix.builder }}-all": {
@@ -615,6 +667,440 @@
           "{% assign config = 'qemu-riscv-' | append: matrix.qemu-riscv-variant | append: '-' | append: matrix.builder | append: '-gcc' | append: matrix.riscv-none-elf-gcc-version %}{{ properties.actions-setup-build-test-for-config }}"
         ]
       },
+      "clear-nucleo-f411re-cmake-gcc": [
+        "xpm run clear --config nucleo-f411re-cmake-gcc-debug --ignore-errors",
+        "xpm run clear --config nucleo-f411re-cmake-gcc-release --ignore-errors"
+      ],
+      "install-nucleo-f411re-cmake-gcc": [
+        "xpm install --config nucleo-f411re-cmake-gcc-debug",
+        "xpm install --config nucleo-f411re-cmake-gcc-release"
+      ],
+      "link-dependencies-nucleo-f411re-cmake-gcc": [
+        "xpm run link-dependencies --config nucleo-f411re-cmake-gcc-debug",
+        "xpm run link-dependencies --config nucleo-f411re-cmake-gcc-release"
+      ],
+      "build-nucleo-f411re-cmake-gcc": [
+        "xpm run setup --config nucleo-f411re-cmake-gcc-debug",
+        "xpm run build --config nucleo-f411re-cmake-gcc-debug",
+        "xpm run setup --config nucleo-f411re-cmake-gcc-release",
+        "xpm run build --config nucleo-f411re-cmake-gcc-release"
+      ],
+      "test-nucleo-f411re-cmake-gcc": [
+        "xpm run setup --config nucleo-f411re-cmake-gcc-debug",
+        "xpm run build --config nucleo-f411re-cmake-gcc-debug",
+        "xpm run test --config nucleo-f411re-cmake-gcc-debug",
+        "xpm run setup --config nucleo-f411re-cmake-gcc-release",
+        "xpm run build --config nucleo-f411re-cmake-gcc-release",
+        "xpm run test --config nucleo-f411re-cmake-gcc-release"
+      ],
+      "clean-nucleo-f411re-cmake-gcc": [
+        "xpm run clean --config nucleo-f411re-cmake-gcc-debug --ignore-errors",
+        "xpm run clean --config nucleo-f411re-cmake-gcc-release --ignore-errors"
+      ],
+      "clear-nucleo-f411re-cubemx-cmake-gcc": [
+        "xpm run clear --config nucleo-f411re-cubemx-cmake-gcc-debug --ignore-errors",
+        "xpm run clear --config nucleo-f411re-cubemx-cmake-gcc-release --ignore-errors"
+      ],
+      "install-nucleo-f411re-cubemx-cmake-gcc": [
+        "xpm install --config nucleo-f411re-cubemx-cmake-gcc-debug",
+        "xpm install --config nucleo-f411re-cubemx-cmake-gcc-release"
+      ],
+      "link-dependencies-nucleo-f411re-cubemx-cmake-gcc": [
+        "xpm run link-dependencies --config nucleo-f411re-cubemx-cmake-gcc-debug",
+        "xpm run link-dependencies --config nucleo-f411re-cubemx-cmake-gcc-release"
+      ],
+      "build-nucleo-f411re-cubemx-cmake-gcc": [
+        "xpm run setup --config nucleo-f411re-cubemx-cmake-gcc-debug",
+        "xpm run build --config nucleo-f411re-cubemx-cmake-gcc-debug",
+        "xpm run setup --config nucleo-f411re-cubemx-cmake-gcc-release",
+        "xpm run build --config nucleo-f411re-cubemx-cmake-gcc-release"
+      ],
+      "test-nucleo-f411re-cubemx-cmake-gcc": [
+        "xpm run setup --config nucleo-f411re-cubemx-cmake-gcc-debug",
+        "xpm run build --config nucleo-f411re-cubemx-cmake-gcc-debug",
+        "xpm run test --config nucleo-f411re-cubemx-cmake-gcc-debug",
+        "xpm run setup --config nucleo-f411re-cubemx-cmake-gcc-release",
+        "xpm run build --config nucleo-f411re-cubemx-cmake-gcc-release",
+        "xpm run test --config nucleo-f411re-cubemx-cmake-gcc-release"
+      ],
+      "clean-nucleo-f411re-cubemx-cmake-gcc": [
+        "xpm run clean --config nucleo-f411re-cubemx-cmake-gcc-debug --ignore-errors",
+        "xpm run clean --config nucleo-f411re-cubemx-cmake-gcc-release --ignore-errors"
+      ],
+      "clear-nucleo-f411re-cubemx-startup-cmake-gcc": [
+        "xpm run clear --config nucleo-f411re-cubemx-startup-cmake-gcc-debug --ignore-errors",
+        "xpm run clear --config nucleo-f411re-cubemx-startup-cmake-gcc-release --ignore-errors"
+      ],
+      "install-nucleo-f411re-cubemx-startup-cmake-gcc": [
+        "xpm install --config nucleo-f411re-cubemx-startup-cmake-gcc-debug",
+        "xpm install --config nucleo-f411re-cubemx-startup-cmake-gcc-release"
+      ],
+      "link-dependencies-nucleo-f411re-cubemx-startup-cmake-gcc": [
+        "xpm run link-dependencies --config nucleo-f411re-cubemx-startup-cmake-gcc-debug",
+        "xpm run link-dependencies --config nucleo-f411re-cubemx-startup-cmake-gcc-release"
+      ],
+      "build-nucleo-f411re-cubemx-startup-cmake-gcc": [
+        "xpm run setup --config nucleo-f411re-cubemx-startup-cmake-gcc-debug",
+        "xpm run build --config nucleo-f411re-cubemx-startup-cmake-gcc-debug",
+        "xpm run setup --config nucleo-f411re-cubemx-startup-cmake-gcc-release",
+        "xpm run build --config nucleo-f411re-cubemx-startup-cmake-gcc-release"
+      ],
+      "test-nucleo-f411re-cubemx-startup-cmake-gcc": [
+        "xpm run setup --config nucleo-f411re-cubemx-startup-cmake-gcc-debug",
+        "xpm run build --config nucleo-f411re-cubemx-startup-cmake-gcc-debug",
+        "xpm run test --config nucleo-f411re-cubemx-startup-cmake-gcc-debug",
+        "xpm run setup --config nucleo-f411re-cubemx-startup-cmake-gcc-release",
+        "xpm run build --config nucleo-f411re-cubemx-startup-cmake-gcc-release",
+        "xpm run test --config nucleo-f411re-cubemx-startup-cmake-gcc-release"
+      ],
+      "clean-nucleo-f411re-cubemx-startup-cmake-gcc": [
+        "xpm run clean --config nucleo-f411re-cubemx-startup-cmake-gcc-debug --ignore-errors",
+        "xpm run clean --config nucleo-f411re-cubemx-startup-cmake-gcc-release --ignore-errors"
+      ],
+      "clear-nucleo-f767zi-cmake-gcc": [
+        "xpm run clear --config nucleo-f767zi-cmake-gcc-debug --ignore-errors",
+        "xpm run clear --config nucleo-f767zi-cmake-gcc-release --ignore-errors"
+      ],
+      "install-nucleo-f767zi-cmake-gcc": [
+        "xpm install --config nucleo-f767zi-cmake-gcc-debug",
+        "xpm install --config nucleo-f767zi-cmake-gcc-release"
+      ],
+      "link-dependencies-nucleo-f767zi-cmake-gcc": [
+        "xpm run link-dependencies --config nucleo-f767zi-cmake-gcc-debug",
+        "xpm run link-dependencies --config nucleo-f767zi-cmake-gcc-release"
+      ],
+      "build-nucleo-f767zi-cmake-gcc": [
+        "xpm run setup --config nucleo-f767zi-cmake-gcc-debug",
+        "xpm run build --config nucleo-f767zi-cmake-gcc-debug",
+        "xpm run setup --config nucleo-f767zi-cmake-gcc-release",
+        "xpm run build --config nucleo-f767zi-cmake-gcc-release"
+      ],
+      "test-nucleo-f767zi-cmake-gcc": [
+        "xpm run setup --config nucleo-f767zi-cmake-gcc-debug",
+        "xpm run build --config nucleo-f767zi-cmake-gcc-debug",
+        "xpm run test --config nucleo-f767zi-cmake-gcc-debug",
+        "xpm run setup --config nucleo-f767zi-cmake-gcc-release",
+        "xpm run build --config nucleo-f767zi-cmake-gcc-release",
+        "xpm run test --config nucleo-f767zi-cmake-gcc-release"
+      ],
+      "clean-nucleo-f767zi-cmake-gcc": [
+        "xpm run clean --config nucleo-f767zi-cmake-gcc-debug --ignore-errors",
+        "xpm run clean --config nucleo-f767zi-cmake-gcc-release --ignore-errors"
+      ],
+      "clear-nucleo-f767zi-cubemx-cmake-gcc": [
+        "xpm run clear --config nucleo-f767zi-cubemx-cmake-gcc-debug --ignore-errors",
+        "xpm run clear --config nucleo-f767zi-cubemx-cmake-gcc-release --ignore-errors"
+      ],
+      "install-nucleo-f767zi-cubemx-cmake-gcc": [
+        "xpm install --config nucleo-f767zi-cubemx-cmake-gcc-debug",
+        "xpm install --config nucleo-f767zi-cubemx-cmake-gcc-release"
+      ],
+      "link-dependencies-nucleo-f767zi-cubemx-cmake-gcc": [
+        "xpm run link-dependencies --config nucleo-f767zi-cubemx-cmake-gcc-debug",
+        "xpm run link-dependencies --config nucleo-f767zi-cubemx-cmake-gcc-release"
+      ],
+      "build-nucleo-f767zi-cubemx-cmake-gcc": [
+        "xpm run setup --config nucleo-f767zi-cubemx-cmake-gcc-debug",
+        "xpm run build --config nucleo-f767zi-cubemx-cmake-gcc-debug",
+        "xpm run setup --config nucleo-f767zi-cubemx-cmake-gcc-release",
+        "xpm run build --config nucleo-f767zi-cubemx-cmake-gcc-release"
+      ],
+      "test-nucleo-f767zi-cubemx-cmake-gcc": [
+        "xpm run setup --config nucleo-f767zi-cubemx-cmake-gcc-debug",
+        "xpm run build --config nucleo-f767zi-cubemx-cmake-gcc-debug",
+        "xpm run test --config nucleo-f767zi-cubemx-cmake-gcc-debug",
+        "xpm run setup --config nucleo-f767zi-cubemx-cmake-gcc-release",
+        "xpm run build --config nucleo-f767zi-cubemx-cmake-gcc-release",
+        "xpm run test --config nucleo-f767zi-cubemx-cmake-gcc-release"
+      ],
+      "clean-nucleo-f767zi-cubemx-cmake-gcc": [
+        "xpm run clean --config nucleo-f767zi-cubemx-cmake-gcc-debug --ignore-errors",
+        "xpm run clean --config nucleo-f767zi-cubemx-cmake-gcc-release --ignore-errors"
+      ],
+      "clear-nucleo-h533re-cmake-gcc": [
+        "xpm run clear --config nucleo-h533re-cmake-gcc-debug --ignore-errors",
+        "xpm run clear --config nucleo-h533re-cmake-gcc-release --ignore-errors"
+      ],
+      "install-nucleo-h533re-cmake-gcc": [
+        "xpm install --config nucleo-h533re-cmake-gcc-debug",
+        "xpm install --config nucleo-h533re-cmake-gcc-release"
+      ],
+      "link-dependencies-nucleo-h533re-cmake-gcc": [
+        "xpm run link-dependencies --config nucleo-h533re-cmake-gcc-debug",
+        "xpm run link-dependencies --config nucleo-h533re-cmake-gcc-release"
+      ],
+      "build-nucleo-h533re-cmake-gcc": [
+        "xpm run setup --config nucleo-h533re-cmake-gcc-debug",
+        "xpm run build --config nucleo-h533re-cmake-gcc-debug",
+        "xpm run setup --config nucleo-h533re-cmake-gcc-release",
+        "xpm run build --config nucleo-h533re-cmake-gcc-release"
+      ],
+      "test-nucleo-h533re-cmake-gcc": [
+        "xpm run setup --config nucleo-h533re-cmake-gcc-debug",
+        "xpm run build --config nucleo-h533re-cmake-gcc-debug",
+        "xpm run test --config nucleo-h533re-cmake-gcc-debug",
+        "xpm run setup --config nucleo-h533re-cmake-gcc-release",
+        "xpm run build --config nucleo-h533re-cmake-gcc-release",
+        "xpm run test --config nucleo-h533re-cmake-gcc-release"
+      ],
+      "clean-nucleo-h533re-cmake-gcc": [
+        "xpm run clean --config nucleo-h533re-cmake-gcc-debug --ignore-errors",
+        "xpm run clean --config nucleo-h533re-cmake-gcc-release --ignore-errors"
+      ],
+      "clear-nucleo-h533re-cubemx-cmake-gcc": [
+        "xpm run clear --config nucleo-h533re-cubemx-cmake-gcc-debug --ignore-errors",
+        "xpm run clear --config nucleo-h533re-cubemx-cmake-gcc-release --ignore-errors"
+      ],
+      "install-nucleo-h533re-cubemx-cmake-gcc": [
+        "xpm install --config nucleo-h533re-cubemx-cmake-gcc-debug",
+        "xpm install --config nucleo-h533re-cubemx-cmake-gcc-release"
+      ],
+      "link-dependencies-nucleo-h533re-cubemx-cmake-gcc": [
+        "xpm run link-dependencies --config nucleo-h533re-cubemx-cmake-gcc-debug",
+        "xpm run link-dependencies --config nucleo-h533re-cubemx-cmake-gcc-release"
+      ],
+      "build-nucleo-h533re-cubemx-cmake-gcc": [
+        "xpm run setup --config nucleo-h533re-cubemx-cmake-gcc-debug",
+        "xpm run build --config nucleo-h533re-cubemx-cmake-gcc-debug",
+        "xpm run setup --config nucleo-h533re-cubemx-cmake-gcc-release",
+        "xpm run build --config nucleo-h533re-cubemx-cmake-gcc-release"
+      ],
+      "test-nucleo-h533re-cubemx-cmake-gcc": [
+        "xpm run setup --config nucleo-h533re-cubemx-cmake-gcc-debug",
+        "xpm run build --config nucleo-h533re-cubemx-cmake-gcc-debug",
+        "xpm run test --config nucleo-h533re-cubemx-cmake-gcc-debug",
+        "xpm run setup --config nucleo-h533re-cubemx-cmake-gcc-release",
+        "xpm run build --config nucleo-h533re-cubemx-cmake-gcc-release",
+        "xpm run test --config nucleo-h533re-cubemx-cmake-gcc-release"
+      ],
+      "clean-nucleo-h533re-cubemx-cmake-gcc": [
+        "xpm run clean --config nucleo-h533re-cubemx-cmake-gcc-debug --ignore-errors",
+        "xpm run clean --config nucleo-h533re-cubemx-cmake-gcc-release --ignore-errors"
+      ],
+      "clear-raspberry-pi-pico-cmake-gcc": [
+        "xpm run clear --config raspberry-pi-pico-cmake-gcc-debug",
+        "xpm run clear --config raspberry-pi-pico-cmake-gcc-release"
+      ],
+      "install-raspberry-pi-pico-cmake-gcc": [
+        "xpm install --config raspberry-pi-pico-cmake-gcc-debug",
+        "xpm install --config raspberry-pi-pico-cmake-gcc-release"
+      ],
+      "link-dependencies-raspberry-pi-pico-cmake-gcc": [
+        "xpm run link-dependencies --config raspberry-pi-pico-cmake-gcc-debug",
+        "xpm run link-dependencies --config raspberry-pi-pico-cmake-gcc-release"
+      ],
+      "build-raspberry-pi-pico-cmake-gcc": [
+        "xpm run setup --config raspberry-pi-pico-cmake-gcc-debug",
+        "xpm run build --config raspberry-pi-pico-cmake-gcc-debug",
+        "xpm run setup --config raspberry-pi-pico-cmake-gcc-release",
+        "xpm run build --config raspberry-pi-pico-cmake-gcc-release"
+      ],
+      "test-raspberry-pi-pico-cmake-gcc": [
+        "xpm run setup --config raspberry-pi-pico-cmake-gcc-debug",
+        "xpm run build --config raspberry-pi-pico-cmake-gcc-debug",
+        "xpm run test --config raspberry-pi-pico-cmake-gcc-debug",
+        "xpm run setup --config raspberry-pi-pico-cmake-gcc-release",
+        "xpm run build --config raspberry-pi-pico-cmake-gcc-release",
+        "xpm run test --config raspberry-pi-pico-cmake-gcc-release"
+      ],
+      "clean-raspberry-pi-pico-cmake-gcc": [
+        "xpm run clean --config raspberry-pi-pico-cmake-gcc-debug",
+        "xpm run clean --config raspberry-pi-pico-cmake-gcc-release"
+      ],
+      "clear-raspberry-pi-pico-sdk-cmake-gcc": [
+        "xpm run clear --config raspberry-pi-pico-sdk-cmake-gcc-debug",
+        "xpm run clear --config raspberry-pi-pico-sdk-cmake-gcc-release"
+      ],
+      "install-raspberry-pi-pico-sdk-cmake-gcc": [
+        "xpm install --config raspberry-pi-pico-sdk-cmake-gcc-debug",
+        "xpm install --config raspberry-pi-pico-sdk-cmake-gcc-release"
+      ],
+      "link-dependencies-raspberry-pi-pico-sdk-cmake-gcc": [
+        "xpm run link-dependencies --config raspberry-pi-pico-sdk-cmake-gcc-debug",
+        "xpm run link-dependencies --config raspberry-pi-pico-sdk-cmake-gcc-release"
+      ],
+      "build-raspberry-pi-pico-sdk-cmake-gcc": [
+        "xpm run setup --config raspberry-pi-pico-sdk-cmake-gcc-debug",
+        "xpm run build --config raspberry-pi-pico-sdk-cmake-gcc-debug",
+        "xpm run setup --config raspberry-pi-pico-sdk-cmake-gcc-release",
+        "xpm run build --config raspberry-pi-pico-sdk-cmake-gcc-release"
+      ],
+      "test-raspberry-pi-pico-sdk-cmake-gcc": [
+        "xpm run setup --config raspberry-pi-pico-sdk-cmake-gcc-debug",
+        "xpm run build --config raspberry-pi-pico-sdk-cmake-gcc-debug",
+        "xpm run test --config raspberry-pi-pico-sdk-cmake-gcc-debug",
+        "xpm run setup --config raspberry-pi-pico-sdk-cmake-gcc-release",
+        "xpm run build --config raspberry-pi-pico-sdk-cmake-gcc-release",
+        "xpm run test --config raspberry-pi-pico-sdk-cmake-gcc-release"
+      ],
+      "clean-raspberry-pi-pico-sdk-cmake-gcc": [
+        "xpm run clean --config raspberry-pi-pico-sdk-cmake-gcc-debug",
+        "xpm run clean --config raspberry-pi-pico-sdk-cmake-gcc-release"
+      ],
+      "clear-raspberry-pi-pico-2-arm-cmake-gcc": [
+        "xpm run clear --config raspberry-pi-pico-2-arm-cmake-gcc-debug",
+        "xpm run clear --config raspberry-pi-pico-2-arm-cmake-gcc-release"
+      ],
+      "install-raspberry-pi-pico-2-arm-cmake-gcc": [
+        "xpm install --config raspberry-pi-pico-2-arm-cmake-gcc-debug",
+        "xpm install --config raspberry-pi-pico-2-arm-cmake-gcc-release"
+      ],
+      "link-dependencies-raspberry-pi-pico-2-arm-cmake-gcc": [
+        "xpm run link-dependencies --config raspberry-pi-pico-2-arm-cmake-gcc-debug",
+        "xpm run link-dependencies --config raspberry-pi-pico-2-arm-cmake-gcc-release"
+      ],
+      "build-raspberry-pi-pico-2-arm-cmake-gcc": [
+        "xpm run setup --config raspberry-pi-pico-2-arm-cmake-gcc-debug",
+        "xpm run build --config raspberry-pi-pico-2-arm-cmake-gcc-debug",
+        "xpm run setup --config raspberry-pi-pico-2-arm-cmake-gcc-release",
+        "xpm run build --config raspberry-pi-pico-2-arm-cmake-gcc-release"
+      ],
+      "test-raspberry-pi-pico-2-arm-cmake-gcc": [
+        "xpm run setup --config raspberry-pi-pico-2-arm-cmake-gcc-debug",
+        "xpm run build --config raspberry-pi-pico-2-arm-cmake-gcc-debug",
+        "xpm run test --config raspberry-pi-pico-2-arm-cmake-gcc-debug",
+        "xpm run setup --config raspberry-pi-pico-2-arm-cmake-gcc-release",
+        "xpm run build --config raspberry-pi-pico-2-arm-cmake-gcc-release",
+        "xpm run test --config raspberry-pi-pico-2-arm-cmake-gcc-release"
+      ],
+      "clean-raspberry-pi-pico-2-arm-cmake-gcc": [
+        "xpm run clean --config raspberry-pi-pico-2-arm-cmake-gcc-debug",
+        "xpm run clean --config raspberry-pi-pico-2-arm-cmake-gcc-release"
+      ],
+      "clear-raspberry-pi-pico-2-arm-sdk-cmake-gcc": [
+        "xpm run clear --config raspberry-pi-pico-2-arm-sdk-cmake-gcc-debug",
+        "xpm run clear --config raspberry-pi-pico-2-arm-sdk-cmake-gcc-release"
+      ],
+      "install-raspberry-pi-pico-2-arm-sdk-cmake-gcc": [
+        "xpm install --config raspberry-pi-pico-2-arm-sdk-cmake-gcc-debug",
+        "xpm install --config raspberry-pi-pico-2-arm-sdk-cmake-gcc-release"
+      ],
+      "link-dependencies-raspberry-pi-pico-2-arm-sdk-cmake-gcc": [
+        "xpm run link-dependencies --config raspberry-pi-pico-2-arm-sdk-cmake-gcc-debug",
+        "xpm run link-dependencies --config raspberry-pi-pico-2-arm-sdk-cmake-gcc-release"
+      ],
+      "build-raspberry-pi-pico-2-arm-sdk-cmake-gcc": [
+        "xpm run setup --config raspberry-pi-pico-2-arm-sdk-cmake-gcc-debug",
+        "xpm run build --config raspberry-pi-pico-2-arm-sdk-cmake-gcc-debug",
+        "xpm run setup --config raspberry-pi-pico-2-arm-sdk-cmake-gcc-release",
+        "xpm run build --config raspberry-pi-pico-2-arm-sdk-cmake-gcc-release"
+      ],
+      "test-raspberry-pi-pico-2-arm-sdk-cmake-gcc": [
+        "xpm run setup --config raspberry-pi-pico-2-arm-sdk-cmake-gcc-debug",
+        "xpm run build --config raspberry-pi-pico-2-arm-sdk-cmake-gcc-debug",
+        "xpm run test --config raspberry-pi-pico-2-arm-sdk-cmake-gcc-debug",
+        "xpm run setup --config raspberry-pi-pico-2-arm-sdk-cmake-gcc-release",
+        "xpm run build --config raspberry-pi-pico-2-arm-sdk-cmake-gcc-release",
+        "xpm run test --config raspberry-pi-pico-2-arm-sdk-cmake-gcc-release"
+      ],
+      "clean-raspberry-pi-pico-2-arm-sdk-cmake-gcc": [
+        "xpm run clean --config raspberry-pi-pico-2-arm-sdk-cmake-gcc-debug",
+        "xpm run clean --config raspberry-pi-pico-2-arm-sdk-cmake-gcc-release"
+      ],
+      "clear-raspberry-pi-pico-2-riscv-cmake-gcc": [
+        "xpm run clear --config raspberry-pi-pico-2-riscv-cmake-gcc-debug",
+        "xpm run clear --config raspberry-pi-pico-2-riscv-cmake-gcc-release"
+      ],
+      "install-raspberry-pi-pico-2-riscv-cmake-gcc": [
+        "xpm install --config raspberry-pi-pico-2-riscv-cmake-gcc-debug",
+        "xpm install --config raspberry-pi-pico-2-riscv-cmake-gcc-release"
+      ],
+      "build-raspberry-pi-pico-2-riscv-cmake-gcc": [
+        "xpm run setup --config raspberry-pi-pico-2-riscv-cmake-gcc-debug",
+        "xpm run build --config raspberry-pi-pico-2-riscv-cmake-gcc-debug",
+        "xpm run setup --config raspberry-pi-pico-2-riscv-cmake-gcc-release",
+        "xpm run build --config raspberry-pi-pico-2-riscv-cmake-gcc-release"
+      ],
+      "test-raspberry-pi-pico-2-riscv-cmake-gcc": [
+        "xpm run setup --config raspberry-pi-pico-2-riscv-cmake-gcc-debug",
+        "xpm run build --config raspberry-pi-pico-2-riscv-cmake-gcc-debug",
+        "xpm run test --config raspberry-pi-pico-2-riscv-cmake-gcc-debug",
+        "xpm run setup --config raspberry-pi-pico-2-riscv-cmake-gcc-release",
+        "xpm run build --config raspberry-pi-pico-2-riscv-cmake-gcc-release",
+        "xpm run test --config raspberry-pi-pico-2-riscv-cmake-gcc-release"
+      ],
+      "clean-raspberry-pi-pico-2-riscv-cmake-gcc": [
+        "xpm run clean --config raspberry-pi-pico-2-riscv-cmake-gcc-debug",
+        "xpm run clean --config raspberry-pi-pico-2-riscv-cmake-gcc-release"
+      ],
+      "clear-raspberry-pi-pico-2-riscv-sdk-cmake-gcc": [
+        "xpm run clear --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-debug",
+        "xpm run clear --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-release"
+      ],
+      "install-raspberry-pi-pico-2-riscv-sdk-cmake-gcc": [
+        "xpm install --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-debug",
+        "xpm install --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-release"
+      ],
+      "build-raspberry-pi-pico-2-riscv-sdk-cmake-gcc": [
+        "xpm run setup --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-debug",
+        "xpm run build --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-debug",
+        "xpm run setup --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-release",
+        "xpm run build --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-release"
+      ],
+      "test-raspberry-pi-pico-2-riscv-sdk-cmake-gcc": [
+        "xpm run setup --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-debug",
+        "xpm run build --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-debug",
+        "xpm run test --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-debug",
+        "xpm run setup --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-release",
+        "xpm run build --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-release",
+        "xpm run test --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-release"
+      ],
+      "clean-raspberry-pi-pico-2-riscv-sdk-cmake-gcc": [
+        "xpm run clean --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-debug",
+        "xpm run clean --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-release"
+      ],
+      "clear-raspberry-pi-zero-2-w-aarch32-cmake-gcc": [
+        "xpm run clear --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-debug",
+        "xpm run clear --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-release"
+      ],
+      "install-raspberry-pi-zero-2-w-aarch32-cmake-gcc": [
+        "xpm install --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-debug",
+        "xpm install --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-release"
+      ],
+      "build-raspberry-pi-zero-2-w-aarch32-cmake-gcc": [
+        "xpm run setup --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-debug",
+        "xpm run build --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-debug",
+        "xpm run setup --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-release",
+        "xpm run build --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-release"
+      ],
+      "test-raspberry-pi-zero-2-w-aarch32-cmake-gcc": [
+        "xpm run setup --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-debug",
+        "xpm run build --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-debug",
+        "xpm run test --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-debug",
+        "xpm run setup --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-release",
+        "xpm run build --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-release",
+        "xpm run test --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-release"
+      ],
+      "clean-raspberry-pi-zero-2-w-aarch32-cmake-gcc": [
+        "xpm run clean --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-debug",
+        "xpm run clean --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-release"
+      ],
+      "clear-raspberry-pi-zero-2-w-aarch64-cmake-gcc": [
+        "xpm run clear --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-debug",
+        "xpm run clear --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-release"
+      ],
+      "install-raspberry-pi-zero-2-w-aarch64-cmake-gcc": [
+        "xpm install --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-debug",
+        "xpm install --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-release"
+      ],
+      "build-raspberry-pi-zero-2-w-aarch64-cmake-gcc": [
+        "xpm run setup --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-debug",
+        "xpm run build --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-debug",
+        "xpm run setup --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-release",
+        "xpm run build --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-release"
+      ],
+      "test-raspberry-pi-zero-2-w-aarch64-cmake-gcc": [
+        "xpm run setup --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-debug",
+        "xpm run build --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-debug",
+        "xpm run test --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-debug",
+        "xpm run setup --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-release",
+        "xpm run build --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-release",
+        "xpm run test --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-release"
+      ],
+      "clean-raspberry-pi-zero-2-w-aarch64-cmake-gcc": [
+        "xpm run clean --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-debug",
+        "xpm run clean --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-release"
+      ],
       "trigger-workflow-test-all": "bash scripts/trigger-workflow-test-all.sh"
     },
     "buildConfigurations": {
@@ -625,10 +1111,10 @@
           "buildFolderRelativePathPosix": "{% if os.platform != 'win32' %}{{ 'build' | path_posix_join: configuration.name | downcase }}{% else %}{{ 'build' | path_posix_join: properties.shortConfigurationName | downcase }}{% endif %}"
         }
       },
-      "cmake-native-actions": {
+      "cmake-synthetic-posix-actions": {
         "hidden": true,
         "actions": {
-          "setup": "{{ properties.commandCMakeGenerateNativeWithToolchain }}",
+          "setup": "{{ properties.commandCMakeGenerateNativePosixWithToolchain }}",
           "build": [
             "{{ properties.commandCMakeRefresh }}",
             "{{ properties.commandCMakeBuild }}"
@@ -640,17 +1126,17 @@
       "cmake-cross-actions": {
         "hidden": true,
         "inherits": [
-          "cmake-native-actions"
+          "cmake-synthetic-posix-actions"
         ],
         "actions": {
           "setup": "{{ properties.commandCMakeGenerateCross }}",
           "clear": "{{ properties.commandClearBuildFolder }}"
         }
       },
-      "meson-native-actions": {
+      "meson-synthetic-posix-actions": {
         "hidden": true,
         "actions": {
-          "setup": "{{ properties.commandMesonSetupNativeWithToolchain }}",
+          "setup": "{{ properties.commandMesonSetupNativePosixWithToolchain }}",
           "refresh": "{{ properties.commandMesonRefresh }}",
           "build": [
             "{{ properties.commandMesonRefresh }}",
@@ -664,16 +1150,16 @@
       "meson-cross-actions": {
         "hidden": true,
         "inherits": [
-          "meson-native-actions"
+          "meson-synthetic-posix-actions"
         ],
         "actions": {
           "setup": "{{ properties.commandMesonSetupCross }}"
         }
       },
-      "xcdl-native-actions": {
+      "xcdl-synthetic-posix-actions": {
         "hidden": true,
         "actions": {
-          "setup": "{{ properties.commandXcdlSetupNativeWithToolchain }} --cdl-configuration native-{{ buildType }}",
+          "setup": "{{ properties.commandXcdlSetupNativeWithToolchain }} --cdl-configuration synthetic-posix-{{ buildType }}",
           "refresh": "{{ properties.commandXcdlRefresh }}",
           "build": [
             "{{ properties.commandXcdlRefresh }}",
@@ -687,13 +1173,13 @@
       "xcdl-cross-actions": {
         "hidden": true,
         "inherits": [
-          "xcdl-native-actions"
+          "xcdl-synthetic-posix-actions"
         ],
         "actions": {
           "setup": "{{ properties.commandXcdlSetupCross }}"
         }
       },
-      "native-actions": {
+      "synthetic-posix-actions": {
         "hidden": true,
         "actions": {
           "install": [
@@ -749,7 +1235,7 @@
           ]
         }
       },
-      "native-dependencies": {
+      "synthetic-posix-dependencies": {
         "hidden": true,
         "devDependencies": {
           "@micro-os-plus/architecture-synthetic-posix": "{{ properties.dependencies-releases['@micro-os-plus/architecture-synthetic-posix'] }}"
@@ -796,13 +1282,13 @@
           "@xpack-3rd-party/arm-cmsis-core": "{{ properties.dependencies-releases['@xpack-3rd-party/arm-cmsis-core'] }}"
         }
       },
-      "native-gcc-dependencies": {
+      "synthetic-posix-gcc-dependencies": {
         "hidden": true,
         "inherits": [
-          "native-gcc{{ properties.native-gcc-releases | keys | reverse | first }}-dependencies"
+          "synthetic-posix-gcc{{ properties.native-gcc-releases | keys | reverse | first }}-dependencies"
         ]
       },
-      "native-gcc{{ matrix.native-gcc-version }}-dependencies": {
+      "synthetic-posix-gcc{{ matrix.native-gcc-version }}-dependencies": {
         "matrix": {
           "native-gcc-version": [
             "{{ properties.native-gcc-versions | join_lines }}"
@@ -818,13 +1304,13 @@
           }
         }
       },
-      "native-clang-dependencies": {
+      "synthetic-posix-clang-dependencies": {
         "hidden": true,
         "inherits": [
-          "native-clang{{ properties.native-clang-releases | keys | reverse | first }}-dependencies"
+          "synthetic-posix-clang{{ properties.native-clang-releases | keys | reverse | first }}-dependencies"
         ]
       },
-      "native-clang{{ matrix.native-clang-version }}-dependencies": {
+      "synthetic-posix-clang{{ matrix.native-clang-version }}-dependencies": {
         "matrix": {
           "native-clang-version": [
             "{{ properties.native-clang-versions | join_lines }}"
@@ -912,124 +1398,124 @@
           "@xpack-dev-tools/openocd": "{{ properties.dependencies-releases['@xpack-dev-tools/openocd'] }}"
         }
       },
-      "native-cmake-sys-debug": {
+      "synthetic-posix-cmake-sys-debug": {
         "inherits": [
           "short-win-paths-properties",
-          "cmake-native-actions",
-          "native-actions",
-          "native-dependencies"
+          "cmake-synthetic-posix-actions",
+          "synthetic-posix-actions",
+          "synthetic-posix-dependencies"
         ],
         "properties": {
           "buildType": "Debug",
-          "platformName": "native",
-          "shortConfigurationName": "ncsd"
+          "platformName": "synthetic-posix",
+          "shortConfigurationName": "spcsd"
         },
         "actions": {
-          "setup": "{{ properties.commandCMakeGenerateNative }}"
+          "setup": "{{ properties.commandCMakeGenerateNativePosix }}"
         }
       },
-      "native-cmake-sys-release": {
+      "synthetic-posix-cmake-sys-release": {
         "inherits": [
-          "native-cmake-sys-debug"
+          "synthetic-posix-cmake-sys-debug"
         ],
         "properties": {
           "buildType": "Release",
-          "shortConfigurationName": "ncsr"
+          "shortConfigurationName": "spcsr"
         }
       },
-      "native-meson-sys-debug": {
+      "synthetic-posix-meson-sys-debug": {
         "inherits": [
           "short-win-paths-properties",
-          "meson-native-actions",
-          "native-actions",
-          "native-dependencies"
+          "meson-synthetic-posix-actions",
+          "synthetic-posix-actions",
+          "synthetic-posix-dependencies"
         ],
         "properties": {
           "buildType": "debug",
-          "platformName": "native",
-          "shortConfigurationName": "nmsd"
+          "platformName": "synthetic-posix",
+          "shortConfigurationName": "spmsd"
         },
         "actions": {
-          "setup": "{{ properties.commandMesonSetupNative }}"
+          "setup": "{{ properties.commandMesonSetupNativePosix }}"
         }
       },
-      "native-meson-sys-release": {
+      "synthetic-posix-meson-sys-release": {
         "inherits": [
-          "native-meson-sys-debug"
+          "synthetic-posix-meson-sys-debug"
         ],
         "properties": {
           "buildType": "release",
-          "shortConfigurationName": "nmsr"
+          "shortConfigurationName": "spmsr"
         }
       },
-      "native-xcdl-sys-debug": {
+      "synthetic-posix-xcdl-sys-debug": {
         "inherits": [
           "short-win-paths-properties",
-          "xcdl-native-actions",
-          "native-actions",
-          "native-dependencies"
+          "xcdl-synthetic-posix-actions",
+          "synthetic-posix-actions",
+          "synthetic-posix-dependencies"
         ],
         "properties": {
           "buildType": "debug",
-          "platformName": "native",
-          "shortConfigurationName": "nxsd"
+          "platformName": "synthetic-posix",
+          "shortConfigurationName": "spxsd"
         },
         "actions": {
           "setup": "{{ properties.commandXcdlSetupNative }}"
         }
       },
-      "native-xcdl-sys-release": {
+      "synthetic-posix-xcdl-sys-release": {
         "inherits": [
-          "native-xcdl-sys-debug"
+          "synthetic-posix-xcdl-sys-debug"
         ],
         "properties": {
           "buildType": "release",
-          "shortConfigurationName": "nxsr"
+          "shortConfigurationName": "spxsr"
         }
       },
-      "native-cmake-gcc": {
+      "synthetic-posix-cmake-gcc": {
         "hidden": true,
         "inherits": [
           "short-win-paths-properties",
-          "cmake-native-actions",
-          "native-actions",
-          "native-dependencies"
+          "cmake-synthetic-posix-actions",
+          "synthetic-posix-actions",
+          "synthetic-posix-dependencies"
         ],
         "properties": {
           "buildType": "Debug",
-          "platformName": "native",
+          "platformName": "synthetic-posix",
           "toolchainFileName": "gcc.cmake"
         }
       },
-      "native-meson-gcc": {
+      "synthetic-posix-meson-gcc": {
         "hidden": true,
         "inherits": [
           "short-win-paths-properties",
-          "meson-native-actions",
-          "native-actions",
-          "native-dependencies"
+          "meson-synthetic-posix-actions",
+          "synthetic-posix-actions",
+          "synthetic-posix-dependencies"
         ],
         "properties": {
           "buildType": "debug",
-          "platformName": "native",
+          "platformName": "synthetic-posix",
           "toolchainFileName": "gcc-{{ os.platform }}.ini"
         }
       },
-      "native-xcdl-gcc": {
+      "synthetic-posix-xcdl-gcc": {
         "hidden": true,
         "inherits": [
           "short-win-paths-properties",
-          "xcdl-native-actions",
-          "native-actions",
-          "native-dependencies"
+          "xcdl-synthetic-posix-actions",
+          "synthetic-posix-actions",
+          "synthetic-posix-dependencies"
         ],
         "properties": {
           "buildType": "debug",
-          "platformName": "native",
+          "platformName": "synthetic-posix",
           "toolchainFileName": "gcc-{{ os.platform }}.ini"
         }
       },
-      "native-{{ matrix.builder }}-gcc{{ matrix.native-gcc-version }}-debug": {
+      "synthetic-posix-{{ matrix.builder }}-gcc{{ matrix.native-gcc-version }}-debug": {
         "matrix": {
           "builder": [
             "{{ properties.builders | join_lines }}"
@@ -1041,15 +1527,15 @@
         },
         "template": {
           "inherits": [
-            "native-{{ matrix.builder }}-gcc",
-            "native-gcc{{ matrix.native-gcc-version }}-dependencies"
+            "synthetic-posix-{{ matrix.builder }}-gcc",
+            "synthetic-posix-gcc{{ matrix.native-gcc-version }}-dependencies"
           ],
           "properties": {
-            "shortConfigurationName": "n{{ matrix.builder | slice:0 | downcase }}g{{ matrix.native-gcc-version | slice:0 | downcase }}d"
+            "shortConfigurationName": "sp{{ matrix.builder | slice:0 | downcase }}g{{ matrix.native-gcc-version | slice:0 | downcase }}d"
           }
         }
       },
-      "native-{{ matrix.builder }}-gcc{{ matrix.native-gcc-version }}-release": {
+      "synthetic-posix-{{ matrix.builder }}-gcc{{ matrix.native-gcc-version }}-release": {
         "matrix": {
           "builder": [
             "{{ properties.builders | join_lines }}"
@@ -1061,43 +1547,43 @@
         },
         "template": {
           "inherits": [
-            "native-{{ matrix.builder }}-gcc{{ matrix.native-gcc-version }}-debug"
+            "synthetic-posix-{{ matrix.builder }}-gcc{{ matrix.native-gcc-version }}-debug"
           ],
           "properties": {
             "buildType": "{% case matrix.builder %}{% when 'cmake' %}Release{% when 'meson' %}release{% else %}unknown{% endcase %}",
-            "shortConfigurationName": "n{{ matrix.builder | slice:0 | downcase }}g{{ matrix.native-gcc-version | slice:0 | downcase }}r"          
+            "shortConfigurationName": "sp{{ matrix.builder | slice:0 | downcase }}g{{ matrix.native-gcc-version | slice:0 | downcase }}r"          
           }
         }
       },
-      "native-cmake-clang": {
+      "synthetic-posix-cmake-clang": {
         "hidden": true,
         "inherits": [
           "short-win-paths-properties",
-          "cmake-native-actions",
-          "native-actions",
-          "native-dependencies"
+          "cmake-synthetic-posix-actions",
+          "synthetic-posix-actions",
+          "synthetic-posix-dependencies"
         ],
         "properties": {
           "buildType": "Debug",
-          "platformName": "native",
+          "platformName": "synthetic-posix",
           "toolchainFileName": "clang.cmake"
         }
       },
-      "native-meson-clang": {
+      "synthetic-posix-meson-clang": {
         "hidden": true,
         "inherits": [
           "short-win-paths-properties",
-          "meson-native-actions",
-          "native-actions",
-          "native-dependencies"
+          "meson-synthetic-posix-actions",
+          "synthetic-posix-actions",
+          "synthetic-posix-dependencies"
         ],
         "properties": {
           "buildType": "debug",
-          "platformName": "native",
+          "platformName": "synthetic-posix",
           "toolchainFileName": "clang-{{ os.platform }}.ini"
         }
       },
-      "native-{{ matrix.builder }}-clang{{ matrix.native-clang-version }}-debug": {
+      "synthetic-posix-{{ matrix.builder }}-clang{{ matrix.native-clang-version }}-debug": {
         "matrix": {
           "builder": [
             "{{ properties.builders | join_lines }}"
@@ -1109,15 +1595,15 @@
         },
         "template": {
           "inherits": [
-            "native-{{ matrix.builder }}-clang",
-            "native-clang{{ matrix.native-clang-version }}-dependencies"
+            "synthetic-posix-{{ matrix.builder }}-clang",
+            "synthetic-posix-clang{{ matrix.native-clang-version }}-dependencies"
           ],
           "properties": {
-            "shortConfigurationName": "n{{ matrix.builder | slice:0 | downcase }}c{{ matrix.native-clang-version | slice:0 | downcase }}d"
+            "shortConfigurationName": "sp{{ matrix.builder | slice:0 | downcase }}c{{ matrix.native-clang-version | slice:0 | downcase }}d"
           }
         }
       },
-      "native-{{ matrix.builder }}-clang{{ matrix.native-clang-version }}-release": {
+      "synthetic-posix-{{ matrix.builder }}-clang{{ matrix.native-clang-version }}-release": {
         "matrix": {
           "builder": [
             "{{ properties.builders | join_lines }}"
@@ -1129,11 +1615,11 @@
         },
         "template": {
           "inherits": [
-            "native-{{ matrix.builder }}-clang{{ matrix.native-clang-version }}-debug"
+            "synthetic-posix-{{ matrix.builder }}-clang{{ matrix.native-clang-version }}-debug"
           ],
           "properties": {
             "buildType": "{% case matrix.builder %}{% when 'cmake' %}Release{% when 'meson' %}release{% else %}unknown{% endcase %}",
-            "shortConfigurationName": "n{{ matrix.builder | slice:0 | downcase }}c{{ matrix.native-clang-version | slice:0 | downcase }}r"          
+            "shortConfigurationName": "sp{{ matrix.builder | slice:0 | downcase }}c{{ matrix.native-clang-version | slice:0 | downcase }}r"          
           }
         }
       },
@@ -1641,6 +2127,487 @@
             "buildType": "minsize",
             "shortConfigurationName": "q{{ matrix.qemu-riscv-variant | slice: 0, 4 }}mg{{ matrix.riscv-none-elf-gcc-version }}r"
           }
+        }
+      },
+      "nucleo-f411re-cmake-gcc-debug": {
+        "inherits": [
+          "short-win-paths-properties",
+          "cmake-cross-actions",
+          "cortexm-actions",
+          "bare-metal-dependencies",
+          "cross-arm-none-eabi-gcc-dependencies",
+          "openocd-dependencies"
+        ],
+        "devDependencies": {
+          "@micro-os-plus/architecture-cortexm": "{{ properties.dependencies-releases['@micro-os-plus/architecture-cortexm'] }}"
+        },
+        "properties": {
+          "buildType": "Debug",
+          "platformName": "nucleo-f411re",
+          "toolchainFileName": "arm-none-eabi-gcc.cmake"
+        },
+        "actions": {
+          "link-dependencies": [
+            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting --config {{ configuration.name }}"
+          ]
+        }
+      },
+      "nucleo-f411re-cmake-gcc-release": {
+        "inherits": [
+          "nucleo-f411re-cmake-gcc-debug"
+        ],
+        "properties": {
+          "buildType": "MinSizeRel"
+        }
+      },
+      "nucleo-f411re-cubemx-cmake-gcc-debug": {
+        "inherits": [
+          "short-win-paths-properties",
+          "cmake-cross-actions",
+          "cortexm-actions",
+          "bare-metal-dependencies",
+          "cross-arm-none-eabi-gcc-dependencies",
+          "openocd-dependencies"
+        ],
+        "devDependencies": {
+          "@micro-os-plus/architecture-cortexm": "{{ properties.dependencies-releases['@micro-os-plus/architecture-cortexm'] }}"
+        },
+        "properties": {
+          "buildType": "Debug",
+          "platformName": "nucleo-f411re-cubemx",
+          "toolchainFileName": "arm-none-eabi-gcc.cmake"
+        },
+        "actions": {
+          "link-dependencies": [
+            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting --config {{ configuration.name }}"
+          ]
+        }
+      },
+      "nucleo-f411re-cubemx-cmake-gcc-release": {
+        "inherits": [
+          "nucleo-f411re-cubemx-cmake-gcc-debug"
+        ],
+        "properties": {
+          "buildType": "MinSizeRel"
+        }
+      },
+      "nucleo-f411re-cubemx-startup-cmake-gcc-debug": {
+        "inherits": [
+          "short-win-paths-properties",
+          "cmake-cross-actions",
+          "cortexm-actions",
+          "bare-metal-dependencies",
+          "cross-arm-none-eabi-gcc-dependencies",
+          "openocd-dependencies"
+        ],
+        "devDependencies": {
+          "@micro-os-plus/architecture-cortexm": "{{ properties.dependencies-releases['@micro-os-plus/architecture-cortexm'] }}"
+        },
+        "properties": {
+          "buildType": "Debug",
+          "platformName": "nucleo-f411re-cubemx-startup",
+          "toolchainFileName": "arm-none-eabi-gcc.cmake"
+        },
+        "actions": {
+          "link-dependencies": [
+            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting --config {{ configuration.name }}"
+          ]
+        }
+      },
+      "nucleo-f411re-cubemx-startup-cmake-gcc-release": {
+        "inherits": [
+          "nucleo-f411re-cubemx-startup-cmake-gcc-debug"
+        ],
+        "properties": {
+          "buildType": "MinSizeRel"
+        }
+      },
+      "nucleo-f767zi-cmake-gcc-debug": {
+        "inherits": [
+          "short-win-paths-properties",
+          "cmake-cross-actions",
+          "cortexm-actions",
+          "bare-metal-dependencies",
+          "cross-arm-none-eabi-gcc-dependencies",
+          "openocd-dependencies"
+        ],
+        "devDependencies": {
+          "@micro-os-plus/architecture-cortexm": "{{ properties.dependencies-releases['@micro-os-plus/architecture-cortexm'] }}"
+        },
+        "properties": {
+          "buildType": "Debug",
+          "platformName": "nucleo-f767zi",
+          "toolchainFileName": "arm-none-eabi-gcc.cmake"
+        },
+        "actions": {
+          "link-dependencies": [
+            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting --config {{ configuration.name }}"
+          ]
+        }
+      },
+      "nucleo-f767zi-cmake-gcc-release": {
+        "inherits": [
+          "nucleo-f767zi-cmake-gcc-debug"
+        ],
+        "properties": {
+          "buildType": "MinSizeRel"
+        }
+      },
+      "nucleo-f767zi-cubemx-cmake-gcc-debug": {
+        "inherits": [
+          "short-win-paths-properties",
+          "cmake-cross-actions",
+          "cortexm-actions",
+          "bare-metal-dependencies",
+          "cross-arm-none-eabi-gcc-dependencies",
+          "openocd-dependencies"
+        ],
+        "devDependencies": {
+          "@micro-os-plus/architecture-cortexm": "{{ properties.dependencies-releases['@micro-os-plus/architecture-cortexm'] }}"
+        },
+        "properties": {
+          "buildType": "Debug",
+          "platformName": "nucleo-f767zi-cubemx",
+          "toolchainFileName": "arm-none-eabi-gcc.cmake"
+        },
+        "actions": {
+          "link-dependencies": [
+            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting --config {{ configuration.name }}"
+          ]
+        }
+      },
+      "nucleo-f767zi-cubemx-cmake-gcc-release": {
+        "inherits": [
+          "nucleo-f767zi-cubemx-cmake-gcc-debug"
+        ],
+        "properties": {
+          "buildType": "MinSizeRel"
+        }
+      },
+      "nucleo-h533re-cmake-gcc-debug": {
+        "inherits": [
+          "short-win-paths-properties",
+          "cmake-cross-actions",
+          "cortexm-actions",
+          "bare-metal-dependencies",
+          "cross-arm-none-eabi-gcc-dependencies",
+          "openocd-dependencies"
+        ],
+        "devDependencies": {
+          "@micro-os-plus/architecture-cortexm": "{{ properties.dependencies-releases['@micro-os-plus/architecture-cortexm'] }}"
+        },
+        "properties": {
+          "buildType": "Debug",
+          "platformName": "nucleo-h533re",
+          "toolchainFileName": "arm-none-eabi-gcc.cmake"
+        },
+        "actions": {
+          "link-dependencies": [
+            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting --config {{ configuration.name }}"
+          ]
+        }
+      },
+      "nucleo-h533re-cmake-gcc-release": {
+        "inherits": [
+          "nucleo-h533re-cmake-gcc-debug"
+        ],
+        "properties": {
+          "buildType": "MinSizeRel"
+        }
+      },
+      "nucleo-h533re-cubemx-cmake-gcc-debug": {
+        "inherits": [
+          "short-win-paths-properties",
+          "cmake-cross-actions",
+          "cortexm-actions",
+          "bare-metal-dependencies",
+          "cross-arm-none-eabi-gcc-dependencies",
+          "openocd-dependencies"
+        ],
+        "devDependencies": {
+          "@micro-os-plus/architecture-cortexm": "{{ properties.dependencies-releases['@micro-os-plus/architecture-cortexm'] }}"
+        },
+        "properties": {
+          "buildType": "Debug",
+          "platformName": "nucleo-h533re-cubemx",
+          "toolchainFileName": "arm-none-eabi-gcc.cmake"
+        },
+        "actions": {
+          "link-dependencies": [
+            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting --config {{ configuration.name }}"
+          ]
+        }
+      },
+      "nucleo-h533re-cubemx-cmake-gcc-release": {
+        "inherits": [
+          "nucleo-h533re-cubemx-cmake-gcc-debug"
+        ],
+        "properties": {
+          "buildType": "MinSizeRel"
+        }
+      },
+      "raspberry-pi-pico-cmake-gcc-debug": {
+        "inherits": [
+          "short-win-paths-properties",
+          "cmake-cross-actions",
+          "cortexm-actions",
+          "arm-cmsis-core-dependencies",
+          "bare-metal-dependencies",
+          "cross-arm-none-eabi-gcc-dependencies",
+          "openocd-dependencies"
+        ],
+        "properties": {
+          "buildType": "Debug",
+          "platformName": "raspberry-pi-pico",
+          "toolchainFileName": "arm-none-eabi-gcc.cmake"
+        },
+        "devDependencies": {
+          "@micro-os-plus/architecture-cortexm": "{{ properties.dependencies-releases['@micro-os-plus/architecture-cortexm'] }}",
+          "@xpack-3rd-party/raspberrypi-pico-sdk": "{{ properties.dependencies-releases['@xpack-3rd-party/raspberrypi-pico-sdk'] }}",
+          "@micro-os-plus/devices-raspberry-pi": "{{ properties.dependencies-releases['@micro-os-plus/devices-raspberry-pi'] }}"
+        },
+        "actions": {
+          "link-dependencies": [
+            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting @xpack-3rd-party/raspberrypi-pico-sdk @micro-os-plus/devices-raspberry-pi --config {{ configuration.name }}"
+          ]
+        }
+      },
+      "raspberry-pi-pico-cmake-gcc-release": {
+        "inherits": [
+          "raspberry-pi-pico-cmake-gcc-debug"
+        ],
+        "properties": {
+          "buildType": "MinSizeRel"
+        }
+      },
+      "raspberry-pi-pico-sdk-cmake-gcc-debug": {
+        "inherits": [
+          "short-win-paths-properties",
+          "cmake-cross-actions",
+          "cortexm-actions",
+          "arm-cmsis-core-dependencies",
+          "bare-metal-dependencies",
+          "cross-arm-none-eabi-gcc-dependencies",
+          "openocd-dependencies"
+        ],
+        "properties": {
+          "buildType": "Debug",
+          "platformName": "raspberry-pi-pico-sdk",
+          "toolchainFileName": "arm-none-eabi-gcc.cmake"
+        },
+        "devDependencies": {
+          "@micro-os-plus/architecture-cortexm": "{{ properties.dependencies-releases['@micro-os-plus/architecture-cortexm'] }}",
+          "@micro-os-plus/devices-raspberry-pi": "{{ properties.dependencies-releases['@micro-os-plus/devices-raspberry-pi'] }}",
+          "@xpack-3rd-party/raspberrypi-pico-sdk": "{{ properties.dependencies-releases['@xpack-3rd-party/raspberrypi-pico-sdk'] }}"
+        },
+        "actions": {
+          "link-dependencies": [
+            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting @xpack-3rd-party/raspberrypi-pico-sdk @micro-os-plus/devices-raspberry-pi --config {{ configuration.name }}"
+          ]
+        }
+      },
+      "raspberry-pi-pico-sdk-cmake-gcc-release": {
+        "inherits": [
+          "raspberry-pi-pico-sdk-cmake-gcc-debug"
+        ],
+        "properties": {
+          "buildType": "MinSizeRel"
+        }
+      },
+      "raspberry-pi-pico-2-arm-cmake-gcc-debug": {
+        "inherits": [
+          "short-win-paths-properties",
+          "cmake-cross-actions",
+          "cortexm-actions",
+          "arm-cmsis-core-dependencies",
+          "bare-metal-dependencies",
+          "cross-arm-none-eabi-gcc-dependencies",
+          "openocd-dependencies"
+        ],
+        "properties": {
+          "buildType": "Debug",
+          "platformName": "raspberry-pi-pico-2-arm",
+          "toolchainFileName": "arm-none-eabi-gcc.cmake"
+        },
+        "devDependencies": {
+          "@micro-os-plus/architecture-cortexm": "{{ properties.dependencies-releases['@micro-os-plus/architecture-cortexm'] }}",
+          "@micro-os-plus/devices-raspberry-pi": "{{ properties.dependencies-releases['@micro-os-plus/devices-raspberry-pi'] }}",
+          "@xpack-3rd-party/raspberrypi-pico-sdk": "{{ properties.dependencies-releases['@xpack-3rd-party/raspberrypi-pico-sdk'] }}"
+        },
+        "actions": {
+          "link-dependencies": [
+            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting @xpack-3rd-party/raspberrypi-pico-sdk @micro-os-plus/devices-raspberry-pi --config {{ configuration.name }}"
+          ]
+        }
+      },
+      "raspberry-pi-pico-2-arm-cmake-gcc-release": {
+        "inherits": [
+          "raspberry-pi-pico-2-arm-cmake-gcc-debug"
+        ],
+        "properties": {
+          "buildType": "MinSizeRel"
+        }
+      },
+      "raspberry-pi-pico-2-arm-sdk-cmake-gcc-debug": {
+        "inherits": [
+          "short-win-paths-properties",
+          "cmake-cross-actions",
+          "cortexm-actions",
+          "arm-cmsis-core-dependencies",
+          "bare-metal-dependencies",
+          "cross-arm-none-eabi-gcc-dependencies",
+          "openocd-dependencies"
+        ],
+        "properties": {
+          "buildType": "Debug",
+          "platformName": "raspberry-pi-pico-2-arm-sdk",
+          "toolchainFileName": "arm-none-eabi-gcc.cmake"
+        },
+        "devDependencies": {
+          "@micro-os-plus/architecture-cortexm": "{{ properties.dependencies-releases['@micro-os-plus/architecture-cortexm'] }}",
+          "@micro-os-plus/devices-raspberry-pi": "{{ properties.dependencies-releases['@micro-os-plus/devices-raspberry-pi'] }}",
+          "@xpack-3rd-party/raspberrypi-pico-sdk": "{{ properties.dependencies-releases['@xpack-3rd-party/raspberrypi-pico-sdk'] }}"
+        },
+        "actions": {
+          "link-dependencies": [
+            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting @xpack-3rd-party/raspberrypi-pico-sdk @micro-os-plus/devices-raspberry-pi --config {{ configuration.name }}"
+          ]
+        }
+      },
+      "raspberry-pi-pico-2-arm-sdk-cmake-gcc-release": {
+        "inherits": [
+          "raspberry-pi-pico-2-arm-sdk-cmake-gcc-debug"
+        ],
+        "properties": {
+          "buildType": "MinSizeRel"
+        }
+      },
+      "raspberry-pi-pico-2-riscv-cmake-gcc-debug": {
+        "inherits": [
+          "short-win-paths-properties",
+          "cmake-cross-actions",
+          "riscv-actions",
+          "bare-metal-dependencies",
+          "cross-riscv-none-elf-gcc-dependencies",
+          "openocd-dependencies"
+        ],
+        "properties": {
+          "buildType": "Debug",
+          "platformName": "raspberry-pi-pico-2-riscv",
+          "toolchainFileName": "riscv-none-elf-gcc.cmake"
+        },
+        "devDependencies": {
+          "@micro-os-plus/architecture-riscv": "{{ properties.dependencies-releases['@micro-os-plus/architecture-riscv'] }}",
+          "@micro-os-plus/devices-raspberry-pi": "{{ properties.dependencies-releases['@micro-os-plus/devices-raspberry-pi'] }}",
+          "@xpack-3rd-party/raspberrypi-pico-sdk": "{{ properties.dependencies-releases['@xpack-3rd-party/raspberrypi-pico-sdk'] }}"
+        },
+        "actions": {
+          "link-dependencies": [
+            "xpm link @micro-os-plus/architecture-riscv @micro-os-plus/startup @micro-os-plus/semihosting @xpack-3rd-party/raspberrypi-pico-sdk @micro-os-plus/devices-raspberry-pi --config {{ configuration.name }}"
+          ]
+        }
+      },
+      "raspberry-pi-pico-2-riscv-cmake-gcc-release": {
+        "inherits": [
+          "raspberry-pi-pico-2-riscv-cmake-gcc-debug"
+        ],
+        "properties": {
+          "buildType": "MinSizeRel"
+        }
+      },
+      "raspberry-pi-pico-2-riscv-sdk-cmake-gcc-debug": {
+        "inherits": [
+          "short-win-paths-properties",
+          "cmake-cross-actions",
+          "riscv-actions",
+          "bare-metal-dependencies",
+          "cross-riscv-none-elf-gcc-dependencies",
+          "openocd-dependencies"
+        ],
+        "properties": {
+          "buildType": "Debug",
+          "platformName": "raspberry-pi-pico-2-riscv-sdk",
+          "toolchainFileName": "riscv-none-elf-gcc.cmake"
+        },
+        "devDependencies": {
+          "@micro-os-plus/architecture-riscv": "{{ properties.dependencies-releases['@micro-os-plus/architecture-riscv'] }}",
+          "@micro-os-plus/devices-raspberry-pi": "{{ properties.dependencies-releases['@micro-os-plus/devices-raspberry-pi'] }}",
+          "@xpack-3rd-party/raspberrypi-pico-sdk": "{{ properties.dependencies-releases['@xpack-3rd-party/raspberrypi-pico-sdk'] }}"
+        },
+        "actions": {
+          "link-dependencies": [
+            "xpm link @micro-os-plus/architecture-riscv @micro-os-plus/startup @micro-os-plus/semihosting @xpack-3rd-party/raspberrypi-pico-sdk @micro-os-plus/devices-raspberry-pi --config {{ configuration.name }}"
+          ]
+        }
+      },
+      "raspberry-pi-pico-2-riscv-sdk-cmake-gcc-release": {
+        "inherits": [
+          "raspberry-pi-pico-2-riscv-sdk-cmake-gcc-debug"
+        ],
+        "properties": {
+          "buildType": "MinSizeRel"
+        }
+      },
+      "raspberry-pi-pico-zero-2-w-aarch32-cmake-gcc-debug": {
+        "inherits": [
+          "short-win-paths-properties",
+          "cmake-cross-actions",
+          "aarch32-actions",
+          "bare-metal-dependencies",
+          "cross-arm-none-eabi-gcc-dependencies",
+          "openocd-dependencies"
+        ],
+        "properties": {
+          "buildType": "Debug",
+          "platformName": "raspberry-pi-pico-zero-2-w-aarch32",
+          "toolchainFileName": "arm-none-eabi-gcc.cmake"
+        },
+        "devDependencies": {
+          "@micro-os-plus/architecture-aarch32": "{{ properties.dependencies-releases['@micro-os-plus/architecture-aarch32'] }}"
+        },
+        "actions": {
+          "link-dependencies": [
+            "xpm link @micro-os-plus/architecture-aarch32 @micro-os-plus/startup @micro-os-plus/semihosting --config {{ configuration.name }}"
+          ]
+        }
+      },
+      "raspberry-pi-pico-zero-2-w-aarch32-cmake-gcc-release": {
+        "inherits": [
+          "raspberry-pi-pico-zero-2-w-aarch32-cmake-gcc-debug"
+        ],
+        "properties": {
+          "buildType": "MinSizeRel"
+        }
+      },
+      "raspberry-pi-pico-zero-2-w-aarch64-cmake-gcc-debug": {
+        "inherits": [
+          "short-win-paths-properties",
+          "cmake-cross-actions",
+          "aarch64-actions",
+          "bare-metal-dependencies",
+          "cross-aarch64-none-elf-gcc-dependencies",
+          "openocd-dependencies"
+        ],
+        "properties": {
+          "buildType": "Debug",
+          "platformName": "raspberry-pi-pico-zero-2-w-aarch64",
+          "toolchainFileName": "aarch64-none-elf-gcc.cmake"
+        },
+        "devDependencies": {
+          "@micro-os-plus/architecture-aarch64": "{{ properties.dependencies-releases['@micro-os-plus/architecture-aarch64'] }}"
+        },
+        "actions": {
+          "link-dependencies": [
+            "xpm link @micro-os-plus/architecture-aarch64 @micro-os-plus/startup @micro-os-plus/semihosting --config {{ configuration.name }}"
+          ]
+        }
+      },
+      "raspberry-pi-pico-zero-2-w-aarch64-cmake-gcc-release": {
+        "inherits": [
+          "raspberry-pi-pico-zero-2-w-aarch64-cmake-gcc-debug"
+        ],
+        "properties": {
+          "buildType": "MinSizeRel"
         }
       }
     }
