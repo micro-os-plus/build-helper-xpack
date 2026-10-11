@@ -22,7 +22,7 @@
           ]
         },
         {
-          "id": "devices",
+          "id": "device",
           "display": "Devices",
           "description": "The µOS++ supported devices",
           "$comments": [
