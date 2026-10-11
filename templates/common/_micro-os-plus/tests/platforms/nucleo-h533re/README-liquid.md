@@ -19,11 +19,12 @@ the CMSIS registers, driven from `src/hooks.cpp`:
   device's maximum, matching the nucleo-h533re-cubemx platform), from
   the on-board 24 MHz X3 crystal, populated and selected by default on
   this board (see
-  `device/include/micro-os-plus/stm32h533re/system-clock.h` for
+  `device-stm32h533re/include/micro-os-plus/stm32h533re/system-clock.h` for
   details), assigning the result to `SystemCoreClock`.
 - `micro_os_plus_startup_initialise_hardware_hook()` — called after the
   data & bss sections are initialised; calls `SystemInit()`
-  (`device/src/system-stm32h533xx.cpp`, not the CubeMX-generated one),
+  (`device-stm32h533re/src/system-stm32h533xx.cpp`, not the CubeMX-generated
+  one),
   which refreshes `SystemCoreClock` from the still-correctly-configured
   RCC hardware registers via `SystemCoreClockUpdate()` — needed because
   the early hook's own write to `SystemCoreClock` above does not

@@ -19,11 +19,12 @@ everything is implemented directly on the CMSIS registers, driven from
   sibling CubeMX platforms, rather than this device's 100 MHz maximum;
   from the 8 MHz clock signal the onboard ST-LINK feeds into
   HSE-bypass; see
-  `device/include/micro-os-plus/stm32f411re/system-clock.h`),
+  `device-stm32f411re/include/micro-os-plus/stm32f411re/system-clock.h`),
   assigning the result to `SystemCoreClock`.
 - `micro_os_plus_startup_initialise_hardware_hook()` — called after the
   data & bss sections are initialised; calls `SystemInit()`
-  (`device/src/system-stm32f411xe.cpp`, not the CubeMX-generated one),
+  (`device-stm32f411re/src/system-stm32f411xe.cpp`, not the CubeMX-generated
+  one),
   which refreshes `SystemCoreClock` from the still-correctly-configured
   PLL hardware registers via `SystemCoreClockUpdate()` — needed because
   the early hook's own write to `SystemCoreClock` above does not

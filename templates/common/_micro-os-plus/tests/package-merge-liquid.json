@@ -137,6 +137,12 @@
         "nucleo-f767zi-cubemx": "stm32f767xx",
         "nucleo-h533re-cubemx": "stm32h533xx"
       },
+      "$configs-platforms-device-folders": {
+        "Template": "define configs-platforms-device-folders for the vectors platforms whose device folder is not named 'device'",
+        "nucleo-f411re-cubemx": "device-stm32f411re",
+        "nucleo-f767zi-cubemx": "device-stm32f767zi",
+        "nucleo-h533re-cubemx": "device-stm32h533re"
+      },
       "configs-platforms-vectors-names": [
         "{{ properties.configs-platforms-vectors | keys | join_lines }}"
       ],
@@ -324,7 +330,7 @@
       "action-build-for-config": "xpm run build-{{ config }}",
       "actions-clean-for-configs": "{% for config in configs %}{% for build-type in properties.build-types %}xpm run clean --config {{ config }}-{{ build-type }} --ignore-errors{{ os.EOL }}{% endfor %}{% endfor %}",
       "actions-clear-for-configs": "{% for config in configs %}{% for build-type in properties.build-types %}xpm run clear --config {{ config }}-{{ build-type }} --ignore-errors{{ os.EOL }}{% endfor %}{% endfor %}",
-      "actions-convert-startup-to-vectors-for-platforms": "{% assign platform-names = properties.configs-platforms-vectors-names | split_lines %}{% for platform-name in platform-names %}{% assign vector-name = properties.configs-platforms-vectors[platform-name] %}node scripts/convert-startup-to-vectors.mjs platforms/{{ platform-name }}/device/stm32cubemx/startup_{{ vector-name }}.s platforms/{{ platform-name }}/device/src/vectors-{{ vector-name }}.c{{ os.EOL }}{% endfor %}"
+      "actions-convert-startup-to-vectors-for-platforms": "{% assign platform-names = properties.configs-platforms-vectors-names | split_lines %}{% for platform-name in platform-names %}{% assign vector-name = properties.configs-platforms-vectors[platform-name] %}{% assign device-folder = properties.configs-platforms-device-folders[platform-name] | default: 'device' %}node scripts/convert-startup-to-vectors.mjs platforms/{{ platform-name }}/{{ device-folder }}/stm32cubemx/startup_{{ vector-name }}.s platforms/{{ platform-name }}/{{ device-folder }}/src/vectors-{{ vector-name }}.c{{ os.EOL }}{% endfor %}"
     },
     "actions": {
       "xcdl-export": [

@@ -12,7 +12,7 @@ Note: It cannot be a static library, since it makes extensive use of `weak` symb
   `micro_os_plus_startup_finalise_hardware_hook` hooks (called from
   `micro_os_plus_startup_run_main()`/`exit()`). `initialise_hardware_hook`
   simply calls the CubeMX-generated `cubemx_main()` (`main()` renamed,
-  see `device/README.md`), which brings up the clocks and calls
+  see `device-stm32h533re/README.md`), which brings up the clocks and calls
   `BSP_LED_Init(LED_GREEN)`/`BSP_LED_On(LED_GREEN)`. The other two
   hooks instantiate the `activity_led` (`platform::led_green`),
   turning it on/off around the application's run. `led_green` has no
@@ -27,7 +27,8 @@ Note: It cannot be a static library, since it makes extensive use of `weak` symb
   driver for the onboard green LED (`LED_GREEN`, `LED2`/`PA5` on this
   Nucleo-64 board), implemented on top of the STM32H5xx Nucleo BSP's
   `BSP_LED_*()` calls, already linked in via
-  `stm32cubemx-drivers-objects-library` (see `device/CMakeLists.txt`),
+  `stm32cubemx-drivers-objects-library` (see
+  `device-stm32h533re/CMakeLists.txt`),
   unlike the sibling nucleo-f411re-cubemx/nucleo-f767zi-cubemx
   platforms, whose CubeMX projects have no BSP layer and drive
   `HAL_GPIO_*()` directly.

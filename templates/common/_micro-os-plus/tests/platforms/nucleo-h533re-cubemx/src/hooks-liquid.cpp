@@ -33,8 +33,8 @@ platform::led_green activity_led;
 // ----------------------------------------------------------------------------
 
 // Declared, but not exposed via a header, in the CubeMX-generated
-// `device/stm32cubemx/Core/Src/main.c`, where it is `main()` renamed
-// via the `#define main cubemx_main` trick.
+// `device-stm32h533re/stm32cubemx/Core/Src/main.c`, where it is `main()`
+// renamed via the `#define main cubemx_main` trick.
 extern "C" int
 cubemx_main (void);
 

@@ -31,7 +31,7 @@ platform::led_green activity_led;
 
 // Called from _start(), before the data & bss sections are initialised;
 // brings the system clock up, as configured by the original
-// STM32CubeMX project (device/README.md), so the rest of the
+// STM32CubeMX project (device-stm32f767zi/README.md), so the rest of the
 // initialisations run at the intended frequency.
 // Requires MICRO_OS_PLUS_STARTUP_INITIALISE_HARDWARE_EARLY_ENABLED
 // (startup-defines.h).
@@ -48,9 +48,9 @@ micro_os_plus_startup_initialise_hardware_early_hook (void)
 // Called from micro_os_plus_startup_run_main(), after the data & bss
 // sections are initialised; replaces the CubeMX-generated `main()`
 // (formerly renamed to this same function via `#define main`, now
-// removed from the build, see device/CMakeLists.txt), which used to
+// removed from the build, see device-stm32f767zi/CMakeLists.txt), which used to
 // call the HAL's `HAL_Init()`/`SystemClock_Config()`/`MX_GPIO_Init()`.
-// `SystemInit()` (device/src/system-stm32f767xx.cpp, not the
+// `SystemInit()` (device-stm32f767zi/src/system-stm32f767xx.cpp, not the
 // CubeMX-generated one) refreshes `SystemCoreClock` from the
 // still-correctly-configured RCC hardware registers via
 // `SystemCoreClockUpdate()`; it does not touch the FPU access bits or

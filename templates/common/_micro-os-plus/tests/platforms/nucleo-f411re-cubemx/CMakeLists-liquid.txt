@@ -22,7 +22,7 @@ message (VERBOSE "Processing 'tests/platforms/${PLATFORM_NAME}/'...")
 # -----------------------------------------------------------------------------
 
 # TODO: possibly update to separate device-stm32f4-extras, when ready.
-add_subdirectory ("device")
+add_subdirectory ("device-stm32f411re")
 
 # -----------------------------------------------------------------------------
 

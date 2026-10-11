@@ -13,7 +13,7 @@
 #
 # -----------------------------------------------------------------------------
 
-message('Adding all warnings (ignore the meson -Wall message)...')
+message('Adding all warnings (ignore the meson -Wxxx messages)...')
 message('')  # Separator for readability
 
 global_warnings = [ ]

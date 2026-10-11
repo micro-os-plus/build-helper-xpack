@@ -28,7 +28,7 @@ message (
 # platform and semihosting). Included in `cmake/project-functions.cmake`.
 
 # No HAL/CubeMX/BSP driver objects any more; the clock and the LED are brought
-# up directly on the CMSIS registers (see device/CMakeLists.txt).
+# up directly on the CMSIS registers (see device-stm32h533re/CMakeLists.txt).
 set (xpack_dependencies_libraries)
 
 # -----------------------------------------------------------------------------

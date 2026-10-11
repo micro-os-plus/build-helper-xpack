@@ -12,7 +12,7 @@ Note: It cannot be a static library, since it makes extensive use of `weak` symb
   `micro_os_plus_startup_finalise_hardware_hook` hooks (called from
   `micro_os_plus_startup_run_main()`/`exit()`). `initialise_hardware_hook`
   simply calls the CubeMX-generated `cubemx_main()` (`main()` renamed,
-  see `device/README.md`), which brings up the clocks and configures
+  see `device-stm32f411re/README.md`), which brings up the clocks and configures
   the LD2 pin. The other two hooks instantiate the `activity_led`
   (`platform::led_green`), turning it on/off around the application's
   run. `led_green` has no data members and a trivial default
@@ -25,7 +25,8 @@ Note: It cannot be a static library, since it makes extensive use of `weak` symb
 - `src/led-green.cpp` — `platform::led_green` driver for the
   onboard green LED (`LD2`, `PA5`), implemented on top of the
   STM32F4xx HAL's `HAL_GPIO_*()` calls, already linked in via
-  `stm32cubemx-drivers-objects-library` (see `device/CMakeLists.txt`).
+  `stm32cubemx-drivers-objects-library` (see
+  `device-stm32f411re/CMakeLists.txt`).
 
 ## OpenOCD invocation
 

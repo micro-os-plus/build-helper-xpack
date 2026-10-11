@@ -20,11 +20,12 @@ everything is implemented directly on the CMSIS registers, driven from
   nominal 16 MHz HSE the onboard ST-Link is documented to feed into
   `PH0/OSC_IN` — more accurate than the internal HSI the original
   STM32CubeMX project actually used (see
-  `device/include/micro-os-plus/stm32f767zi/system-clock.h` for
+  `device-stm32f767zi/include/micro-os-plus/stm32f767zi/system-clock.h` for
   details), assigning the result to `SystemCoreClock`.
 - `micro_os_plus_startup_initialise_hardware_hook()` — called after the
   data & bss sections are initialised; calls `SystemInit()`
-  (`device/src/system-stm32f767xx.cpp`, not the CubeMX-generated one),
+  (`device-stm32f767zi/src/system-stm32f767xx.cpp`, not the CubeMX-generated
+  one),
   which refreshes `SystemCoreClock` from the still-correctly-configured
   RCC hardware registers via `SystemCoreClockUpdate()` — needed because
   the early hook's own write to `SystemCoreClock` above does not
