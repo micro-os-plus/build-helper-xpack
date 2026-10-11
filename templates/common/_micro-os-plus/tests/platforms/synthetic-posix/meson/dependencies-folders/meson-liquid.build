@@ -40,6 +40,10 @@ xpack_dependencies_folders = [
   
   # Dependencies: none.
   xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/architecture-synthetic-posix',
+
+  # Dependencies: architecture.
+  # Defines the generic micro_os_plus_architecture_dependency alias.
+  'platforms/' + xpack_platform_name + '/meson/architecture-alias',
 ]
 
 # -----------------------------------------------------------------------------

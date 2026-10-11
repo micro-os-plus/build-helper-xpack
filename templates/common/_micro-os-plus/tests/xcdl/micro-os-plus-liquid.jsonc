@@ -14,7 +14,7 @@
       "docsUrl": "https://micro-os-plus.github.io/",
       "cdlComponents": [
         {
-          "id": "architectures",
+          "id": "architecture",
           "display": "Architectures",
           "description": "The µOS++ supported architectures",
           "$comments": [

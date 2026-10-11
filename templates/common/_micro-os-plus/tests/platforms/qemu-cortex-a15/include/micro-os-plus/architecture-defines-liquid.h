@@ -10,9 +10,9 @@
 // ----------------------------------------------------------------------------
 
 // The AArch32 architecture definitions.
-#if !defined(MICRO_OS_PLUS_ARCHITECTURES_AARCH32_ENABLED)
-#define MICRO_OS_PLUS_ARCHITECTURES_AARCH32_ENABLED
-#endif // !defined(MICRO_OS_PLUS_ARCHITECTURES_AARCH32_ENABLED)
+#if !defined(MICRO_OS_PLUS_ARCHITECTURE_AARCH32_ENABLED)
+#define MICRO_OS_PLUS_ARCHITECTURE_AARCH32_ENABLED
+#endif // !defined(MICRO_OS_PLUS_ARCHITECTURE_AARCH32_ENABLED)
 
 // ----------------------------------------------------------------------------
 

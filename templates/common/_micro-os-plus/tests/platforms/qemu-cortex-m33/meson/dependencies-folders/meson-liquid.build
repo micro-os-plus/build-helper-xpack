@@ -32,6 +32,10 @@ xpack_dependencies_folders = [
   # Hidden dependency: semihosting.
   xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/architecture-cortexm',
 
+  # Dependencies: architecture.
+  # Defines the generic micro_os_plus_architecture_dependency alias.
+  'platforms/' + xpack_platform_name + '/meson/architecture-alias',
+
   # Dependencies: arm_cmsis_core_m, architecture, diag.trace.
   # Hidden dependency: semihosting.
   xpack_build_folder_relative_path + '/xpacks/@micro-os-plus/devices-qemu-cortexm',

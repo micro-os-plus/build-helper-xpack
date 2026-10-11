@@ -257,6 +257,8 @@ function (add_compare_files_test)
 
   set_tests_properties ("${arg_NAME}" PROPERTIES DEPENDS "${arg_DEPENDS}")
 
+  message (VERBOSE "T> ${arg_NAME}")
+
 endfunction ()
 
 # -----------------------------------------------------------------------------
@@ -289,6 +291,8 @@ function (add_qemu_test)
       "${elf_name}.elf" ${XPACK_QEMU_EXTRA_ARGS} --semihosting-config
       "${semihosting_config}" -D ${arg_NAME}-qemu.log
   )
+
+  message (VERBOSE "T> ${arg_NAME}")
 
 endfunction ()
 

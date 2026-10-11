@@ -125,7 +125,7 @@ macro (xpack_add_dependencies_subdirectories dependencies_folders base_bin_path)
       )
       # message (VERBOSE "Adding '${relative_path}'...")
       get_filename_component (folder_name ${dependency_folder} NAME)
-      message (VERBOSE "")
+      message (VERBOSE "") # Separator for readability
       add_subdirectory (
         "${dependency_folder}" "${base_bin_path}/${folder_name}"
       )

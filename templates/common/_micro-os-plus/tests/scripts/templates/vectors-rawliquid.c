@@ -1,5 +1,5 @@
 /*
- * DO NOT EDIT! Automatically generated from template file:
+ * DO NOT EDIT! Automatically generated from CMSIS startup file:
  * {{libraryFilePath}}
  *
  * This file is part of the µOS++ project (https://micro-os-plus.github.io/).

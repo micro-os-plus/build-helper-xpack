@@ -47,6 +47,7 @@ set (
 
 # A list of all imaginable warnings. Targets may add options to disable some of
 # them.
+message (VERBOSE "") # Separator for readability
 xpack_set_all_compiler_warnings (all_warnings)
 
 target_compile_options (

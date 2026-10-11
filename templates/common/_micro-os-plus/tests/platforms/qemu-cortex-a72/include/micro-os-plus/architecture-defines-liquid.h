@@ -10,9 +10,9 @@
 // ----------------------------------------------------------------------------
 
 // The AArch64 architecture definitions.
-#if !defined(MICRO_OS_PLUS_ARCHITECTURES_AARCH64_ENABLED)
-#define MICRO_OS_PLUS_ARCHITECTURES_AARCH64_ENABLED
-#endif // !defined(MICRO_OS_PLUS_ARCHITECTURES_AARCH64_ENABLED)
+#if !defined(MICRO_OS_PLUS_ARCHITECTURE_AARCH64_ENABLED)
+#define MICRO_OS_PLUS_ARCHITECTURE_AARCH64_ENABLED
+#endif // !defined(MICRO_OS_PLUS_ARCHITECTURE_AARCH64_ENABLED)
 
 // ----------------------------------------------------------------------------
 

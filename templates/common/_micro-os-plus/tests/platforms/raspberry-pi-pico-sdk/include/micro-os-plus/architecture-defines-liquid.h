@@ -9,9 +9,9 @@
 
 // ----------------------------------------------------------------------------
 
-#if !defined(MICRO_OS_PLUS_ARCHITECTURES_CORTEXM_ENABLED)
-#define MICRO_OS_PLUS_ARCHITECTURES_CORTEXM_ENABLED
-#endif // !defined(MICRO_OS_PLUS_ARCHITECTURES_CORTEXM_ENABLED)
+#if !defined(MICRO_OS_PLUS_ARCHITECTURE_CORTEXM_ENABLED)
+#define MICRO_OS_PLUS_ARCHITECTURE_CORTEXM_ENABLED
+#endif // !defined(MICRO_OS_PLUS_ARCHITECTURE_CORTEXM_ENABLED)
 
 // ----------------------------------------------------------------------------
 

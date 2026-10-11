@@ -76,12 +76,22 @@ compile_args += [
 {%- endif %}
 {%- if component.dependencies and component.dependencies.size > 0 %}
 
+# The dependencies are single objects; enclose them in brackets,
+# to append them as elements of the list.
 _local_dependencies += [
 {%- for dependency in component.dependencies %}
 {%- assign dependencyUnderscore = dependency | replace: '.static-library', '' | replace: '.objects-library', '' | replace: '-', '_' | replace: '.', '_' %}
   {{dependencyUnderscore}}_dependency,
 {%- endfor %}
 ]
+
+# The dependencies' C/C++ args are lists; add them without brackets,
+# to concatenate their elements rather than nest the lists.
+{%- for dependency in component.dependencies %}
+{%- assign dependencyUnderscore = dependency | replace: '.static-library', '' | replace: '.objects-library', '' | replace: '-', '_' | replace: '.', '_' %}
+_local_compile_c_args += {{dependencyUnderscore}}_dependency_compile_c_args
+_local_compile_cpp_args += {{dependencyUnderscore}}_dependency_compile_cpp_args
+{%- endfor %}
 {%- endif %}
 
 # https://mesonbuild.com/Reference-manual_functions.html#declare_dependency

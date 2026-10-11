@@ -131,7 +131,7 @@ target_link_libraries (
             hardware_clocks
             hardware_gpio
             cmsis_core_headers
-            micro-os-plus::architecture
+            micro-os-plus::architecture-cortexm
             micro-os-plus::startup
 )
 
