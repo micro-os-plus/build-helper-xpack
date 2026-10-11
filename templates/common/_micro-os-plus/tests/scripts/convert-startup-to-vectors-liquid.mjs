@@ -161,7 +161,12 @@ const liquidEngine = new Liquid({
  * @param {boolean} isArmArch8m
  * @returns {string} The rendered C source.
  */
-const renderVectorsTemplate = (handlers, libraryFilePath, isArmArch6m, isArmArch8m) => {
+const renderVectorsTemplate = (
+  handlers,
+  libraryFilePath,
+  isArmArch6m,
+  isArmArch8m
+) => {
   const templateFilePath = path.resolve(
     scriptFolderPath,
     'templates',
@@ -180,7 +185,7 @@ const renderVectorsTemplate = (handlers, libraryFilePath, isArmArch6m, isArmArch
     handlers,
     libraryFilePath,
     isArmArch6m,
-    isArmArch8m
+    isArmArch8m,
   })
 }
 
@@ -229,6 +234,7 @@ const resultText = renderVectorsTemplate(
 )
 
 if (outputFilePath !== null) {
+  fs.rmSync(outputFilePath, { force: true })
   fs.writeFileSync(outputFilePath, resultText)
 } else {
   process.stdout.write(resultText)
