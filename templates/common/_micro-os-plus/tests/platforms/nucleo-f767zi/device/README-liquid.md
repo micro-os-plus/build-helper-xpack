@@ -5,7 +5,7 @@
 
 This folder includes the **stm32f767xx** device definitions.
 
-The result is a CMake interface library `micro-os-plus::device`.
+The result is a CMake interface library `micro-os-plus::device-stm32f767zi`.
 
 Unlike the sibling nucleo-f767zi-cubemx platform, this one does not use
 STM32CubeMX or the STM32F7xx HAL; the clock and the onboard LED are
@@ -36,7 +36,7 @@ headers it holds have to be applied by hand.
 ## CMake
 
 `device/CMakeLists.txt` defines the `micro-os-plus-device-interface`
-library (`micro-os-plus::device`), which exposes the CMSIS include
+library (`micro-os-plus::device-stm32f767zi`), which exposes the CMSIS include
 directories kept under `stm32cubemx/Drivers/CMSIS`, the `STM32F767xx`
 compile definition, and the sources below.
 

@@ -5,7 +5,7 @@
 
 This folder includes the **stm32h533re** device definitions.
 
-The result is a CMake interface library `micro-os-plus::device`.
+The result is a CMake interface library `micro-os-plus::device-stm32h533re`.
 
 Unlike the sibling nucleo-h533re-cubemx platform, this one does not use
 STM32CubeMX, the STM32H5xx HAL, or the STM32H5xx Nucleo BSP; the clock
@@ -39,7 +39,7 @@ headers it holds have to be applied by hand.
 ## CMake
 
 `device/CMakeLists.txt` defines the `micro-os-plus-device-interface`
-library (`micro-os-plus::device`), which exposes the CMSIS include
+library (`micro-os-plus::device-stm32h533re`), which exposes the CMSIS include
 directories kept under `stm32cubemx/Drivers/CMSIS`, the `STM32H533xx`
 compile definition, and the sources below.
 

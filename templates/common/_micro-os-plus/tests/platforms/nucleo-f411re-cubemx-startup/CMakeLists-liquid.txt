@@ -113,7 +113,7 @@ if ("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "12.0.0")
 endif ()
 
 target_link_libraries (
-  micro-os-plus-platform-interface INTERFACE micro-os-plus::device
+  micro-os-plus-platform-interface INTERFACE micro-os-plus::device-stm32f411re
                                              micro-os-plus::startup
 )
 

@@ -104,7 +104,7 @@ if ("${CMAKE_C_COMPILER_VERSION}" VERSION_GREATER_EQUAL "12.0.0")
 endif ()
 
 target_link_libraries (
-  micro-os-plus-platform-interface INTERFACE micro-os-plus::devices-qemu-cortexm
+  micro-os-plus-platform-interface INTERFACE micro-os-plus::device-qemu-cortexm
                                              micro-os-plus::startup
 )
 

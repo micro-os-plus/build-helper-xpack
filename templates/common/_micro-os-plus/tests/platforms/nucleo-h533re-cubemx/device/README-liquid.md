@@ -5,7 +5,7 @@
 
 This folder includes the **stm32h533re** device definitions.
 
-The result is a CMake interface library `micro-os-plus::device`.
+The result is a CMake interface library `micro-os-plus::device-stm32h533re`.
 
 ## stm32cubemx
 

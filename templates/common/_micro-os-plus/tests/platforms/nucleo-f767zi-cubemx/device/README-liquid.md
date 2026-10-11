@@ -5,7 +5,7 @@
 
 This folder includes the **stm32f7xx** device definitions.
 
-The result is a CMake interface library `micro-os-plus::device`.
+The result is a CMake interface library `micro-os-plus::device-stm32f767zi`.
 
 ## stm32cubemx
 

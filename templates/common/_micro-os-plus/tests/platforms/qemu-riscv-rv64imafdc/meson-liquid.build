@@ -115,7 +115,7 @@ if c_compiler.version().version_compare('>=12.0.0')
 endif
 
 _local_dependencies += [
-  micro_os_plus_devices_qemu_riscv_dependency,
+  micro_os_plus_device_qemu_riscv_dependency,
   micro_os_plus_startup_dependency,
 ]
 

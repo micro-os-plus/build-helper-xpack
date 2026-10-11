@@ -43,7 +43,7 @@ specific to the RP2350.
   `_exit()` (reporting the exit code to the host via semihosting),
   the startup sequence, and the heap (`_sbrk()`, from the
   `devices-raspberry-pi` package, enabled by
-  `MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_SDK_SBRK_ENABLED`; it grows from
+  `MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_SDK_SBRK_ENABLED`; it grows from
   `end` to `__StackLimit`, as defined by the SDK linker script).
 - **The Pico SDK provides** only the boot image and the linker script
   (`pico_standard_link`), the reset entry (`pico_crt0`), the platform

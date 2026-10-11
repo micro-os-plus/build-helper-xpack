@@ -18,7 +18,7 @@
 # -----------------------------------------------------------------------------
 
 xpack_dependencies_libraries = [
-  micro_os_plus_devices_qemu_cortexm_vectors_mps2_an385_dependency
+  micro_os_plus_device_qemu_cortexm_vectors_mps2_an385_dependency
 ]
 
 # -----------------------------------------------------------------------------

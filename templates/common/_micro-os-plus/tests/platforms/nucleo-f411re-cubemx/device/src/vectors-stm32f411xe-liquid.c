@@ -1,6 +1,6 @@
 /*
  * DO NOT EDIT! Automatically generated from CMSIS startup file:
- * {{fromFilePath}}
+ * platforms/nucleo-f411re/device/stm32cubemx/startup_stm32f411xe.s
  *
  * This file is part of the µOS++ project (https://micro-os-plus.github.io/).
  * Copyright (c) 2023-{{currentYear}} Liviu Ionescu. All rights reserved.

@@ -1,6 +1,6 @@
 /*
  * DO NOT EDIT! Automatically generated from CMSIS startup file:
- * {{fromFilePath}}
+ * platforms/nucleo-h533re/device/stm32cubemx/startup_stm32h533xx.s
  *
  * This file is part of the µOS++ project (https://micro-os-plus.github.io/).
  * Copyright (c) 2023-{{currentYear}} Liviu Ionescu. All rights reserved.

@@ -129,18 +129,23 @@ message (
 # -----------------------------------------------------------------------------
 
 # Define the device library.
-add_library (micro-os-plus-device-interface INTERFACE EXCLUDE_FROM_ALL)
+add_library (
+  micro-os-plus-device-stm32h533re-interface INTERFACE EXCLUDE_FROM_ALL
+)
 
 # -----------------------------------------------------------------------------
 
-target_include_directories (micro-os-plus-device-interface INTERFACE "include")
+target_include_directories (
+  micro-os-plus-device-stm32h533re-interface INTERFACE "include"
+)
 
 target_sources (
-  micro-os-plus-device-interface INTERFACE "src/vectors-stm32h533xx.c"
+  micro-os-plus-device-stm32h533re-interface
+  INTERFACE "src/vectors-stm32h533xx.c"
 )
 
 target_compile_options (
-  micro-os-plus-device-interface
+  micro-os-plus-device-stm32h533re-interface
   INTERFACE $<$<COMPILE_LANGUAGE:C>:-Wno-missing-prototypes>
             $<$<COMPILE_LANGUAGE:C>:-Wno-nested-externs>
             $<$<COMPILE_LANGUAGE:C>:-Wno-strict-prototypes>
@@ -155,7 +160,7 @@ target_compile_options (
 )
 
 target_link_options (
-  micro-os-plus-device-interface
+  micro-os-plus-device-stm32h533re-interface
   INTERFACE
   # Prefer absolute paths over paths relative to the build folder.
   -T${CMAKE_CURRENT_SOURCE_DIR}/linker-scripts/mem.ld
@@ -164,16 +169,22 @@ target_link_options (
 )
 
 target_link_libraries (
-  micro-os-plus-device-interface INTERFACE micro-os-plus::stm32cubemx
-                                           micro-os-plus::architecture
+  micro-os-plus-device-stm32h533re-interface
+  INTERFACE micro-os-plus::stm32cubemx micro-os-plus::architecture-cortexm
 )
 
-xpack_display_target_lists (micro-os-plus-device-interface)
+xpack_display_target_lists (micro-os-plus-device-stm32h533re-interface)
 
 # -----------------------------------------------------------------------------
 
 # Aliases.
-add_library (micro-os-plus::device ALIAS micro-os-plus-device-interface)
-message (VERBOSE "> micro-os-plus::device -> micro-os-plus-device-interface")
+add_library (
+  micro-os-plus::device-stm32h533re ALIAS
+  micro-os-plus-device-stm32h533re-interface
+)
+message (
+  VERBOSE
+  "> micro-os-plus::device-stm32h533re -> micro-os-plus-device-stm32h533re-interface"
+)
 
 # -----------------------------------------------------------------------------
