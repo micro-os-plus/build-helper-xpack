@@ -1,10 +1,10 @@
-# platforms/qemu-cortex-a72
+# platforms/qemu-aarch32-a15
 
 > DO NOT EDIT! Automatically generated from template file:
 > {{fromFilePath}}
 
 Support files for building application to run on the QEMU "virt"
-emulated board with "cortex-a72" CPU.
+emulated board with "cortex-a15" CPU.
 
 ## Include folders
 
@@ -26,9 +26,11 @@ The source files to be added to user projects are:
 
 ## Memory map
 
+The `virt` machine defines:
+
 - virtual flash 0x00000000, 64 MiB, usable only as `-bios`
-- the RAM region 0x40000000 (1 GiB), with the actual value as given by 
-`-m`, 128 MiB if mising.
+- the RAM region 0x40000000 (1 GiB), with the actual value as given by
+  `-m`, 128 MiB if mising.
 
 Semihosting heap base: 0x44000000, limit: 0x48000000, stack base: 0x48000000, limit: 0x44000000.
 
@@ -36,30 +38,22 @@ Semihosting heap base: 0x44000000, limit: 0x48000000, stack base: 0x48000000, li
 
 The applications are built for the following memory range:
 
-- RAM: 0x4000_0000-0x43FF_FFFF (64 MB)
-- HEAP: 0x4400_0000-0x47FF_FFFF (64 MB)
+- RAM: 0x4000_0000 - 0x43FF_FFFF (64 MB)
+- HEAP: 0x4400_0000 - 0x47FF_FFFF (64 MB)
 - stack: 0x4800_0000
-
-## Advanced SIMD & FP
-
-By default, in certain cases (like variable arguments functions),
-when generating code for `-mcpu=cortex-a72`, GCC uses quad registers
-from the Advanced SIMD & FP unit, which is not enabled by default
-in QEMU, and requires explicit code in the reset handler, before
-calling the `_start()` function.
 
 ## QEMU invocation
 
 To run tests, pass the ELF file and the arguments:
 
 ```sh
-qemu-system-aarch64 --machine virt --cpu cortex-a72 --nographic -smp 1 -d unimp,guest_errors --kernel "unit-test.elf" --semihosting-config enable=on,target=native,arg=unit-test,arg=--reporter,arg=human
+qemu-system-arm --machine virt --cpu cortex-a15 --nographic -smp 1 -d unimp,guest_errors --kernel "unit-test.elf" --semihosting-config enable=on,target=native,arg=unit-test,arg=--reporter,arg=human
 ```
 
 For debug sessions start QEMU in GDB server mode by passing both `-s -S`:
 
 ```sh
-qemu-system-aarch64 --machine virt --cpu cortex-a72 --nographic -smp 1 -d unimp,guest_errors -s -S --semihosting-config enable=on,target=native,arg=unit-test,arg=--reporter,arg=human
+qemu-system-arm --machine virt --cpu cortex-a15 --nographic -smp 1 -d unimp,guest_errors -s -S --semihosting-config enable=on,target=native,arg=unit-test,arg=--reporter,arg=human
 ```
 
 ## Links

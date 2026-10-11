@@ -14,7 +14,7 @@
 option('platform-name',
 type : 'string',
 value : '',
-description : '[native, qemu-cortex-a15, qemu-cortex-a72, qemu-cortex-m0, qemu-cortex-m3, qemu-cortex-m4f, qemu-cortex-m7f, qemu-riscv-rv32imac, qemu-riscv-rv64imafdc]'
+description : '[native, qemu-aarch32-a15, qemu-aarch64-a72, qemu-cortex-m0, qemu-cortex-m3, qemu-cortex-m4f, qemu-cortex-m7f, qemu-riscv-rv32imac, qemu-riscv-rv64imafdc]'
 )
 
 # -----------------------------------------------------------------------------
