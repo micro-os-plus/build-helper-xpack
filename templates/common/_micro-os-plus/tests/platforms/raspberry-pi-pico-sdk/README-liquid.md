@@ -103,6 +103,11 @@ The start-up sequence is:
   `multiple definition` error if `pico_stdio`, `pico_printf`, or
   `pico_malloc` are ever linked again; they are otherwise discarded by
   `--gc-sections`.
+  The file is part of the platform, not of a device folder, because
+  this is where the Pico SDK startup code (`pico_crt0`) and the matching
+  `--wrap` linker options are added to the build; the
+  `nucleo-f411re-cubemx-startup` platform, which uses the STM32CubeMX
+  startup code kept in its device folder, keeps its `wraps.c` there.
 - `src/hooks.cpp` — the µOS++ startup hooks, called from
   `micro_os_plus_startup_run_main()`/`exit()`:
   - `micro_os_plus_startup_initialise_hardware_hook()`, which calls

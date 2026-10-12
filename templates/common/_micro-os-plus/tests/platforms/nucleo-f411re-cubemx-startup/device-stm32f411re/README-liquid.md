@@ -77,6 +77,11 @@ simply calls `cubemx_main()`; the initialisation calls
 
 #### `src/wraps.c`
 
+Unlike the `-sdk` platforms, which keep their `wraps.c` in the platform
+folder, here it belongs to the device folder, since it adapts the
+STM32CubeMX startup code kept in this folder; the matching linker
+options are also set in this folder's `CMakeLists.txt`.
+
 The two functions actually being wrapped:
 
 - wrap `main()`

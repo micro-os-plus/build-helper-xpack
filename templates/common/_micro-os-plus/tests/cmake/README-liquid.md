@@ -50,11 +50,6 @@ a native `clang` toolchain, instead of the system default compiler:
 cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=cmake/toolchains/clang.cmake
 ```
 
-## `toolchains/riscv-none-embed-gcc.cmake`
-
-This file is deprecated and is kept only for compatibility with older
-projects; use `toolchains/riscv-none-elf-gcc.cmake` instead.
-
 ## Other resources
 
 - <https://cmake.org/cmake/help/v3.20/manual/cmake-variables.7.html>
