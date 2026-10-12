@@ -2562,7 +2562,7 @@
           "buildType": "MinSizeRel"
         }
       },
-      "raspberry-pi-pico-zero-2-w-aarch32-cmake-gcc-debug": {
+      "raspberry-pi-zero-2-w-aarch32-cmake-gcc-debug": {
         "inherits": [
           "short-win-paths-properties",
           "cmake-cross-actions",
@@ -2573,7 +2573,7 @@
         ],
         "properties": {
           "buildType": "Debug",
-          "platformName": "raspberry-pi-pico-zero-2-w-aarch32",
+          "platformName": "raspberry-pi-zero-2-w-aarch32",
           "toolchainFileName": "arm-none-eabi-gcc.cmake"
         },
         "devDependencies": {
@@ -2585,15 +2585,15 @@
           ]
         }
       },
-      "raspberry-pi-pico-zero-2-w-aarch32-cmake-gcc-release": {
+      "raspberry-pi-zero-2-w-aarch32-cmake-gcc-release": {
         "inherits": [
-          "raspberry-pi-pico-zero-2-w-aarch32-cmake-gcc-debug"
+          "raspberry-pi-zero-2-w-aarch32-cmake-gcc-debug"
         ],
         "properties": {
           "buildType": "MinSizeRel"
         }
       },
-      "raspberry-pi-pico-zero-2-w-aarch64-cmake-gcc-debug": {
+      "raspberry-pi-zero-2-w-aarch64-cmake-gcc-debug": {
         "inherits": [
           "short-win-paths-properties",
           "cmake-cross-actions",
@@ -2604,7 +2604,7 @@
         ],
         "properties": {
           "buildType": "Debug",
-          "platformName": "raspberry-pi-pico-zero-2-w-aarch64",
+          "platformName": "raspberry-pi-zero-2-w-aarch64",
           "toolchainFileName": "aarch64-none-elf-gcc.cmake"
         },
         "devDependencies": {
@@ -2616,9 +2616,9 @@
           ]
         }
       },
-      "raspberry-pi-pico-zero-2-w-aarch64-cmake-gcc-release": {
+      "raspberry-pi-zero-2-w-aarch64-cmake-gcc-release": {
         "inherits": [
-          "raspberry-pi-pico-zero-2-w-aarch64-cmake-gcc-debug"
+          "raspberry-pi-zero-2-w-aarch64-cmake-gcc-debug"
         ],
         "properties": {
           "buildType": "MinSizeRel"
