@@ -123,7 +123,7 @@ endif ()
 # reset entry (crt0) and the hardware drivers.
 target_link_libraries (
   micro-os-plus-platform-interface
-  INTERFACE micro-os-plus::device
+  INTERFACE micro-os-plus::device-raspberry-pi
             pico_standard_link
             pico_crt0
             pico_platform
