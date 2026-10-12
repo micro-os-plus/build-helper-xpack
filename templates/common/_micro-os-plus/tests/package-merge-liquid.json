@@ -256,7 +256,7 @@
       "synthetic-posix-dependencies": [
         "@micro-os-plus/architecture-synthetic-posix"
       ],
-      "qemu-cortexm-variants": [
+      "qemu-cortex-variants": [
         "m0",
         "m3",
         "m4f",
@@ -300,11 +300,11 @@
       "add-selected-configs": "{% for config in properties.configs-selected %}{% assign configs = configs | push: config %}{% endfor %}",
       "add-selected-non-darwin-configs": "{% for config in properties.configs-selected-non-darwin %}{% assign configs = configs | push: config %}{% endfor %}",
       "compute-selected-configs": "{% assign configs = '' | split: '' %}{% if os.platform != 'darwin' %}{{ properties.add-selected-non-darwin-configs }}{% endif %}{{ properties.add-selected-configs }}",
-      "add-qemu-cortexm-variants-to-configs-for-builder": "{% for variant in properties.qemu-cortexm-variants %}{% assign config = 'qemu-cortex-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}",
+      "add-qemu-cortex-variants-to-configs-for-builder": "{% for variant in properties.qemu-cortex-variants %}{% assign config = 'qemu-cortex-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}",
       "add-qemu-aarch32-variants-to-configs-for-builder": "{% for variant in properties.qemu-aarch32-variants %}{% assign config = 'qemu-aarch32-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}",
       "add-qemu-aarch64-variants-to-configs-for-builder": "{% for variant in properties.qemu-aarch64-variants %}{% assign config = 'qemu-aarch64-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}",
       "add-qemu-riscv-variants-to-configs-for-builder": "{% for variant in properties.qemu-riscv-variants %}{% assign config = 'qemu-riscv-' | append: variant | append: '-' | append: builder | append: '-gcc' %}{% assign configs = configs | push: config %}{% endfor %}",
-      "add-latest-configs-for-builder": "{% if os.platform != 'darwin' %}{{ properties.add-synthetic-posix-gcc-to-configs-for-builder }}{% endif %}{{ properties.add-synthetic-posix-clang-to-configs-for-builder }}{{ properties.add-qemu-cortexm-variants-to-configs-for-builder }}{{ properties.add-qemu-aarch32-variants-to-configs-for-builder }}{{ properties.add-qemu-aarch64-variants-to-configs-for-builder }}{{ properties.add-qemu-riscv-variants-to-configs-for-builder }}",
+      "add-latest-configs-for-builder": "{% if os.platform != 'darwin' %}{{ properties.add-synthetic-posix-gcc-to-configs-for-builder }}{% endif %}{{ properties.add-synthetic-posix-clang-to-configs-for-builder }}{{ properties.add-qemu-cortex-variants-to-configs-for-builder }}{{ properties.add-qemu-aarch32-variants-to-configs-for-builder }}{{ properties.add-qemu-aarch64-variants-to-configs-for-builder }}{{ properties.add-qemu-riscv-variants-to-configs-for-builder }}",
       "compute-latest-cmake-configs": "{% assign configs = '' | split: '' %}{% assign builder = 'cmake' %}{{ properties.add-latest-configs-for-builder }}",
       "compute-latest-meson-configs": "{% assign configs = '' | split: '' %}{% assign builder = 'meson' %}{{ properties.add-latest-configs-for-builder }}",
       "compute-latest-configs": "{% assign configs = '' | split: '' %}{% for builder in properties.builders %}{{ properties.add-latest-configs-for-builder }}{% endfor %}",
@@ -312,11 +312,11 @@
       "compute-boards-configs": "{% assign configs = '' | split: '' %}{{ properties.add-boards-configs }}",
       "add-native-gcc-versions-to-configs-for-builder": "{% assign native-gcc-versions = properties.native-gcc-versions | split_lines %}{% for version in native-gcc-versions %}{% assign config = 'synthetic-posix-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}",
       "add-native-clang-versions-to-configs-for-builder": "{% assign native-clang-versions = properties.native-clang-versions | split_lines %}{% for version in native-clang-versions %}{% assign config = 'synthetic-posix-' | append: builder | append: '-clang' | append: version %}{% assign configs = configs | push: config %}{% endfor %}",
-      "add-qemu-cortexm-variants-versions-to-configs-for-builder": "{% assign arm-none-eabi-gcc-versions = properties.arm-none-eabi-gcc-versions | split_lines %}{% for variant in properties.qemu-cortexm-variants %}{% for version in arm-none-eabi-gcc-versions %}{% assign config = 'qemu-cortex-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}",
+      "add-qemu-cortex-variants-versions-to-configs-for-builder": "{% assign arm-none-eabi-gcc-versions = properties.arm-none-eabi-gcc-versions | split_lines %}{% for variant in properties.qemu-cortex-variants %}{% for version in arm-none-eabi-gcc-versions %}{% assign config = 'qemu-cortex-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}",
       "add-qemu-aarch32-variants-versions-to-configs-for-builder": "{% assign arm-none-eabi-gcc-versions = properties.arm-none-eabi-gcc-versions | split_lines %}{% for variant in properties.qemu-aarch32-variants %}{% for version in arm-none-eabi-gcc-versions %}{% assign config = 'qemu-aarch32-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}",
       "add-qemu-aarch64-variants-versions-to-configs-for-builder": "{% assign arm-none-eabi-gcc-versions = properties.arm-none-eabi-gcc-versions | split_lines %}{% for variant in properties.qemu-aarch64-variants %}{% for version in arm-none-eabi-gcc-versions %}{% assign config = 'qemu-aarch64-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}",
       "add-qemu-riscv-variants-versions-to-configs-for-builder": "{% assign riscv-none-elf-gcc-versions = properties.riscv-none-elf-gcc-versions | split_lines %}{% for variant in properties.qemu-riscv-variants %}{% for version in riscv-none-elf-gcc-versions %}{% assign config = 'qemu-riscv-' | append: variant | append: '-' | append: builder | append: '-gcc' | append: version %}{% assign configs = configs | push: config %}{% endfor %}{% endfor %}",
-      "add-all-configs-for-builder": "{% if os.platform != 'darwin' %}{{ properties.add-native-gcc-versions-to-configs-for-builder }}{% endif %}{{ properties.add-native-clang-versions-to-configs-for-builder }}{{ properties.add-qemu-cortexm-variants-versions-to-configs-for-builder }}{{ properties.add-qemu-aarch32-variants-versions-to-configs-for-builder }}{{ properties.add-qemu-aarch64-variants-versions-to-configs-for-builder }}{{ properties.add-qemu-riscv-variants-versions-to-configs-for-builder }}",
+      "add-all-configs-for-builder": "{% if os.platform != 'darwin' %}{{ properties.add-native-gcc-versions-to-configs-for-builder }}{% endif %}{{ properties.add-native-clang-versions-to-configs-for-builder }}{{ properties.add-qemu-cortex-variants-versions-to-configs-for-builder }}{{ properties.add-qemu-aarch32-variants-versions-to-configs-for-builder }}{{ properties.add-qemu-aarch64-variants-versions-to-configs-for-builder }}{{ properties.add-qemu-riscv-variants-versions-to-configs-for-builder }}",
       "compute-all-cmake-configs": "{% assign configs = '' | split: '' %}{% assign builder = 'cmake' %}{{ properties.add-all-configs-for-builder }}",
       "compute-all-meson-configs": "{% assign configs = '' | split: '' %}{% assign builder = 'meson' %}{{ properties.add-all-configs-for-builder }}",
       "compute-all-configs": "{% assign configs = '' | split: '' %}{% for builder in properties.builders %}{{ properties.add-all-configs-for-builder }}{% endfor %}",
@@ -538,13 +538,13 @@
           ]
         },
         "template": [
-          "{% for qemu-cortexm-variant in properties.qemu-cortexm-variants %}{% assign config = 'qemu-cortex-' | append: qemu-cortexm-variant | append: '-' | append: matrix.builder | append: '-gcc' | append: matrix.arm-none-eabi-gcc-version %}{{ properties.action-test-for-config }}{{ os.EOL }}{% endfor %}"
+          "{% for qemu-cortex-variant in properties.qemu-cortex-variants %}{% assign config = 'qemu-cortex-' | append: qemu-cortex-variant | append: '-' | append: matrix.builder | append: '-gcc' | append: matrix.arm-none-eabi-gcc-version %}{{ properties.action-test-for-config }}{{ os.EOL }}{% endfor %}"
         ]
       },
       "test-qemu-cortex-{{ matrix.qemu-cortex-variant }}-{{ matrix.builder }}-gcc{{ matrix.arm-none-eabi-gcc-version }}": {
         "matrix": {
           "qemu-cortex-variant": [
-            "{{ properties.qemu-cortexm-variants | join_lines }}"
+            "{{ properties.qemu-cortex-variants | join_lines }}"
           ],
           "builder": [
             "{{ properties.builders | join_lines }}"
@@ -1653,10 +1653,10 @@
           }
         }
       },
-      "qemu-cortex-{{ matrix.qemu-cortexm-variant }}-cmake-gcc": {
+      "qemu-cortex-{{ matrix.qemu-cortex-variant }}-cmake-gcc": {
         "matrix": {
-          "qemu-cortexm-variant": [
-            "{{ properties.qemu-cortexm-variants | join_lines }}"
+          "qemu-cortex-variant": [
+            "{{ properties.qemu-cortex-variants | join_lines }}"
           ]
         },
         "template": {
@@ -1672,15 +1672,15 @@
           ],
           "properties": {
             "buildType": "Debug",
-            "platformName": "qemu-cortex-{{ matrix.qemu-cortexm-variant }}",
+            "platformName": "qemu-cortex-{{ matrix.qemu-cortex-variant }}",
             "toolchainFileName": "arm-none-eabi-gcc.cmake"
           }
         }
       },
-      "qemu-cortex-{{ matrix.qemu-cortexm-variant }}-meson-gcc": {
+      "qemu-cortex-{{ matrix.qemu-cortex-variant }}-meson-gcc": {
         "matrix": {
-          "qemu-cortexm-variant": [
-            "{{ properties.qemu-cortexm-variants | join_lines }}"
+          "qemu-cortex-variant": [
+            "{{ properties.qemu-cortex-variants | join_lines }}"
           ]
         },
         "template": {
@@ -1696,15 +1696,15 @@
           ],
           "properties": {
             "buildType": "debug",
-            "platformName": "qemu-cortex-{{ matrix.qemu-cortexm-variant }}",
+            "platformName": "qemu-cortex-{{ matrix.qemu-cortex-variant }}",
             "toolchainFileName": "arm-none-eabi-gcc-{{ os.platform }}.ini"
           }
         }
       },
-      "qemu-cortex-{{ matrix.qemu-cortexm-variant }}-cmake-gcc{{ matrix.arm-none-eabi-gcc-version }}-debug": {
+      "qemu-cortex-{{ matrix.qemu-cortex-variant }}-cmake-gcc{{ matrix.arm-none-eabi-gcc-version }}-debug": {
         "matrix": {
-          "qemu-cortexm-variant": [
-            "{{ properties.qemu-cortexm-variants | join_lines }}"
+          "qemu-cortex-variant": [
+            "{{ properties.qemu-cortex-variants | join_lines }}"
           ],
           "arm-none-eabi-gcc-version": [
             "",
@@ -1713,18 +1713,18 @@
         },
         "template": {
           "inherits": [
-            "qemu-cortex-{{ matrix.qemu-cortexm-variant }}-cmake-gcc",
+            "qemu-cortex-{{ matrix.qemu-cortex-variant }}-cmake-gcc",
             "cross-arm-none-eabi-gcc-dependencies"
           ],
           "properties": {
-            "shortConfigurationName": "q{{ matrix.qemu-cortexm-variant }}cg{{ matrix.arm-none-eabi-gcc-version }}d"
+            "shortConfigurationName": "q{{ matrix.qemu-cortex-variant }}cg{{ matrix.arm-none-eabi-gcc-version }}d"
           }
         }
       },
-      "qemu-cortex-{{ matrix.qemu-cortexm-variant }}-cmake-gcc{{ matrix.arm-none-eabi-gcc-version }}-release": {
+      "qemu-cortex-{{ matrix.qemu-cortex-variant }}-cmake-gcc{{ matrix.arm-none-eabi-gcc-version }}-release": {
         "matrix": {
-          "qemu-cortexm-variant": [
-            "{{ properties.qemu-cortexm-variants | join_lines }}"
+          "qemu-cortex-variant": [
+            "{{ properties.qemu-cortex-variants | join_lines }}"
           ],
           "arm-none-eabi-gcc-version": [
             "",
@@ -1733,18 +1733,18 @@
         },
         "template": {
           "inherits": [
-            "qemu-cortex-{{ matrix.qemu-cortexm-variant }}-cmake-gcc{{ matrix.arm-none-eabi-gcc-version }}-debug"
+            "qemu-cortex-{{ matrix.qemu-cortex-variant }}-cmake-gcc{{ matrix.arm-none-eabi-gcc-version }}-debug"
           ],
           "properties": {
             "buildType": "MinSizeRel",
-            "shortConfigurationName": "q{{ matrix.qemu-cortexm-variant }}cg{{ matrix.arm-none-eabi-gcc-version }}r"
+            "shortConfigurationName": "q{{ matrix.qemu-cortex-variant }}cg{{ matrix.arm-none-eabi-gcc-version }}r"
           }
         }
       },
-      "qemu-cortex-{{ matrix.qemu-cortexm-variant }}-meson-gcc{{ matrix.arm-none-eabi-gcc-version }}-debug": {
+      "qemu-cortex-{{ matrix.qemu-cortex-variant }}-meson-gcc{{ matrix.arm-none-eabi-gcc-version }}-debug": {
         "matrix": {
-          "qemu-cortexm-variant": [
-            "{{ properties.qemu-cortexm-variants | join_lines }}"
+          "qemu-cortex-variant": [
+            "{{ properties.qemu-cortex-variants | join_lines }}"
           ],
           "arm-none-eabi-gcc-version": [
             "",
@@ -1753,18 +1753,18 @@
         },
         "template": {
           "inherits": [
-            "qemu-cortex-{{ matrix.qemu-cortexm-variant }}-meson-gcc",
+            "qemu-cortex-{{ matrix.qemu-cortex-variant }}-meson-gcc",
             "cross-arm-none-eabi-gcc-dependencies"
           ],
           "properties": {
-            "shortConfigurationName": "q{{ matrix.qemu-cortexm-variant }}mg{{ matrix.arm-none-eabi-gcc-version }}d"
+            "shortConfigurationName": "q{{ matrix.qemu-cortex-variant }}mg{{ matrix.arm-none-eabi-gcc-version }}d"
           }
         }
       },
-      "qemu-cortex-{{ matrix.qemu-cortexm-variant }}-meson-gcc{{ matrix.arm-none-eabi-gcc-version }}-release": {
+      "qemu-cortex-{{ matrix.qemu-cortex-variant }}-meson-gcc{{ matrix.arm-none-eabi-gcc-version }}-release": {
         "matrix": {
-          "qemu-cortexm-variant": [
-            "{{ properties.qemu-cortexm-variants | join_lines }}"
+          "qemu-cortex-variant": [
+            "{{ properties.qemu-cortex-variants | join_lines }}"
           ],
           "arm-none-eabi-gcc-version": [
             "",
@@ -1773,11 +1773,11 @@
         },
         "template": {
           "inherits": [
-            "qemu-cortex-{{ matrix.qemu-cortexm-variant }}-meson-gcc{{ matrix.arm-none-eabi-gcc-version }}-debug"
+            "qemu-cortex-{{ matrix.qemu-cortex-variant }}-meson-gcc{{ matrix.arm-none-eabi-gcc-version }}-debug"
           ],
           "properties": {
             "buildType": "minsize",
-            "shortConfigurationName": "q{{ matrix.qemu-cortexm-variant }}mg{{ matrix.arm-none-eabi-gcc-version }}r"
+            "shortConfigurationName": "q{{ matrix.qemu-cortex-variant }}mg{{ matrix.arm-none-eabi-gcc-version }}r"
           }
         }
       },
