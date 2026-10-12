@@ -3,7 +3,7 @@
 > DO NOT EDIT! Automatically generated from template file:
 > {{fromFilePath}}
 
-This folder includes the **stm32f411xe** device definitions.
+This folder includes the **stm32f411re** device definitions.
 
 The result is a CMake interface library `micro-os-plus::device-stm32f411re`.
 
@@ -28,7 +28,7 @@ customisations are required.
 Fortunately, STM32CubeMX uses `USER CODE` sections, which are not
 overwritten when regenerating code.
 
-#### `Core/src/main.c`
+#### `Core/Src/main.c`
 
 There are two customisations done to main:
 

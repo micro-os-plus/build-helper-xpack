@@ -3,7 +3,7 @@
 > DO NOT EDIT! Automatically generated from template file:
 > {{fromFilePath}}
 
-This folder includes the **stm32f411xe** device definitions.
+This folder includes the **stm32f411re** device definitions.
 
 The result is a CMake interface library `micro-os-plus::device-stm32f411re`.
 
@@ -66,7 +66,7 @@ a `device::system_clock` instance.
 
 ## Memory map
 
-The memory map was originally copied from `stm32f411xe_FLASH.ld` (part
+The memory map was originally copied from `STM32F411xx_FLASH.ld` (part
 of the removed STM32CubeMX project) into
 `device-stm32f411re/linker-scripts/mem.ld`.
 

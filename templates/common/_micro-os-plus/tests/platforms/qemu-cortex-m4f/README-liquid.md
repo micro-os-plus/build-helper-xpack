@@ -29,7 +29,7 @@ The source files to be added to user projects are:
 
 ## Memory map
 
-The `mps2-an385` machine defines:
+The `mps2-an386` machine defines:
 
 - ZBT SSRAM 1, 0x0000_0000 – 0x003F_FFFF, 4 MiB, Primary execution memory. This is where the Cortex-M4 vector table lives at reset
 - ZBT SSRAM 2&3, 0x2000_0000 – 0x203F_FFFF, 2+2 MiB, Real RAM
@@ -62,4 +62,4 @@ qemu-system-arm --machine mps2-an386 --cpu cortex-m4 --nographic -d unimp,guest_
 ## Links
 
 - [QEMU Arm](https://www.qemu.org/docs/master/system/target-arm.html)
-- [virt](https://www.qemu.org/docs/master/system/arm/virt.html)
+- [Arm MPS2 and MPS3 boards](https://www.qemu.org/docs/master/system/arm/mps2.html)

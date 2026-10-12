@@ -61,4 +61,4 @@ qemu-system-arm --machine mps2-an500 --cpu cortex-m7 --nographic -d unimp,guest_
 ## Links
 
 - [QEMU Arm](https://www.qemu.org/docs/master/system/target-arm.html)
-- [virt](https://www.qemu.org/docs/master/system/arm/virt.html)
+- [Arm MPS2 and MPS3 boards](https://www.qemu.org/docs/master/system/arm/mps2.html)

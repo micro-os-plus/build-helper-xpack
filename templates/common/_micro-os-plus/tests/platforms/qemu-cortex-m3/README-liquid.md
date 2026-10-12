@@ -50,16 +50,16 @@ The applications are built for the following memory ranges:
 To run tests, pass the ELF file and the arguments:
 
 ```sh
-qemu-system-arm --machine mps2-an365 --cpu cortex-m3 --nographic -d unimp,guest_errors --kernel "unit-test.elf" --semihosting-config enable=on,target=native,arg=unit-test,arg=--reporter,arg=human
+qemu-system-arm --machine mps2-an385 --cpu cortex-m3 --nographic -d unimp,guest_errors --kernel "unit-test.elf" --semihosting-config enable=on,target=native,arg=unit-test,arg=--reporter,arg=human
 ```
 
 For debug sessions start QEMU in GDB server mode by passing both `-s -S`:
 
 ```sh
-qemu-system-arm --machine mps2-an5365 --cpu cortex-m3 --nographic -d unimp,guest_errors -s -S --semihosting-config enable=on,target=native,arg=unit-test,arg=--reporter,arg=human
+qemu-system-arm --machine mps2-an385 --cpu cortex-m3 --nographic -d unimp,guest_errors -s -S --semihosting-config enable=on,target=native,arg=unit-test,arg=--reporter,arg=human
 ```
 
 ## Links
 
 - [QEMU Arm](https://www.qemu.org/docs/master/system/target-arm.html)
-- [virt](https://www.qemu.org/docs/master/system/arm/virt.html)
+- [Arm MPS2 and MPS3 boards](https://www.qemu.org/docs/master/system/arm/mps2.html)

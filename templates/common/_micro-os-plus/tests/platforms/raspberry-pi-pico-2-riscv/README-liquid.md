@@ -41,8 +41,8 @@ The following folders should be passed to the compiler during the build:
 
 - `src/hooks.cpp` — the `micro_os_plus_startup_initialise_hardware_*`
   hooks (clock bring-up); also installs the trap handler
-  (`device::install_trap_handler()`, see
-  [device/README.md](device/README.md)) and instantiates the
+  (`device::install_trap_handler()`, provided by the
+  `@micro-os-plus/devices-raspberry-pi` package) and instantiates the
   `activity_led` (`platform::led_green`), powering it up.
 - `src/led-green.cpp` — `platform::led_green` driver for the
   onboard green LED (GPIO25), implemented directly on the RP2350
@@ -108,13 +108,16 @@ this via the `@xpack-dev-tools/openocd` xpm dependency (the one on
 `xpacks/.bin/openocd`, pinned at 0.12.0-7.1, the latest published release):
 that build does not yet bundle `target/rp2350-riscv.cfg`. It invokes the
 Pico SDK's own OpenOCD install instead
-(`~/.pico-sdk/openocd/0.12.0+dev/openocd`), the same one the VS Code debug
-launcher above uses, which does have it.
+(`~/.pico-sdk/openocd/0.12.0+dev/openocd`), the same one used by the
+VS Code debug launchers, which does have it.
 
-## Known limitation
+## Boot-ROM image metadata
 
-See [device/README.md](device/README.md) for the current status of the
-RP2350 boot-ROM image metadata block.
+The RP2350 boot ROM requires an image metadata block (`IMAGE_DEF`) in
+the first 4 KiB of flash; on RISC-V it also carries an explicit
+`ENTRY_POINT` item. It is provided by the
+`@micro-os-plus/devices-raspberry-pi` package
+(`src/rp2350-riscv/embedded-block-rp2350-riscv.c`).
 
 ## Links
 

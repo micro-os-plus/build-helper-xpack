@@ -8,20 +8,52 @@ These files are intended as helpers during CMake builds.
 ## `toolchains/arm-none-eabi-gcc.cmake`
 
 This file can be used when invoking cmake to build projects using
-the `arm-none-eabi-gcc` toolchains:
+the `arm-none-eabi-gcc` toolchains (bare-metal Cortex-M and AArch32):
 
 ```sh
 cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=cmake/toolchains/arm-none-eabi-gcc.cmake
 ```
 
-## `toolchains/riscv-none-embed-gcc.cmake`
+## `toolchains/aarch64-none-elf-gcc.cmake`
 
 This file can be used when invoking cmake to build projects using
-the `riscv-none-embed-gcc` toolchains:
+the `aarch64-none-elf-gcc` toolchains (bare-metal AArch64):
 
 ```sh
-cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=cmake/toolchains/riscv-none-embed-gcc.cmake
+cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=cmake/toolchains/aarch64-none-elf-gcc.cmake
 ```
+
+## `toolchains/riscv-none-elf-gcc.cmake`
+
+This file can be used when invoking cmake to build projects using
+the `riscv-none-elf-gcc` toolchains (bare-metal RISC-V):
+
+```sh
+cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=cmake/toolchains/riscv-none-elf-gcc.cmake
+```
+
+## `toolchains/gcc.cmake`
+
+This file can be used when invoking cmake to build projects using
+a native `gcc` toolchain, instead of the system default compiler:
+
+```sh
+cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=cmake/toolchains/gcc.cmake
+```
+
+## `toolchains/clang.cmake`
+
+This file can be used when invoking cmake to build projects using
+a native `clang` toolchain, instead of the system default compiler:
+
+```sh
+cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=cmake/toolchains/clang.cmake
+```
+
+## `toolchains/riscv-none-embed-gcc.cmake`
+
+This file is deprecated and is kept only for compatibility with older
+projects; use `toolchains/riscv-none-elf-gcc.cmake` instead.
 
 ## Other resources
 

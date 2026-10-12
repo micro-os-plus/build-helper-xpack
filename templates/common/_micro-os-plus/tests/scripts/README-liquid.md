@@ -121,8 +121,8 @@ platforms that use STM32CubeMX startup files, for example:
 
 ```sh
 node scripts/convert-startup-to-vectors.mjs \
-  platforms/nucleo-f411re/device/stm32cubemx/startup_stm32f411xe.s \
-  platforms/nucleo-f411re/device/src/vectors-stm32f411xe.c
+  platforms/nucleo-f411re-cubemx/device-stm32f411re/stm32cubemx/startup_stm32f411xe.s \
+  platforms/nucleo-f411re-cubemx/device-stm32f411re/src/vectors-stm32f411xe.c
 ```
 
 ## `get-libraries-paths.mjs`
@@ -158,7 +158,7 @@ compilers that are neither clang nor gcc, the output is empty.
 Although CMake can run sequences of piped commands, meson cannot, and
 requires an external script; for consistency, both use this script.
 
-In CMake (`platforms/native/CMakeLists.txt`):
+In CMake (`platforms/synthetic-posix/CMakeLists.txt`):
 
 ```cmake
 # Compute RPATH; return result in `rpath_options_list`.
@@ -189,7 +189,7 @@ endif ()
 ```
 
 In meson, the script is called with `run_command()` from
-`platforms/native/meson.build`.
+`platforms/synthetic-posix/meson.build`.
 
 ## `show-coverage.sh`
 
@@ -214,11 +214,11 @@ The script:
 
 The files in `xpacks` and `tests` folders are excluded. The optional
 third argument limits the report to a single source file, for example
-`../../../../src/doubly-list-links.cpp` (relative to the build folder).
+`../../../../src/<file>.cpp` (relative to the build folder).
 
 In CMake builds, when `XPACK_ENABLE_COVERAGE` is enabled, it is
 registered as a test that depends on the test program run, for
-example in `platforms/native/cmake/artefacts.cmake`.
+example in `platforms/synthetic-posix/cmake/artefacts.cmake`.
 
 ## `xcdl-export.mjs`
 

@@ -3,7 +3,7 @@
 > DO NOT EDIT! Automatically generated from template file:
 > {{fromFilePath}}
 
-This folder includes the **stm32f767xx** device definitions.
+This folder includes the **stm32f767zi** device definitions.
 
 The result is a CMake interface library `micro-os-plus::device-stm32f767zi`.
 

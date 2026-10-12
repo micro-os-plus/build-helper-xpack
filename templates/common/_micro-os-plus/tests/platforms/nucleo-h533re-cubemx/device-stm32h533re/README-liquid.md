@@ -28,7 +28,7 @@ customisations are required.
 Fortunately, STM32CubeMX uses `USER CODE` sections, which are not
 overwritten when regenerating code.
 
-#### `Core/src/main.c`
+#### `Core/Src/main.c`
 
 There are two customisations done to main:
 

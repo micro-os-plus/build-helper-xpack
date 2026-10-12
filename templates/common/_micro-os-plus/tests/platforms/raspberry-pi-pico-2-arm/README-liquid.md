@@ -90,11 +90,12 @@ openocd \
       -c "reset"
 ```
 
-## Known limitation
+## Boot-ROM image metadata
 
-See [device/README.md](device/README.md) for the current status of the
-RP2350 boot-ROM image metadata block, which this platform does not yet
-produce.
+The RP2350 boot ROM requires an image metadata block (`IMAGE_DEF`) in
+the first 4 KiB of flash. It is provided by the
+`@micro-os-plus/devices-raspberry-pi` package
+(`src/rp2350-arm/embedded-block-rp2350-arm.c`).
 
 ## Links
 

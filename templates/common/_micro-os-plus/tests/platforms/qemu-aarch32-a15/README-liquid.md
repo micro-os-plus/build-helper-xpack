@@ -30,7 +30,7 @@ The `virt` machine defines:
 
 - virtual flash 0x00000000, 64 MiB, usable only as `-bios`
 - the RAM region 0x40000000 (1 GiB), with the actual value as given by
-  `-m`, 128 MiB if mising.
+  `-m`, 128 MiB if missing.
 
 Semihosting heap base: 0x44000000, limit: 0x48000000, stack base: 0x48000000, limit: 0x44000000.
 
