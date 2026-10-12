@@ -1019,6 +1019,10 @@
         "xpm install --config raspberry-pi-pico-2-riscv-cmake-gcc-debug",
         "xpm install --config raspberry-pi-pico-2-riscv-cmake-gcc-release"
       ],
+      "link-dependencies-raspberry-pi-pico-2-riscv-cmake-gcc": [
+        "xpm run link-dependencies --config raspberry-pi-pico-2-riscv-cmake-gcc-debug",
+        "xpm run link-dependencies --config raspberry-pi-pico-2-riscv-cmake-gcc-release"
+      ],
       "build-raspberry-pi-pico-2-riscv-cmake-gcc": [
         "xpm run setup --config raspberry-pi-pico-2-riscv-cmake-gcc-debug",
         "xpm run build --config raspberry-pi-pico-2-riscv-cmake-gcc-debug",
@@ -1044,6 +1048,10 @@
       "install-raspberry-pi-pico-2-riscv-sdk-cmake-gcc": [
         "xpm install --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-debug",
         "xpm install --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-release"
+      ],
+      "link-dependencies-raspberry-pi-pico-2-riscv-sdk-cmake-gcc": [
+        "xpm run link-dependencies --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-debug",
+        "xpm run link-dependencies --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-release"
       ],
       "build-raspberry-pi-pico-2-riscv-sdk-cmake-gcc": [
         "xpm run setup --config raspberry-pi-pico-2-riscv-sdk-cmake-gcc-debug",
@@ -1071,6 +1079,10 @@
         "xpm install --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-debug",
         "xpm install --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-release"
       ],
+      "link-dependencies-raspberry-pi-zero-2-w-aarch32-cmake-gcc": [
+        "xpm run link-dependencies --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-debug",
+        "xpm run link-dependencies --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-release"
+      ],
       "build-raspberry-pi-zero-2-w-aarch32-cmake-gcc": [
         "xpm run setup --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-debug",
         "xpm run build --config raspberry-pi-zero-2-w-aarch32-cmake-gcc-debug",
@@ -1096,6 +1108,10 @@
       "install-raspberry-pi-zero-2-w-aarch64-cmake-gcc": [
         "xpm install --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-debug",
         "xpm install --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-release"
+      ],
+      "link-dependencies-raspberry-pi-zero-2-w-aarch64-cmake-gcc": [
+        "xpm run link-dependencies --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-debug",
+        "xpm run link-dependencies --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-release"
       ],
       "build-raspberry-pi-zero-2-w-aarch64-cmake-gcc": [
         "xpm run setup --config raspberry-pi-zero-2-w-aarch64-cmake-gcc-debug",
