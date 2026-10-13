@@ -91,6 +91,9 @@ target_link_options (
   #
   # -specs=nano.specs
   -Wl,--gc-sections
+  # The startup linker script reserves only 4 KB for the stack by default,
+  # which is not enough for the debug builds of the unit tests.
+  -Wl,--defsym=__stack_size=8K
   # Including files from other packages is not very nice, but functional. Prefer
   # absolute paths over paths relative to the build folder.
   -T${CMAKE_BINARY_DIR}/xpacks/@micro-os-plus/devices-qemu-cortexm/linker-scripts/mem-mps2-an386.ld
