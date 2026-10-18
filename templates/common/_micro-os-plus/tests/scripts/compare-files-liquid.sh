@@ -73,8 +73,8 @@ fi
 # Strip the info lines and the line numbers from both files before comparing.
 # On mingw-gcc, hex pointers are printed as exectly 16 hex digits, without 0x.
 diff -u \
-  <(grep -v -e '^# Running:' -e '^Running:' -e '^# Built with ' -e '^Built with ' "$2" | sed -e 's|0[xX][1-9a-fA-F][0-9a-fA-F]*|0xXXX|g' -e 's|[0-9a-fA-F]\{16\}|0xXXX|g' -e 's|, time: [0-9]*\.[0-9]* ms||g' -e 's|  line: [0-9][0-9]*|  line: NNN|g' -e 's|:[0-9][0-9]*, |:NNN, |g' -e 's|:[0-9][0-9]*)|:NNN)|g') \
-  <(grep -v -e '^# Running:' -e '^Running:' -e '^# Built with ' -e '^Built with ' "$1" | sed -e 's|0[xX][1-9a-fA-F][0-9a-fA-F]*|0xXXX|g' -e 's|[0-9a-fA-F]\{16\}|0xXXX|g' -e 's|, time: [0-9]*\.[0-9]* ms||g' -e 's|  line: [0-9][0-9]*|  line: NNN|g' -e 's|:[0-9][0-9]*, |:NNN, |g' -e 's|:[0-9][0-9]*)|:NNN)|g') \
+  <(grep -v -e '^# Running:' -e '^Running:' -e '^# Built with ' -e '^Built with ' "$2" | sed -e 's|0[xX][1-9a-fA-F][0-9a-fA-F]*|0xXXX|g' -e 's|[0-9a-fA-F]\{16\}|0xXXX|g' -e 's|, time: [0-9]*\.[0-9]* ms||g' -e 's|  \(line\(Number\)\{0,1\}\): [0-9][0-9]*|  \1: NNN|g' -e 's|:[0-9][0-9]*, |:NNN, |g' -e 's|:[0-9][0-9]*)|:NNN)|g') \
+  <(grep -v -e '^# Running:' -e '^Running:' -e '^# Built with ' -e '^Built with ' "$1" | sed -e 's|0[xX][1-9a-fA-F][0-9a-fA-F]*|0xXXX|g' -e 's|[0-9a-fA-F]\{16\}|0xXXX|g' -e 's|, time: [0-9]*\.[0-9]* ms||g' -e 's|  \(line\(Number\)\{0,1\}\): [0-9][0-9]*|  \1: NNN|g' -e 's|:[0-9][0-9]*, |:NNN, |g' -e 's|:[0-9][0-9]*)|:NNN)|g') \
 
 echo "$(basename "$1") ok"
 exit 0

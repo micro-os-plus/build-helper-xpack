@@ -65,7 +65,8 @@ both files are normalised before comparison:
 - hexadecimal pointers (`0x...`) and 16-digit hexadecimal values (as
   printed by mingw-gcc, without `0x`) are replaced by `0xXXX`;
 - timings (`, time: N.N ms`) are removed;
-- line numbers (`line: N`, `:N, `, and `:N)`) are replaced by `NNN`.
+- line numbers (`line: N`, `lineNumber: N`, `:N, `, and `:N)`) are
+  replaced by `NNN`.
 
 The differences, if any, are displayed in unified format (`diff -u`)
 and the script exits with an error; otherwise it prints
