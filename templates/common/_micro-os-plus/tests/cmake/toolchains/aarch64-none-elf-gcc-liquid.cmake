@@ -63,12 +63,9 @@ set (CMAKE_STRIP "${triple}strip${extension}")
 # set(CMAKE_ASM_FLAGS " -x assembler-with-cpp" CACHE STRING "Flags used by the
 # ASM compiler during all build types.")
 
-# The µTest++ unit test fails with -O0, so use -Og instead, which is still
-# debuggable, but more optimized.
-
 set (
   CMAKE_ASM_FLAGS_DEBUG
-  "-Og -g3" # "-O0 -g3"
+  "-O0 -g3"
   CACHE STRING "Flags used by the ASM compiler during DEBUG builds."
 )
 
@@ -99,7 +96,7 @@ set (CMAKE_C_FLAGS CACHE STRING
 
 set (
   CMAKE_C_FLAGS_DEBUG
-  "-Og -g3" # "-O0 -g3"
+  "-O0 -g3"
   CACHE STRING "Flags used by the C compiler during DEBUG builds."
 )
 
@@ -130,7 +127,7 @@ set (CMAKE_CXX_FLAGS
 
 set (
   CMAKE_CXX_FLAGS_DEBUG
-  "-Og -g3" # "-O0 -g3"
+  "-O0 -g3"
   CACHE STRING "Flags used by the CXX compiler during DEBUG builds."
 )
 

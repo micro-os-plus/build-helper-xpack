@@ -52,10 +52,6 @@ target_compile_definitions (
 
 set (
   xpack_platform_common_args
-  # The unit-test debug binary is more than 700K and the flash is only 512K; The
-  # workaround is to use the `-Og` option, which is a compromise between `-O0`
-  # and `-O1` that reduces the size to about 490K.
-  $<$<CONFIG:Debug>:-Og>
   -mcpu=cortex-m4
   -mthumb
   -mfpu=fpv4-sp-d16
