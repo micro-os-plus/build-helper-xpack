@@ -32,7 +32,7 @@
 {% if component.description %}
 # {{component.description}}.
 {%- endif %}
-message('Processing {{outputFolderPath}}...')
+message('Processing \'tests/{{outputFolderPath}}/\'...')
 
 # -----------------------------------------------------------------------------
 
@@ -84,7 +84,6 @@ _local_dependencies += [
   {{dependencyUnderscore}}_dependency,
 {%- endfor %}
 ]
-
 # The dependencies' C/C++ args are lists; add them without brackets,
 # to concatenate their elements rather than nest the lists.
 {%- for dependency in component.dependencies %}
