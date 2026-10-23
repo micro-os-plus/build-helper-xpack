@@ -102,8 +102,8 @@ _local_link_args += [
 
   '-Wl,--gc-sections',
 
-  # The startup linker script reserves only 4 KB for the stack by default,
-  # which is not enough for the debug builds of the unit tests.
+  # The startup linker script reserves only 4 KB for the stack by default, which
+  # is not enough for the debug builds of the unit tests.
   '-Wl,--defsym=__stack_size=8K',
 
   # Path are relative to the build folder.

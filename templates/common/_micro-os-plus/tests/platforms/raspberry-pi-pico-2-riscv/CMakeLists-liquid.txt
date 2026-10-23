@@ -90,8 +90,8 @@ target_link_options (
   # exceptions. -specs=nano.specs
   -Wl,--gc-sections
   -Wl,-z,max-page-size=4096
-  # The startup linker script reserves only 4 KB for the stack by default,
-  # which is not enough for the debug builds of the unit tests.
+  # The startup linker script reserves only 4 KB for the stack by default, which
+  # is not enough for the debug builds of the unit tests.
   -Wl,--defsym=__stack_size=8K
   # Prefer absolute paths over paths relative to the build folder.
   -T${CMAKE_CURRENT_SOURCE_DIR}/linker-scripts/mem.ld
