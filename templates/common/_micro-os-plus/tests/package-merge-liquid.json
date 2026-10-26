@@ -346,9 +346,7 @@
         "{{ properties.compute-default-configs }}{{ properties.actions-install-for-configs }}"
       ],
       "link-dependencies": [
-{% endraw %}
-        "xpm link{% if packageScopedName != '@micro-os-plus/diag-trace' %} @micro-os-plus/diag-trace{% endif %}{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}",
-{% raw %}
+        "xpm link{% endraw %}{% if packageScopedName != '@micro-os-plus/diag-trace' %} @micro-os-plus/diag-trace{% endif %}{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %}",
         "{{ properties.compute-default-configs }}{{ properties.actions-link-dependencies-for-configs }}"
       ],
       "test": [
@@ -1216,7 +1214,7 @@
           ],
           "clear": "{{ properties.commandClearBuildFolder }}",
           "link-dependencies": [
-            "xpm link --config {{ configuration.name }} @micro-os-plus/architecture-synthetic-posix"
+            "xpm link{% endraw %} @micro-os-plus/architecture-synthetic-posix{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -1227,7 +1225,7 @@
             "xpm install --config {{ configuration.name }}"
           ],
           "link-dependencies": [
-            "xpm link --config {{ configuration.name }} @micro-os-plus/architecture-cortexm @micro-os-plus/devices-qemu-cortexm @micro-os-plus/semihosting @micro-os-plus/startup @xpack-3rd-party/arm-cmsis-core"
+            "xpm link{% endraw %} @micro-os-plus/architecture-cortexm @micro-os-plus/devices-qemu-cortexm @micro-os-plus/semihosting @micro-os-plus/startup @xpack-3rd-party/arm-cmsis-core{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -1238,7 +1236,7 @@
             "xpm install --config {{ configuration.name }}"
           ],
           "link-dependencies": [
-            "xpm link --config {{ configuration.name }} @micro-os-plus/architecture-aarch32 @micro-os-plus/devices-qemu-aarch32 @micro-os-plus/semihosting @micro-os-plus/startup"
+            "xpm link{% endraw %} @micro-os-plus/architecture-aarch32 @micro-os-plus/devices-qemu-aarch32 @micro-os-plus/semihosting @micro-os-plus/startup{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -1249,7 +1247,7 @@
             "xpm install --config {{ configuration.name }}"
           ],
           "link-dependencies": [
-            "xpm link --config {{ configuration.name }} @micro-os-plus/architecture-aarch64 @micro-os-plus/devices-qemu-aarch64 @micro-os-plus/semihosting @micro-os-plus/startup"
+            "xpm link{% endraw %} @micro-os-plus/architecture-aarch64 @micro-os-plus/devices-qemu-aarch64 @micro-os-plus/semihosting @micro-os-plus/startup{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -1260,7 +1258,7 @@
             "xpm install --config {{ configuration.name }}"
           ],
           "link-dependencies": [
-            "xpm link --config {{ configuration.name }} @micro-os-plus/architecture-riscv @micro-os-plus/devices-qemu-riscv @micro-os-plus/semihosting @micro-os-plus/startup"
+            "xpm link{% endraw %} @micro-os-plus/architecture-riscv @micro-os-plus/devices-qemu-riscv @micro-os-plus/semihosting @micro-os-plus/startup{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -2177,7 +2175,7 @@
         },
         "actions": {
           "link-dependencies": [
-            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting --config {{ configuration.name }}"
+            "xpm link{% endraw %} @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -2208,7 +2206,7 @@
         },
         "actions": {
           "link-dependencies": [
-            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting --config {{ configuration.name }}"
+            "xpm link{% endraw %} @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -2239,7 +2237,7 @@
         },
         "actions": {
           "link-dependencies": [
-            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting --config {{ configuration.name }}"
+            "xpm link{% endraw %} @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -2270,7 +2268,7 @@
         },
         "actions": {
           "link-dependencies": [
-            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting --config {{ configuration.name }}"
+            "xpm link{% endraw %} @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -2301,7 +2299,7 @@
         },
         "actions": {
           "link-dependencies": [
-            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting --config {{ configuration.name }}"
+            "xpm link{% endraw %} @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -2332,7 +2330,7 @@
         },
         "actions": {
           "link-dependencies": [
-            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting --config {{ configuration.name }}"
+            "xpm link{% endraw %} @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -2363,7 +2361,7 @@
         },
         "actions": {
           "link-dependencies": [
-            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting --config {{ configuration.name }}"
+            "xpm link{% endraw %} @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -2397,7 +2395,7 @@
         },
         "actions": {
           "link-dependencies": [
-            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting @xpack-3rd-party/raspberrypi-pico-sdk @micro-os-plus/devices-raspberry-pi --config {{ configuration.name }}"
+            "xpm link{% endraw %} @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting @xpack-3rd-party/raspberrypi-pico-sdk @micro-os-plus/devices-raspberry-pi{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -2431,7 +2429,7 @@
         },
         "actions": {
           "link-dependencies": [
-            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting @xpack-3rd-party/raspberrypi-pico-sdk @micro-os-plus/devices-raspberry-pi --config {{ configuration.name }}"
+            "xpm link{% endraw %} @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting @xpack-3rd-party/raspberrypi-pico-sdk @micro-os-plus/devices-raspberry-pi{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -2465,7 +2463,7 @@
         },
         "actions": {
           "link-dependencies": [
-            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting @xpack-3rd-party/raspberrypi-pico-sdk @micro-os-plus/devices-raspberry-pi --config {{ configuration.name }}"
+            "xpm link{% endraw %} @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting @xpack-3rd-party/raspberrypi-pico-sdk @micro-os-plus/devices-raspberry-pi{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -2499,7 +2497,7 @@
         },
         "actions": {
           "link-dependencies": [
-            "xpm link @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting @xpack-3rd-party/raspberrypi-pico-sdk @micro-os-plus/devices-raspberry-pi --config {{ configuration.name }}"
+            "xpm link{% endraw %} @micro-os-plus/architecture-cortexm @micro-os-plus/startup @micro-os-plus/semihosting @xpack-3rd-party/raspberrypi-pico-sdk @micro-os-plus/devices-raspberry-pi{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -2532,7 +2530,7 @@
         },
         "actions": {
           "link-dependencies": [
-            "xpm link @micro-os-plus/architecture-riscv @micro-os-plus/startup @micro-os-plus/semihosting @xpack-3rd-party/raspberrypi-pico-sdk @micro-os-plus/devices-raspberry-pi --config {{ configuration.name }}"
+            "xpm link{% endraw %} @micro-os-plus/architecture-riscv @micro-os-plus/startup @micro-os-plus/semihosting @xpack-3rd-party/raspberrypi-pico-sdk @micro-os-plus/devices-raspberry-pi{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -2565,7 +2563,7 @@
         },
         "actions": {
           "link-dependencies": [
-            "xpm link @micro-os-plus/architecture-riscv @micro-os-plus/startup @micro-os-plus/semihosting @xpack-3rd-party/raspberrypi-pico-sdk @micro-os-plus/devices-raspberry-pi --config {{ configuration.name }}"
+            "xpm link{% endraw %} @micro-os-plus/architecture-riscv @micro-os-plus/startup @micro-os-plus/semihosting @xpack-3rd-party/raspberrypi-pico-sdk @micro-os-plus/devices-raspberry-pi{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -2596,7 +2594,7 @@
         },
         "actions": {
           "link-dependencies": [
-            "xpm link @micro-os-plus/architecture-aarch32 @micro-os-plus/startup @micro-os-plus/semihosting --config {{ configuration.name }}"
+            "xpm link{% endraw %} @micro-os-plus/architecture-aarch32 @micro-os-plus/startup @micro-os-plus/semihosting{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
@@ -2627,7 +2625,7 @@
         },
         "actions": {
           "link-dependencies": [
-            "xpm link @micro-os-plus/architecture-aarch64 @micro-os-plus/startup @micro-os-plus/semihosting --config {{ configuration.name }}"
+            "xpm link{% endraw %} @micro-os-plus/architecture-aarch64 @micro-os-plus/startup @micro-os-plus/semihosting{% if packageScopedName != '@micro-os-plus/micro-test-plus' %} @micro-os-plus/micro-test-plus{% endif %}{% raw %} --config {{ configuration.name }}"
           ]
         }
       },
