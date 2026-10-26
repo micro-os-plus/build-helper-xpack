@@ -217,7 +217,10 @@ if (options.doInit) {
 
   for (const relativeFilePath of commonFiles) {
     const item = `./${relativeFilePath}`
-    if (!item.includes('tests/platforms')) {
+
+    // Process platform-specific templates only if the platform is 
+    // included in the configuration.
+    if (!item.includes('tests/platforms') || platforms.includes(platformNameOf(item))) {
       processTemplateItem(item, projectFolderPath, {
         context,
         options,
@@ -225,17 +228,6 @@ if (options.doInit) {
         fromAbsoluteFolderPath: commonFolderPath,
         substitutionPrefix: commonSubstitutionPrefix,
       })
-    } else if (platforms.includes(platformNameOf(item))) {
-      processTemplateItem(item, projectFolderPath, {
-        context,
-        options,
-        doForce: true,
-        fromAbsoluteFolderPath: commonFolderPath,
-        substitutionPrefix: commonSubstitutionPrefix,
-      })
-    } else {
-      console.log(`Preserving file: ${item}`)
-      // removeTemplateItem(item, projectFolderPath, options)
     }
   }
 
