@@ -35,8 +35,10 @@
 // The maximum number of characters that can be received from the host;
 // the buffer is modified in place, and space characters are replaced
 // by nulls to mark the string terminators.
-#if !defined(MICRO_OS_PLUS_SEMIHOSTING_STARTUP_CMDLINE_BUFFER_ARRAY_SIZE_INTEGER)
-#define MICRO_OS_PLUS_SEMIHOSTING_STARTUP_CMDLINE_BUFFER_ARRAY_SIZE_INTEGER (120)
+#if !defined( \
+    MICRO_OS_PLUS_SEMIHOSTING_STARTUP_CMDLINE_BUFFER_ARRAY_SIZE_INTEGER)
+#define MICRO_OS_PLUS_SEMIHOSTING_STARTUP_CMDLINE_BUFFER_ARRAY_SIZE_INTEGER \
+  (120)
 #endif // !defined(MICRO_OS_PLUS_SEMIHOSTING_STARTUP_CMDLINE_BUFFER_ARRAY_SIZE_INTEGER)
 
 // ----------------------------------------------------------------------------
