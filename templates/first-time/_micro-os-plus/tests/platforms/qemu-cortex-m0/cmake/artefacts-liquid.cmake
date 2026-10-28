@@ -44,7 +44,7 @@ prepend_compile_common_private_options (
 
 if (XPACK_ENABLE_SAMPLE_TEST)
   add_cross_test_executable (sample-test)
-  target_link_cross_test_libraries (sample-test tests::sample)
+  target_link_cross_tests_libraries (sample-test tests::sample)
 
   xpack_display_target_lists (sample-test)
   message (VERBOSE "A> sample-test")
@@ -57,7 +57,7 @@ endif ()
 
 if (XPACK_ENABLE_UNIT_TEST)
   add_cross_test_executable (unit-test)
-  target_link_cross_test_libraries (unit-test tests::unit)
+  target_link_cross_tests_libraries (unit-test tests::unit)
 
   xpack_display_target_lists (unit-test)
   message (VERBOSE "A> unit-test")

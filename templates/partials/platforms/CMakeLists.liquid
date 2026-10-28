@@ -20,7 +20,7 @@ add_compile_common_private_options (
 
 if (XPACK_ENABLE_{{testUpperCase}}_TEST)
   add_cross_test_executable ({{testName}}-test)
-  target_link_cross_test_libraries ({{testName}}-test tests::{{testName}})
+  target_link_cross_tests_libraries ({{testName}}-test tests::{{testName}})
 
   xpack_display_target_lists ({{testName}}-test)
   message (VERBOSE "A> {{testName}}-test")

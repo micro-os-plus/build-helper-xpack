@@ -53,7 +53,7 @@ endfunction ()
 # `xpack_dependencies_libraries` is defined in each platform
 # `cmake/dependencies-libraries.cmake` file.
 
-function (target_link_cross_test_libraries name)
+function (target_link_cross_tests_libraries name)
   target_link_libraries (
     ${name}
     PRIVATE # The compile & link options common to all platforms.
@@ -73,7 +73,7 @@ function (target_link_cross_test_libraries name)
   if (NOT ARGN)
     message (
       FATAL_ERROR
-        "target_link_cross_test_libraries: at least one library required"
+        "target_link_cross_tests_libraries: at least one library required"
     )
   endif ()
 endfunction ()
